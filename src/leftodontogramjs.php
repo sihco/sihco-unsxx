@@ -49,7 +49,7 @@ function createOdontogram() {
         if (i <= 5) {
             //Dientes Temporales Cuandrante Derecho (Superior/Inferior)
 
-            htmlLecheRight += '<div id="dientelecheindex' + i + '" style="left: -28%;" class="diente-leche'+cl+'">' +
+            htmlLecheRight += '<div id="dientelecheindex' + i + '" style="left: 20%;" class="diente-leche'+cl+'">' +
                 '<span style="margin-left: 45px; margin-bottom:5px; display: inline-block !important; border-radius: 10px !important;" class="label label-primary">index' + i + '</span>' +
                 '<div id="tlecheindex' + i + '" class="cuadro-leche top-leche click">' +
                 '</div>' +

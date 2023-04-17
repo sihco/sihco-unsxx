@@ -76,7 +76,9 @@ if(!isset($upreferred)){
     </script>
   </div>
 </div>-->
-<table class="table table-responsive table-sm table-hover" id="table_admission">
+<div class="table-responsive ">
+
+<table class="table table-sm table-hover" id="table_admission">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -125,7 +127,7 @@ for ($i=0; $i < $size; $i++) {
 echo "</tbody></table>\n";
 
 ?>
-
+</div>
 
 <!--tabla para pacientes remitidos fin-->
 
@@ -685,6 +687,8 @@ echo "</tbody></table>\n";
     </h2>
     <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
       <div class="accordion-body">
+
+
 				<!--odontograma inicio-->
 				        <?php
 				        include("../leftodontogram.php");
@@ -693,27 +697,10 @@ echo "</tbody></table>\n";
 				          $odontogramstatus="true";
 				          $pat=decryptOdontogram($pat);
 				        }
-				        /*if (isset($pat)){
-				          $pat=decryptOdontogram($pat);
-
-				          if(isset($pat["tl"])){
-				            $odontogramstatus="true";
-				            $pat["tr"]= html_entity_decode($pat["tr"]);
-				            $pat["tl"]= html_entity_decode($pat["tl"]);
-				            $pat["tlr"]= html_entity_decode($pat["tlr"]);
-				            $pat["tll"]= html_entity_decode($pat["tll"]);
-				            $pat["bl"]= html_entity_decode($pat["bl"]);
-				            $pat["br"]= html_entity_decode($pat["br"]);
-				            $pat["bll"]= html_entity_decode($pat["bll"]);
-				            $pat["blr"]= html_entity_decode($pat["blr"]);
-
-				          }
-				        }*/
-
 				        ?>
 				<!--odontograma fin-->
 				<input type="hidden" name="draw" id="draw" value="<?php if(isset($pat["draw"])) echo $pat["draw"];?>">
-
+				
 			</div>
     </div>
   </div>

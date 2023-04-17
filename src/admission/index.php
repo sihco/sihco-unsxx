@@ -187,8 +187,9 @@ else $limit = 500;
                             </script>
                           </div>
                         </div>
+                        <div class="table-responsive">
 
-                        <table class="table table-responsive table-sm table-hover">
+                        <table class="table table-sm table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -240,7 +241,7 @@ else $limit = 500;
                         echo "</tbody></table>\n";
 
                         ?>
-
+                        </div>
 
                     </div>
 
