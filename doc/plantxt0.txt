@@ -1,0 +1,34 @@
+1.- Resolución de urgencias
+
+
+2.- Control de la infección
+
+
+	-Inactivacion = piezas # 0
+	-Control mecanico del biofil = cada 15 dias
+	-Motivacion = cada 15 dias
+
+3.- Control del medio condicional
+	-Asesoramiento dietetico = cada 15 dias
+	-Motivacion = cada 15 dias
+
+4.- Refuerzo morfologico y estructura del huesped
+
+	-Selladores =piezas # 0
+	-Fluorizacion =cada 15 dias
+
+5.- Control de la infeccion no resuelta en urgencias
+
+	-Necropulpectomia = piezas # 0
+	-Biopulpectomia =piezas # 74, 75, 84, 85
+	-Exodoncia = pizas # 74, 75, 84, 85
+
+6.- Reabilitación
+	- Obturacion
+	-Resina Foto = piezas # 0
+	-Resina Auto =piezas # 0
+	-Amalgama = piezas # 0
+
+
+7.- Monitoreo
+	Al paciente se realizo profilaxis cada 15 dias

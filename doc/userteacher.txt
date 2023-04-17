@@ -1,0 +1,256 @@
+[user]
+userci=0
+username=raydocente
+userfullname=Ray Gueridt Quiñonez Miranda
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=eloydocente
+userfullname=Eloy O. Sandry Muriel
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=victordocente
+userfullname=Victor Mamani Alvarez
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=dilmadocente
+userfullname=Dilma Espada Moreno
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=germandocente
+userfullname=German Mena Santander
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=willmadocente
+userfullname=Willma Flores Velasco
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=borisdocente
+userfullname=Boris R. Patiño Martinez
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=josedocente
+userfullname=Jose R. Gutierrez Aliendre
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=guillermodocente
+userfullname=Guillermo Cruz Bautista
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=migueldocente
+userfullname=Miguel A. Martinez Galvan
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=carlosdocente
+userfullname=Carlos Tirado Hurtado
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=rosmerydocente
+userfullname=Rosmery Calizaya Cabrera
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=lourdesdocente
+userfullname=Lourdes M. Paca Quispe
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=ernestodocente
+userfullname=Ernesto Calani Lopez
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=maximodocente
+userfullname=Maximo Quiroz Paniagua
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=freddydocente
+userfullname=Freddy Yapura Aranibar
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=fideliadocente
+userfullname=Fidelia Vela Benitez
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=fernandodocente
+userfullname=Fernando Cocha Flores
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=juandocente
+userfullname=Juan de Dios Caba Flores
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=lucindadocente
+userfullname=Lucinda Chulve Flores
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=henrydocente
+userfullname=Henry D. Juanes Loredo
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=freddyortegadocente
+userfullname=Freddy Ortega Agudo
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=mariadocente
+userfullname=Maria E. Lopez Solano
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=durbydocente
+userfullname=Durby P. Sevilla Vega
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=jaimedocente
+userfullname=Jaime Flores Azurduy
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=redzaidocente
+userfullname=Redzai A. Gutierrez Jimenez
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=patriciadocente
+userfullname=Patricia Flores Soliz
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=rolandodocente
+userfullname=Rolando Gutierrez Davalos
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=fermindocente
+userfullname=Fermin Negrete Alarcon
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=doradocente
+userfullname=Dora Flores
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=soniadocente
+userfullname=Sonia Padilla
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=giovanna
+userfullname=Giovanna Villarroel S.G
+usertype=admission
+userenabled=t
+usermultilogin=t
+userpassword=123

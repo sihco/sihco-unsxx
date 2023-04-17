@@ -1,0 +1,10 @@
+.diente {
+    position: relative;/*static*/
+    width: 0px;
+    height: auto;
+    margin-left: 50px;
+    display: inline-block;
+}
+.plomo {
+  background-color: #EBEBEB;
+}

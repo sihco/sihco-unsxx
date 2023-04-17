@@ -1,0 +1,1440 @@
+[user]
+userci=10904733
+username=vladimir10904733
+userfullname=Vladirmir Rodrigo Alvarez Mamani
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10904733
+userspecialtydessigned=6,8,9,7
+
+userci=10548867
+username=hilda10548867
+userfullname=Hilda Apaza Sayari
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10548867
+userspecialtydessigned=6,3
+
+userci=8951507
+username=morgan8951507
+userfullname=Morgan Oliver Apaza Huanca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8951507
+userspecialtydessigned=3,2,8,9
+
+userci=8529304
+username=franz8529304
+userfullname=Franz Jhosimar Apaza Ventura
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8529304
+userspecialtydessigned=6,8,9,7
+
+userci=8609990
+username=melanio8609990
+userfullname=Melanio Aranibar Choque
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8609990
+userspecialtydessigned=6,8,9
+
+userci=8616155
+username=luis8616155
+userfullname=Luis Gonzalo Arce Villca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8616155
+userspecialtydessigned=6,8,9,7
+
+userci=11331133
+username=jacob11331133
+userfullname=Jacob Alexandro Balcas Condori
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=11331133
+userspecialtydessigned=6,8,9
+
+userci=10475141
+username=noemi10475141
+userfullname=Noemi Caricari Yapura
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10475141
+userspecialtydessigned=6,8,9,7
+
+userci=5752207
+username=jhonny5752207
+userfullname=Jhonny Caricari Yapura
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=5752207
+userspecialtydessigned=6,8,9,7
+
+userci=9156702
+username=abraham9156702
+userfullname=Abraham Jose Choque Llanqui
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9156702
+userspecialtydessigned=8
+
+userci=12590807
+username=lourdes12590807
+userfullname=Lourdes Castro Toribio
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12590807
+userspecialtydessigned=6
+
+userci=13093193
+username=lilian13093193
+userfullname=Lilian Choque Tito
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13093193
+userspecialtydessigned=6,8,9
+
+userci=8535435
+username=abigail8535435
+userfullname=Abigail Chungara Romero
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8535435
+userspecialtydessigned=6,8,9
+
+userci=6684773
+username=cristian6684773
+userfullname=Cristian Claros Calderon
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=6684773
+userspecialtydessigned=6,8,9
+
+userci=7391288
+username=yvan7391288
+userfullname=Yvan Colque Antonio
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7391288
+userspecialtydessigned=6,8,9,7
+
+userci=7310986
+username=manuel7310986
+userfullname=Manuel Santiago Colque Usnayo
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7310986
+userspecialtydessigned=6,5,4
+
+userci=13093738
+username=mayde13093738
+userfullname=Mayde Condori Ojeda
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13093738
+userspecialtydessigned=6,8,9,7
+
+userci=7402389
+username=kevin7402389
+userfullname=Kevin Ramiro Cuellar Paz
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7402389
+userspecialtydessigned=6,8,9
+
+userci=8847831
+username=oscar8847831
+userfullname=Oscar Augusto Flores Marca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7402389
+userspecialtydessigned=3,8,5
+
+userci=3057477
+username=jaime3057477
+userfullname=Jaime Raul Flores Roque
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=3057477
+userspecialtydessigned=6,8,9,7
+
+userci=7325947
+username=cintia7325947
+userfullname=Cintia Abigail Flores Zepita
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7325947
+userspecialtydessigned=6,8,9,7
+
+userci=5549643
+username=claudia5549643
+userfullname=Claudia Garcia Flores
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=5549643
+userspecialtydessigned=6,8,9
+
+userci=7406980
+username=viviana7406980
+userfullname=Viviana Gutierrez Ajhuacho
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7406980
+userspecialtydessigned=6,8,9,7
+
+userci=7336902
+username=monica7336902
+userfullname=Monica Lara Soto
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7336902
+userspecialtydessigned=8,9,7
+
+userci=8418872
+username=franklin8418872
+userfullname=Franklin Lima Choque
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8418872
+userspecialtydessigned=6,8,9
+
+userci=57522080
+username=roman57522080
+userfullname=Roman Lora Ossio
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=57522080
+userspecialtydessigned=2,8,9
+
+userci=10479239
+username=maria10479239
+userfullname=Maria Isabel Mamani Antonio
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10479239
+userspecialtydessigned=6,8,9,7
+
+userci=7358724
+username=abel7358724
+userfullname=Abel Martinez Achacollo
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7358724
+userspecialtydessigned=8,9,7
+
+userci=9143653
+username=pedro9143653
+userfullname=Pedro Mollo Barrios
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9143653
+userspecialtydessigned=2,8,9
+
+userci=7414875
+username=israel7414875
+userfullname=Israel Plata Huanca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7414875
+userspecialtydessigned=6,8,9
+
+userci=9170305
+username=rebeca9170305
+userfullname=Rebeca Poma Flores
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9170305
+userspecialtydessigned=6,8,9,7
+
+userci=5753885
+username=oswaldo5753885
+userfullname=Oswaldo Poquechoque Acha
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=5753885
+userspecialtydessigned=3,8,9
+
+userci=12525151
+username=daniela12525151
+userfullname=Daniela porcel Huarachi
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12525151
+userspecialtydessigned=6,5,4,7
+
+userci=10476277
+username=raissa10476277
+userfullname=Raissa Quispe Cabezas
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10476277
+userspecialtydessigned=6,8,9,7
+
+userci=14339076
+username=roxana14339076
+userfullname=Roxana Gisela Quispe Espadero
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=14339076
+userspecialtydessigned=6,8,9,7
+
+userci=7332837
+username=elmer7332837
+userfullname=Elmer Ramirez Contreras
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7332837
+userspecialtydessigned=6,9
+
+userci=7028402
+username=maria7028402
+userfullname=Maria Magdalena Rocha Tola
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7028402
+userspecialtydessigned=6,8,9
+
+userci=9337813
+username=gilda9337813
+userfullname=Gilda Rojas Espiritu
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9337813
+userspecialtydessigned=6,8,5
+
+userci=0
+username=emerson0
+userfullname=Emerson Sanchez Motiño
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=0
+userspecialtydessigned=8
+
+userci=7358180
+username=reyna7358180
+userfullname=Reyna Tola Canaviri
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7358180
+userspecialtydessigned=8
+
+userci=10463225
+username=camila10463225
+userfullname=Camila Veliz Mamani
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10463225
+userspecialtydessigned=6,8,9
+
+userci=12751122
+username=silvia12751122
+userfullname=Silvia Yapura Vasquez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12751122
+userspecialtydessigned=6,8,9
+
+userci=8394506
+username=bigman8394506
+userfullname=Bigman Gilmar Acarapi Quino
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8394506
+userspecialtydessigned=6,8,9
+
+userci=7328136
+username=lisandra7328136
+userfullname=Lisandra Adrian Blanco
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7328136
+userspecialtydessigned=6,8,9,7
+
+userci=8606562
+username=vadir8606562
+userfullname=Vadir Jhamil Aguilar Portillo
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8606562
+userspecialtydessigned=6,8,9,7
+
+userci=9179486
+username=luz9179486
+userfullname=Luz Guadalupe Argote Mamani
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9179486
+userspecialtydessigned=6,8,9
+
+userci=6716966
+username=silvia6716966
+userfullname=Silvia Arteaga Reynaga
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=6716966
+userspecialtydessigned=6,8,9
+
+userci=7364141
+username=roxana7364141
+userfullname=Roxana Rosaysela Callaguara Benitez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7364141
+userspecialtydessigned=6,8,9,7
+
+userci=9381070
+username=yhesselyn9381070
+userfullname=Yhesselyn Camaqui Condori
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9381070
+userspecialtydessigned=6,8,9,7
+
+userci=8527000
+username=jhenny8527000
+userfullname=Jhenny Camata Quispe
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8527000
+userspecialtydessigned=6
+
+userci=7374109
+username=alex7374109
+userfullname=Alex Canaviri Inocente
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7374109
+userspecialtydessigned=6,8,9,7
+
+userci=0
+username=juan0
+userfullname=Juan Jhonny Canaviri Romero
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=juan0
+userspecialtydessigned=6,8,9,7
+
+userci=8888321
+username=maycon8888321
+userfullname=Maycon Rene Cervantes Yale
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8888321
+userspecialtydessigned=6,8,9,7
+
+userci=12589790
+username=ruth12589790
+userfullname=Ruth Ximena Choque Alonzo
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12589790
+userspecialtydessigned=6
+
+userci=12489963
+username=jeanette12489963
+userfullname=Jeanette Maribel Choque Ayca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12489963
+userspecialtydessigned=6,8,9,7
+
+userci=7293588
+username=joselin7293588
+userfullname=Joselin Choque Villca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7293588
+userspecialtydessigned=6,8,9,7
+
+userci=9418660
+username=bernabe9418660
+userfullname=Bernabe Colquechuima Perez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9418660
+userspecialtydessigned=6
+
+userci=9501362
+username=maribel9501362
+userfullname=Maribel Condori Poca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9501362
+userspecialtydessigned=6,8,9,7
+
+userci=7400728
+username=rocio7400728
+userfullname=Rocio Condori Quispe
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7400728
+userspecialtydessigned=6,8,9,7
+
+userci=10460311
+username=neysa10460311
+userfullname=Neysa Jeanneth Espinoza Condori
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10460311
+userspecialtydessigned=6,8
+
+userci=12670637
+username=dennise12670637
+userfullname=Dennise Mishel Fernandez Alaniz
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12670637
+userspecialtydessigned=6,8,9,7
+
+userci=7298085
+username=rolando7298085
+userfullname=Rolando Steven Flores Apaza
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7298085
+userspecialtydessigned=6,8,9,7
+
+userci=13931422
+username=avenor13931422
+userfullname=Avenor Flores Flores
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13931422
+userspecialtydessigned=8
+
+userci=13065748
+username=erlinda13065748
+userfullname=Erlinda Gabriel Guzman
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13065748
+userspecialtydessigned=6,8,9,7
+
+userci=7368418
+username=maribel7368418
+userfullname=Maribel Garcia Huaylla
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7368418
+userspecialtydessigned=6,3,8
+
+userci=7309134
+username=iver7309134
+userfullname=Iver Melanio Gomez Marca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7309134
+userspecialtydessigned=6
+
+userci=3117250
+username=milan3117250
+userfullname=Milan Gonzales Quilla
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=3117250
+userspecialtydessigned=6
+
+userci=0
+username=cristian0
+userfullname=Cristian Gonzales Villcaez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=cristian0
+userspecialtydessigned=6,8,9,7
+
+userci=13691393
+username=waldo13691393
+userfullname=Waldo Grageda Paredes
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13691393
+userspecialtydessigned=6,9
+
+userci=13160815
+username=jessica13160815
+userfullname=Jessica Melvi Guarayo Ventura
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13160815
+userspecialtydessigned=6,8,9,7
+
+userci=9945135
+username=rebeca9945135
+userfullname=Rebeca Gutierrez Pinaya
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9945135
+userspecialtydessigned=6,8,9
+
+userci=7334119
+username=maykol7334119
+userfullname=Maykol Leon Mamani
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7334119
+userspecialtydessigned=6
+
+userci=7300511
+username=silvia7300511
+userfullname=Silvia Lopez Lazaro
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7300511
+userspecialtydessigned=6,4
+
+userci=13980533
+username=pablo13980533
+userfullname=Pablo Arnaldo Lopez Tola
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13980533
+userspecialtydessigned=6,8,9,7
+
+userci=13190910
+username=juan13190910
+userfullname=Juan Manuel Lopez Vasquez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13190910
+userspecialtydessigned=6,8,9,7
+
+userci=7324306
+username=alexis7324306
+userfullname=Alexis Mamani Condo
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7324306
+userspecialtydessigned=6
+
+userci=12590819
+username=paola12590819
+userfullname=Paola Andrea Mamani Espejo
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12590819
+userspecialtydessigned=6,8,9,7
+
+userci=7287351
+username=cristian7287351
+userfullname=Cristian Rivaldo Mamani Flores
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7287351
+userspecialtydessigned=6,2,5
+
+userci=7354262
+username=marisabel7354262
+userfullname=Marisabel Mamani Huarachi
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7354262
+userspecialtydessigned=6
+
+userci=10466613
+username=yessica10466613
+userfullname=Yessica Jhassel Martinez Porco
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10466613
+userspecialtydessigned=6,8,9,7
+
+userci=10549396
+username=edwin10549396
+userfullname=Edwin Mateo Fiesta
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10549396
+userspecialtydessigned=6,8,9,7
+
+userci=6634474
+username=rebeca6634474
+userfullname=Rebeca Ossio Antonio
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=6634474
+userspecialtydessigned=6,3
+
+userci=10567412
+username=yerco10567412
+userfullname=Yerco Puente Chocata
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10567412
+userspecialtydessigned=6,4
+
+userci=8762520
+username=jose8762520
+userfullname=Jose Omar Quiroz Gutierrez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8762520
+userspecialtydessigned=6,2
+
+userci=7358431
+username=kevin7358431
+userfullname=Kevin Michael Quispe Cruz
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7358431
+userspecialtydessigned=6
+
+userci=14869087
+username=jessica14869087
+userfullname=Jessica Edmi Rojas Aguilar
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=14869087
+userspecialtydessigned=6,8,9,7
+
+userci=13931943
+username=amancaya13931943
+userfullname=Amancaya Ingrid Santander Vigabriel
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13931943
+userspecialtydessigned=6
+
+userci=6709964
+username=rosa6709964
+userfullname=Rosa Taraña Ambrocio
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=6709964
+userspecialtydessigned=6
+
+userci=7319233
+username=sandra7319233
+userfullname=Sandra Villca Gonzales
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7319233
+userspecialtydessigned=6,8,9,7
+
+userci=10467546
+username=evo10467546
+userfullname=Evo Antonio Quichari
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10467546
+userspecialtydessigned=3,2,5,4
+
+userci=8626454
+username=kevin8626454
+userfullname=Kevin Octavio Caceres Huarachi
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8626454
+userspecialtydessigned=3,9,5,4
+
+userci=10462006
+username=esther10462006
+userfullname=Esther Checo Condori
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10462006
+userspecialtydessigned=3,2,5,4
+
+userci=7405104
+username=juan7405104
+userfullname=Juan Ariel Chila Tangara
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7405104
+userspecialtydessigned=3,2,5
+
+userci=7341656
+username=jhovana7341656
+userfullname=Jhovana Chintari Juarez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7341656
+userspecialtydessigned=3,2,5,4
+
+userci=7424476
+username=juan7424476
+userfullname=Juan Carlos Colque Ramirez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7424476
+userspecialtydessigned=3,2,5,4
+
+userci=8194066
+username=daniela8194066
+userfullname=Daniela Ivonne Felipe Copacondo
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8194066
+userspecialtydessigned=3,2,5,4
+
+userci=7356712
+username=joel7356712
+userfullname=Joel Gallego Aguilar
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7356712
+userspecialtydessigned=3,2,5,4
+
+userci=8534954
+username=jhilda8534954
+userfullname=Jhilda Gareca Teran
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8534954
+userspecialtydessigned=3,2,5,4
+
+userci=4060007
+username=noemi4060007
+userfullname=Noemi Paola Guaygua Gutierrez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=4060007
+userspecialtydessigned=3,2
+
+userci=7328130
+username=amanda7328130
+userfullname=Amanda Nilda Gutierrez Choque
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7328130
+userspecialtydessigned=3
+
+userci=12497077
+username=jhanneth12497077
+userfullname=Jhanneth Deysi Mamani Carata
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12497077
+userspecialtydessigned=3,2,5,4
+
+userci=13357959
+username=katherine13357959
+userfullname=Katherine Davinia Ines Medina Mendieta
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13357959
+userspecialtydessigned=3,2,5,4
+
+userci=7310310
+username=victor7310310
+userfullname=Victor Ocaña Choque
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7310310
+userspecialtydessigned=3,2,5,4
+
+userci=15279204
+username=alejandro15279204
+userfullname=Alejandro Miguel Pacheco Velarde
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=15279204
+userspecialtydessigned=3,2,5,4
+
+userci=7384275
+username=claudia7384275
+userfullname=Claudia Pairo Choque
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7384275
+userspecialtydessigned=3,2,5,4
+
+userci=9093586
+username=roger9093586
+userfullname=Roger Pairo Huallpa
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9093586
+userspecialtydessigned=3,2,5,4
+
+userci=8532302
+username=patricia8532302
+userfullname=Patricia Paniagua Pedro
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8532302
+userspecialtydessigned=3,2,5,4
+
+userci=7367894
+username=lizeth7367894
+userfullname=Lizeth Milenka Plata Tudela
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7367894
+userspecialtydessigned=3,2,5,4
+
+userci=10575232
+username=iverth10575232
+userfullname=Iverth Ramirez Mamani
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10575232
+userspecialtydessigned=3,2,5,4
+
+userci=10474424
+username=jhonnathan10474424
+userfullname=Jhonnathan Rinzo Ramos Mamani
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10474424
+userspecialtydessigned=3,2,5,4
+
+userci=9470367
+username=loida9470367
+userfullname=Loida Soliz Marquina
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9470367
+userspecialtydessigned=3,2,5,4
+
+userci=10551246
+username=danitza10551246
+userfullname=Danitza Tola Pillco
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10551246
+userspecialtydessigned=3,2,5,4
+
+userci=13470553
+username=maribel13470553
+userfullname=Maribel Usnayo Espadero
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13470553
+userspecialtydessigned=3,2,5,4
+
+userci=10461893
+username=mauricio10461893
+userfullname=Mauricio Vasquez Condarco
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10461893
+userspecialtydessigned=3,5,4
+
+userci=12869477
+username=ivan12869477
+userfullname=Ivan Iver Apaza Acho
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12869477
+userspecialtydessigned=3,2,5,4
+
+userci=7289091
+username=alex7289091
+userfullname=Alex Alejandro Apaza Acho
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7289091
+userspecialtydessigned=3,2,5,4
+
+userci=9395873
+username=andrea9395873
+userfullname=Andrea Janelly Balderrama
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9395873
+userspecialtydessigned=3,2,5
+
+userci=8528098
+username=joel8528098
+userfullname=Joel Blacutt Morales
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8528098
+userspecialtydessigned=3,2,5,4
+
+userci=8534572
+username=belinda8534572
+userfullname=Belinda Michelle Caballero Moreira
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8534572
+userspecialtydessigned=3,2,5,4
+
+userci=8653282
+username=ronald8653282
+userfullname=Ronald Orlando Choque Llanos
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8653282
+userspecialtydessigned=3,2,5,4
+
+userci=5764940
+username=doris5764940
+userfullname=Doris Colque Figueredo
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=5764940
+userspecialtydessigned=3,2,5
+
+userci=7359505
+username=stephanie7359505
+userfullname=Stephanie Colque Ibarra
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7359505
+userspecialtydessigned=3,2,5,4
+
+userci=7420713
+username=noemi7420713
+userfullname=Noemi Elizabeth Flores Condori
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7420713
+userspecialtydessigned=3,2,5,4
+
+userci=7396758
+username=miriam7396758
+userfullname=Miriam Flores Ramirez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7396758
+userspecialtydessigned=3,2,5,4
+
+userci=7284657
+username=abdiel7284657
+userfullname=Abdiel Ever Hurtado Inca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7284657
+userspecialtydessigned=3,2,5
+
+userci=9157144
+username=yoselin9157144
+userfullname=Yoselin Aracely Mamani Chambi
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9157144
+userspecialtydessigned=3,2,5,4
+
+userci=12586561
+username=alex12586561
+userfullname=Alex Mamani Choquecha
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12586561
+userspecialtydessigned=3,2
+
+userci=5752916
+username=maria5752916
+userfullname=Maria Mamani Colque
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=5752916
+userspecialtydessigned=3,2,5,4
+
+userci=6400981
+username=leonel6400981
+userfullname=Leonel Mamani Mamani
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=6400981
+userspecialtydessigned=3,2,5,4
+
+userci=14507920
+username=deyna14507920
+userfullname=Deyna Leticia Necretty Mendoza
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=14507920
+userspecialtydessigned=3,2,5,4
+
+userci=7309434
+username=cristian7309434
+userfullname=Cristian Yamil Nina Alejandro
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7309434
+userspecialtydessigned=3,2,5,4
+
+userci=12496041
+username=hilda12496041
+userfullname=Hilda Perez Reynaga
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12496041
+userspecialtydessigned=3,2,5,4
+
+userci=13834855
+username=jhenny13834855
+userfullname=Jhenny Quiruchi Ninavia
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13834855
+userspecialtydessigned=3,2,5,4
+
+userci=12590769
+username=andres12590769
+userfullname=Andres Ramirez Condori
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12590769
+userspecialtydessigned=3,2,5
+
+userci=10549986
+username=rocio10549986
+userfullname=Rocio Sarai Sanchez Porco
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10549986
+userspecialtydessigned=3,2,5
+
+userci=8630163
+username=miguel8630163
+userfullname=Miguel Anghelo Tapia Almanza
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8630163
+userspecialtydessigned=3,2,5,4
+
+userci=10479402
+username=linnet10479402
+userfullname=Linnet Ayelen Tococari Cabrera
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10479402
+userspecialtydessigned=3,2,5,4
+
+userci=8534858
+username=sarahi8534858
+userfullname=Sarahi Gabriel Ulaque Guzman
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8534858
+userspecialtydessigned=3,2,5,4
+
+userci=7410282
+username=lidia7410282
+userfullname=Lidia Vargas Canaviri
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7410282
+userspecialtydessigned=3,2,5,4
+
+userci=13356677
+username=jhovana13356677
+userfullname=Jhovana Vicente Rojas
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13356677
+userspecialtydessigned=3,2,4
+
+userci=8923630
+username=ana8923630
+userfullname=Ana Veronica Castro Mendieta
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8923630
+userspecialtydessigned=2,9
+
+userci=7414779
+username=yesica7414779
+userfullname=Yesica Condori Ojeda
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7414779
+userspecialtydessigned=2,5
+
+userci=6552311
+username=remberd6552311
+userfullname=Remberd Miranda Ramos
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=6552311
+userspecialtydessigned=2
+
+userci=7419159
+username=helen7419159
+userfullname=Helen Leydi Mollo Argandoña
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7419159
+userspecialtydessigned=2,9
+
+userci=9109046
+username=veronica9109046
+userfullname=Veronica Picachuri Chambi
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9109046
+userspecialtydessigned=2,5,4
+
+userci=12591036
+username=rodrigo12591036
+userfullname=Rodrigo Rojas Ledezma
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12591036
+userspecialtydessigned=2,5
+
+userci=5509702
+username=claudia5509702
+userfullname=Claudia Fajardo Lorenza
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=5509702
+userspecialtydessigned=2,5,4
+
+userci=0
+username=yoselin0
+userfullname=Yoselin Hermelina Huarachi Lopez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=yoselin0
+userspecialtydessigned=2,5,4
+
+userci=10093175
+username=miguel10093175
+userfullname=Miguel Mamani Garcia
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10093175
+userspecialtydessigned=2,5,4
+
+userci=9583562
+username=ivan9583562
+userfullname=Ivan Pablo Tarqui Perez
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9583562
+userspecialtydessigned=2,9
+
+userci=10461892
+username=mauro10461892
+userfullname=Mauro Fabricio Vasquez Condarco
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=10461892
+userspecialtydessigned=2,5,4
+
+userci=7410722
+username=mayra7410722
+userfullname=Mayra Yucra Escobar
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7410722
+userspecialtydessigned=2,5,4
+
+userci=12672650
+username=emerson12672650
+userfullname=Emerson Jhoao Bernal Marin
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=12672650
+userspecialtydessigned=9
+
+userci=8535106
+username=eva8535106
+userfullname=Eva Fernandez Velarde
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8535106
+userspecialtydessigned=9,5,4,7
+
+userci=8437928
+username=tommy8437928
+userfullname=Tommy William Machicado Choque
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8437928
+userspecialtydessigned=9
+
+userci=14079379
+username=geymar14079379
+userfullname=Geymar Alan Condori Ayza
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=14079379
+userspecialtydessigned=5
+
+userci=7381594
+username=bernabe7381594
+userfullname=Bernabe Mamani Huarachi
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=7381594
+userspecialtydessigned=5
+
+userci=13134839
+username=cristhian13134839
+userfullname=Cristhian Marcial Romero Paco
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=13134839
+userspecialtydessigned=5,4
+
+userci=8714082
+username=gaby8714082
+userfullname=Gaby Suset Saldaña Larico
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=8714082
+userspecialtydessigned=5
+
+userci=9678876
+username=denise9678876
+userfullname=Denise Alison Velasco Coca
+usertype=student
+userenabled=t
+usermultilogin=t
+userpassword=9678876
+userspecialtydessigned=4
