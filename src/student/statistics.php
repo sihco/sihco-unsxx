@@ -308,7 +308,6 @@ require('footer.php');
              if(data=='Error de fechas enviadas'){
                alert(data);
              }else{
-               //alert(data);
                var d=data.split('#');
                var first=d[0].split(',');
                var second=d[1].split(',');

@@ -265,7 +265,7 @@ echo "</tbody></table>\n";
 
 				  <div class="row">
 				    <div class="col-6">
-				      <label for="patientphone">Tel.</label><span class="text-danger">*</span>
+				      <label for="patientphone">Tel.</label>
 				      <input type="text" name="patientphone" class="form-control" id="patientphone" maxlength="9" onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" value="<?php if(isset($pat["patientphone"])) echo $pat["patientphone"];  ?>">
 				    </div>
 				    <div class="col-6">
@@ -315,13 +315,12 @@ echo "</tbody></table>\n";
 				      <label for="patientnationality">Nacionalidad</label><span class="text-danger">*</span>
 				      <!--<input type="text" name="patientnationality" class="form-control" id="patientnationality" value="<?php if(isset($pat["patientnationality"])) echo $pat["patientnationality"];  ?>">-->
 							<select name="patientnationality" id="patientnationality" class="form-select">
-					      <option <?php if(!isset($pat) || $pat["patientnationality"] == '--') echo "selected"; ?> value="--">--</option>
-					      <option <?php if(isset($pat) && $pat["patientnationality"] == 'boliviana') echo "selected"; ?> value="boliviana">Boliviana</option>
+					      <option <?php if(!isset($pat) || (isset($pat) && $pat["patientnationality"] == 'boliviana')) echo "selected"; ?> value="boliviana">Boliviana</option>
 					      <option <?php if(isset($pat) && $pat["patientnationality"] == 'extranjera') echo "selected"; ?> value="extranjera">Extranjera</option>
 					    </select>
 						</div>
 				    <div class="col-6">
-				      <label for="patientschool">Grado de escolaridad</label><span class="text-danger">*</span>
+				      <label for="patientschool">Grado de escolaridad</label>
 				      <!--<input type="text" name="patientschool" class="form-control" id="patientschool" value="<?php //if(isset($pat["patientschool"])) echo $pat["patientschool"];  ?>">-->
 							<select name="patientschool" id="patientschool" class="form-select">
 					      <option <?php if(!isset($pat) || $pat["patientschool"] == '--') echo "selected"; ?> value="--">--</option>
@@ -630,13 +629,20 @@ echo "</tbody></table>\n";
 				      </select>
 				    </div>
 				    <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-				      <label for="occlusion">Tipo de Oclusion</label>
+				      <label for="occlusion">Tipo de Oclusión</label>
 				      <select name="occlusion" class="form-select" aria-label="Default select example">
-				        <option <?php if(!isset($pat) || $pat["dentaltypeo"] == 'normo') echo "selected"; ?> value="normo">Normo oclusion</option>
-				        <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'disto') echo "selected"; ?> value="disto">Disto oclusion</option>
-				        <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'mesio') echo "selected"; ?> value="mesio">Mesio oclusion</option>
-				        <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'abierta') echo "selected"; ?> value="abierta">Abierta anterior</option>
-				      </select>
+
+							<option <?php if(!isset($pat) || $pat["dentaltypeo"] == 'normal') echo "selected"; ?> value="normal">Mordida Normal</option>
+							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'sobre') echo "selected"; ?> value="sobre">SobreMordida</option>
+							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'abierta') echo "selected"; ?> value="abierta">Mordida Abierta</option>
+							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'cruzada') echo "selected"; ?> value="cruzada">Mordida Cruzada</option>
+							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'bis') echo "selected"; ?> value="bis">Mordida Bis a Bis</option>
+							<!--<option <?php //if(!isset($pat) || $pat["dentaltypeo"] == 'normo') echo "selected"; ?> value="normo">Normo oclusion</option>
+				        <option <?php //if(isset($pat) && $pat["dentaltypeo"] == 'disto') echo "selected"; ?> value="disto">Disto oclusion</option>
+				        <option <?php //if(isset($pat) && $pat["dentaltypeo"] == 'mesio') echo "selected"; ?> value="mesio">Mesio oclusion</option>
+				        <option <?php //if(isset($pat) && $pat["dentaltypeo"] == 'abierta') echo "selected"; ?> value="abierta">Abierta anterior</option>
+							-->
+							</select>
 				    </div>
 				  <div class="row">
 				    <div class="col-lg-2 col-md-2 col-sm-6 col-6">
@@ -700,7 +706,7 @@ echo "</tbody></table>\n";
 				        ?>
 				<!--odontograma fin-->
 				<input type="hidden" name="draw" id="draw" value="<?php if(isset($pat["draw"])) echo $pat["draw"];?>">
-				
+
 			</div>
     </div>
   </div>
@@ -1089,10 +1095,6 @@ $(document).ready(function(){
          alert("Debe completar campo procedencia.");
          return false;
        }
-       if(patientphone.trim()==''){
-         alert("Debe completar campo telefono.");
-         return false;
-       }
        if(patientoccupation.trim()==''){
          alert("Debe completar campo ocupación.");
          return false;
@@ -1101,10 +1103,10 @@ $(document).ready(function(){
          alert("Debe completar campo nacionalidad.");
          return false;
        }
-       if(patientschool.trim()==''){
-         alert("Debe completar campo grado de escolaridad.");
-         return false;
-       }
+       //if(patientschool.trim()==''){
+         //alert("Debe completar campo grado de escolaridad.");
+         //return false;
+       //}
        if(patientcivilstatus.trim()==''){
          alert("Debe completar campo estado civil.");
          return false;

@@ -233,7 +233,7 @@ userpassword=123
 
 userci=0
 username=doradocente
-userfullname=Dora Flores
+userfullname=Dora Flores Morante
 usertype=teacher
 userenabled=t
 usermultilogin=t
@@ -242,6 +242,14 @@ userpassword=123
 userci=0
 username=soniadocente
 userfullname=Sonia Padilla
+usertype=teacher
+userenabled=t
+usermultilogin=t
+userpassword=123
+
+userci=0
+username=rubendocente
+userfullname=Ruben Alain Cossio Vela
 usertype=teacher
 userenabled=t
 usermultilogin=t

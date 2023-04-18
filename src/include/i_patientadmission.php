@@ -18,7 +18,7 @@ if (isset($_POST["designed"]) && isset($_POST["student"])) {
 if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patientname"]) &&
     isset($_POST["patientfirstname"]) && isset($_POST["patientlastname"]) &&
     isset($_POST["patientdirection"]) && isset($_POST["patientlocation"]) && isset($_POST["patientage"]) &&
-    isset($_POST["patientprovenance"]) && isset($_POST["patientphone"]) && is_numeric($_POST["patientphone"]) &&
+    isset($_POST["patientprovenance"]) && isset($_POST["patientphone"]) &&
     isset($_POST["patientgender"]) && isset($_POST["patientcivilstatus"]) &&
     isset($_POST["patientoccupation"]) && isset($_POST["patientnationality"]) &&
     isset($_POST["patientschool"]) && isset($_POST["patientattorney"]) && isset($_POST["yesno0"]) && isset($_POST["obs0"]) && isset($_POST["obs13"]) &&
@@ -35,17 +35,21 @@ if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patien
     	$param['idpa'] = htmlspecialchars(trim($_POST["padmissionid"]));
 
       //$param['patientname'] = htmlspecialchars(trim($_POST["patientfullname"]));
-      $param['patientname'] = htmlspecialchars(trim($_POST["patientname"]));
-    	$param['patientfirstname'] = htmlspecialchars(trim($_POST["patientfirstname"]));
-    	$param['patientlastname'] = htmlspecialchars(trim($_POST["patientlastname"]));
-    	$param['patientdirection'] = htmlspecialchars(trim($_POST["patientdirection"]));
-    	$param['patientlocation'] = htmlspecialchars(trim($_POST["patientlocation"]));
+      $param['patientname'] = ucfirst(htmlspecialchars(trim($_POST["patientname"])));
+    	$param['patientfirstname'] = ucfirst(htmlspecialchars(trim($_POST["patientfirstname"])));
+    	$param['patientlastname'] = ucfirst(htmlspecialchars(trim($_POST["patientlastname"])));
+    	$param['patientdirection'] = ucfirst(htmlspecialchars(trim($_POST["patientdirection"])));
+    	$param['patientlocation'] = ucfirst(htmlspecialchars(trim($_POST["patientlocation"])));
     	$param['patientage'] = htmlspecialchars(trim($_POST["patientage"]));
-    	$param['patientprovenance'] = htmlspecialchars(trim($_POST["patientprovenance"]));
-    	$param['patientphone'] = htmlspecialchars(trim($_POST["patientphone"]));
+    	$param['patientprovenance'] = ucfirst(htmlspecialchars(trim($_POST["patientprovenance"])));
+      $param['patientphone'] = htmlspecialchars(trim($_POST["patientphone"]));
+      if(!is_numeric($_POST['patientphone'])){
+        $param['patientphone'] = 0;
+      }
+
     	$param['patientgender'] = htmlspecialchars(trim($_POST["patientgender"]));
     	$param['patientcivilstatus'] = htmlspecialchars(trim($_POST["patientcivilstatus"]));
-    	$param['patientoccupation'] = htmlspecialchars(trim($_POST["patientoccupation"]));
+    	$param['patientoccupation'] = ucfirst(htmlspecialchars(trim($_POST["patientoccupation"])));
     	$param['patientnationality'] = htmlspecialchars(trim($_POST["patientnationality"]));
     	$param['patientschool'] = htmlspecialchars(trim($_POST["patientschool"]));
     	$param['patientattorney']=htmlspecialchars(trim($_POST["patientattorney"]));
@@ -67,7 +71,7 @@ if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patien
       $param['prosthesis'] = htmlspecialchars($_POST["prosthesis"]);
       $param['hygiene'] = htmlspecialchars($_POST["hygiene"]);
       $param['lastconsultation'] = htmlspecialchars($_POST["lastconsultation"]);
-      $param['consultation'] = htmlspecialchars($_POST["consultation"]);
+      $param['consultation'] = ucfirst(htmlspecialchars($_POST["consultation"]));
 
       //odontogram
       $conf=globalconf();
@@ -80,7 +84,7 @@ if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patien
       $param['bll'] = encryptData($_POST["bll"], $conf["key"], false);
       $param['blr'] = encryptData($_POST["blr"], $conf["key"], false);
       //remission
-      $param['diagnosis'] = htmlspecialchars($_POST["diagnostico"]);
+      $param['diagnosis'] = ucfirst(htmlspecialchars($_POST["diagnostico"]));
 
       //$admission=$_SESSION["usertable"]["usernumber"];
       if(!isset($_SESSION["usertable"]["usernumber"])){

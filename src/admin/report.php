@@ -270,7 +270,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
         </div>
         <div class="tres" align="left">
           <?php
-          $name="Ocupacion:";
+          $name="Ocupación:";
           if(isset($pat) && $pat["patientoccupation"]){
             $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientoccupation"];
             echo $name;
@@ -581,8 +581,19 @@ if(!isset($_SESSION['usertable']['usertype'])||
               $name.="Disto oclusion";
             if($pat["dentaltypeo"]=='mesio')
               $name.="Mesio oclusion";
+            //if($pat["dentaltypeo"]=='abierta')
+            //  $name.="Abierta anterior";
+
+            if($pat["dentaltypeo"]=='normal')
+              $name.="Mordida Normal";
+            if($pat["dentaltypeo"]=='sobre')
+              $name.="SobreMordida";
             if($pat["dentaltypeo"]=='abierta')
-              $name.="Abierta anterior";
+              $name.="Mordida Abierta";
+            if($pat["dentaltypeo"]=='cruzada')
+              $name.="Mordida Cruzada";
+            if($pat["dentaltypeo"]=='bis')
+              $name.="Mordida Bis a Bis";
 
             echo $name;
           }else{

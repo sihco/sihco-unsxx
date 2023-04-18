@@ -94,11 +94,10 @@ if(isset($_POST['start'])&&$_POST['start']&&isset($_POST['end'])&&$_POST['end']&
       $total=$dyear['new']+$dyear['process']+$dyear['end']+$dyear['fail']+$dyear['canceled'];
       $mes.=$total.',';
     }
-
     $start=strtotime($_POST['start']);
     $end=strtotime($_POST['end'])+86400;//fecha de finalizacion
     $data=DBClinicalStatisticsInfo($start, $end, $a, $userid, $usertype);
-
+    //echo $data['new'];
     $max=max($data['new'],$data['process'],$data['end'],$data['fail'],$data['canceled'])+1;
 
 

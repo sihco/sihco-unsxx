@@ -2525,7 +2525,7 @@ function DBClinicalStatisticsInfo($start, $end, $clinicals=array(), $userid=null
 		for ($j=0;$j<$n;$j++) {
 			$ab[$j] = DBRow($r,$j);
 			//nuevo
-			if(($ab[$j]['status']=='new'||$ab[$j]['status']=='process')&&$ab[$j]['stdatetime']==-1&&$ab[$j]['updatetime']>=$start&&$ab[$j]['updatetime']<=$end){
+			if($ab[$j]['status']=='new'&& $ab[$j]['updatetime']>=$start&& $ab[$j]['updatetime']<=$end){
 					$a['new']++;
 			}
 			//en proceso
