@@ -424,7 +424,7 @@ echo "</tbody></table>\n";
 				<!--formulario para entecedentes medico general fin-->
 				        <br>
 				        <div class="row">
-				          <u><b>Presion Arterial actual:</b></u>
+				          <u><b>Presión Arterial actual:</b></u>
 				          <br>
 				          <div class="col-12">
 				            <div class="row">
@@ -609,7 +609,7 @@ echo "</tbody></table>\n";
 				    <div class="col-lg-2 col-md-2 col-sm-6 col-6">
 				      <label for="patientgender">Piso de la boca</label>
 				      <select name="piso" class="form-select" aria-label="Default select example">
-				        <option <?php if(!isset($pat) || $pat["dentalpiso"] == 'toruslingua') echo "selected"; ?> value="toruslingua">Torus Lingua</option>
+				        <option <?php if(!isset($pat) || $pat["dentalpiso"] == 'toruslingua') echo "selected"; ?> value="toruslingua">Torus Lingual</option>
 				        <option <?php if(isset($pat) && $pat["dentalpiso"] == 'aparentemente') echo "selected"; ?> value="aparentemente">Aparentemente Normal</option>
 				      </select>
 				    </div>
@@ -617,7 +617,7 @@ echo "</tbody></table>\n";
 				      <label for="encias">Encias</label>
 				      <select name="encias" class="form-select" aria-label="Default select example">
 				        <option <?php if(!isset($pat) || $pat["dentalencias"] == 'difusa') echo "selected"; ?> value="difusa">Difusa</option>
-				        <option <?php if(isset($pat) && $pat["dentalencias"] == 'gingivitis') echo "selected"; ?> value="gingivitis">Gingivitis cronoca no complicada</option>
+				        <option <?php if(isset($pat) && $pat["dentalencias"] == 'gingivitis') echo "selected"; ?> value="gingivitis">Gingivitis cronica no complicada</option>
 				        <option <?php if(isset($pat) && $pat["dentalencias"] == 'papilar') echo "selected"; ?> value="papilar">Papilar</option>
 				      </select>
 				    </div>
@@ -666,13 +666,11 @@ echo "</tbody></table>\n";
 					<br>
 					<div class="row">
 						<div class="col-lg-4 col-md-4 col-sm-12 col-12">
-
 				      <label for="lastconsultation"><u><b>Ultima Consulta</b></u></label>
 				      <input type="text" name="lastconsultation" class="form-control" id="lastconsultation" value="<?php if(isset($pat["lastconsult"])) echo $pat["lastconsult"];  ?>">
 				      <!--<input type="date" id="lastconsultation" class="form-control"  name="lastconsultation" value="<?php //if(isset($pat["lastconsult"])) echo $pat["lastconsult"];  ?>" min="2015-01-01" max="2099-01-01">-->
 				    </div>
 				    <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-
 				      <label for="consultation"><u><b>Motivo de Consulta</b></u></label>
 				      <input type="text" name="consultation" class="form-control" id="consultation" value="<?php if(isset($pat["motconsult"])) echo $pat["motconsult"];  ?>">
 				    </div>

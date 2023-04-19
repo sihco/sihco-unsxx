@@ -524,7 +524,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
             if($pat["dentalpiso"]=='toruslingua')
               $name.="Aparentemente Normal";
             if($pat["dentalpiso"]=='aparentemente')
-              $name.="Torus lingua";
+              $name.="Torus lingual";
 
             echo $name;
           }else{
@@ -538,7 +538,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
           if(isset($pat)){
             $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
             if($pat["dentalencias"]=='gingivitis')
-              $name.="Gingivitis cronoca no complicada";
+              $name.="Gingivitis cronica no complicada";
             if($pat["dentalencias"]=='difusa')
               $name.="Difusa";
             if($pat["dentalencias"]=='papilar')
@@ -558,7 +558,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
             if($pat["dentalmucosa"]=='normal')
               $name.="Aparentemente normal";
             if($pat["dentalmucosa"]=='alteracion')
-              $name.="Con alteracion";
+              $name.="Con alteración";
 
 
             echo $name;
@@ -572,15 +572,15 @@ if(!isset($_SESSION['usertable']['usertype'])||
       <div class="left" style="width:48%;">
         <div class="">
           <?php
-          $name="Tipo de Oclusion:";
+          $name="Tipo de Oclusión:";
           if(isset($pat)){
             $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
             if($pat["dentaltypeo"]=='normo')
-              $name.="Normo oclusion";
+              $name.="Normo oclusión";
             if($pat["dentaltypeo"]=='disto')
-              $name.="Disto oclusion";
+              $name.="Disto oclusión";
             if($pat["dentaltypeo"]=='mesio')
-              $name.="Mesio oclusion";
+              $name.="Mesio oclusión";
             //if($pat["dentaltypeo"]=='abierta')
             //  $name.="Abierta anterior";
 
