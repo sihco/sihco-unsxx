@@ -609,8 +609,8 @@ echo "</tbody></table>\n";
 				    <div class="col-lg-2 col-md-2 col-sm-6 col-6">
 				      <label for="patientgender">Piso de la boca</label>
 				      <select name="piso" class="form-select" aria-label="Default select example">
-				        <option <?php if(!isset($pat) || $pat["dentalpiso"] == 'toruslingua') echo "selected"; ?> value="toruslingua">Torus Lingual</option>
-				        <option <?php if(isset($pat) && $pat["dentalpiso"] == 'aparentemente') echo "selected"; ?> value="aparentemente">Aparentemente Normal</option>
+				        <option <?php if(!isset($pat) || $pat["dentalpiso"] == 'aparentemente') echo "selected"; ?> value="aparentemente">Aparentemente Normal</option>
+				        <option <?php if(isset($pat) && $pat["dentalpiso"] == 'toruslingua') echo "selected"; ?> value="toruslingua">Torus Lingual</option>
 				      </select>
 				    </div>
 				    <div class="col-lg-3 col-md-3 col-sm-6 col-6">
