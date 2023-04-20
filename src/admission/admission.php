@@ -632,7 +632,8 @@ echo "</tbody></table>\n";
 				      <label for="occlusion">Tipo de Oclusión</label>
 				      <select name="occlusion" class="form-select" aria-label="Default select example">
 
-							<option <?php if(!isset($pat) || $pat["dentaltypeo"] == 'normal') echo "selected"; ?> value="normal">Mordida Normal</option>
+							<option <?php if(!isset($pat) || $pat["dentaltypeo"] == '--') echo "selected"; ?> value="--">--</option>
+							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'normal') echo "selected"; ?> value="normal">Mordida Normal</option>
 							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'sobre') echo "selected"; ?> value="sobre">SobreMordida</option>
 							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'abierta') echo "selected"; ?> value="abierta">Mordida Abierta</option>
 							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'cruzada') echo "selected"; ?> value="cruzada">Mordida Cruzada</option>
@@ -691,8 +692,6 @@ echo "</tbody></table>\n";
     </h2>
     <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
       <div class="accordion-body">
-
-
 				<!--odontograma inicio-->
 				        <?php
 				        include("../leftodontogram.php");

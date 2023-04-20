@@ -594,6 +594,8 @@ if(!isset($_SESSION['usertable']['usertype'])||
               $name.="Mordida Cruzada";
             if($pat["dentaltypeo"]=='bis')
               $name.="Mordida Bis a Bis";
+            if($pat["dentaltypeo"]=='--')
+              $name.="--";
 
             echo $name;
           }else{
