@@ -103,7 +103,7 @@ $size=count($pr);
 for ($i=0; $i < $size; $i++) {
       echo " <tr>\n";
       echo "   <td>" . ($size-$i) . "</td>";
-      echo "   <td>" . $pr[$i]["patientname"] ." ". $pr[$i]["patientfirstname"] ." ". $pr[$i]["patientlastname"] ."</td>";
+      echo "   <td><a href=\"report.php?id=" . $pr[$i]["patientadmissionid"] . "\">" . $pr[$i]["patientname"] ." ". $pr[$i]["patientfirstname"] ." ". $pr[$i]["patientlastname"] ."</a></td>";
       echo "   <td>" . $pr[$i]["motconsult"] . "</td>";
       echo "   <td>" . $pr[$i]["diagnosis"] . "</td>";
 
