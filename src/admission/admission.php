@@ -600,7 +600,8 @@ echo "</tbody></table>\n";
 				    <div class="col-lg-2 col-md-2 col-sm-6 col-6">
 				      <label for="patientgender">Lengua</label>
 				      <select name="tongue" class="form-select" aria-label="Default select example">
-				        <option <?php if(!isset($pat) || $pat["dentaltongue"] == 'saburra') echo "selected"; ?> value="saburra">Saburral</option>
+				        <option <?php if(!isset($pat) || $pat["dentaltongue"] == 'normal') echo "selected"; ?> value="normal">Normal</option>
+				        <option <?php if(isset($pat) && $pat["dentaltongue"] == 'saburra') echo "selected"; ?> value="saburra">Saburral</option>
 				        <option <?php if(isset($pat) && $pat["dentaltongue"] == 'fisurada') echo "selected"; ?> value="fisurada">Fisurada</option>
 				        <option <?php if(isset($pat) && $pat["dentaltongue"] == 'geografica') echo "selected"; ?> value="geografica">Geográfica</option>
 				        <option <?php if(isset($pat) && $pat["dentaltongue"] == 'otros') echo "selected"; ?> value="otros">Otros</option>
@@ -616,7 +617,8 @@ echo "</tbody></table>\n";
 				    <div class="col-lg-3 col-md-3 col-sm-6 col-6">
 				      <label for="encias">Encias</label>
 				      <select name="encias" class="form-select" aria-label="Default select example">
-				        <option <?php if(!isset($pat) || $pat["dentalencias"] == 'difusa') echo "selected"; ?> value="difusa">Difusa</option>
+				        <option <?php if(!isset($pat) || $pat["dentalencias"] == 'normal') echo "selected"; ?> value="normal">Normal</option>
+				        <option <?php if(isset($pat) && $pat["dentalencias"] == 'difusa') echo "selected"; ?> value="difusa">Difusa</option>
 				        <option <?php if(isset($pat) && $pat["dentalencias"] == 'gingivitis') echo "selected"; ?> value="gingivitis">Gingivitis cronica no complicada</option>
 				        <option <?php if(isset($pat) && $pat["dentalencias"] == 'papilar') echo "selected"; ?> value="papilar">Papilar</option>
 				      </select>

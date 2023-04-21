@@ -502,6 +502,8 @@ if(!isset($_SESSION['usertable']['usertype'])||
           $name="Lengua:";
           if(isset($pat)){
             $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+            if($pat["dentaltongue"]=='normal')
+              $name.="Normal";
             if($pat["dentaltongue"]=='saburra')
               $name.="Saburral";
             if($pat["dentaltongue"]=='fisurada')
@@ -521,9 +523,9 @@ if(!isset($_SESSION['usertable']['usertype'])||
           $name="Piso de la boca:";
           if(isset($pat)){
             $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-            if($pat["dentalpiso"]=='toruslingua')
-              $name.="Aparentemente Normal";
             if($pat["dentalpiso"]=='aparentemente')
+              $name.="Aparentemente Normal";
+            if($pat["dentalpiso"]=='toruslingua')
               $name.="Torus lingual";
 
             echo $name;
@@ -537,6 +539,8 @@ if(!isset($_SESSION['usertable']['usertype'])||
           $name="Encias:";
           if(isset($pat)){
             $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+            if($pat["dentalencias"]=='normal')
+              $name.="Normal";
             if($pat["dentalencias"]=='gingivitis')
               $name.="Gingivitis cronica no complicada";
             if($pat["dentalencias"]=='difusa')
