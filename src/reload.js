@@ -1,7 +1,7 @@
 var msg = 0;
 var rld  = 0;
 var selecionando = 0;
-var seg = 30;
+var seg = 180;
 function recarregar() {
 	if (rld) {
 		clearTimeout(rld);

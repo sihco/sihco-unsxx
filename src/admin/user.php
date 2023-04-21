@@ -224,8 +224,8 @@ El archivo debe tener el formato definido en el manual del administrador.</b></c
 <!--formulario de importacion de usuarios fin-->
 
 
-
-<table class="table table-responsive table-sm table-hover" id="table_users" style="width:100%">
+<div class="table-responsive">
+<table class="table table-sm table-hover" id="table_users" style="width:100%">
     <thead>
         <tr>
             <th scope="col">ID #</th>
@@ -331,6 +331,7 @@ if (isset($_GET["user"]) && is_numeric($_GET["user"]))
   $u = DBUserInfo($_GET["user"]);
 ////esta funcion retorna el registro de usuario y tambien si cambio o no hashpass = true
 ?>
+</div>
 
 <script language="JavaScript" src="../sha256.js"></script>
 <script language="JavaScript" src="../hex.js"></script>

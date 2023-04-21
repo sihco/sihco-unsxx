@@ -24,13 +24,16 @@
 <script src="../js/scripts.js"></script>
 <script src="../assets/graphic/jquery-3.5.1.min.js"></script>
 <script src="../assets/graphic/chart.js"></script>
+<script src="../assets/graphic/jquery.dataTables.min.js"></script>
 
 </body>
 </html>
 <script language="JavaScript" src="../sha256.js"></script>
 <script language="JavaScript" src="../hex.js"></script>
 <script>
-
+$(document).ready( function () {
+    $('#table_users').DataTable();
+} );
 $(document).ready(function(){
 
 //update
