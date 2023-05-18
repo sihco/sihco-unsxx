@@ -151,7 +151,7 @@ if($r["status"]=='end'&& $r["reviewteacher"]!=''&& $r["reviewstatus"]=='t'){
     </div>
     <div class="col-lg-5 col-md-5 col-sm-12 col-12">
       <label for="obsdesc"><u><b>Observaciones</b></u></label>
-      <textarea name="obsdesc" id="obsdesc" class="form-control" rows="8" ></textarea>
+      <textarea name="obsdesc" id="obsdesc" class="form-control" rows="4" ></textarea>
       <div class="border border-success bordered">
         <div class="row container">
           <span align="center"><u><h6>OBSERVACIONES REALIZADAS</h6></u></span>

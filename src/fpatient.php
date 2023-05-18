@@ -321,7 +321,6 @@ function DBNewPatient($param, $c=null){
 	$t = time();
 	if($updatetime <= 0)
 		$updatetime=$t;
-
 	if($idp==-1){
 		$sql = "select * from patienttable where patientname='$name' and patientfirstname='$firstname' and patientlastname='$lastname'";
 		$a = DBGetRow ($sql, 0, $c);
@@ -375,7 +374,7 @@ function DBNewPatient($param, $c=null){
 
 					DBExec($c, $sql, "DBNewPatient(insert patientadmission)");
 
-					if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<17){
+					if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<=17){
 							$rdata=array();
 							$rdata['patientid']=$idp;
 							$rdata['patientadmissionid']=$idpa;
@@ -412,7 +411,7 @@ function DBNewPatient($param, $c=null){
 
 
 				DBExec($c, $sql, "DBNewPatient(insert patientadmission)");
-				if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<17){
+				if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<=17){
 						$rdata=array();
 						$rdata['patientid']=$idp;
 						$rdata['patientadmissionid']=$idpa;
@@ -433,7 +432,6 @@ function DBNewPatient($param, $c=null){
 				if($updatetime > $a['updatetime'] && $idpa!="") {
 					$ret=2;
 					$idpa=$param["idpa"];
-
 					$sql="update patienttable set patientname='$name', patientfirstname='$firstname', patientlastname='$lastname', patientgender='$gender', " .
 						"patientnationality='$nationality', patientdatebirth=$datebirth, patientplacebirth='$placebirth', updatetime=$updatetime where patientid=$idp";
 					$r = DBExec ($c, $sql, "DBNewPatient(update patient)");
@@ -449,7 +447,7 @@ function DBNewPatient($param, $c=null){
 					"triagethroat='$throat', triagegeneral='$general', triagevaccine='$vaccine', diagnosis='$diagnosis', updatetime=$updatetime where patientadmissionid=$idpa";
 
 					$r = DBExec ($c, $sql, "DBNewPatient(update patientadmission)");
-					if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<17){
+					if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<=17){
 							$rdata=array();
 							$reinfo=DBRemissionInfo($idpa, $c);//idadmission
 							$rdata['remissionid']=$reinfo['remissionid'];
@@ -610,11 +608,14 @@ function DBAllPatientRemissionInfo($student=null) {
 	}
 	return $a;
 }
-function DBAllPatientRemissionClinicalInfo($clinical=null) {
+function DBAllPatientRemissionClinicalInfo($clinical=null, $patient=null) {
 	$sql = "select *from patienttable as p, patientadmissiontable as pa, remissiontable re
 	where p.patientid=pa.patientid and re.patientadmissionid=pa.patientadmissionid";
 	if($clinical!=null&&is_numeric($clinical)){
 		$sql.=" and re.clinicalid=$clinical";
+	}
+	if($patient!=null&&is_numeric($patient)){//buscar por id del paciente
+		$sql.=" and p.patientid=$patient";
 	}
 	$sql.=" order by pa.patientadmissionid desc";
 	$c = DBConnect();
@@ -630,6 +631,32 @@ function DBAllPatientRemissionClinicalInfo($clinical=null) {
 		$a[$i] = DBRow($r,$i);
 		//$a[$i]['remission']=DBRemissionInfo($a[$i]['patientadmissionid'],$c);
 		$a[$i]['remission']=DBAllRemissionInfo($a[$i]['patientadmissionid'],$c);
+		$a[$i]=clearpa($a[$i]);
+		$a[$i]=clearfathers($a[$i],'father');
+		$a[$i]=clearfathers($a[$i],'mother');
+	}
+	return $a;
+}
+//funcion para listar a todos los paciente con ultimo registro para seguimiento a paciente
+function DBAllFollowPatient() {
+	$sql = "select *from patienttable as p";
+
+	$sql.=" order by p.patientid desc";
+	$c = DBConnect();
+	$r = DBExec ($c, $sql, "DBAllFollowPatient(get patients)");
+	$n = DBnlines($r);
+	if ($n == 0) {
+		LOGError("Unable to find users in the database. SQL=(" . $sql . ")");
+		MSGError("¡No se pueden encontrar pacientes remitidos en la base de datos!");
+	}
+
+	$a = array();
+	for ($i=0;$i<$n;$i++) {
+		$a[$i] = DBRow($r,$i);
+		$pa[$i] = DBGetRow ("select *from patientadmissiontable where
+		patientadmissionid=(select max(patientadmissionid) from patientadmissiontable where patientid=".$a[$i]['patientid'].")", 0, $c);
+		//$a[$i]['remission']=DBAllRemissionInfo($a[$i]['patientadmissionid'],$c);
+		$a[$i] = array_merge($a[$i], $pa[$i]);
 		$a[$i]=clearpa($a[$i]);
 		$a[$i]=clearfathers($a[$i],'father');
 		$a[$i]=clearfathers($a[$i],'mother');
@@ -1492,7 +1519,6 @@ function DBNewRemission($param, $c=null){
 	$ret=0;
 	if($a==null){
 		$ret=2;
-
 		$sql="insert into remissiontable (remissionid, patientadmissionid, patientid, clinicalid) values ".
 		"($idre, $idpa, $idp, $clinical)";
 		DBExec($c, $sql, "DBNewRemission(insert remission)");

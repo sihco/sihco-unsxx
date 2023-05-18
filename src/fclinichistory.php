@@ -65,10 +65,10 @@ function DBNewClinichistory($param, $c=null, $authorized=false){
 
 	$acourse=array(3, 4,4,4,4,4,4,4,4, 5,5,5,5,5,5,5,5);
 	if(isset($param['studentclinicalid'])){
-				$param['studentcourseid']=$acourse[$param['studentclinicalid']];
+				$param['studentcourseid']=$acourse[$param['studentclinicalid']-1];
 	}
 	if(isset($param['teacherclinicalid'])){
-				$param['teachercourseid']=$acourse[$param['teacherclinicalid']];
+				$param['teachercourseid']=$acourse[$param['teacherclinicalid']-1];
 	}
 	$ac=array('idre', 'idp', 'idpa', 'clinical', 'studentid', 'studentclinicalid',
 	'studentcourseid', 'teacherid', 'teacherclinicalid', 'teachercourseid');

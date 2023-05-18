@@ -124,7 +124,11 @@ if (isset($_POST["username"]) && isset($_POST["userci"]) && isset($_POST["userfu
 						  }
 
 							if($_SESSION["usertable"]["usertype"] == 'admin')
-								if($param['usernumber'] != 0) DBNewUser($param);
+								if($param['usernumber'] != 0){
+                  $usr=DBNewUser($param,null, true);
+                  if($usr!=1&&$usr!=2)
+                    $param['usernumber']=$usr;
+                }
 
               if(isset($param['usernumber'])&& is_numeric($param['usernumber'])&&
                isset($param['specialtydessigned'])&& $param['specialtydessigned']!=''){

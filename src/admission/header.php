@@ -121,6 +121,10 @@ if(isset($_SESSION["usertable2"])&&$_SESSION["usertable2"]["active"]){
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Admision
                             </a>
+                            <a class="nav-link" href="follow.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Seguimiento a pacientes
+                            </a>
                             <!--paginas para modulos-->
 
 

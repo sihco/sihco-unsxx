@@ -114,7 +114,6 @@ if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patien
           exit;
         }
       }
-
       if(isset($_POST['clinical'])&&is_numeric($_POST['clinical']))
         $param['clinical'] = htmlspecialchars($_POST["clinical"]);
       if(isset($_POST['examined'])&&trim($_POST['examined'])!="")

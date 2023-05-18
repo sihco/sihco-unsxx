@@ -483,7 +483,7 @@ function DBAllUserInfo() {
 }
 //funcion para actulizar o insertar un nuevo usuario segun los datos que pasa
 //actualizado1
-function DBNewUser($param, $c=null){
+function DBNewUser($param, $c=null, $import=false){
 
     //if(isset($param['contestnumber']) && !isset($param['contest'])) $param['contest']=$param['contestnumber'];
 	//if(isset($param['sitenumber']) && !isset($param['site'])) $param['site']=$param['sitenumber'];
@@ -620,7 +620,12 @@ function DBNewUser($param, $c=null){
 	  LOGLevel ("Problema de actualizacion para el usuario  $user (tal vez el nombre de usuario ya esté en uso).",1);
 //Problema de actualización para el usuario $ usuario, sitio $ sitio (tal vez el nombre de usuario ya esté en uso).
       MSGError ("Problema de actualizacion para el usuario  $user, (tal vez el nombre de usuario ya esté en uso).");
-	  return false;
+		if($import){
+			$a= DBRow($r,0);
+			return $a['usernumber'];
+		}else{
+			return false;
+		}
 	}
 	if($cw) DBExec($c, "commit work");
 	return $ret;
