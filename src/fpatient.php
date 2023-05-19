@@ -226,7 +226,7 @@ function DBNewPatient($param, $c=null){
 	'ulcerations', 'cheilitis', 'commissures', 'tongue', 'piso', 'encias',
 	'mucosa', 'occlusion', 'prosthesis', 'hygiene', 'lastconsultation', 'consultation',
 	'generalstatus', 'temperature', 'headache', 'respiratory', 'throat', 'general',
-	'vaccine', 'diagnosis', 'clinical', 'examined');
+	'vaccine', 'diagnosis', 'clinical', 'examined', 'updatetime');
 
 	$typei['updatetime']=1;
 

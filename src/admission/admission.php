@@ -163,7 +163,7 @@ echo "</tbody></table>\n";
 				          </div>
 				          <div class="col-lg-6 col-md-6 col-sm-12 col-12">
 				            <input type="datetime-local" id="meeting-time"
-				       name="meeting-time" value="<?php  if(isset($pat['updatetime'])&&is_numeric($pat['updatetime'])){
+				       name="meeting-time" value="<?php  if(isset($pat['updatetime'])&&is_numeric($pat['updatetime'])&& $upreferred==true){
 				         echo datetimeconv($pat['updatetime'],true); }else{echo datetimeconv(time(),true);}?>"
 				       min="2000-01-01T00:00" max="2100-01-01T00:00" class="form-control">
 				          </div>
