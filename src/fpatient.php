@@ -428,14 +428,12 @@ function DBNewPatient($param, $c=null){
 				LOGLevel ("Paciente $idp admitido $idpa : registrado.",2);
 
 			}else{
-
-				if($updatetime > $a['updatetime'] && $idpa!="") {
+				if($updatetime >= $a['updatetime'] && $idpa!="") {
 					$ret=2;
 					$idpa=$param["idpa"];
 					$sql="update patienttable set patientname='$name', patientfirstname='$firstname', patientlastname='$lastname', patientgender='$gender', " .
 						"patientnationality='$nationality', patientdatebirth=$datebirth, patientplacebirth='$placebirth', updatetime=$updatetime where patientid=$idp";
 					$r = DBExec ($c, $sql, "DBNewPatient(update patient)");
-
 					$sql="update patientadmissiontable set patientdirection='$direction', ".
 					"patientlocation='$location', patientage='$age', patientprovenance='$provenance', ".
 					"patientphone='$phone', patientcivilstatus='$civilstatus', patientoccupation='$occupation', ".
@@ -445,7 +443,6 @@ function DBNewPatient($param, $c=null){
 					"dentalhygiene='$hygiene', lastconsult='$lastconsultation', motconsult='$consultation', ".
 					"triagetemperature='$temperature', triageheadache='$headache', triagerespiratory='$respiratory', ".
 					"triagethroat='$throat', triagegeneral='$general', triagevaccine='$vaccine', diagnosis='$diagnosis', updatetime=$updatetime where patientadmissionid=$idpa";
-
 					$r = DBExec ($c, $sql, "DBNewPatient(update patientadmission)");
 					if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<=17){
 							$rdata=array();
@@ -458,7 +455,6 @@ function DBNewPatient($param, $c=null){
 								$rdata['examined']=$examined;
 							}
 							$ret=DBNewRemission($rdata, $c);
-
 					}
 					if($cw) {
 						DBExec ($c, "commit work");
@@ -1535,7 +1531,7 @@ function DBNewRemission($param, $c=null){
 
 		LOGLevel ("remitido paciente $idp a la especilidad $clinical registrado.",2);
 	}else{
-		if($updatetime > $a['updatetime'] ){
+		if($updatetime >= $a['updatetime'] ){
 			$ret=2;
 			$idre=$a['remissionid'];
 			if($clinical!=$a['clinicalid']){
@@ -2635,4 +2631,33 @@ function validodontogram($str, $f){
 	$str=="perdidoausente") return true;
 	else return false;
 }
+
+//funcion para actualizar nombre del paciente
+function DBUpdatePatientfullname($patientid, $patientname, $patientfirstname, $patientlastname, $c=null){
+		$cw = false;
+		if($c == null) {
+			$cw = true;
+			$c = DBConnect();
+			DBExec($c, "begin work", "DBUpdatePatientfullname(begin)");
+		}
+		DBExec($c, "lock table patienttable", "DBUpdatePatientfullname(lock)");
+
+		$ret=1;
+		$time=time();
+		$patientname=ucfirst($patientname);
+		$patientfirstname=ucfirst($patientfirstname);
+		$patientlastname=ucfirst($patientlastname);
+		if(is_numeric($patientid)&& is_numeric($patientid)&& $patientname&& $patientfirstname&& $patientlastname){
+				$sql="update patienttable set patientname='$patientname', patientfirstname='$patientfirstname',
+				patientlastname='$patientlastname', updatetime=$time where patientid=$patientid";
+				DBExec($c, $sql, "DBUpdatePatientfullname(update patienttable)");
+				$ret=2;
+		}
+
+		if($cw) {
+				DBExec ($c, "commit work");
+		}
+		return $ret;
+}
+
 ?>

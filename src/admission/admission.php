@@ -85,8 +85,9 @@ if(!isset($upreferred)){
             <th scope="col">Paciente</th>
             <th scope="col">Consulta</th>
             <th scope="col">Diagnostico</th>
-            <th scope="col">Remision</th>
-            <th scope="col">Examinado Por</th>
+						<th scope="col">Examinado Por</th>
+						<th scope="col">Remision</th>
+            <th scope="col">Estudiante Designado</th>
             <th scope="col">Fecha</th>
             <th scope="col">Acciones</th>
         </tr>
@@ -106,17 +107,26 @@ for ($i=0; $i < $size; $i++) {
       echo "   <td><a href=\"report.php?id=" . $pr[$i]["patientadmissionid"] . "\">" . $pr[$i]["patientname"] ." ". $pr[$i]["patientfirstname"] ." ". $pr[$i]["patientlastname"] ."</a></td>";
       echo "   <td>" . $pr[$i]["motconsult"] . "</td>";
       echo "   <td>" . $pr[$i]["diagnosis"] . "</td>";
-
+			$in=DBUserInfo($pr[$i]['studentid']);
+			echo "   <td>".$in['userfullname']."</td>";
 			echo "   <td>";
+			$stdesigned=-1;
 			if($pr[$i]['remission']!=null){
 				$size2=count($pr[$i]['remission']);
 				for ($j=0; $j < $size2 ; $j++) {
 						echo $pr[$i]['remission'][$j]['clinicalspecialty'];
-				}
+						$stdesigned = $pr[$i]['remission'][$j]['studentid'];
+ 				}
 			}
 			echo "</td>";
-			$in=DBUserInfo($pr[$i]['studentid']);
-			echo "   <td>".$in['userfullname']."</td>";
+
+			if(is_numeric($stdesigned)&&$stdesigned>0){
+				$stdesigned=DBUserInfo($stdesigned);
+				echo "   <td>".$stdesigned['userfullname']."</td>";
+			}else{
+				echo "<td></td>";
+			}
+
 
 			echo "   <td>" . datetimeconv($pr[$i]["updatetime"]) ."</td>";
       echo "   <td><div class=\"btn-group\"><a href=\"admission.php?id=" .
@@ -172,9 +182,47 @@ echo "</tbody></table>\n";
 				    </div>
 				    <div class="row">
 							<div class="col-12">
-								<label for="patientfullname">Nombres y Apellidos</label><span class="text-danger">*</span>
+								<a href="" data-bs-toggle="modal" data-bs-target="#modalname">Nombres y Apellidos</a><span class="text-danger">*</span>
 				        <!--<input type="text" name="patientfullname" class="form-control" id="patientfullname" value="<?php //echo $a["username"]; ?>"> readonly="readonly"-->
 								<input type="hidden" name="mod" id="mod" value="<?php if($upreferred == true){echo "update";}else{echo "new";}?>">
+
+								<!--Modal cambio de nombre inicio-->
+
+								<div class="modal fade" id="modalname" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h1 class="modal-title fs-5" id="exampleModalLabel">Cambiar Nombre Paciente</h1>
+								        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								      </div>
+								      <div class="modal-body">
+								        <div class="row">
+													<input type="hidden" name="patientidchange" id="patientidchange" value="<?php if(isset($pat["patientid"])) echo $pat["patientid"];  ?>">
+													<div class="col-12">
+														<div class="input-group">
+																<label for="patientnamemodal" class="input-group-text">Nombres</label>
+																<label for="patientfirstnamemodal" class="input-group-text">A. Paterno</label>
+																<label for="patientlastnamemodal" class="input-group-text">A. Materno</label>
+														</div>
+													</div>
+													<div class="col-12">
+														<div class="input-group">
+																<input type="text" class="form-control" id="patientnamemodal" name="patientnamemodal" autocomplete="off" value="<?php if(isset($pat["patientname"])) echo $pat["patientname"];  ?>">
+																<input type="text" class="form-control" id="patientfirstnamemodal" name="patientfirstnamemodal" autocomplete="off" value="<?php if(isset($pat["patientfirstname"])) echo $pat["patientfirstname"];  ?>">
+																<input type="text" class="form-control" id="patientlastnamemodal" name="patientlastnamemodal" autocomplete="off" value="<?php if(isset($pat["patientlastname"])) echo $pat["patientlastname"];  ?>">
+														</div>
+													</div>
+								        </div>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+								        <button type="button" class="btn btn-primary" id="patientchange">Guardar Cambios</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+								<!--Modal cambio de nombre fin-->
+
 							</div>
 							<div class="col-12">
 								<div class="input-group">
@@ -198,11 +246,7 @@ echo "</tbody></table>\n";
 											<div class="dropdown-menu" aria-labelledby="search" id="result3">
 						          </div>
 						        </div>
-
-
-
 								</div>
-
 							</div>
 
 				      <!--modo de registro inicio-->
@@ -296,7 +340,7 @@ echo "</tbody></table>\n";
 					      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'soltero') echo "selected"; ?> value="soltero">Soltero(a)</option>
 					      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'casado') echo "selected"; ?> value="casado">Casado(a)</option>
 					      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'conviviente') echo "selected"; ?> value="conviviente">Conviviente</option>
-					      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'anulado') echo "selected"; ?> value="anulado">Anulado(a)</option>
+					      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'anulado') echo "selected"; ?> value="anulado">Divorciado(a)</option>
 					      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'viudo') echo "selected"; ?> value="viudo">Viudo(a)</option>
 					    </select>
 						</div>
@@ -465,7 +509,7 @@ echo "</tbody></table>\n";
 				  <div class="row">
 				    <div class="col-lg-2 col-md-2 col-sm-4 col-4">
 				      <label for="temperature">Temperatura</label>
-				      <input type="text" name="temperature" class="form-control" id="temperature" value="<?php  if(isset($pat["triagetemperature"])) echo $pat["triagetemperature"];?>">
+				      <input type="text" name="temperature" class="form-control" id="temperature" value="<?php  if(isset($pat["triagetemperature"])) echo $pat["triagetemperature"]; else echo "36.5°"?>">
 				    </div>
 				    <div class="col-lg-1 col-md-1 col-sm-4 col-4">
 				      <label for="headache">Cefalea</label>
@@ -670,7 +714,7 @@ echo "</tbody></table>\n";
 					<div class="row">
 						<div class="col-lg-4 col-md-4 col-sm-12 col-12">
 				      <label for="lastconsultation"><u><b>Ultima Consulta</b></u></label>
-				      <input type="text" name="lastconsultation" class="form-control" id="lastconsultation" value="<?php if(isset($pat["lastconsult"])) echo $pat["lastconsult"];  ?>">
+				      <input type="text" name="lastconsultation" class="form-control" id="lastconsultation" value="<?php if(isset($pat["updatetime"])){ if($upreferred==false){echo 'En '.datetimeconv($pat["updatetime"]);}else{echo $pat['lastconsult'];}}  ?>">
 				      <!--<input type="date" id="lastconsultation" class="form-control"  name="lastconsultation" value="<?php //if(isset($pat["lastconsult"])) echo $pat["lastconsult"];  ?>" min="2015-01-01" max="2099-01-01">-->
 				    </div>
 				    <div class="col-lg-4 col-md-4 col-sm-12 col-12">
@@ -1292,7 +1336,7 @@ function obten(){
     $('#patientregister_button').click(function(){
       if (confirm("Registar todos los datos del paciente?")) {
         if ($('#patientname').val()==="" || $('#patientfirtname').val()==="" || $('#patientlastname').val()==="") {
-          alert('deben completarse el nombre del paciente');
+          alert('debe completar el nombre del paciente');
         }else{
           var clinical = $('select[name=clinical]').val();
           var examined = $('#examined').val();
@@ -1318,6 +1362,37 @@ function obten(){
       }//else{
       //    location.reload();
       //}
+    });
+
+		//register patient
+    $('#patientchange').click(function(){
+			if($('#patientid').val()==''){
+				$('#modalname').modal('hide');
+			}
+      if ($('#patientname').val()==="" || $('#patientfirtname').val()==="" || $('#patientlastname').val()==="") {
+				alert('debe completar todos los campos');
+			}else{
+				var patientid = $('#patientidchange').val();
+				var patientadid = $('#padmissionid').val();
+				var patientname = $('#patientnamemodal').val();
+				var patientfirstname = $('#patientfirstnamemodal').val();
+				var patientlastname = $('#patientlastnamemodal').val();
+				$.ajax({
+					 url:"../include/i_patientadmission.php",
+					 method:"POST",
+					 data: {patientidch:patientid, patientnamech:patientname, patientfirstnamech:patientfirstname,
+						 patientlastnamech:patientlastname},
+					 success:function(data)
+					 {
+							alert(data);
+							$('#patientname').val(patientname);
+							$('#patientfirstname').val(patientfirstname);
+							$('#patientlastname').val(patientlastname);
+							$('#modalname').modal('hide');
+					 }
+				});
+
+			}
     });
 });
 </script>

@@ -24,7 +24,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Reporte</title>
 <style>
 
 .container{

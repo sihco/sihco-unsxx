@@ -295,13 +295,13 @@ for ($i=0; $i < count($usr); $i++) {
 
             if($usr[$i]['userenabled'] != 't' && $usr[$i]['userlastlogin'] < 1){
                  echo " <td><div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"><a onClick=\"conf7(".$usr[$i]["usernumber"].")\"" .
-                       "')\" class=\"btn btn-warning\">Activar</a>";
-                 echo "<a class=\"btn btn-secondary\" name=\"\" style=\"pointer-events: none; cursor: default; \">Actualizar</a></div>";
+                       "')\" class=\"btn btn-warning btn-sm\">Activar</a>";
+                 echo "<a class=\"btn btn-secondary btn-sm\" name=\"\" style=\"pointer-events: none; cursor: default; \">Actualizar</a></div>";
             }else{
                  echo " <td><div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\"><a " .
-                     "')\" class=\"btn btn-danger\" onClick=\"conf4(".$usr[$i]["usernumber"].")\">Eliminar</a>";
+                     "')\" class=\"btn btn-danger btn-sm\" onClick=\"conf4(".$usr[$i]["usernumber"].")\">Eliminar</a>";
                  echo "<a href=\"user.php?user=" .
-        		  $usr[$i]["usernumber"] . "#form_user\" class=\"btn btn-primary\" name=\"\" >Actualizar</a></div>";
+        		  $usr[$i]["usernumber"] . "#form_user\" class=\"btn btn-primary btn-sm\" name=\"\" >Actualizar</a></div>";
             }
             echo "<script language=\"javascript\">    function conf4(user) {\n";
             echo "      if (confirm('ADVERTENCIA: eliminar un usuario eliminará por completo TODO lo relacionado con él (incluidas las ejecuciones, aclaraciones, etc.).?')) {\n";

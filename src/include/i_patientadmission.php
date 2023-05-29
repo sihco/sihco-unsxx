@@ -15,6 +15,16 @@ if (isset($_POST["designed"]) && isset($_POST["student"])) {
     exit;
 }
 
+if(isset($_POST["patientidch"])&& isset($_POST["patientnamech"])&&
+ isset($_POST["patientfirstnamech"])&& isset($_POST["patientlastnamech"])){
+    $param['patientid'] = htmlspecialchars(trim($_POST["patientidch"]));
+    $param['patientname'] = htmlspecialchars(trim($_POST["patientnamech"]));
+    $param['patientfirstname'] = htmlspecialchars(trim($_POST["patientfirstnamech"]));
+    $param['patientlastname'] = htmlspecialchars(trim($_POST["patientlastnamech"]));
+    DBUpdatePatientfullname($param['patientid'], $param['patientname'], $param['patientfirstname'], $param['patientlastname']);
+    echo "yes";
+}
+
 if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patientname"]) &&
     isset($_POST["patientfirstname"]) && isset($_POST["patientlastname"]) &&
     isset($_POST["patientdirection"]) && isset($_POST["patientlocation"]) && isset($_POST["patientage"]) &&
