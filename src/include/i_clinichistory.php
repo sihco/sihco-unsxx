@@ -17,7 +17,7 @@ if(isset($_POST['ch'])&& is_numeric($_POST['ch'])){
   $param['studentclinicalid']=$r['studentclinicalid'];
   if($_SESSION['usertable']['usertype']=='teacher'&& is_numeric($_SESSION['usertable']['usernumber'])){
     $acourse=array(3, 4,4,4,4,4,4,4,4, 5,5,5,5,5,5,5,5);
-    $r=DBSpecialtyInfo($_SESSION['usertable']['usernumber'] , $r['clinicalid'], $acourse[$r['clinicalid']]);
+    $r=DBSpecialtyInfo($_SESSION['usertable']['usernumber'] , $r['clinicalid'], $acourse[$r['clinicalid']-1]);
     if($r==null){
       echo "Docente no encotrado en la especialidad";
       exit;
