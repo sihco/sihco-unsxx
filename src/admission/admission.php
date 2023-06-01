@@ -49,109 +49,12 @@ if(!isset($upreferred)){
 
                     <div class="container-fluid px-2">
 <?php if($main==true){ ?>
-<!--tabla para pacientes remitidos inicio-->
-<br>
-<a class="btn btn-primary btn-sm" href="newadmission.php#patient">Remitir Paciente</a>
-<a class="" href="report.php">Descargar Plantilla</a>
-<br>
-<div class="text-center text-success">
-  <u><b>REGISTRO DE PACIENTES REMITIDOS</b></u>
-</div>
-<!--<div class="row">
-  <div class="col-lg-1 col-md-1 col-sm-2 col-2">
-    <label for="listar" class="text-primary"><u><b>Listar:</b></u></label>
-  </div>
-  <div class="col-lg-2 col-md-2 col-sm-5 col-5">
-    <select name="listar" id="listar" onchange="ListLog()" class="form-select" aria-label="Default select example">
-      <option <?php //if(isset($_GET['limit'])&&is_numeric($_GET['limit'])&&$_GET['limit']<=50) echo "selected"; ?> value="50">50 registros</option>
-      <option <?php //if(isset($_GET['limit'])&&is_numeric($_GET['limit'])&&$_GET['limit']>50&&$_GET['limit']<=100) echo "selected"; ?> value="100">100 registros</option>
-      <option <?php //if(isset($_GET['limit'])&&is_numeric($_GET['limit'])&&$_GET['limit']>100&&$_GET['limit']<=500) echo "selected"; ?> value="500">500 registros</option>
-      <option <?php //if(isset($_GET['limit'])&&is_numeric($_GET['limit'])&&$_GET['limit']>500) echo "selected"; ?> value="1000000">Sin limite</option>
-    </select>
-    <script>
-      function ListLog() {
-        var number=document.getElementById("listar").value;
-        location.href="admission.php?limit="+number;
-      }
-    </script>
-  </div>
-</div>-->
-<div class="table-responsive ">
-
-<table class="table table-sm table-hover" id="table_admission">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Paciente</th>
-            <th scope="col">Consulta</th>
-            <th scope="col">Diagnostico</th>
-						<th scope="col">Examinado Por</th>
-						<th scope="col">Remision</th>
-            <th scope="col">Estudiante Designado</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-
-
-<?php
-//$usr = DBAllUserInfo();
-
-$pr = DBAllPatientRemissionInfo();
-//$pr = DBAllRemissionInfo(null, false, $limit);
-$size=count($pr);
-for ($i=0; $i < $size; $i++) {
-      echo " <tr>\n";
-      echo "   <td>" . ($size-$i) . "</td>";
-      echo "   <td><a href=\"report.php?id=" . $pr[$i]["patientadmissionid"] . "\">" . $pr[$i]["patientname"] ." ". $pr[$i]["patientfirstname"] ." ". $pr[$i]["patientlastname"] ."</a></td>";
-      echo "   <td>" . $pr[$i]["motconsult"] . "</td>";
-      echo "   <td>" . $pr[$i]["diagnosis"] . "</td>";
-			$in=DBUserInfo($pr[$i]['studentid']);
-			echo "   <td>".$in['userfullname']."</td>";
-			echo "   <td>";
-			$stdesigned=-1;
-			if($pr[$i]['remission']!=null){
-				$size2=count($pr[$i]['remission']);
-				for ($j=0; $j < $size2 ; $j++) {
-						echo $pr[$i]['remission'][$j]['clinicalspecialty'];
-						$stdesigned = $pr[$i]['remission'][$j]['studentid'];
- 				}
-			}
-			echo "</td>";
-
-			if(is_numeric($stdesigned)&&$stdesigned>0){
-				$stdesigned=DBUserInfo($stdesigned);
-				echo "   <td>".$stdesigned['userfullname']."</td>";
-			}else{
-				echo "<td></td>";
-			}
-
-
-			echo "   <td>" . datetimeconv($pr[$i]["updatetime"]) ."</td>";
-      echo "   <td><div class=\"btn-group\"><a href=\"admission.php?id=" .
-        $pr[$i]["patientadmissionid"] . "#patient\" class=\"btn btn-primary btn-sm\" name=\"\" >Actualizar</a><a href=\"report.php?id=" . $pr[$i]["patientadmissionid"] . "\" class=\"btn btn-success btn-sm\">Imprimir</a></div></td>";
-
-      echo "</tr>";
-}
-echo "</tbody></table>\n";
-
-?>
-</div>
-
-<!--tabla para pacientes remitidos fin-->
-
-
-
-
-<a id="patient"></a>
-<br>
-<br>
+<!--<a id="patient"></a>-->
 <div class="accordion" id="accordionPanelsStayOpenExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
       <button class="accordion-button btn-link text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        Datos Personales O Filiación
+        <a href="listadmission.php" class="text-warning"><i class="fa fa-solid fa-reply-all"></i></a>&nbsp;&nbsp;&nbsp; Datos Personales O Filiación
       </button>
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
@@ -1175,7 +1078,7 @@ $(document).ready(function(){
 
                 if(data=='yes'){
                   alert('Se guardó los datos del paciente');
-                  location.href="newadmission.php";
+                  location.href="listadmission.php";
                 }else{
                   alert(data);
                   console.log(data);
@@ -1283,7 +1186,7 @@ $(document).ready(function(){
               {
                 if(data==''){
                   alert('Se registro de los datos del paciente');
-                  location.href="admission.php";
+                  location.href="listadmission.php";
                 }else{
                   alert(data);
                   console.log(data);
@@ -1479,12 +1382,7 @@ $(document).ready(function(){
     $(".fffa").on('hidden.bs.collapse', function(){
         alert('The collapsible content is now hidden.');
     });
-    $(".sierra").on('hide.bs.collapse', function(){
-        alert('The collapsible content is about to be hidden.');
-    });
-    $(".sierra").on('hidden.bs.collapse', function(){
-        alert('The collapsible content is now hidden.');
-    });
+
 });
 </script>
 <!--fin collapse-->

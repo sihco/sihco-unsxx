@@ -578,7 +578,46 @@ function DBAllRemissionInfo($id=null, $c=null) {
 	}
 	return $a;
 }
-function DBAllPatientRemissionInfo($student=null) {
+//mejorar los registros
+function DBAllPatientRemissionInfo($student=null, $search='', $RegistrationPag=false, $RegistrationInitial=false) {
+	$sql = "select *from patienttable as p, patientadmissiontable as pa
+	where p.patientid=pa.patientid";
+	if($student!=null&&is_numeric($student)){
+		$sql.=" and pa.studentid=$student";
+	}
+
+	if($search!=''){
+		$sql.=" and (p.patientname ILIKE '%$search%' or p.patientfirstname ILIKE '%$search%' ".
+		"or p. patientlastname ILIKE '%$search%')";
+	}
+
+	if(is_numeric($RegistrationPag)&&is_numeric($RegistrationInitial)){
+		$sql.=" ORDER BY pa.patientadmissionid DESC LIMIT $RegistrationPag OFFSET $RegistrationInitial";
+	}else{
+		$sql.=" order by pa.patientadmissionid desc";
+	}
+
+	$c = DBConnect();
+	$r = DBExec ($c, $sql, "DBAllPatientRemissionInfo(get patients remission)");
+	$n = DBnlines($r);
+	if ($n == 0) {
+		LOGError("¡No se pueden encontrar pacientes remitidos en la base de datos! SQL=(" . $sql . ")");
+		//MSGError("¡No se pueden encontrar pacientes remitidos en la base de datos!");
+	}
+
+	$a = array();
+	for ($i=0;$i<$n;$i++) {
+		$a[$i] = DBRow($r,$i);
+		//$a[$i]['remission']=DBRemissionInfo($a[$i]['patientadmissionid'],$c);
+		$a[$i]['remission']=DBAllRemissionInfo($a[$i]['patientadmissionid'],$c);
+		$a[$i]=clearpa($a[$i]);
+		$a[$i]=clearfathers($a[$i],'father');
+		$a[$i]=clearfathers($a[$i],'mother');
+	}
+	return $a;
+}
+//old function
+/*function DBAllPatientRemissionInfo($student=null) {
 	$sql = "select *from patienttable as p, patientadmissiontable as pa
 	where p.patientid=pa.patientid";
 	if($student!=null&&is_numeric($student)){
@@ -603,7 +642,7 @@ function DBAllPatientRemissionInfo($student=null) {
 		$a[$i]=clearfathers($a[$i],'mother');
 	}
 	return $a;
-}
+}*/
 function DBAllPatientRemissionClinicalInfo($clinical=null, $patient=null) {
 	$sql = "select *from patienttable as p, patientadmissiontable as pa, remissiontable re
 	where p.patientid=pa.patientid and re.patientadmissionid=pa.patientadmissionid";

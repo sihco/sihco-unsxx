@@ -117,9 +117,9 @@ if(isset($_SESSION["usertable2"])&&$_SESSION["usertable2"]["active"]){
                             </a>
                             <div class="sb-sidenav-menu-heading">Interfaz</div>
 
-                            <a class="nav-link" href="newadmission.php">
+                            <a class="nav-link" href="listadmission.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Admision
+                                Admisión
                             </a>
                             <a class="nav-link" href="follow.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>

@@ -1022,6 +1022,18 @@ if(!isset($_SESSION['usertable']['usertype'])||
         ?>
       </div>
       <div class="">
+        <?php
+        $name="Estudiante Designado:";
+        if(isset($pat['remission']['studentid']) && is_numeric($pat['remission']['studentid'])){
+          $stinfo=DBUserInfo($pat['remission']['studentid']);
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Univ. ".$stinfo['userfullname'];
+          echo $name;
+        }else{
+          echo $name."..............................................................................................................................................................";
+        }
+        ?>
+      </div>
+      <div class="">
 
         <?php
         $name="Examinado Por:";
