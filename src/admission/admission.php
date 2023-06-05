@@ -583,6 +583,7 @@ if(!isset($upreferred)){
 
 							<option <?php if(!isset($pat) || $pat["dentaltypeo"] == '--') echo "selected"; ?> value="--">--</option>
 							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'normal') echo "selected"; ?> value="normal">Mordida Normal</option>
+							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'normal') echo "selected"; ?> value="malposicion">Mal posición dental</option>
 							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'sobre') echo "selected"; ?> value="sobre">SobreMordida</option>
 							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'abierta') echo "selected"; ?> value="abierta">Mordida Abierta</option>
 							<option <?php if(isset($pat) && $pat["dentaltypeo"] == 'cruzada') echo "selected"; ?> value="cruzada">Mordida Cruzada</option>

@@ -587,9 +587,10 @@ if(!isset($_SESSION['usertable']['usertype'])||
               $name.="Mesio oclusión";
             //if($pat["dentaltypeo"]=='abierta')
             //  $name.="Abierta anterior";
-
             if($pat["dentaltypeo"]=='normal')
               $name.="Mordida Normal";
+            if($pat["dentaltypeo"]=='malposicion')
+              $name.="Mal posición dental";
             if($pat["dentaltypeo"]=='sobre')
               $name.="SobreMordida";
             if($pat["dentaltypeo"]=='abierta')
