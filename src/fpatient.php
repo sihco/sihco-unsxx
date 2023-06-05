@@ -339,8 +339,8 @@ function DBNewPatient($param, $c=null){
 		$c = DBConnect();
 		DBExec($c, "begin work", "DBNewPacient(begin)");
 	}
-	DBExec($c, "lock table patienttable", "DBNewPatient(patienttable lock)");
-	DBExec($c, "lock table patientadmissiontable", "DBNewPatient(patientadmissiontable lock)");
+	//DBExec($c, "lock table patienttable", "DBNewPatient(patienttable lock)");
+	//DBExec($c, "lock table patientadmissiontable", "DBNewPatient(patientadmissiontable lock)");
 	$r = DBExec($c, "select * from patienttable where (patientname='$name' and patientfirstname='$firstname' and patientlastname='$lastname') and patientid!=$idp", "DBNewPatient(get user)");
 
 	$n = DBnlines ($r);
