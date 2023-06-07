@@ -5,77 +5,109 @@ require('header.php');
                     <div class="container-fluid px-4">
 
                         <h2 class="mt-4">Pacientes derivados en linea</h2>
-                        <ol class="breadcrumb mb-4">
+                        <ol class="breadcrumb mb-3">
                             <li class="breadcrumb-item active">Odontologia(UNSXX)</li>
                             &nbsp; Fila &nbsp;<span class="border border-danger table-danger rounded ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span> &nbsp; Significa que requiere urgente autorización
                         </ol>
-<div class="table-responsive">
-<table class="table table-sm table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Paciente</th>
-            <th scope="col">Edad</th>
-            <th scope="col">Consulta</th>
-            <th scope="col">Diagnostico Presuntivo</th>
-            <th scope="col">Especialidad Derivada</th>
-            <th scope="col">Fecha Remisión</th>
-            <th scope="col">Estudiante Designado</th>
-            <th scope="col">Autorizado por</th>
-        </tr>
-    </thead>
-    <tbody>
-<?php
-//$usr = DBAllUserInfo();
 
-//$pr = DBAllPatientRemissionInfo();
-$pr=DBAllRemissionPatientInfo($_SESSION['usertable']['usernumber'], false, true);
-//$pr = DBAllRemissionInfo(null, false, $limit);
-$size=count($pr);
-for ($i=0; $i < $size; $i++) {
-      if($pr[$i]['status']=='new'&& $pr[$i]['authorized']=='t')
-        echo " <tr class=\"table-danger\">\n";
-      else
-        echo " <tr>\n";
-      echo "   <td>" . ($size-$i) . "</td>";
-      $fullname=$pr[$i]["patientname"] ." ". $pr[$i]["patientfirstname"] ." ". $pr[$i]["patientlastname"];
-      echo "   <td>" . $fullname ."</td>";
-      echo "   <td>" . $pr[$i]["patientage"] . "</td>";
-      echo "   <td>" . $pr[$i]["motconsult"] . "</td>";
-      echo "   <td>" . $pr[$i]["diagnosis"] . "</td>";
-
-			echo "   <td>" . $pr[$i]['clinicalspecialty'] . "</td>";
-
-			echo "   <td>" . datetimeconv($pr[$i]["updatetimeremission"]) ."</td>";
-
-      if($pr[$i]["studentid"]!=NULL&& is_numeric($pr[$i]["studentid"])){
-        $u=DBUserInfo($pr[$i]['studentid']);
-        echo " <td>".$u['userfullname']."</td>";
-      }else{
-        echo "   <td><div class=\"btn-group\"><button type=\"button\" cli=\"".$pr[$i]['clinicalid']."\" ".
-        "pname=\"".$fullname."\" remp=\"".$pr[$i]['remissionid']."\" class=\"assigned btn btn-sm btn-primary\" data-bs-toggle=\"modal\" ".
-        "data-bs-target=\"#modalassigned\">Designar</button>".
-        "<a href=\"report.php?id=" . $pr[$i]["patientadmissionid"] . "\" class=\"btn btn-success btn-sm\">Ver Ficha</a></div></td>";
-
-      }
-      echo "<td>";
-      if($pr[$i]["teacherid"]!=NULL&& is_numeric($pr[$i]["teacherid"])){
-        if($pr[$i]["teacherid"]!=0){
-          $u=DBUserInfo($pr[$i]['teacherid']);
-          echo $u['userfullname'];
-        }else{
-          echo "   <div class=\"btn-group\"><input type=\"button\" class=\"btn btn-sm btn-primary btn_autorization\" name=\"btn_autorization\" hc=".$pr[$i]['remissionidch']." value=\"Autorizar\">".
-          "<a href=\"report.php?id=" . $pr[$i]["patientadmissionid"] . "\" class=\"btn btn-success btn-sm\">Ver Ficha</a></div>";
-        }
-
-      }
-      echo "</dt>";
-      echo "</tr>";
-}
-echo "</tbody></table>\n";
-
-?>
+<!--<label class="input-group-text" for="selectPage">Page</label>
+<select class="form-control" onchange="PatientDerivative(1)" id='selectPage' name = 'selectPage' style="visibility:hidden">
+  <option>15</option>
+  <option>25</option>
+  <option>50</option>
+  <option>100</option>
+  <option>250</option>
+  <option>500</option>
+  <option>1000</option>
+</select>-->
+<style media="screen">
+  td,th{
+    text-align: center;
+  }
+  table{
+    font-size: 15px
+  }
+</style>
+<div id="patientderivepage">
+  <?php include("patientderivepage.php");?>
 </div>
+<div class="table-responsive">
+  <table class="table table-striped table-sm table-hover ">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Paciente
+            <input type="text" class="form-control" name='search' id='search' aria-label="Buscar" aria-describedby="boton-buscar" onkeyup="PatientDerivative(1)">
+          </th>
+          <th scope="col">Edad</th>
+          <th scope="col">Diagnostico Presuntivo</th>
+          <th scope="col">Especialidad Derivada
+            <select class="form-control" onchange="PatientDerivative(1)" id='specialty' name = 'specialty'>
+              <?php
+              $a = DBAllSpecialtyInfo($_SESSION["usertable"]["usernumber"], true);
+              $size=count($a);
+              if($size>0)
+                echo "<option value='-1'>Todos</option>";
+              for ($i=0; $i < $size; $i++) {
+                    $clinical=DBClinicalInfo($a[$i]['clinicalid']);
+                    echo "<option value=".$clinical['clinicalid'].">" . $clinical["clinicalspecialty"] . "</option>";
+              }
+              ?>
+    				</select>
+          </th>
+          <th scope="col">Fecha Remisión</th>
+          <th scope="col">Estudiante Designado
+            <input type="text" class="form-control" name='searchstudent' id='searchstudent' aria-label="BuscarEstudiante" aria-describedby="boton-buscar-estudiante" onkeyup="PatientDerivative(1)">
+          </th>
+          <th scope="col">Autorizado por</th>
+        </tr>
+      </thead>
+      <tbody id="patientderivetable">
+        <?php include("patientderivetable.php");?>
+      </tbody>
+  </table>
+</div>
+
+<script>
+	//funcion que carga la paginacion o de cuanto en cuanto quiere que se muestre en la tabla
+	function PatientDerivative(page){
+		//  var selectDateI = document.getElementById("selectDateI2").value;
+		var search = document.getElementById("search").value;
+		var select = 15;//document.getElementById("selectPage").value;
+		var selectspecialty = document.getElementById("specialty").value;
+    var searchstudent = document.getElementById("searchstudent").value;
+		//alert(page+"   "+select);
+		var formData = new FormData(); // Crear un objeto FormData vacío
+		//formData.append('selectDateI', selectDateI);
+		formData.append('search', search);
+		formData.append('page', page);
+		formData.append('select', select);
+		formData.append('selectspecialty', selectspecialty);
+    formData.append('searchstudent', searchstudent);
+		$.ajax({
+			url: "patientderivetable.php",
+			type: "POST",
+			data: formData,
+			contentType: false, // Deshabilitar la codificación de tipo MIME
+			processData: false, // Deshabilitar la codificación de datos
+			success: function(data) {
+		//  alert(data+"dasdas");
+				$("#patientderivetable").html(data);
+			}
+		});
+    $.ajax({
+			url: "patientderivepage.php",
+			type: "POST",
+			data: formData,
+			contentType: false, // Deshabilitar la codificación de tipo MIME
+			processData: false, // Deshabilitar la codificación de datos
+			success: function(data) {
+		//  alert(data+"dasdas");
+				$("#patientderivepage").html(data);
+			}
+		});
+	}
+</script>
 <div class="modal fade" id="modalassigned" tabindex="-1" aria-labelledby="modallabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -127,8 +159,31 @@ function insert(id, val){
    $('#examinedid').val(id);
    $('#studentfullname').val(val);
 }
+function autorization(ch, page) {
+  //var ch=$(this).attr('hc');
+  Stop();
+  if (confirm("¿Estas seguro de autorizar?")) {
+    $.ajax({
+
+         url:"../include/i_clinichistory.php",
+         method:"POST",
+         data: {ch:ch},
+         success:function(data)
+         {
+            if(data=='yes'){
+              PatientDerivative(page);
+              alert('Se autorizó la ficha');
+              //location.reload();
+
+            }else{
+              alert(data);
+            }
+         }
+    });
+  }
+}
 $(document).ready(function(){
-      $('.btn_autorization').click(function(){
+      /*$('.btn_autorization').click(function(){
         var ch=$(this).attr('hc');
         Stop();
         if (confirm("¿Estas seguro de autorizar?")) {
@@ -149,7 +204,7 @@ $(document).ready(function(){
           });
         }
 
-      });
+      });*/
      $('#studentfullname').on('keyup', function(){
        var examined = $('#studentfullname').val()
 			 var clinical = $('#clinical').val()
