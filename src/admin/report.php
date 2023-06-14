@@ -1079,7 +1079,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
 
     <br>
     <div class="">
-      Los datos proporcionados por el paciente son confiables y se compromete a cumplir las normas de la
+      Los datos proporcionados por el <u>paciente</u> son confiables y se compromete a cumplir las normas de la
       Carrera de Odontologia.
     </div>
 <!-- por lo que firma en constancia-->

@@ -140,7 +140,8 @@ if(!isset($upreferred)){
 												echo "<input type=\"text\" class=\"form-control text-primary\" id=\"patientname\" name=\"patientname\" value=\"".
 												( (isset($pat["patientname"])?$pat["patientname"]:'') )."\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" readonly>";
 											}else{
-												echo "<input type=\"text\" class=\"form-control\" id=\"patientname\" name=\"patientname\" value=\"\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
+												echo "<input type=\"text\" class=\"form-control\" id=\"patientname\" name=\"patientname\" value=\"".
+												( (isset($pat["patientname"])?$pat["patientname"]:'') )."\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
 											}
 											?>
 											<div class="dropdown-menu" aria-labelledby="search" id="result1">
@@ -152,7 +153,8 @@ if(!isset($upreferred)){
 												echo "<input type=\"text\" class=\"form-control text-primary\" id=\"patientfirstname\" name=\"patientfirstname\" value=\"".
 												( (isset($pat["patientfirstname"])?$pat["patientfirstname"]:'') )."\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" readonly>";
 											}else{
-												echo "<input type=\"text\" class=\"form-control\" id=\"patientfirstname\" name=\"patientfirstname\" value=\"\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
+												echo "<input type=\"text\" class=\"form-control\" id=\"patientfirstname\" name=\"patientfirstname\" value=\"".
+												( (isset($pat["patientfirstname"])?$pat["patientfirstname"]:'') )."\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
 											}
 											?>
 											<div class="dropdown-menu" aria-labelledby="search" id="result2">
@@ -164,7 +166,8 @@ if(!isset($upreferred)){
 												echo "<input type=\"text\" class=\"form-control text-primary\" id=\"patientlastname\" name=\"patientlastname\" value=\"".
 												( (isset($pat["patientlastname"])?$pat["patientlastname"]:'') )."\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\" readonly>";
 											}else{
-												echo "<input type=\"text\" class=\"form-control\" id=\"patientlastname\" name=\"patientlastname\" value=\"\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
+												echo "<input type=\"text\" class=\"form-control\" id=\"patientlastname\" name=\"patientlastname\" value=\"".
+												( (isset($pat["patientlastname"])?$pat["patientlastname"]:'') )."\" autocomplete=\"off\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">";
 											}
 											?>
 											<div class="dropdown-menu" aria-labelledby="search" id="result3">
