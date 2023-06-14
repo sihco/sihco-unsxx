@@ -63,7 +63,11 @@ for ($i=0; $i < $size; $i++) {
         if($pr[$i]["teacherid"]==0&& $pr[$i]['authorized']=='t'){
           echo " <td><div class=\"catimg\"><img src=\"../images/loading.gif\" alt=\"...\"></div></td>";
         }else{
-          echo " <td><input type=\"button\" class=\"btn btn-sm btn-success btn_autorization\" name=\"btn_autorization\" hc=".$pr[$i]['remissionidch']." value=\"Solicitar\"></td>";
+          echo " <td><input type=\"button\" class=\"btn btn-sm btn-success btn_autorization\" name=\"btn_autorization\" hc=".$pr[$i]['remissionidch']." value=\"Solicitar\">";
+          echo "<button type=\"button\"".
+          "ch=\"".$pr[$i]['remissionidch']."\" class=\"btn btn-sm btn-outline-secondary\" data-bs-toggle=\"modal\" ".
+          "data-bs-target=\"#modalautorization\"><i class=\"fa fa-2x fa-solid fa-info\"></i></button>";
+          echo "</td>";
 
         }
       }
@@ -109,6 +113,96 @@ echo "</tbody></table>\n";
 ?>
 </div>
 <!--tabla para pacientes remitidos fin-->
+
+<!--modal para autorizar paciente INICIO-->
+<div class="modal fade" id="modalautorization" tabindex="-1" aria-labelledby="modallabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modallabel">Autorización</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Restart()"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Docente:</label>
+            <div id="allteacher"></div>
+            <span id='spantext'></span>
+          </div>
+          <div class="p-3" id="allpatterndiv">
+            <div class="row">
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern1" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern2" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern3" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern4" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern5" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern6" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern7" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern8" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern9" align="center">
+                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="Restart()">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="designed_button">Designar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal para autorizar paciente FIN-->
+<script>
+  var modal = document.getElementById('modalautorization');
+
+  modal.addEventListener('touchstart', function (e) {
+    if (e.target === modal){
+      var initialTouchPos = e.touches[0].clientY;
+
+      modal.addEventListener('touchmove', function (e) {
+        var deltaY = initialTouchPos - e.touches[0].clientY;
+        if(deltaY > 0 && modal.scrollTop === 0){
+          e.preventDefault();
+        }
+      });
+    }
+  });
+
+  var patternbutton = document.getElementsByClassName('patterndiv');
+  var datoRegistrado = '';
+
+  for (var i = 0; i < patternbutton.length; i++) {
+
+    patternbutton[i].addEventListener('touchmove', function (e){
+      var divId = e.target.id;
+      //alert(divId);
+      document.getElementById('spantext').innerHTML = divId;
+      //console.log(divId);
+    });
+  }
+
+</script>
+
 <!--MODAL INICIO-->
 
 <div class="modal fade" id="subfile" tabindex="-1" aria-labelledby="modallabel" aria-hidden="true">

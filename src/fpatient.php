@@ -793,14 +793,14 @@ where re.enabled='t' and u.usernumber=cli.studentid";
 }
 
 //funcion para saber en que especilidades esta presente
-function DBAllSpecialtyInfo($student=null, $all=false) {
-	$sql = "SELECT *from specialtytable s";
+function DBAllSpecialtyInfo($student=null, $all=false, $type='') {
+	$sql = "SELECT *from usertable u, specialtytable s where u.usernumber=s.userid";
 
-	if($all==false) $sql.=" where s.specialtyenabled='t'";
+	if($all==false) $sql.=" and s.specialtyenabled='t'";
 	if($student!=null&& is_numeric($student)){
-		if(!$all) $sql.=" and s.userid=$student";
-		else $sql.=" where s.userid=$student";
+		$sql.=" and s.userid=$student";
 	}
+	if(trim($type)!='') $sql.=" and u.usertype='$type'";
 	$sql.=" order by s.updatetime desc";
 	$c = DBConnect();
 	$r = DBExec ($c, $sql, "DBAllSpecialtyInfo(get specialty)");

@@ -286,12 +286,12 @@ if(!isset($_SESSION['usertable']['usertype'])||
         .tres2{
           display: inline-block;
           float: left;
-          width: 20%;
+          width: 25%;
         }
         .grado{
           display: inline-block;
           float: left;
-          width: 40%;
+          width: 35%;
         }
         .nac{
           display: inline-block;
@@ -1030,24 +1030,23 @@ if(!isset($_SESSION['usertable']['usertype'])||
           $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Univ. ".$stinfo['userfullname'];
           echo $name;
         }else{
-          echo $name."..............................................................................................................................................................";
+          echo $name."....................................................................................................................";
         }
         ?>
       </div>
-      <div class="">
+      <!--<div class="">
 
         <?php
-        $name="Examinado Por:";
-        if(isset($pat['studentid']) && $pat["studentid"]){
-          $u=DBUserInfo($pat['studentid']);
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$u['userfullname'];
-
-          echo $name;
-        }else{
-          echo $name.".....................................................................................................................................................";
-        }
+        //$name="Examinado Por:";
+        //if(isset($pat['studentid']) && $pat["studentid"]){
+        //  $u=DBUserInfo($pat['studentid']);
+        //  $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$u['userfullname'];
+        //  echo $name;
+        //}else{
+        //  echo $name.".....................................................................................................................................................";
+        //}
         ?>
-      </div>
+      </div>-->
       <div class="">
         <?php
         $name="Responsable Clinica Admision:";
@@ -1080,10 +1079,10 @@ if(!isset($_SESSION['usertable']['usertype'])||
 
     <br>
     <div class="">
-      El paciente <u>CERFICA</u> que los datos proporcionados son confiables, comprometiendose a cumplir las normas de la
-      Carrera de Odontologia por lo que firma en constancia.
+      Los datos proporcionados por el paciente son confiables y se compromete a cumplir las normas de la
+      Carrera de Odontologia.
     </div>
-
+<!-- por lo que firma en constancia-->
 <!--PAGINA 1 FIN-->
 
 <!--PAGINA 2 INICIO
