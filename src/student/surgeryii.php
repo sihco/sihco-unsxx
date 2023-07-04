@@ -23,9 +23,6 @@ $pat=$r;
                           Ficha Clinica de Cirugia Bucal II
                         </h2>
 
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Odontologia(UNSXX)</li>
-                        </ol>
 
                         <!--notificaciones inicio-->
                         <?php
@@ -148,448 +145,443 @@ $pat=$r;
                           </div>
                         </div>
                         <!--MODAL FIN-->
+<div class="card p-3 shadow rounded text-half">
+  <div class="fixed-bottom mb-3" align="center">
+    <button type="button" class="btn btn-success">
 
-<div class="accordion" id="accordionPanelsStayOpenExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-      <button class="accordion-button btn-link text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        Datos Personales O Filiación
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-      <div class="accordion-body">
-        <!--formulario para paciente inicio-->
-        <!--id para paciente-->
-        <input type="hidden" name="patientid" id="patientid" value="<?php if(isset($pat["patientid"])) echo $pat["patientid"];  ?>">
-        <div class="from-group">
-
-            <div class="row">
-              <div class="col">
-                <label for="patientfullname">Nombres y Apellidos:</label>
-                <!--<input type="text" name="patientfullname" class="form-control" id="patientfullname" value="<?php //echo $a["username"]; ?>"> readonly="readonly"-->
-
-                <div class="dropdown">
-
-                  <input type="text" class="dropdown-toggle form-control" name="patientfullname" id="patientfullname" autocomplete="off" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                  <?php if(isset($pat["patientname"])) echo "readonly onmousedown=\"return false;\""; ?>
-                  value="<?php if(isset($pat["patientname"])){ echo $pat["patientname"]." ".$pat["patientfirstname"]." ".$pat["patientlastname"];}?>"  >
-
-                  <div class="dropdown-menu" aria-labelledby="search" id="result">
-
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-
-        </div>
-
-        <br>
-        <div class="from-group">
-
-          <div class="row">
-            <div class="col-6">
-              <label for="patientdirection">Direccion</label>
-              <input type="text" name="patientdirection" class="form-control" id="patientdirection" readonly onmousedown="return false;" value="<?php if(isset($pat["patientdirection"])) echo $pat["patientdirection"];  ?>">
-            </div>
-            <div class="col-6">
-              <label for="patientlocation">Localidad</label>
-              <input type="text" name="patientlocation" class="form-control" id="patientlocation" readonly onmousedown="return false;" value="<?php if(isset($pat["patientlocation"])) echo $pat["patientlocation"];  ?>">
-            </div>
-          </div>
-
-        </div>
-        <br>
-        <div class="from-group">
-
-          <div class="row">
-            <div class="col-6">
-              <label for="patientage">Edad</label>
-              <input type="text" name="patientage" class="form-control" id="patientage" readonly onmousedown="return false;" value="<?php if(isset($pat["patientage"])) echo $pat["patientage"];  ?>">
-            </div>
-            <div class="col-6">
-              <label for="patientprovenance">Procedencia</label>
-              <input type="text" name="patientprovenance" class="form-control" id="patientprovenance" readonly onmousedown="return false;" value="<?php if(isset($pat["patientprovenance"])) echo $pat["patientprovenance"];  ?>">
-            </div>
-          </div>
-
-        </div>
-        <br>
-        <div class="from-group">
-
-          <div class="row">
-            <div class="col-6">
-              <label for="patientphone">Tel.</label>
-              <input type="text" name="patientphone" class="form-control" id="patientphone" readonly onmousedown="return false;" maxlength="9" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="<?php if(isset($pat["patientphone"])) echo $pat["patientphone"];  ?>">
-            </div>
-            <div class="col-6">
-              <label for="patientgender">Genero</label>
-              <select name="patientgender" disabled=true class="form-select" aria-label="Default select example">
-                <option <?php if(!isset($pat) || $pat["patientgender"] == '--') echo "selected"; ?> value="--">--</option>
-                <option <?php if(isset($pat) && $pat["patientgender"] == 'masculino') echo "selected"; ?> value="masculino">Masculino</option>
-                <option <?php if(isset($pat) && $pat["patientgender"] == 'femenino') echo "selected"; ?> value="femenino">Femenino</option>
-              </select>
-
-
-              <!--
-              <input type="text" name="patientgender" class="form-control" id="patientgender" value="<?php //if(isset($pat["patientgender"])) echo $pat["patientgender"];  ?>">
-            -->
-            </div>
-          </div>
-
-        </div>
-        <br>
-        <div class="from-group">
-
-          <div class="row">
-            <div class="col-6">
-              <label for="patientcivilstatus">Estado Civil</label>
-              <input type="text" name="patientcivilstatus" class="form-control" id="patientcivilstatus" readonly onmousedown="return false;" value="<?php if(isset($pat["patientcivilstatus"])) echo $pat["patientcivilstatus"];  ?>">
-            </div>
-            <div class="col-6">
-              <label for="patientoccupation">Ocupacion</label>
-              <input type="text" name="patientoccupation" class="form-control" id="patientoccupation" readonly onmousedown="return false;" value="<?php if(isset($pat["patientoccupation"])) echo $pat["patientoccupation"];  ?>">
-            </div>
-          </div>
-
-        </div>
-        <br>
-        <div class="from-group">
-
-          <div class="row">
-            <div class="col-6">
-              <label for="patientnationality">Nacionalidad</label>
-              <input type="text" name="patientnationality" class="form-control" id="patientnationality" readonly onmousedown="return false;" value="<?php if(isset($pat["patientnationality"])) echo $pat["patientnationality"];  ?>">
-            </div>
-            <div class="col-6">
-              <label for="patientschool">Grado de escolaridad</label>
-              <input type="text" name="patientschool" class="form-control" id="patientschool" readonly onmousedown="return false;" value="<?php if(isset($pat["patientschool"])) echo $pat["patientschool"];  ?>">
-            </div>
-          </div>
-
-        </div>
-
-        <div class="from-group">
-
-          <label for="patientattorney">Apoderado</label>
-          <input type="text" name="patientattorney" class="form-control" id="patientattorney" readonly onmousedown="return false;" value="<?php if(isset($pat["patientattorney"])) echo $pat["patientattorney"];  ?>">
-
-        </div>
-
-        <!--formulario para paciente fin-->
-      </div>
+      Guardar Datos
+    </button>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <label for="patientfullname"><b>Nombre del paciente:</b></label>&nbsp;&nbsp;&nbsp;
+      <span class="text-secondary">
+      <?php
+      if(isset($pat["patientname"])){
+        echo $pat["patientname"]." ".$pat["patientfirstname"]." ".$pat["patientlastname"];
+      }
+      ?></span>
+    </div>
+    <div class="col-2">
+      <label for="patientage"><b>Edad:</b></label>&nbsp;&nbsp;&nbsp;
+      <span class="text-secondary"><?php if(isset($pat["patientage"])) echo $pat["patientage"];  ?></span>
+    </div>
+    <div class="col-2">
+      <span style="cursor: pointer;"class="text-primary fst-italic btn-link" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">mas info</span>
     </div>
   </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-      <button class="accordion-button collapsed btn-link text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-        Antecedente Médico General
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-      <div class="accordion-body">
-        <!--formulario para antecedentes medico general-->
-
-          <div class="row">
-            <div class="col-5">
-              <b><u>ENFERMEDAD</u></b>
-            </div>
-            <div class="col-2">
-              <b><u>SI NO</u></b>
-            </div>
-            <div class="col-5">
-              <b><u>OBSERVACIONES</u></b>
-            </div>
-          </div>
-        <?php
-        $a = array('Cardiopatías', 'Fiebre Reumática', 'Artritis', 'Tuberculosis', 'Silicosis',
-            'Epilepsia', 'Hepatitis', 'Diabetes', 'Hipertension Arterial', 'Alergias', 'Asma', 'Embarazo',
-            'Habitos / vicios', 'Recibe tratamiento Medico');
-
-        $st=false;
-        if(isset($pat["patientgmh"])){
-            $p=cleanpatientgmh($pat["patientgmh"]);
-            $st=true;
-        }
-        for ($i=0; $i <count($a) ; $i++) {
-          echo "<div class=\"row\">".
-               "  <div class=\"col-5\">".
-               "    <label class=\"form-check-label\" rfor=\"yesno$i\">".$a[$i]."</label>".
-               "  </div>";
-
-          echo "<div class=\"col-2\">".
-               "  <div class=\"form-check form-switch\">";
-          //$tt=$p[$i]["status"];
-          if($st){
-            if ($p[$i]["status"]=="true") {
-                echo "    <input class=\"form-check-input\" disabled=true type=\"checkbox\" id=\"yesno$i\" checked>";
-            }else{
-                echo "    <input class=\"form-check-input\" disabled=true type=\"checkbox\" id=\"yesno$i\">";
-            }
-          }else{
-            if (true) {
-                echo "    <input class=\"form-check-input\" disabled=true type=\"checkbox\" id=\"yesno$i\" checked>";
-            }else{
-                echo "    <input class=\"form-check-input\" disabled=true type=\"checkbox\" id=\"yesno$i\">";
-            }
+  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+    <div class="accordion-body">
+      <div class="row">
+        <div class="col-4">
+          <label for="patientdirection">Dirección:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"> <?php if(isset($pat["patientdirection"])) echo $pat["patientdirection"];  ?></span>
+        </div>
+        <div class="col-4">
+          <label for="patientlocation">Localidad:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"><?php if(isset($pat["patientlocation"])) echo $pat["patientlocation"];  ?></span>
+        </div>
+        <div class="col-4">
+          <label for="patientprovenance">Procedencia:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"><?php if(isset($pat["patientprovenance"])) echo $pat["patientprovenance"];  ?></span>
+        </div>
+        <div class="col-4">
+          <label for="patientphone">Tel.&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"><?php if(isset($pat["patientphone"])) echo $pat["patientphone"];  ?></span>
+        </div>
+        <div class="col-4">
+          <label for="patientgender">Genero:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary">
+          <?php
+          if (isset($pat["patientgender"])&& trim($pat["patientgender"])!='') {
+            echo ucfirst($pat["patientgender"]);
           }
-
-
-          echo "  </div>";
-          echo "</div>";
-
-          echo "  <div class=\"col-5\">";
-          if($st){
-            echo "    <input type=\"text\" name=\"obs$i\" class=\"form-control\" readonly onmousedown=\"return false;\" id=\"obs$i\" value=\"".$p[$i]["obs"]."\">";
-          }else{
-            echo "    <input type=\"text\" name=\"obs$i\" class=\"form-control\" readonly onmousedown=\"return false;\" id=\"obs$i\" value=\"\">";
-          }
-
-
-               echo "  </div>".
-               "</div>";
-        }
-        ?>
-
-        <!--formulario para entecedentes medico general fin-->
-                <hr>
-                <div class="row">
-                  <input type="hidden" name="dental" id="dental" value="<?php if(isset($pat["dentalid"])) echo $pat["dentalid"];  ?>">
-                  <u><b>CONSULTAS:</b></u>
-                  <br>
-                  <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                    <label for="lastconsultation"><u><b>Ultima Consulta</b></u></label>
-                    <input type="text" name="lastconsultation" class="form-control" id="lastconsultation" value="<?php if(isset($pat["lastconsult"])) echo $pat["lastconsult"];  ?>">
-
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                    <label for="consultation"><u><b>Motivo de Consulta</b></u></label>
-                    <input type="text" name="consultation" class="form-control" id="consultation" value="<?php if(isset($pat["motconsult"])) echo $pat["motconsult"];  ?>">
-
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12 col-12">
-                    <label for="generalstatus"><u><b>Estado General</b></u></label>
-                    <input type="text" name="generalstatus" class="form-control" id="generalstatus" value="<?php if(isset($pat["generalstatus"])) echo $pat["generalstatus"];  ?>">
-                  </div>
-                </div>
-
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-      <button class="accordion-button collapsed btn-link text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-        Examen Clínico
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-      <div class="accordion-body">
-        <!--examen bucodental inicio-->
-        <div class="from-group">
-          <div class="row">
-            <br>
-          <u><b>EXATRA ORAL</u></b>
-          <br><br>
-            <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="faces">Facies</label>
-                <select name="faces" id="faces" class="form-select" aria-label="Default select example">
-                  <option <?php if(!isset($pat) || $pat["dentalfaces"] == 'simetrico') echo "selected"; ?> value="simetrico">Simétrico</option>
-                  <option <?php if(isset($pat) && $pat["dentalfaces"] == 'asimetrico') echo "selected"; ?> value="asimetrico">Asimétrico</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="profile">Perfil</label>
-                <select name="profile" id="profile" class="form-select" aria-label="Default select example">
-                  <option <?php if(!isset($pat) || $pat["dentalprofile"] == 'recto') echo "selected"; ?> value="recto">Recto</option>
-                  <option <?php if(isset($pat) && $pat["dentalprofile"] == 'concavo') echo "selected"; ?> value="concavo">Cóncavo</option>
-                  <option <?php if(isset($pat) && $pat["dentalprofile"] == 'convexo') echo "selected"; ?> value="convexo">Cónvexo</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="scars">Cicatrices</label>
-                <input type="text" name="scars" class="form-control" id="scars" value="<?php if(isset($pat["dentalscars"]) && $pat['dentalscars']!="") echo $pat["dentalscars"]; else echo "Ninguno"; ?>">
-
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="atm">A.T.M</label>
-                <select name="atm" id="atm" class="form-select" aria-label="Default select example">
-                  <option <?php if(!isset($pat) || $pat["dentalatm"] == 'normal') echo "selected"; ?> value="normal">Aparentemente Normal</option>
-                  <option <?php if(isset($pat) && $pat["dentalatm"] == 'dolor') echo "selected"; ?> value="dolor">Dolor</option>
-                  <option <?php if(isset($pat) && $pat["dentalatm"] == 'chasquidos') echo "selected"; ?> value="chasquidos">Chasquidos</option>
-                  <option <?php if(isset($pat) && $pat["dentalatm"] == 'crujidos') echo "selected"; ?> value="crujidos">Crujidos</option>
-                  <option <?php if(isset($pat) && $pat["dentalatm"] == 'dtm') echo "selected"; ?> value="dtm">D.T.M</option>
-                  <option <?php if(isset($pat) && $pat["dentalatm"] == 'trismus') echo "selected"; ?> value="trismus">Trismus</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="ganglia">Ganglios</label>
-                <select name="ganglia" id="ganglia" class="form-select" aria-label="Default select example">
-                  <option <?php if(!isset($pat) || $pat["dentalganglia"] == 'normal') echo "selected"; ?> value="normal">Aparentemente Normal</option>
-                  <option <?php if(isset($pat) && $pat["dentalganglia"] == 'inflamados') echo "selected"; ?> value="inflamados">Inflamados</option>
-                  <option <?php if(isset($pat) && $pat["dentalganglia"] == 'adenitis') echo "selected"; ?> value="adenitis">Adenitis</option>
-
-                </select>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="lips">Labios</label>
-                <select name="lips" id="lips" class="form-select" aria-label="Default select example">
-                  <option <?php if(!isset($pat) || $pat["dentallips"] == 'medianos') echo "selected"; ?> value="medianos">Medianos</option>
-                  <option <?php if(isset($pat) && $pat["dentallips"] == 'delgados') echo "selected"; ?> value="delgados">Delgados</option>
-                  <option <?php if(isset($pat) && $pat["dentallips"] == 'gruesos') echo "selected"; ?> value="gruesos">Gruesos</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="ulcerations">Ulceraciones</label>
-                <select name="ulcerations" id="ulcerations" class="form-select" aria-label="Default select example">
-                  <option <?php if(!isset($pat) || $pat["dentalulcerations"] == 'no') echo "selected"; ?> value="no">No</option>
-                  <option <?php if(isset($pat) && $pat["dentalulcerations"] == 'si') echo "selected"; ?> value="si">Si</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="cheilitis">Queilitis</label>
-                <select name="cheilitis" id="cheilitis" class="form-select" aria-label="Default select example">
-                  <option <?php if(!isset($pat) || $pat["dentalcheilitis"] == 'no') echo "selected"; ?> value="no">No</option>
-                  <option <?php if(isset($pat) && $pat["dentalcheilitis"] == 'si') echo "selected"; ?> value="si">Si</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                <label for="commissures">Comisuras</label>
-                <select name="commissures" id="commissures" class="form-select" aria-label="Default select example">
-                  <option <?php if(!isset($pat) || $pat["dentalcommissures"] == 'normal') echo "selected"; ?> value="normal">Aparentemente Normal</option>
-                  <option <?php if(isset($pat) && $pat["dentalcommissures"] == 'presenta') echo "selected"; ?> value="presenta">Presenta queilitis</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <u><b>INTRA ORAL</u></b>
-            <br><br>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-              <label for="tongue">Lengua</label>
-              <select name="tongue" id="tongue" class="form-select" aria-label="Default select example">
-                <option <?php if(!isset($pat) || $pat["dentaltongue"] == 'saburra') echo "selected"; ?> value="saburra">Saburral</option>
-                <option <?php if(isset($pat) && $pat["dentaltongue"] == 'fisurada') echo "selected"; ?> value="fisurada">Fisurada</option>
-                <option <?php if(isset($pat) && $pat["dentaltongue"] == 'geografica') echo "selected"; ?> value="geografica">Geográfica</option>
-                <option <?php if(isset($pat) && $pat["dentaltongue"] == 'otros') echo "selected"; ?> value="otros">Otros</option>
-              </select>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-              <label for="piso">Piso de la boca</label>
-              <select name="piso" id="piso" class="form-select" aria-label="Default select example">
-                <option <?php if(!isset($pat) || $pat["dentalpiso"] == 'aparentemente') echo "selected"; ?> value="aparentemente">Aparentemente Normal</option>
-                <option <?php if(isset($pat) && $pat["dentalpiso"] == 'toruslingua') echo "selected"; ?> value="toruslingua">Torus Lingua</option>
-                <option <?php if(isset($pat) && $pat["dentalpiso"] == 'ranula') echo "selected"; ?> value="ranula">Ránula</option>
-                <option <?php if(isset($pat) && $pat["dentalpiso"] == 'frenillo') echo "selected"; ?> value="frenillo">Frenillo lingual Alto</option>
-                <option <?php if(isset($pat) && $pat["dentalpiso"] == 'mucocele') echo "selected"; ?> value="mucocele">Mucocele</option>
-              </select>
-            </div>
-
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-              <label for="encias">Encias</label>
-              <select name="encias" id="encias" class="form-select" aria-label="Default select example">
-                <option <?php if(!isset($pat) || $pat["dentalencias"] == 'difusa') echo "selected"; ?> value="difusa">Gingivitis Difusa</option>
-                <option <?php if(isset($pat) && $pat["dentalencias"] == 'aguda') echo "selected"; ?> value="aguda">Gingivitis Aguda</option>
-                <option <?php if(isset($pat) && $pat["dentalencias"] == 'gingivitis') echo "selected"; ?> value="gingivitis">Gingivitis cronoca no complicada</option>
-                <option <?php if(isset($pat) && $pat["dentalencias"] == 'papilar') echo "selected"; ?> value="papilar">Papilar</option>
-                <option <?php if(isset($pat) && $pat["dentalencias"] == 'guna') echo "selected"; ?> value="guna">G.U.N.A</option>
-                <option <?php if(isset($pat) && $pat["dentalencias"] == 'hiperplasia') echo "selected"; ?> value="hiperplasia">Hiperplasia gingival</option>
-              </select>
-            </div>
-
-
-          </div>
-          <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-              <label for="mucosa">Mucosa Bucal</label>
-              <select name="mucosa" id="mucosa" class="form-select" aria-label="Default select example">
-                <option <?php if(!isset($pat) || $pat["dentalmucosa"] == 'normal') echo "selected"; ?> value="normal">Aparentemente Normal</option>
-                <option <?php if(isset($pat) && $pat["dentalmucosa"] == 'alteracion') echo "selected"; ?> value="alteracion">Con Alteración</option>
-              </select>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-              <label for="occlusion">Tipo de Oclusion</label>
-              <select name="occlusion" id="occlusion" class="form-select" aria-label="Default select example">
-                <option <?php if(!isset($pat) || $pat["dentaltypeo"] == 'normo') echo "selected"; ?> value="normo">Normo oclusion</option>
-                <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'disto') echo "selected"; ?> value="disto">Disto oclusion</option>
-                <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'mesio') echo "selected"; ?> value="mesio">Mesio oclusion</option>
-                <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'abierta') echo "selected"; ?> value="abierta">Mordida Abierta anterior</option>
-              </select>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-              <label for="prosthesis">Tipo de Protesis</label>
-              <select name="prosthesis" id="prosthesis" class="form-select" aria-label="Default select example">
-                <option <?php if(!isset($pat) || $pat["dentaltypep"] == '') echo "selected"; ?> value="">--</option>
-                <option <?php if(isset($pat) && $pat["dentaltypep"] == 'removible') echo "selected"; ?> value="removible">Removible</option>
-                <option <?php if(isset($pat) && $pat["dentaltypep"] == 'fija') echo "selected"; ?> value="fija">Fija</option>
-                <option <?php if(isset($pat) && $pat["dentaltypep"] == 'total') echo "selected"; ?> value="total">Total</option>
-              </select>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-              <label for="hygiene">Higiene Bucal</label>
-              <select name="hygiene" id="hygiene" class="form-select" aria-label="Default select example">
-                <option <?php if(!isset($pat) || $pat["dentalhygiene"] == 'regular') echo "selected"; ?> value="regular">Regular</option>
-                <option <?php if(isset($pat) && $pat["dentalhygiene"] == 'buena') echo "selected"; ?> value="buena">Buena</option>
-                <option <?php if(isset($pat) && $pat["dentalhygiene"] == 'mala') echo "selected"; ?> value="mala">Mala</option>
-              </select>
-            </div>
-
-          </div>
-
+          ?>
+          </span>
         </div>
-        <br>
-
-        <!--examen bucodental fin-->
-
+        <div class="col-4">
+          <label for="patientcivilstatus">Estado Civil:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"><?php if(isset($pat["patientcivilstatus"])) echo ucfirst($pat["patientcivilstatus"]);  ?></span>
+        </div>
+        <div class="col-4">
+          <label for="patientoccupation">Ocupacion:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"><?php if(isset($pat["patientoccupation"])) echo $pat["patientoccupation"];  ?></span>
+        </div>
+        <div class="col-4">
+          <label for="patientnationality">Nacionalidad:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"><?php if(isset($pat["patientnationality"])) echo ucfirst($pat["patientnationality"]);  ?></span>
+        </div>
+        <div class="col-4">
+          <label for="patientschool">Grado de escolaridad:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"><?php if(isset($pat["patientschool"])) echo ucfirst($pat["patientschool"]);  ?></span>
+        </div>
+        <div class="col-4">
+          <label for="patientattorney">Apoderado:&nbsp;&nbsp;&nbsp;</label>
+          <span class="text-secondary"><?php if(isset($pat["patientattorney"])) echo $pat["patientattorney"];  ?></span>
+        </div>
+      </div>
+      <!--formulario para paciente fin-->
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="input-group input-group-sm mb-3">
+        <label class="input-group-text" for="generalstatus">Estado general del paciente</label>
+        <input type="text" class="form-control" name="generalstatus" id="generalstatus" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="<?php if(isset($pat["generalstatus"])) echo $pat["generalstatus"];  ?>">
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="input-group input-group-sm mb-3">
+        <label class="input-group-text" for="generalstatus">Antecedentes psicotraumáticos del paciente</label>
+        <input type="text" class="form-control" name="generalstatus" id="generalstatus" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="<?php if(isset($pat["generalstatus"])) echo $pat["generalstatus"];  ?>">
       </div>
     </div>
   </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-      <button class="accordion-button collapsed btn-link text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-        Odontograma
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
-      <div class="accordion-body">
-        <input type="hidden" name="odontogram" id="odontogram" value="<?php if(isset($pat["odontogramid"])) echo $pat["odontogramid"];  ?>">
-<!--odontograma inicio-->
-        <?php
-        include("../leftodontogram.php");
-        $odontogramstatus="false";
-        if (isset($pat['draw'])){
-          $pat=decryptOdontogram($pat);
-          $odontogramstatus="true";
-        }
-        /*if (isset($pat)){
-          $pat=decryptOdontogram($pat);
+  <div class="row">
+    <div class="col-12">
+      <b>I. Examen Clínico</b><br>
+      <u><b>Extraoral</u></b>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="faces">Facies</label>
+        <select name="faces" id="faces" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalfaces"] == 'simetrico') echo "selected"; ?> value="simetrico">Simétrico</option>
+          <option <?php if(isset($pat) && $pat["dentalfaces"] == 'asimetrico') echo "selected"; ?> value="asimetrico">Asimétrico</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="profile">Perfil</label>
+        <select name="profile" id="profile" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalprofile"] == 'recto') echo "selected"; ?> value="recto">Recto</option>
+          <option <?php if(isset($pat) && $pat["dentalprofile"] == 'concavo') echo "selected"; ?> value="concavo">Cóncavo</option>
+          <option <?php if(isset($pat) && $pat["dentalprofile"] == 'convexo') echo "selected"; ?> value="convexo">Cónvexo</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="scars">Cicatrices</label>
+        <input type="text" name="scars" class="form-control" id="scars" value="<?php if(isset($pat["dentalscars"]) && $pat['dentalscars']!="") echo $pat["dentalscars"]; else echo "Ninguno"; ?>">
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="atm">A.T.M</label>
+        <select name="atm" id="atm" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalatm"] == 'normal') echo "selected"; ?> value="normal">Aparentemente Normal</option>
+          <option <?php if(isset($pat) && $pat["dentalatm"] == 'dolor') echo "selected"; ?> value="dolor">Dolor</option>
+          <option <?php if(isset($pat) && $pat["dentalatm"] == 'chasquidos') echo "selected"; ?> value="chasquidos">Chasquidos</option>
+          <option <?php if(isset($pat) && $pat["dentalatm"] == 'crujidos') echo "selected"; ?> value="crujidos">Crujidos</option>
+          <option <?php if(isset($pat) && $pat["dentalatm"] == 'dtm') echo "selected"; ?> value="dtm">D.T.M</option>
+          <option <?php if(isset($pat) && $pat["dentalatm"] == 'trismus') echo "selected"; ?> value="trismus">Trismus</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="ganglia">Ganglios</label>
+        <select name="ganglia" id="ganglia" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalganglia"] == 'normal') echo "selected"; ?> value="normal">Aparentemente Normal</option>
+          <option <?php if(isset($pat) && $pat["dentalganglia"] == 'inflamados') echo "selected"; ?> value="inflamados">Inflamados</option>
+          <option <?php if(isset($pat) && $pat["dentalganglia"] == 'adenitis') echo "selected"; ?> value="adenitis">Adenitis</option>
 
-          if(isset($pat["tl"])){
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="lips">Labios</label>
+        <select name="lips" id="lips" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentallips"] == 'medianos') echo "selected"; ?> value="medianos">Medianos</option>
+          <option <?php if(isset($pat) && $pat["dentallips"] == 'delgados') echo "selected"; ?> value="delgados">Delgados</option>
+          <option <?php if(isset($pat) && $pat["dentallips"] == 'gruesos') echo "selected"; ?> value="gruesos">Gruesos</option>
+        </select>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="row mb-2">
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="lips">Labios</label>
+        <select name="lips" id="lips" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentallips"] == 'medianos') echo "selected"; ?> value="medianos">Medianos</option>
+          <option <?php if(isset($pat) && $pat["dentallips"] == 'delgados') echo "selected"; ?> value="delgados">Delgados</option>
+          <option <?php if(isset($pat) && $pat["dentallips"] == 'gruesos') echo "selected"; ?> value="gruesos">Gruesos</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="ulcerations">Ulceraciones</label>
+        <select name="ulcerations" id="ulcerations" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalulcerations"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(isset($pat) && $pat["dentalulcerations"] == 'si') echo "selected"; ?> value="si">Si</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="cheilitis">Queilitis</label>
+        <select name="cheilitis" id="cheilitis" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalcheilitis"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(isset($pat) && $pat["dentalcheilitis"] == 'si') echo "selected"; ?> value="si">Si</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+  <div class="row mb-3">
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="commissures">Comisuras</label>
+        <select name="commissures" id="commissures" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalcommissures"] == 'normal') echo "selected"; ?> value="normal">Aparentemente Normal</option>
+          <option <?php if(isset($pat) && $pat["dentalcommissures"] == 'presenta') echo "selected"; ?> value="presenta">Presenta queilitis</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <u><b>Intraoral</u></b>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="tongue">Lengua</label>
+        <select name="tongue" id="tongue" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentaltongue"] == 'saburra') echo "selected"; ?> value="saburra">Saburral</option>
+          <option <?php if(isset($pat) && $pat["dentaltongue"] == 'fisurada') echo "selected"; ?> value="fisurada">Fisurada</option>
+          <option <?php if(isset($pat) && $pat["dentaltongue"] == 'geografica') echo "selected"; ?> value="geografica">Geográfica</option>
+          <option <?php if(isset($pat) && $pat["dentaltongue"] == 'otros') echo "selected"; ?> value="otros">Otros</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="piso">Piso de la boca</label>
+        <select name="piso" id="piso" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalpiso"] == 'aparentemente') echo "selected"; ?> value="aparentemente">Aparentemente Normal</option>
+          <option <?php if(isset($pat) && $pat["dentalpiso"] == 'toruslingua') echo "selected"; ?> value="toruslingua">Torus Lingua</option>
+          <option <?php if(isset($pat) && $pat["dentalpiso"] == 'ranula') echo "selected"; ?> value="ranula">Ránula</option>
+          <option <?php if(isset($pat) && $pat["dentalpiso"] == 'frenillo') echo "selected"; ?> value="frenillo">Frenillo lingual Alto</option>
+          <option <?php if(isset($pat) && $pat["dentalpiso"] == 'mucocele') echo "selected"; ?> value="mucocele">Mucocele</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="encias">Encias</label>
+        <select name="encias" id="encias" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalencias"] == 'difusa') echo "selected"; ?> value="difusa">Gingivitis Difusa</option>
+          <option <?php if(isset($pat) && $pat["dentalencias"] == 'aguda') echo "selected"; ?> value="aguda">Gingivitis Aguda</option>
+          <option <?php if(isset($pat) && $pat["dentalencias"] == 'gingivitis') echo "selected"; ?> value="gingivitis">Gingivitis cronoca no complicada</option>
+          <option <?php if(isset($pat) && $pat["dentalencias"] == 'papilar') echo "selected"; ?> value="papilar">Papilar</option>
+          <option <?php if(isset($pat) && $pat["dentalencias"] == 'guna') echo "selected"; ?> value="guna">G.U.N.A</option>
+          <option <?php if(isset($pat) && $pat["dentalencias"] == 'hiperplasia') echo "selected"; ?> value="hiperplasia">Hiperplasia gingival</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="mucosa">Mucosa Bucal</label>
+        <select name="mucosa" id="mucosa" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalmucosa"] == 'normal') echo "selected"; ?> value="normal">Aparentemente Normal</option>
+          <option <?php if(isset($pat) && $pat["dentalmucosa"] == 'alteracion') echo "selected"; ?> value="alteracion">Con Alteración</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="occlusion">Tipo de Oclusion</label>
+        <select name="occlusion" id="occlusion" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentaltypeo"] == 'normo') echo "selected"; ?> value="normo">Normo oclusion</option>
+          <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'disto') echo "selected"; ?> value="disto">Disto oclusion</option>
+          <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'mesio') echo "selected"; ?> value="mesio">Mesio oclusion</option>
+          <option <?php if(isset($pat) && $pat["dentaltypeo"] == 'abierta') echo "selected"; ?> value="abierta">Mordida Abierta anterior</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="prosthesis">Tipo de Protesis</label>
+        <select name="prosthesis" id="prosthesis" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentaltypep"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat) && $pat["dentaltypep"] == 'removible') echo "selected"; ?> value="removible">Removible</option>
+          <option <?php if(isset($pat) && $pat["dentaltypep"] == 'fija') echo "selected"; ?> value="fija">Fija</option>
+          <option <?php if(isset($pat) && $pat["dentaltypep"] == 'total') echo "selected"; ?> value="total">Total</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+  <div class="row mb-2">
+    <div class="col-4">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="hygiene">Higiene Bucal</label>
+        <select name="hygiene" id="hygiene" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentalhygiene"] == 'regular') echo "selected"; ?> value="regular">Regular</option>
+          <option <?php if(isset($pat) && $pat["dentalhygiene"] == 'buena') echo "selected"; ?> value="buena">Buena</option>
+          <option <?php if(isset($pat) && $pat["dentalhygiene"] == 'mala') echo "selected"; ?> value="mala">Mala</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <span style="cursor: pointer;"class="text-primary fst-italic btn-link" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">Odontograma</span>
+
+      <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+        <div class="accordion-body">
+          <input type="hidden" name="odontogram" id="odontogram" value="<?php if(isset($pat["odontogramid"])) echo $pat["odontogramid"];  ?>">
+  <!--odontograma inicio-->
+          <?php
+          include("../leftodontogram.php");
+          $odontogramstatus="false";
+          if (isset($pat['draw'])){
+            $pat=decryptOdontogram($pat);
             $odontogramstatus="true";
-            $pat["tr"]= html_entity_decode($pat["tr"]);
-            $pat["tl"]= html_entity_decode($pat["tl"]);
-            $pat["tlr"]= html_entity_decode($pat["tlr"]);
-            $pat["tll"]= html_entity_decode($pat["tll"]);
-            $pat["bl"]= html_entity_decode($pat["bl"]);
-            $pat["br"]= html_entity_decode($pat["br"]);
-            $pat["bll"]= html_entity_decode($pat["bll"]);
-            $pat["blr"]= html_entity_decode($pat["blr"]);
-
           }
-        }*/
+          ?>
+  <!--odontograma fin-->
+        <input type="hidden" name="draw" id="draw" value="<?php if(isset($pat["draw"])) echo $pat["draw"];?>">
 
-        ?>
-<!--odontograma fin-->
-      <input type="hidden" name="draw" id="draw" value="<?php if(isset($pat["draw"])) echo $pat["draw"];?>">
-
+        </div>
       </div>
     </div>
   </div>
+  <div class="row mt-2">
+    <div class="col-12">
+      <b>II. Examenes Complementarios</b><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-8 col-8">
+      <div class="input-group input-group-sm">
+        <!--<label class="input-group-text" for="exam"><u><b>Examenes Complementarios</b></u></label>-->
+        <select name="exam" id="exam" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat["exam"]) || $pat["exam"] == '--') echo "selected"; ?> value="--">--</option>
+          <option <?php if(isset($pat["exam"]) && $pat["exam"] == 'periapical') echo "selected"; ?> value="periapical">RX PERIAPICAL</option>
+          <option <?php if(isset($pat["exam"]) && $pat["exam"] == 'oclusal') echo "selected"; ?> value="oclusal">RX OCLUSAL</option>
+          <option <?php if(isset($pat["exam"]) && $pat["exam"] == 'panoramico') echo "selected"; ?> value="panoramico">RX PANORAMICO</option>
+          <option <?php if(isset($pat["exam"]) && $pat["exam"] == 'otros') echo "selected"; ?> value="otros">Otros</option>
+        </select>
+        <label class="input-group-text" for="pieza">Pieza</label>
+        <input type="text" name="pieza" class="form-control" id="pieza" value="<?php if(isset($pat['pieza'])) echo $pat['pieza'] ?>">
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-lg-6 col-md-6 col-sm-4 col-4">
+      <label for="diagnostico"><u><b>III. Diagnostico</b></u></label>
+      <div class="input-group input-group-sm">
+        <textarea class="form-control" id="diagnostico" name="diagnostico" rows="2"><?php if(isset($pat["surgeryiidiagnosis"])) echo $pat["surgeryiidiagnosis"];  ?></textarea>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <label for=""><u><b>IV. Tratamiento</b></u></label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="hygiene">Tecnicas Anestesicas</label>
+
+        <div class="border">
+          <div class="from-check form-check-inline border p-3" align="center">
+            <input class="form-check-input" type="checkbox" id="spix" value="spix">
+            <label for="spix">SIPX</label>
+            <br>
+            <div class="autorizar">
+              <button type="button" class="btn btn-outline-primary btn-sm" name="button">Docente <i class="fa fa-solid fa-qrcode"></i></button>
+            </div>
+            <div class="mt-1 autorizar">
+              <button type="button" class="btn btn-outline-success btn-sm" name="button">Enfermeria <i class="fa fa-solid fa-qrcode"></i></button>
+            </div>
+          </div>
+          <div class="from-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="spix" value="spix">
+            <label for="spix">SIPX</label>
+          </div>
+          <div class="from-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="spix" value="spix">
+            <label for="spix">SIPX</label>
+          </div>
+          <div class="from-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="spix" value="spix">
+            <label for="spix">SIPX</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <label for=""><u><b>V. Prescripcion Farmacologica</b></u></label>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+      <label for="prescriptions"><u>RP/</u></label>
+      <!--<input type="text" name="diagnostico" class="form-control" id="diagnostico" value="<?php //if(isset($pat["diagnostico"])) echo $pat["diagnostico"];  ?>">-->
+      <textarea class="form-control" id="prescriptions" name="prescriptions" rows="3"><?php if(isset($pat["surgeryiiprescriptions"])) echo $pat["surgeryiiprescriptions"];  ?></textarea>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+      <label for="indications"><u>INDICACIONES</u></label>
+      <!--<input type="text" name="diagnostico" class="form-control" id="diagnostico" value="<?php //if(isset($pat["diagnostico"])) echo $pat["diagnostico"];  ?>">-->
+      <textarea class="form-control" id="indications" name="indications" rows="3"><?php if(isset($pat["surgeryiiindications"])) echo $pat["surgeryiiindications"];  ?></textarea>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+      <label for="evolution"><u><b>VI. Tratamiento post operatorio y evolución</b></u></label>
+      <!--<input type="text" name="diagnostico" class="form-control" id="diagnostico" value="<?php //if(isset($pat["diagnostico"])) echo $pat["diagnostico"];  ?>">-->
+      <textarea class="form-control" id="evolution" name="evolution" rows="3"><?php if(isset($pat["surgeryiievolution"])) echo $pat["surgeryiievolution"];  ?></textarea>
+    </div>
+    <input type="hidden" name="remissionid" id="remissionid"value="<?php if(isset($_GET['id'])) echo $_GET['id'];?>">
+    <input type="hidden" name="ficha" id="ficha"value="<?php if(isset($pat["surgeryiiid"])) echo $pat["surgeryiiid"]?>">
+
+  </div>
+  <br>
+  <div class="row">
+    <?php
+    if(!isset($pat['surgeryiiid'])||($pat['status']!='end'&& $pat['status']!='canceled'&& $pat['status']!='fail'&&
+    $pat['reviewstatus']=='t')){
+      echo "
+      <div class=\"col-4\">
+        <button id=\"patientregister_button\" class=\"btn btn-success\" type=\"button\" name=\"patientregister_button\">Enviar Datos</button>
+      </div>
+      <div class=\"col-4\">
+        <button id=\"cancel_button\" class=\"btn btn-danger\" type=\"button\" name=\"cancel_button\">Cancelar</button>
+      </div>
+      ";
+    }
+    ?>
+
+  </div>
+
+
+</div>
+<br>
+<div class="accordion" id="accordionPanelsStayOpenExample">
+
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingFive">
       <button class="accordion-button collapsed btn-link text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
@@ -599,41 +591,7 @@ $pat=$r;
     <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
       <div class="accordion-body">
         <!--inicio finalizacion-->
-                <div class="row">
-                  <div class="col-4 col-lg-4 col-md-4 col-sm-12 col-12">
 
-                    <label for="disease">Historia de la Enfermedad Actual:</label>
-                  </div>
-                  <div class="col-lg-8 col-md-8 col-sm-12 col-12">
-                    <input type="text" name="disease" class="form-control" id="disease" value="<?php if(isset($pat['surgeryiidisease'])) echo $pat['surgeryiidisease'];?>">
-                  </div>
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col-lg-3 col-md-3 col-sm-8 col-8">
-                    <label for="exam"><u><b>Examenes Complementarios</b></u></label>
-
-                    <select name="exam" id="exam" class="form-select" aria-label="Default select example">
-                      <option <?php if(!isset($pat["exam"]) || $pat["exam"] == '--') echo "selected"; ?> value="--">--</option>
-                      <option <?php if(isset($pat["exam"]) && $pat["exam"] == 'periapical') echo "selected"; ?> value="periapical">RX PERIAPICAL</option>
-                      <option <?php if(isset($pat["exam"]) && $pat["exam"] == 'oclusal') echo "selected"; ?> value="oclusal">RX OCLUSAL</option>
-                      <option <?php if(isset($pat["exam"]) && $pat["exam"] == 'panoramico') echo "selected"; ?> value="panoramico">RX PANORAMICO</option>
-                      <option <?php if(isset($pat["exam"]) && $pat["exam"] == 'otros') echo "selected"; ?> value="otros">Otros</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-1 col-md-2 col-sm-4 col-4">
-                    <label for="pieza">Pieza</label>
-                    <input type="text" name="pieza" class="form-control" id="pieza" value="<?php if(isset($pat['pieza'])) echo $pat['pieza'] ?>">
-                  </div>
-
-                  <br><br><br>
-                  <div class="col-lg-8 col-md-7 col-sm-12 col-12">
-                    <label for="diagnostico"><u><b>Diagnostico</b></u></label>
-                    <!--<input type="text" name="diagnostico" class="form-control" id="diagnostico" value="<?php //if(isset($pat["diagnostico"])) echo $pat["diagnostico"];  ?>">-->
-                    <textarea class="form-control" id="diagnostico" name="diagnostico" rows="4"><?php if(isset($pat["surgeryiidiagnosis"])) echo $pat["surgeryiidiagnosis"];  ?></textarea>
-
-                  </div>
-                </div>
 
                 <hr>
                 <div class="row">

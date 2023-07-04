@@ -25,7 +25,7 @@ function globalconf() {
 
   $conf["basepass"]="sihco";
 
-  $conf["key"]="GG56KFJtNDBGjJprR6ex";
+  $conf["key"]="GG56KFJtNDBGjJprR6ex";//tambien se utiliza para QR
 
 
   $conf["ip"]='local';

@@ -11,7 +11,7 @@ if(isset($_POST["select"])) { $RegistrationPag = $_POST["select"]; } else { $Reg
 $TotalPages = 0;
 
 ?>
-<table class="table table-sm table-hover ">
+<table class="table table-sm table-striped table-hover ">
     <thead>
       <tr>
           <th scope="col">#</th>

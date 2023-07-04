@@ -825,7 +825,8 @@ if(!isset($upreferred)){
 				<script src="../js/scripts.js"></script>
 				<script src="../assets/graphic/jquery-3.5.1.min.js"></script>
 				<script src="../assets/graphic/chart.js"></script>
-
+				<!--sweet alert 2-->
+				<script src="../assets/graphic/sweetalert2.min.js"></script>
 <!--odontograma inicio js-->
 <!-- jQuery -->
 <!--<script src="../jquery-1.10.2.min.js"></script>-->
@@ -1083,7 +1084,92 @@ $(document).ready(function(){
          return false;
        }
        if(patientname != '' && patientfirstname != '' && patientlastname != ''){
-           $.ajax({
+				 	 //mejorado el envio inicio..
+					 Swal.fire({
+					  title: 'Enviando datos del paciente...',
+					  html: '<div class="lds-dual-ring"></div>',
+					  showConfirmButton: false,
+					  allowOutsideClick: false,
+					  allowEscapeKey: false,
+					  allowEnterKey: false,
+					  didOpen: () => {
+					    Swal.showLoading();
+					  }
+					});
+
+					$.ajax({
+						url:"../include/i_patientadmission.php",
+						method:"POST",
+						data: {mod:mod, padmissionid:padmissionid, patientname:patientname,
+		 patientfirstname:patientfirstname, patientlastname:patientlastname, patientdirection:patientdirection, patientlocation:patientlocation, patientage:patientage, patientprovenance:patientprovenance,
+							patientphone:patientphone, patientgender:patientgender, patientcivilstatus:patientcivilstatus, patientoccupation:patientoccupation, patientnationality:patientnationality,
+							patientschool:patientschool, patientattorney:patientattorney, yesno0:yesno0, yesno1:yesno1, yesno2:yesno2, yesno3:yesno3, yesno4:yesno4, yesno5:yesno5, yesno6:yesno6,
+							yesno7:yesno7, yesno8:yesno8, yesno9:yesno9, yesno10:yesno10, yesno11:yesno11, yesno12:yesno12, yesno13:yesno13,
+							obs0:obs0, obs1:obs1, obs2:obs2, obs3:obs3, obs4:obs4, obs5:obs5, obs6:obs6, obs7:obs7, obs8:obs8, obs9:obs9, obs10:obs10, obs11:obs11, obs12:obs12, obs13:obs13, sistolica:sistolica, diastolica:diastolica,
+							temperature:temperature, headache:headache, respiratory:respiratory, throat:throat, general:general, vaccine:vaccine,
+							tongue:tongue, piso:piso, encias:encias, mucosa:mucosa, occlusion:occlusion,
+							prosthesis:prosthesis, hygiene:hygiene, lastconsultation:lastconsultation, consultation:consultation,
+							tr:tr, tl:tl, tlr:tlr, tll:tll, bl:bl, br:br, bll:bll, blr:blr,
+							diagnostico:diagnostico, clinical:clinical, examined:examined, examinedid:examinedid, odontodiagnostico:odontodiagnostico, odontodraw:odontodraw, meeting_time:meeting_time},
+					  beforeSend: () => {
+					    Swal.update({
+					      title: 'Procesando datos del paciente...',
+					      html: 'Estamos procesando los datos enviados...',
+					    });
+					  },
+					  success: (response) => {
+
+
+							if(response=='yes'){
+								Swal.fire({
+						      icon: 'success',
+						      title: '¡Terminado!',
+						      html: 'Se guardó los datos del paciente con éxito.',
+						      showConfirmButton: true,
+						      didOpen: () => {
+						        Swal.hideLoading();
+						      }
+						    });
+								location.href="listadmission.php";
+							}else{
+								//alert(response);
+								console.log(response);
+								Swal.fire({
+						      icon: 'error',
+						      title: '¡Error!',
+						      html: 'Hubo un error en el envio de datos del paciente: ' + response,
+						      showConfirmButton: true,
+						      didOpen: () => {
+						        Swal.hideLoading();
+						      }
+						    });
+							}
+
+					  },
+					  error: (jqXHR, textStatus) => {
+					    Swal.fire({
+					      icon: 'error',
+					      title: '¡Error!',
+					      html: 'Hubo un error en el envio de datos del paciente: ' + textStatus,
+					      showConfirmButton: true,
+					      didOpen: () => {
+					        Swal.hideLoading();
+					      }
+					    });
+					  },
+					  complete: () => {
+					    //Swal.close(); // Cierra la ventana emergente de "Enviando datos..."
+							setTimeout(() => {
+					        Swal.close(); // Cierra la ventana emergente después de 2 segundos
+					    }, 3000);
+
+					  }
+					});
+
+				 	 //mejorado el envio fin..
+
+
+					 /*$.ajax({
               url:"../include/i_patientadmission.php",
               method:"POST",
               data: {mod:mod, padmissionid:padmissionid, patientname:patientname,
@@ -1109,7 +1195,8 @@ $(document).ready(function(){
                   console.log(data);
                 }
               }
-           });
+           });*/
+
 
        }else{
          alert('debe completar al menos nombres y apellidos');
@@ -1262,34 +1349,61 @@ function obten(){
     }
     //register patient
     $('#patientregister_button').click(function(){
-      if (confirm("Registar todos los datos del paciente?")) {
-        if ($('#patientname').val()==="" || $('#patientfirtname').val()==="" || $('#patientlastname').val()==="") {
-          alert('debe completar el nombre del paciente');
-        }else{
-          var clinical = $('select[name=clinical]').val();
-          var examined = $('#examined').val();
-          if(clinical!=""&&examined!=""){
-            $.ajax({
-               url:"../include/i_patientadmission.php",
-               method:"POST",
-               data: {designed:clinical, student:examined},
-               success:function(data)
-               {
-                  if(data == 'yes'){
-                    registerpatient();
-                  }else{
-                    alert(data);
-                  }
-               }
-            });
-          }else{
-            registerpatient();
-          }
 
-        }
-      }//else{
-      //    location.reload();
-      //}
+			Swal.fire({
+				title: 'Confirmación',
+			  text: '¿Estás seguro de enviar los datos?',
+			  icon: 'question',
+			  showCancelButton: true,
+			  confirmButtonText: 'Enviar',
+			  cancelButtonText: 'Cancelar',
+			  customClass: {
+			    popup: 'my-custom-popup-class',
+			    title: 'my-custom-title-class',
+			    text: 'my-custom-text-class',
+			    confirmButton: 'btn btn-primary',
+			    cancelButton: 'btn btn-secondary'
+			  },
+			  buttonsStyling: false,
+			  reverseButtons: true
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			    //...
+					if ($('#patientname').val()==="" || $('#patientfirtname').val()==="" || $('#patientlastname').val()==="") {
+	          alert('debe completar el nombre del paciente');
+	        }else{
+	          var clinical = $('select[name=clinical]').val();
+	          var examined = $('#examined').val();
+	          if(clinical!=""&&examined!=""){
+	            $.ajax({
+	               url:"../include/i_patientadmission.php",
+	               method:"POST",
+	               data: {designed:clinical, student:examined},
+	               success:function(data)
+	               {
+	                  if(data == 'yes'){
+	                    registerpatient();
+	                  }else{
+	                    alert(data);
+	                  }
+	               }
+	            });
+	          }else{
+	            registerpatient();
+	          }
+
+	        }
+
+
+			  }
+			});
+
+
+
+
+
+
+
     });
 
 		//register patient

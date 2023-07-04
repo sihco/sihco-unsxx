@@ -62,3 +62,37 @@ if(isset($main)&&$main){
 
   </div>
 </div>
+
+<div class="modal fade" role="dialog" id="qrModal">
+<?php
+$a=DBUserInfo($_SESSION["usertable"]["usernumber"]);
+?>
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h3 class="modal-title">Código Qr</h3>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="row">
+        <div class="col-12" align="center">
+          <span class=" text-primary"><b> <?php if($a['usertype']=='teacher') echo "Dr(a). ";echo $a["userfullname"]; ?></b></span>
+          <button class="btn btn-outline-warning btn-sm" type="button" name="qr_button" id="qr_button"> Generar Nueva <i class="fa fa-solid fa-qrcode"></i></button>
+          <a href="downloadqr.php" class="btn btn-outline-success btn-sm">Descargar <i class="fa fa-solid fa-qrcode"></i></a>
+
+        </div>
+        <div class="col-12" id="idqr">
+          <?php include('../include/viewqr.php'); ?>
+          <!--<img src="../include/qr.php" alt="QR Code" class="w-100">-->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+</div>

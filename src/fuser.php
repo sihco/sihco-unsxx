@@ -319,6 +319,29 @@ function DBUpdateSpecialtyEnabled($user, $clinical, $status, $c=null){
 		}
 		return $ret;
 }
+//actualizar la informacion del paciente
+function DBUpdateInfoUser($user, $data, $c=null){
+		$cw = false;
+		if($c == null) {
+			$cw = true;
+			$c = DBConnect();
+			DBExec($c, "begin work", "DBUpdateInfoUser(begin)");
+		}
+		DBExec($c, "lock table usertable", "DBUpdateInfoUser(lock)");
+
+		$ret=2;
+		$time=time();
+		if(is_numeric($user)){
+				$sql="update usertable set userinfo='$data', updatetime=$time where usernumber=$user";
+				DBExec($c, $sql, "DBUpdateInfoUser(update usertable)");
+		}else{
+			$ret=1;
+		}
+		if($cw) {
+				DBExec ($c, "commit work");
+		}
+		return $ret;
+}
 //funcion para buscar usuarios con especialidad
 function DBSpecialtySearchInfo($search1, $search2, $type, $t=null, $c=null) {
 

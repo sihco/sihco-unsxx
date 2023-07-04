@@ -87,10 +87,24 @@ if($('#passwordn1').val() == $('#passwordo').val()){
 }
 }
 
-
-
 });
 
+//regenerar qr
+$('#qr_button').click(function(){
+  $.ajax({
+
+       url:"../include/i_qr.php",
+       success:function(data){
+         $('#idqr').html(data);
+
+         if(data='<img src="../include/qr.php" alt="QR Code" class="w-100">'){
+           alert('yes');
+         }else{
+           alert(data);
+         }
+       }
+  });
+});
 
 });
 </script>

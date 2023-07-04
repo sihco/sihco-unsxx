@@ -188,6 +188,9 @@ if(!isset($upreferred)){
 
 <script>
 $(document).ready(function(){
+		//setInterval(function(){
+		//	PatientDerivative(1);
+		//}, 1000);//actualizacion de cada segundo
 		//update
 		$('#update_button').click(function(){
 		var username,userdesc,userfull,passHASHo,passHASHn;

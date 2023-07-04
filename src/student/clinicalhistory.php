@@ -128,41 +128,7 @@ echo "</tbody></table>\n";
             <div id="allteacher"></div>
             <span id='spantext'></span>
           </div>
-          <div class="p-3" id="allpatterndiv">
-            <div class="row">
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern1" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern2" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern3" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern4" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern5" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern6" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern7" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern8" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-              <div class="col-4 bg-secondary py-5 patterndiv" id="pattern9" align="center">
-                <button class="btn btn-primary" type="button" name="button"><i class="fa fa-solid fa-square"></i></button>
-              </div>
-            </div>
-          </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="Restart()">Cerrar</button>

@@ -1,74 +1,30 @@
-<?php
-
-/*
-\"registeredafter\" bool DEFAULT 'f',   -- (campo para controlar en llenado de registro despues)
-ALTER TABLE remissiontable ADD COLUMN registeredafter bool DEFAULT 'f';
-select *from remissiontable
-*/
-define('SIZE_OF_ARRAY', 10);
-define('TRACE', true);
-define('WAIT_TIME', 0);
-
-$theArray = array();
-for ($i = 0; $i < SIZE_OF_ARRAY; ++$i) {
-    $theArray[$i] = rand(0, 9);
-}
-
-$initialArray = $theArray;
-$theArray = mergesort($theArray);
-echo 'Initial array: '.implode('-', $initialArray).PHP_EOL;
-echo '<br>';
-echo 'Final array: '.implode('-', $theArray).PHP_EOL;
-function mergesort($theArray)
-{
-    //printToScreen('>> mergesorting', $theArray, '');
-
-    if (count($theArray) <= 1) {
-        return $theArray;
-    } else {
-        $middlePos = count($theArray) / 2;
-
-        $U = mergesort(array_slice($theArray, 0, $middlePos));
-        $V = mergesort(array_slice($theArray, $middlePos, count($theArray) + 1 - $middlePos));
-
-        return Fussion($U, $V);
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .slide-image {
+      animation: imagescale 15s ease-in-out infinite alternate;
+      -webkit-animation: imagescale 15s ease-in-out infinite alternate;
+      -moz-animation: imagescale 15s ease-in-out infinite alternate;
+      -o-webkit-animation: imagescale 15s ease-in-out infinite alternate;
     }
-}
-
-function Fussion($U, $V)
-{
-    //printToScreen('>> fussioning U', $U, '');
-    //printToScreen('>> fussioning V', $V, '');
-
-    $i = $j = 0;
-    $finalArray = array();
-    while (count($U) > 0 and count($V) > 0) {
-        if ($U[0] < $V[0]) {
-            $finalArray[] = array_shift($U);
-        } else {
-            $finalArray[] = array_shift($V);
-        }
-    }
-    if (count($U) > 0) {
-        $finalArray = array_merge($finalArray, $U);
-    } else {
-        $finalArray = array_merge($finalArray, $V);
+    .slide-image {
+        height: 480px;
+        width: auto !important;
+        position: relative;
     }
 
-    //printToScreen('>> fussion', $finalArray, '');
-
-    return $finalArray;
-}
-
-function printToScreen($preStr, $theArray, $postStr)
-{
-    if (TRACE) {
-        echo str_pad($preStr, 20, ' ');
-        foreach ($theArray as $item) {
-            echo str_pad($item, 3, ' ');
-        }
-        echo $postStr.PHP_EOL;
-        sleep(WAIT_TIME);
+    .slide-image {
+        left: -50%;
+        height: 450px;
     }
-}
-?>
+    </style>
+  </head>
+  <body>
+    <div class="">
+      <img src="images/admision.jpeg" alt="">
+    </div>
+  </body>
+</html>

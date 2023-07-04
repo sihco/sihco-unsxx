@@ -1,3 +1,73 @@
+/*CSS Swal Start*/
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.my-custom-popup-class {
+  /* Estilos personalizados para el cuadro de diálogo */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.my-custom-title-class {
+  /* Estilos personalizados para el título del cuadro de diálogo */
+  font-size: 24px;
+  color: #333;
+}
+
+.my-custom-text-class {
+  /* Estilos personalizados para el texto del cuadro de diálogo */
+  font-size: 18px;
+  color: #666;
+}
+
+.my-custom-confirm-button-class {
+  /* Estilos personalizados para el botón de confirmación */
+  background-color: #4285F4;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.my-custom-cancel-button-class {
+  /* Estilos personalizados para el botón de cancelación */
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+
+/*CSS Swal End*/
+
 @media (min-width: 768px) {
 
 
@@ -306,19 +376,32 @@
 
 @media (max-width: 767px) {
 
-
 .diente {
     position: relative;/*static*/
     width: 0px;
     height: auto;
-    margin-left: 50px;
+    margin-left: 47px;
     display: inline-block;
 }
 .dientex {
     position: relative;/*static*/
     width: 0px;
     height: auto;
-    margin-left: -55px;
+    margin-left: -47px;
+    display: inline-block;
+}
+.diente-leche {
+    position: relative;
+    width: 0px;
+    height: auto;
+    margin-left: 40px;/*40*/
+    display: inline-block;
+}
+.diente-lechex {
+    position: relative;
+    width: 0px;
+    height: auto;
+    margin-left: 0px;
     display: inline-block;
 }
 .dientep {
@@ -342,27 +425,23 @@
     margin-left: -10px;
     display: inline-block;
 }
-.diente-leche {
-    position: relative;
-    width: 0px;
-    height: auto;
-    margin-left: 40px;/*40*/
-    display: inline-block;
-}
-.diente-lechex {
-    position: relative;
-    width: 0px;
-    height: auto;
-    margin-left: 0px;
-    display: inline-block;
-}
+
 .cuadro {
-    background-color: #FFFFFF;
+    /*background-color: #FFFFFF;
     border: 1px solid #7F7F7F;
     position: relative;
     width: 25px;
     height: 15px;
     left: 45px;
+    -webkit-border-radius: 80px 80px 0px 15px;
+    -moz-border-radius: 80px 80px 0px 15px;
+    border-radius: 80px 80px 0px 15px;*/
+    background-color: #FFFFFF;
+    border: 1px solid #7F7F7F;
+    position: relative;
+    width: 13px;
+    height: 13px;
+    left: 48px;
     -webkit-border-radius: 80px 80px 0px 15px;
     -moz-border-radius: 80px 80px 0px 15px;
     border-radius: 80px 80px 0px 15px;
@@ -375,8 +454,15 @@
 }
 
 .izquierdo {
-    top: 1px !important;
+    /*top: 1px !important;
     left: 28px !important;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);*/
+    top: -4px !important;
+    left: 37px !important;
     -webkit-transform: rotate(270deg);
     -moz-transform: rotate(270deg);
     -ms-transform: rotate(270deg);
@@ -385,8 +471,16 @@
 }
 
 .debajo {
-    top: 2px !important;
+    /*top: 2px !important;
     left: 45px !important;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);*/
+    /*width: 15px;*/
+    top: -8px !important;
+    left: 48px !important;
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
@@ -395,8 +489,15 @@
 }
 
 .derecha {
-    top: -29px !important;
+    /*top: -29px !important;
     left: 61px !important;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);*/
+    top: -30px !important;
+    left: 58px !important;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
@@ -405,12 +506,19 @@
 }
 
 .centro {
-    background: #F3F3F3;
+    /*background: #F3F3F3;
     border: 1px solid #7F7F7F;
     width: 25px;
     height: 25px;
     top: -49px;
     left: 45px;
+    position: relative;*/
+    background: #F3F3F3;
+    border: 1px solid #7F7F7F;
+    width: 13px;
+    height: 13px;
+    top: -43px;
+    left: 48px;
     position: relative;
 }
 

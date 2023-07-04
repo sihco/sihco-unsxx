@@ -38,6 +38,7 @@ require_once('../db.php');
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>-->
         <script src="../assets/graphic/all.min.js"></script>
         <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/text.css" rel="stylesheet">
         <script language="javascript" src="../reload.js"></script>
         <?php
         //funcion retorna true o false si no existe usertable en session false si es id diferente false
