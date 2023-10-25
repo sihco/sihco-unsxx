@@ -272,7 +272,7 @@ if(!isset($upreferred)){
 					    </select>
 						</div>
 				    <div class="col-6">
-				      <label for="patientoccupation">Ocupacion</label><span class="text-danger">*</span>
+				      <label for="patientoccupation">Ocupación</label><span class="text-danger">*</span>
 				      <input type="text" name="patientoccupation" class="form-control" id="patientoccupation" value="<?php if(isset($pat["patientoccupation"])) echo $pat["patientoccupation"];  ?>">
 				    </div>
 				  </div>
@@ -1497,30 +1497,6 @@ $(document).ready(function(){
 		}
 
 		});
-
-
-
-    $(".btn-primary").click(function(){
-        $(".fffa").collapse('toggle');
-    });
-    $(".btn-success").click(function(){
-        $(".fffa").collapse('show');
-    });
-    $(".btn-warning").click(function(){
-        $(".fffa").collapse('hide');
-    });
-    $(".fffa").on('show.bs.collapse', function(){
-        alert('The collapsible content is about to be shown.');
-    });
-    $(".fffa").on('shown.bs.collapse', function(){
-        alert('The collapsible content is now fully shown.');
-    });
-    $(".fffa").on('hide.bs.collapse', function(){
-        alert('The collapsible content is about to be hidden.');
-    });
-    $(".fffa").on('hidden.bs.collapse', function(){
-        alert('The collapsible content is now hidden.');
-    });
 
 });
 </script>

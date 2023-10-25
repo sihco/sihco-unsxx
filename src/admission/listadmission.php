@@ -107,7 +107,9 @@ if(!isset($upreferred)){
 <!--tabla para pacientes remitidos fin-->
 
                     </div>
+
                 </main>
+
 			<?php }else{ ?>
       <div class="row">
           <center>
@@ -181,12 +183,82 @@ if(!isset($upreferred)){
 				<script src="../js/scripts.js"></script>
 				<script src="../assets/graphic/jquery-3.5.1.min.js"></script>
 				<script src="../assets/graphic/chart.js"></script>
+				<script src="../assets/graphic/sweetalert2.min.js"></script>
     </body>
 </html>
 <script language="JavaScript" src="../sha256.js"></script>
 <script language="JavaScript" src="../hex.js"></script>
 
 <script>
+function getdata(e, u, remid){
+
+
+	Swal.fire({
+	  title: e+'. Tu contraseña porfavor',
+	  input: 'password',
+	  inputAttributes: {
+	    autocapitalize: 'off'
+	  },
+	  showCancelButton: true,
+	  confirmButtonText: 'Entrar',
+	  showLoaderOnConfirm: true,
+	  preConfirm: (login) => {
+			//password hash
+			var userHASH, passHASH;
+			userHASH = u;
+			passHASH = js_myhash(js_myhash(login)+'<?php echo session_id(); ?>');
+
+			return $.ajax({
+				url: '../include/i_uservalid.php',
+				method: 'POST',
+				data: { name:userHASH, pass:passHASH},
+				success: function (response) {
+					return response;
+				}, error: function (xhr, status, error){
+					Swal.showValidationMessage(
+	          `Debe introducir su contraseña: ${error}`
+	        );
+				}
+			});
+	    /*return fetch(`//api.github.com/users/${login}`)
+	      .then(response => {
+	        if (!response.ok) {
+	          throw new Error(response.statusText)
+	        }
+	        return response.json()
+	      })
+	      .catch(error => {
+	        Swal.showValidationMessage(
+	          `Debe introducir su contraseña: ${error}`
+	        )
+	      })*/
+	  },
+	  allowOutsideClick: () => !Swal.isLoading()
+	}).then((result) => {
+	  if (result.isConfirmed) {
+			if(result.value=='true'){
+				Swal.fire({
+				  position: 'top-end',
+				  icon: 'success',
+				  title: 'Correcto',
+				  showConfirmButton: false,
+				  timer: 1500
+				}).then(() => {
+				  // Esta función se ejecutará después de que la notificación se cierre
+				  location.href="surgeryii.php?id="+remid;
+				});
+
+			}else{
+				Swal.fire({
+		      title: `${'Contraseña incorrecta'}`,
+		      imageUrl: result.value.avatar_url
+		    })
+			}
+
+
+		}
+	});
+}
 $(document).ready(function(){
 		//setInterval(function(){
 		//	PatientDerivative(1);

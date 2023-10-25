@@ -154,7 +154,7 @@ function DBNewSurgeryii($param , $c=null){
 		$sql = "select * from surgeryiitable where remissionid= $remission";
 		$a = DBGetRow ($sql, 0, $c);
 
-	      	//para insercion o actulizacion
+	  //para insercion o actulizacion
 		if ($a == null) {
 				  $ret=2;
 					$surgery=DBSurgeryiiNumberMax();
@@ -954,10 +954,101 @@ function DBSurgeryiiInfo($id, $xremission=false, $c=null) {
 
 	return $a;
 }
+//funcion para autorizar tecnica de anestesia
+function DBAuthorizationAnesthesia($user, $time=null, $type, $id, $c=null){
+	$userinfo=DBUserInfo($user);
 
+	if($userinfo==null)
+		return false;
+	//funcion para saber si es por qr o no
+	if($time!=null){
+		if($userinfo['usertype']!='teacher'&& $userinfo['usertype']!='nursing'|| $userinfo['userinfo']!=$time)
+			return false;
+	}
+
+	if($userinfo['usertype']=='teacher'){
+		//registrado en cirugia cuarto año
+		if(DBSpecialtyInfo($user, 6, 4)==null){
+			return false;
+		}
+	}
+
+	$file=DBSurgeryiiInfo($id);
+	$file['surgeryiitreatment'];
+	if(trim($file['surgeryiitreatment'])==''){
+		$file['surgeryiitreatment']='[false-false][false-false-false-false-false-false][(*,*)(*,*)(*,*)(*,*)(*,*)(*,*)]';
+	}else{
+		$treat=explode(']',$file['surgeryiitreatment']);
+		$size=count($treat);
+		if($size!=4){
+			$file['surgeryiitreatment']='[false-false][false-false-false-false-false-false][(*,*)(*,*)(*,*)(*,*)(*,*)(*,*)]';
+		}
+	}
+	$treat_tmp=explode(']',$file['surgeryiitreatment']);
+	$treat=explode('[',$treat_tmp[2]);
+	$treat=trim($treat[1]);
+
+	$auto=explode(')',$treat);
+	$size=count($auto);
+	if($size!=7)
+		return false;
+	$data=$auto[$type-1];
+	$data=explode('(',$data);
+	$data=trim($data[1]);
+
+	$data=explode(',',$data);
+	$teacher=trim($data[0]);
+	$nursing=trim($data[1]);
+	if($userinfo['usertype']=='teacher')
+		$teacher=$user.'*'.time();
+	if($userinfo['usertype']=='nursing')
+		$nursing=$user.'*'.time();
+
+	$data='('.$teacher.','.$nursing;
+
+	$auto[$type-1]=$data;
+
+	$auto1='';
+	for ($i=0; $i < count($auto)-1; $i++) {
+		$auto1=$auto1.$auto[$i].')';
+	}
+	$treat_tmp[2]='['.$auto1;
+	$treat='';
+	for ($i=0; $i < count($treat_tmp)-1; $i++) {
+		$treat=$treat.$treat_tmp[$i].']';
+	}
+
+
+	$cw = false;
+	if($c == null) {
+		$cw = true;
+		$c = DBConnect();
+		DBExec($c, "begin work", "DBAuthorizationAnesthesia(begin)");
+	}
+	DBExec($c, "lock table surgeryiitable", "DBAuthorizationAnesthesia(lock)");
+
+	$ret=1;
+	$time=time();
+	$sql="update surgeryiitable set surgeryiitreatment='$treat' where surgeryiiid=$id";
+	DBExec($c, $sql, "DBAuthorizationAnesthesia(update surgeryiitable)");
+
+	if($cw) {
+			DBExec ($c, "commit work");
+	}
+
+
+
+
+
+	$msg=$teacher.','.$nursing;//$treat;
+
+	//DBSurgeryiiInfo($id);
+	return $msg;
+}
 function DBPatientRemissionSurgeryiiInfo($id, $c=null) {
 
-	$sql = "select *from patientadmissiontable as pa,
+	$sql = "select pa.*, p.*,
+	su.*, su.remissionid as remissionidsu, cli.* from patientadmissiontable as pa,
 patienttable as p, clinichistorytable as cli LEFT JOIN surgeryiitable as su ON su.remissionid=cli.remissionid
 where cli.remissionid=$id and pa.patientadmissionid=cli.patientadmissionid and
 p.patientid=cli.patientid";
@@ -1242,23 +1333,59 @@ function cleartreatment($a){
 	$r=explode(']',$a['surgeryiitreatment']);
 	$len=count($r);
 	if($len>1){
+
 		$r2=explode('[',$r[0]);
-		$a['treatment']=$r2[1];
+		$a['treatment']=array();//$r2[1];
+		$r3=explode('-',$r2[1]);
+		if(count($r3)==2){
+			$a['treatment']['quirurgico']=$r3[0];
+			$a['treatment']['farmacologico']=$r3[1];
+		}
+
 		if($len>2){
 			$r2=explode('[',$r[1]);
-			$a['anestesia']=$r2[1];
-			/*if($len>3){
+			$a['anestesia']=array();//$r2[1];
+			$r3=explode('-',$r2[1]);
+			if(count($r3)==6){
+				$a['anestesia']['spix']=$r3[0];
+				$a['anestesia']['mentoniana']=$r3[1];
+				$a['anestesia']['local']=$r3[2];
+				$a['anestesia']['infraorbitaria']=$r3[3];
+				$a['anestesia']['tuberositaria']=$r3[4];
+				$a['anestesia']['carrea']=$r3[5];
+			}
+			if($len>3){
 				$r2=explode('[',$r[2]);
-				$a['quirurgico']=$r2[1];
-				if($len>4){
-					$r2=explode('[',$r[3]);
-					$a['farmacologico']=$r2[1];
-					if($len>5){
-						$r2=explode('[',$r[4]);
-						$a['anestesia']=$r2[1];
-					}
+				//$a['anestesia']=array();//$r2[1];
+
+				$r3=explode(')',$r2[1]);
+				if(count($r3)==7){
+					$r4=explode('(',$r3[0]);
+					$r5=explode(',',$r4[1]);
+					$a['anestesia']['spixteacher']=$r5[0];
+					$a['anestesia']['spixnursing']=$r5[1];
+					$r4=explode('(',$r3[1]);
+					$r5=explode(',',$r4[1]);
+					$a['anestesia']['mentonianateacher']=$r5[0];
+					$a['anestesia']['mentoniananursing']=$r5[1];
+					$r4=explode('(',$r3[2]);
+					$r5=explode(',',$r4[1]);
+					$a['anestesia']['localteacher']=$r5[0];
+					$a['anestesia']['localnursing']=$r5[1];
+					$r4=explode('(',$r3[3]);
+					$r5=explode(',',$r4[1]);
+					$a['anestesia']['infraorbitariateacher']=$r5[0];
+					$a['anestesia']['infraorbitarianursing']=$r5[1];
+					$r4=explode('(',$r3[4]);
+					$r5=explode(',',$r4[1]);
+					$a['anestesia']['tuberositariateacher']=$r5[0];
+					$a['anestesia']['tuberositarianursing']=$r5[1];
+					$r4=explode('(',$r3[5]);
+					$r5=explode(',',$r4[1]);
+					$a['anestesia']['carreateacher']=$r5[0];
+					$a['anestesia']['carreanursing']=$r5[1];
 				}
-			}*/
+			}
 		}
 	}
 	return $a;

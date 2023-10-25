@@ -588,8 +588,7 @@ function DBAllPatientRemissionInfo($student=null, $search='', $RegistrationPag=f
 	}
 
 	if($search!=''){
-		$sql.=" and (p.patientname ILIKE '%$search%' or p.patientfirstname ILIKE '%$search%' ".
-		"or p. patientlastname ILIKE '%$search%')";
+		$sql.=" and CONCAT(p.patientname, ' ', p.patientfirstname, ' ', p.patientlastname) ILIKE '%$search%'";
 	}
 
 	if(is_numeric($RegistrationPag)&&is_numeric($RegistrationInitial)){

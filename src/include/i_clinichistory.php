@@ -3,8 +3,8 @@ session_start();//para iniciar session_sta
 require_once("../globals.php");
 require_once("../db.php");
 if(isset($_POST['ch'])&& is_numeric($_POST['ch'])){
-  $param['remissionid']=htmlspecialchars($_POST['ch']);
 
+  $param['remissionid']=htmlspecialchars($_POST['ch']);
   $r=DBClinicHistoryInfo($param['remissionid']);
   if($r==null){
     echo "No Encontrado Historial Clínico";
@@ -15,21 +15,86 @@ if(isset($_POST['ch'])&& is_numeric($_POST['ch'])){
   $param['clinicalid']=$r['clinicalid'];
   $param['studentid']=$r['studentid'];
   $param['studentclinicalid']=$r['studentclinicalid'];
-  if($_SESSION['usertable']['usertype']=='teacher'&& is_numeric($_SESSION['usertable']['usernumber'])){
-    $acourse=array(3, 4,4,4,4,4,4,4,4, 5,5,5,5,5,5,5,5);
-    $r=DBSpecialtyInfo($_SESSION['usertable']['usernumber'] , $r['clinicalid'], $acourse[$r['clinicalid']-1]);
-    if($r==null){
-      echo "Docente no encotrado en la especialidad";
+
+  //es para qr del estudiante para que autorize
+  if(isset($_POST['content'])&& trim($_POST['content'])!=''){
+    $conf=globalconf();
+    $data=decryptData($_POST['content'], $conf["key"]);
+    $adata = explode(']', $data);
+    if(is_array($adata)&& count($adata)==3){
+      $user=explode('[',$adata[0]);
+      $user=trim($user[1]);
+      $time=explode('[',$adata[1]);
+      $time=trim($time[1]);
+      if(is_numeric($user)&& is_numeric($time)){
+        $userinfo=DBUserInfo($user);
+        if($userinfo['usertype']=='teacher'&& $time==$userinfo['userinfo']){
+          $param['teacherid']=$userinfo['usernumber'];
+          $param['status']='process';
+        }else{
+          echo "Qr no tiene permisos de autorización";
+          exit;
+        }
+      }else{
+        echo "Valor de Qr invalido";
+        exit;
+      }
+
+    }else{
+      echo "QR invalido";
       exit;
     }
-    $param['teacherid']=$r['userid'];
-    $param['teacherclinicalid']=$r['clinicalid'];
-    $param['status']='process';
   }else{
-    $param['teacherid']=$r['teacherid'];
-    $param['teacherclinicalid']=$r['teacherclinicalid'];
+    if($_SESSION['usertable']['usertype']=='teacher'&& is_numeric($_SESSION['usertable']['usernumber'])){
+      $param['teacherid']=$_SESSION['usertable']['usernumber'];
+      $param['status']='process';
+    }else{
+      $param['teacherid']=$r['teacherid'];
+      $param['teacherclinicalid']=$r['teacherclinicalid'];
+    }
   }
-  DBNewClinichistory($param, null, true);
+
+  $acourse=array(3, 4,4,4,4,4,4,4,4, 5,5,5,5,5,5,5,5);
+  $r=DBSpecialtyInfo($param['teacherid'] , $r['clinicalid'], $acourse[$r['clinicalid']-1]);
+  if($r==null){
+    echo "Docente no encotrado en la especialidad";
+    exit;
+  }
+  $param['teacherid']=$r['userid'];
+  $param['teacherclinicalid']=$r['clinicalid'];
+  if(isset($_POST['endch'])&&$_POST['endch']=='true'){
+    $teacher=$param['teacherid'];
+    $param = array();
+    $param['remissionid']=htmlspecialchars($_POST['ch']);
+    $r=DBClinicHistoryInfo($param['remissionid']);
+    if($r==null){
+      echo "No Encontrado Historial Clínico";
+      exit;
+    }
+
+    $param['reviewany']='t';
+    $param['status']='end';
+    $param['reviewteacher']=$r['reviewteacher'].'['.$teacher.'::=::::=::'.time().']';
+    $param['reviewstatus']='t';
+    DBUpdateExamClinichistory($param);//para finalizar ficha clinica
+  }elseif (isset($_POST['canceledch'])&&$_POST['canceledch']=='true') {
+    $teacher=$param['teacherid'];
+    $param = array();
+    $param['remissionid']=htmlspecialchars($_POST['ch']);
+    $r=DBClinicHistoryInfo($param['remissionid']);
+    if($r==null){
+      echo "No Encontrado Historial Clínico";
+      exit;
+    }
+
+    $param['reviewany']='t';
+    $param['status']='canceled';
+    $param['reviewteacher']=$r['reviewteacher'].'['.$teacher.'::=::::=::'.time().']';
+    $param['reviewstatus']='t';
+    DBUpdateExamClinichistory($param);//para finalizar ficha clinica
+  }else{
+    DBNewClinichistory($param, null, true);
+  }
   echo 'yes';
   exit;
 }

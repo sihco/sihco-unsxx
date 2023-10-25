@@ -114,11 +114,11 @@ if(function_exists("globalconf") && function_exists("sanitizeVariables")) {
 
                                               <div class="form-floating mb-3">
                                                   <input class="form-control" id="name" name="name" placeholder="name@example.com" />
-                                                  <label for="name">Email</label>
+                                                  <label for="name">Usuario</label>
                                               </div>
                                               <div class="form-floating mb-3">
                                                   <input class="form-control" id="password" name="password" type="password" placeholder="Password" />
-                                                  <label for="password">Password</label>
+                                                  <label for="password">Contraseña</label>
                                               </div>
 
                                               <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
@@ -128,6 +128,11 @@ if(function_exists("globalconf") && function_exists("sanitizeVariables")) {
                                               </div>
 
                                           </form>
+																					<div class="row">
+																						<div class="col-12" align="center">
+																							<a href="clinicalview.php" class="text-white"> <b>HOME</b> </a>
+																						</div>
+																					</div>
                                       </div>
                                       <div class="card-footer text-center py-3"></div>
                                   </div>

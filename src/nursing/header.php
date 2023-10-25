@@ -23,14 +23,11 @@ require_once('../db.php');
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
         <title>Admision Odontologia</title>
+
+
         <link rel="shortcut icon" href="../images/favicon.png">
         <!--firma digital-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>-->
-        <script src="../assets/graphic/signature_pad.min.js"></script>
-
         <link href="../assets/graphic/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <link href="../css/styles.css" rel="stylesheet" />
         <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">-->
@@ -38,10 +35,9 @@ require_once('../db.php');
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>-->
         <script src="../assets/graphic/all.min.js"></script>
         <link href="../css/base.css" rel="stylesheet">
-        <link href="../css/text.css" rel="stylesheet">
         <script language="javascript" src="../reload.js"></script>
+
         <script src="../assets/instascan.min.js"></script>
-        <link rel="stylesheet" href="../assets/graphic/sweetalert2.min.css">
         <?php
         //funcion retorna true o false si no existe usertable en session false si es id diferente false
         //si ho hay usertable en session  FALSE
@@ -50,16 +46,15 @@ require_once('../db.php');
         if(!isset($_POST['noflush']))
             ob_end_flush();
         if(!ValidSession()){
-            InvalidSession("student/index.php");////funcion para expirar el session y registar 3= debug en logtable
+            InvalidSession("nursing/index.php");////funcion para expirar el session y registar 3= debug en logtable
             ForceLoad("../index.php");//index.php
         }
-        $_SESSION["usertable"]["contestnumber"]=0;//para ejercicios generales
-        if($_SESSION["usertable"]["usertype"] != "student"){//system
-            IntrusionNotify("student/index.php");
+
+        if($_SESSION["usertable"]["usertype"] != "nursing"){//system
+            IntrusionNotify("nursing/index.php");
             ForceLoad("../index.php");//index.php
         }
         ?>
-
     </head>
     <!--fin de head-->
     <body class="sb-nav-fixed" onload="Comecar()" onunload="Parar()">
@@ -83,6 +78,7 @@ require_once('../db.php');
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#updateModal">Mi cuenta</a></li>
+                        <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#qrModal">Mi Codigo QR</a></li>
                         <li><a class="dropdown-item" href="#!">Mis notificaciones</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="../index.php">Salir del sistema</a></li>
@@ -105,25 +101,20 @@ require_once('../db.php');
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">REMITIDOS</div>
-
                             <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Mis Fichas Clínicas
-                            </a>
-                            <a class="nav-link" href="assigned.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Mis pacientes
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Interfaz</div>
-                            <a class="nav-link" href="admission.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Mis pacientes admitidos
-                            </a>
-                            <a class="nav-link" href="referredpatient.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Pacientes Derivados
                             </a>
+                            <div class="sb-sidenav-menu-heading">Interfaz</div>
 
+                            <a class="nav-link" href="clinicalhistory.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Fichas Clinicas Autorizadas
+                            </a>
+                            <a class="nav-link" href="clinicalhistoryother.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Fichas Clinicas
+                            </a>
                             <!--paginas para modulos-->
 
 
@@ -145,4 +136,4 @@ require_once('../db.php');
                 </nav>
             </div>
             <!--inicio de div contenido-->
-            <div id="layoutSidenav_content">
+<div id="layoutSidenav_content">

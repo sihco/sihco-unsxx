@@ -36,6 +36,8 @@ require_once('../db.php');
         <script src="../assets/graphic/all.min.js"></script>
         <link href="../css/base.css" rel="stylesheet">
         <script language="javascript" src="../reload.js"></script>
+        <link rel="stylesheet" href="../assets/graphic/sweetalert2.min.css">
+        <script src="../assets/instascan.min.js"></script>
         <?php
         //funcion retorna true o false si no existe usertable en session false si es id diferente false
         //si ho hay usertable en session  FALSE

@@ -239,6 +239,97 @@ function DBLogIn2($name,$pass,$msg=true) {
   $_SESSION['usertable2']['active']=true;
 	return $a;
 }
+function DBLogIn3($name,$pass,$msg=true) {
+
+  $a = DBGetRow("select * from usertable where username='$name'", 0, null, "DBLogIn3(get user)");
+	if ($a == null) {
+		if($msg) {
+			LOGLevel("El usuario $name intentó iniciar sesión pero no existe.",2);
+			MSGError("El usuario no existe o la contraseña es incorrecta.");
+		}
+		return false;
+	}
+  //informacion del usuario
+	$a = DBUserInfo($a['usernumber'],null,false);
+	$_SESSION['usertable3'] = $a;
+	$_SESSION['usertable3']['usersession']='';
+	$_SESSION['usertable3']['userip']='';
+
+	$p = myhash($a["userpassword"] . session_id());
+	$_SESSION['usertable3']['userpassword'] = $p;//con hash y id
+
+	if ($a["userpermitlogin"]=="f" && $a["usertype"] != "admin") {
+		LOGLevel("El usuario $name intentó iniciar sesión pero se deniega el inicio de sesión.",2);
+		if($msg) MSGError("No se permiten inicio de sesión.");
+		unset($_SESSION["usertable3"]);
+		return false;
+  }
+	if ($a["userenabled"] != "t") {
+		LOGLevel("El usuario $name intentó iniciar sesión pero está deshabilitado.",2);
+		if($msg) MSGError("Usuario deshabilitado");
+		unset($_SESSION["usertable3"]);
+		return false;
+	}
+	if ($a["userpassword"] != "" && $p != $pass) {
+		LOGLevel("El usuario $name intentó iniciar sesión pero la contraseña es incorrecta.",2);
+		if($msg) MSGError("Contraseña incorrecta.");
+		unset($_SESSION["usertable3"]);
+		return false;
+	}
+  //Chequea si todos los caracteres en la string entregada, texto, son alfanuméricos.
+	if(!ctype_alnum($name)) {
+	  LOGLevel("El usuario $name intentó iniciar sesión pero el nombre de usuario no es alfanum.",2);
+	  if($msg) MSGError("El nombre de usuario debe ser alfanumérico.");
+	  unset($_SESSION["usertable3"]);
+	  return false;
+	}
+
+
+	$gip=getIP();
+	if ($a["userip"] != $gip && $a["userip"] != "") {
+		LOGLevel("El usuario $name está usando dos direcciones IP diferentes: " . $a["userip"] .
+			 "(" . dateconv($a["userlastlogin"]) .") and " . $gip,1);
+		if($msg && $a["usertype"] != "admin" && $a["usermultilogin"] != "t") MSGError("Está utilizando dos direcciones IP distintas. Administrador notificado.");
+	}
+	if ($a["userpermitip"] != "") {
+		$ips=explode(';',$a["userpermitip"]);
+		$gips=explode(';',$gip);
+		if(count($gips) < count($ips)) {
+			IntrusionNotify("Invalid IP: " . $gip);
+			ForceLoad("index.php");
+		}
+		for($ipss=0;$ipss<count($ips);$ipss++) {
+			$gipi=$gips[$ipss];
+			$ipi=$ips[$ipss];
+			if(!match_network($ipi, $gipi)) {
+				IntrusionNotify("Invalid IP: " . $gip);
+				ForceLoad("index.php");
+			}
+		}
+	}
+	$_SESSION['usertable3']['usersession']=session_id();
+	$_SESSION['usertable3']['userip']=$gip;
+	$c = DBConnect();
+	$t = time();
+  //==team
+	if($a["usertype"] != "admin" && $a["usermultilogin"] != "t" && $a["userpermitip"] == "") {
+
+	  $r = DBExec($c,"update usertable set userip='" . $gip . "', updatetime=" . time() . ", userpermitip='" . $gip . "'," .
+		"userlastlogin=$t, usersession='".session_id()."' where username='$name'", "DBLogIn3(update session)");
+	} else {
+		DBExec($c,"begin work");
+		$sql = "update usertable set usersessionextra='".session_id()."' where username='$name' and (usersessionextra='' or userip != '" . $gip ."' or userlastlogin<=" . ($t-86400) . ")";
+		DBExec($c,$sql);
+
+		DBExec($c,"update usertable set userip='" . $gip . "', updatetime=" . time() . ", userlastlogin=$t, ".
+			   "usersession='".session_id()."' where username='$name'", "DBLogIn3(update user)");
+
+		DBExec($c,"commit work");
+	}
+	LOGLevel("Usuario $name autentificado (" . $gip . ")",2);
+  $_SESSION['usertable3']['active']=true;
+	return $a;
+}
 //funcion para capturar los registros ordenados
 function DBGetLogs($o,$user, $type, $ip, $limit) {
 	$c = DBConnect();

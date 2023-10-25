@@ -175,12 +175,12 @@ if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patien
 }
 
 if(isset($_POST["mod"]) && $_POST["mod"]='surgeryii' &&
-    isset($_POST["faces"]) &&   isset($_POST["ficha"]) && isset($_POST["profile"]) && isset($_POST["scars"]) &&
+    isset($_POST["faces"]) &&   isset($_POST["ficha"])&& isset($_POST["profile"]) && isset($_POST["scars"]) &&
     isset($_POST["atm"]) && isset($_POST["ganglia"]) && isset($_POST["lips"]) &&
     isset($_POST["ulcerations"]) && isset($_POST["cheilitis"]) && isset($_POST["commissures"]) &&
     isset($_POST["tongue"]) && isset($_POST["piso"]) &&
     isset($_POST["encias"]) && isset($_POST["mucosa"]) && isset($_POST["occlusion"]) && isset($_POST["prosthesis"]) &&
-    isset($_POST["hygiene"]) && isset($_POST["lastconsultation"]) && isset($_POST["consultation"]) && isset($_POST["generalstatus"]) &&
+    isset($_POST["hygiene"]) && isset($_POST["generalstatus"]) &&
     isset($_POST["tr"]) && isset($_POST["tl"]) &&
     isset($_POST["tlr"]) && isset($_POST["tll"]) && isset($_POST["bl"]) && isset($_POST["br"]) &&
     isset($_POST["bll"]) && isset($_POST["blr"]) && isset($_POST["diagnostico"]) && isset($_POST["remission"])&& is_numeric($_POST["remission"])) {
@@ -188,9 +188,12 @@ if(isset($_POST["mod"]) && $_POST["mod"]='surgeryii' &&
       $param=array();
       $param["mod"]='update';
       $param["patientid"]=htmlspecialchars(trim($_POST["patientid"]));
-
+      $param['remissionid'] = htmlspecialchars($_POST["remission"]);
+      $infoch=DBClinicHistoryInfo($param['remissionid']);
+      $param['idpa'] = $infoch['patientadmissionid'];
+      $infopa=DBPatientRemissionInfo($param['idpa']);//informacion de patient admission
       //examen buco dental
-      $param['dentalid'] = htmlspecialchars($_POST["dental"]);
+      //$param['dentalid'] = htmlspecialchars($_POST["dental"]);
       $param['faces'] = htmlspecialchars($_POST["faces"]);
       $param['profile'] = htmlspecialchars($_POST["profile"]);
       $param['scars'] = htmlspecialchars($_POST["scars"]);
@@ -208,13 +211,13 @@ if(isset($_POST["mod"]) && $_POST["mod"]='surgeryii' &&
       $param['occlusion'] = htmlspecialchars($_POST["occlusion"]);
       $param['prosthesis'] = htmlspecialchars($_POST["prosthesis"]);
       $param['hygiene'] = htmlspecialchars($_POST["hygiene"]);
-      $param['lastconsultation'] = htmlspecialchars($_POST["lastconsultation"]);
-      $param['consultation'] = htmlspecialchars($_POST["consultation"]);
+      $param['lastconsultation'] = $infopa['lastconsult'];//htmlspecialchars($_POST["lastconsultation"]);
+      $param['consultation'] = $infopa['motconsult'];//htmlspecialchars($_POST["consultation"]);
       $param['generalstatus'] = htmlspecialchars($_POST["generalstatus"]);
 
       //odontogram
       $conf=globalconf();
-      $param['odontogramid'] = htmlspecialchars($_POST["odontogram"]);
+      //$param['odontogramid'] = htmlspecialchars($_POST["odontogram"]);
       $param['tr'] = encryptData($_POST["tr"], $conf["key"], false);
       $param['tl'] = encryptData($_POST["tl"], $conf["key"], false);
       $param['tlr'] = encryptData($_POST["tlr"], $conf["key"], false);
@@ -248,16 +251,51 @@ if(isset($_POST["mod"]) && $_POST["mod"]='surgeryii' &&
       //$param['quirurgico'] = htmlspecialchars($_POST["quirurgico"]);
       //$param['farmacologico'] = htmlspecialchars($_POST["farmacologico"]);
 
-      $param['anestesia'] = htmlspecialchars($_POST["anestesia"]);
-      $param['treatment'] = '['.htmlspecialchars($_POST["treatment"], true).']['.htmlspecialchars($param['anestesia'],true).']';//'['.$param['sintomatico'].']'.'['.$param['etiologica'].']'.'['.$param['quirurgico'].']'.'['.$param['farmacologico'].']'.'['.$param['anestesia'].']';
+      $param['treatment'] = explode('-', htmlspecialchars($_POST['treatment']));
+      if(count($param['treatment'])==2&& strIsBool($param['treatment'][0])&&
+        strIsBool($param['treatment'][1])){
+          $param['treatment'] = $param['treatment'][0].'-'.$param['treatment'][1];
+      }else{
+        echo "No se envió todos los valores necesarias para guardar datos 1";
+        exit;
+      }
+      $param['anestesia'] = explode('-', htmlspecialchars($_POST["anestesia"]));
+
+      if(count($param['anestesia'])==6&& strIsBool($param['anestesia'][0])&&
+        strIsBool($param['anestesia'][1])&&
+        strIsBool($param['anestesia'][2])&&
+        strIsBool($param['anestesia'][3])&&
+        strIsBool($param['anestesia'][4])&&
+        strIsBool($param['anestesia'][5])){
+          $param['anestesia'] = $param['anestesia'][0].'-'.$param['anestesia'][1].'-'.$param['anestesia'][2].
+          '-'.$param['anestesia'][3].'-'.$param['anestesia'][4].'-'.$param['anestesia'][5];
+      }else{
+        echo "No se envió todos los valores necesarias para guardar datos 2";
+        exit;
+      }
+
+
+      $param['treatment'] = '['.htmlspecialchars($_POST["treatment"], true).']['.
+      htmlspecialchars($param['anestesia'],true).']';
+      //'['.$param['sintomatico'].']'.'['.$param['etiologica'].']'.'['.$param['quirurgico'].']'.'['.$param['farmacologico'].']'.'['.$param['anestesia'].']';
+
+      $ret=DBSurgeryiiInfo($param['remissionid'], true);
+      if($ret!=null&& isset($ret['surgeryiitreatment'])&& $ret['surgeryiitreatment']!=''){
+        $arr=explode(']', $ret['surgeryiitreatment']);
+        if(count($arr)==4&& $arr[2]!=''){
+          $param['treatment']=$param['treatment'].$arr[2].']';
+        }else{
+          $param['treatment']=$param['treatment'].'[(*,*)(*,*)(*,*)(*,*)(*,*)(*,*)]';
+        }
+      }else{
+        $param['treatment']=$param['treatment'].'[(*,*)(*,*)(*,*)(*,*)(*,*)(*,*)]';
+      }
       $param['prescriptions'] = htmlspecialchars($_POST["prescriptions"]);
       $param['indications'] = htmlspecialchars($_POST["indications"]);
       $param['evolution'] = htmlspecialchars($_POST["evolution"]);
-      $param['remissionid'] = htmlspecialchars($_POST["remission"]);
-      $param['status'] = 'process';
-      $infoch=DBClinicHistoryInfo($param['remissionid']);
 
-      $param['idpa'] = $infoch['patientadmissionid'];
+      $param['status'] = 'process';
+
 
       $r=DBUpdateRemissionPatientSurgeryii($param);
       if($r==0){ echo "No se actualizó los datos";exit;}

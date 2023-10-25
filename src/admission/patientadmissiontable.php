@@ -1,7 +1,6 @@
 <?php
-require_once("../globals.php");
-require_once("../db.php");
-
+require_once('../globals.php');
+require_once('../db.php');
 if(isset($_POST["search"]) && $_POST["search"]!=""){ $search=trim($_POST["search"]);} else { $search=""; }
 if (isset($_POST['page'])) { $currentPag = $_POST['page']; } else { $currentPag = 1; }
 //variable que permite mostrar 5 filas se puede cambiar
@@ -53,8 +52,21 @@ if ($size1>0) {
     if($pr[$i]['remission']!=null){
       $size2=count($pr[$i]['remission']);
       for ($j=0; $j < $size2 ; $j++) {
-          echo $pr[$i]['remission'][$j]['clinicalspecialty'];
           $stdesigned = $pr[$i]['remission'][$j]['studentid'];
+
+          if($pr[$i]['remission'][$j]['clinicalid']==6){
+            $stmp=DBUserInfo($stdesigned);
+            if(isset($_SESSION['usertable3'])&& $stmp['userfullname']==$_SESSION['usertable3']['userfullname']){
+              echo "<a href=\"surgeryii.php?id=".$pr[$i]['remission'][$j]['remissionid']."\" class=\"btn btn-sm btn-outline-primary\">".$pr[$i]['remission'][$j]['clinicalspecialty']."</a>";
+            }else{
+              echo "<button type=\"button\" class=\"btn btn-sm btn-outline-primary\" name=\"data\" onclick=\"getdata('".$stmp['userfullname']."', '".$stmp['username']."', ".$pr[$i]['remission'][$j]['remissionid'].")\">".$pr[$i]['remission'][$j]['clinicalspecialty']."</button>";
+            }
+            //echo "<a href=\"#\" onclick="">".$pr[$i]['remission'][$j]['clinicalspecialty']."</a>";
+          }else{
+            echo $pr[$i]['remission'][$j]['clinicalspecialty'];
+          }
+
+
       }
     }
     echo "</td>";

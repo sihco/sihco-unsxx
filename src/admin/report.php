@@ -5,6 +5,9 @@ require_once('../version.php');
 require_once('../globals.php');
 require_once('../db.php');
 
+// Incluir la biblioteca QR Code
+require_once('../assets/phpqrcode/qrlib.php');
+
 if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
   $id=htmlspecialchars(trim($_GET["id"]));
   if(($pat=DBPatientRemissionInfo($id))==null){
@@ -24,7 +27,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Reporte</title>
+    <title>Ficha Admision</title>
 <style>
 
 .container{
@@ -70,7 +73,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
 }
 .titulo{
   padding-top: 25px;
-  width: 80%;
+  width: 65%;
   height: 75px;
 }
 .cat {
@@ -97,8 +100,37 @@ if(!isset($_SESSION['usertable']['usertype'])||
       <div class="cabezera cat">
         <img class="ajuste" src="<?php echo $c; ?>" alt="">
       </div>
-      <div align="center" class="cabezera titulo">
+      <div align="right" class="cabezera titulo">
         <font SIZE=6><b>CLINICA DE ADMISION</b></font>
+      </div>
+      <div class="cabezera" style="padding-left:20px">
+        <?php
+        $cod_unique=myhash9($_GET['id']);
+        $infoqr='Codigo ID: '.$cod_unique;
+        $infoqr.="\n Ficha N.: ";
+        if(isset($pat['patientadmissionid'])&& is_numeric($pat['patientadmissionid']))
+          $infoqr.=$pat['patientadmissionid'];
+        $infoqr.="\n Paciente:";
+        if(isset($pat["patientname"])&& isset($pat["patientfirstname"])&& isset($pat["patientlastname"]))
+          $infoqr.="Paciente: ".$pat["patientname"]." ".$pat["patientfirstname"]." ".$pat["patientlastname"];
+        $infoqr.="\n Especialidad derivada: ";
+        if(isset($pat['remission']['clinicalspecialty']))
+          $infoqr.=$pat['remission']['clinicalspecialty'];
+        $infoqr.="\n Estudiante designado: ";
+        if(isset($pat['remission']['studentid'])&& is_numeric($pat['remission']['studentid'])){
+          $stinfo=DBUserInfo($pat['remission']['studentid']);
+          $infoqr.=$stinfo['userfullname'];
+        }
+        $temp_qr_file=tempnam(sys_get_temp_dir(), 'qr').'.png';
+        QRcode::png($infoqr, $temp_qr_file,QR_ECLEVEL_L, 2);
+
+        // Mostrar el QR en la página HTML
+        echo '<img src="data:image/png;base64,'.base64_encode(file_get_contents($temp_qr_file)).'">';
+        unlink($temp_qr_file);
+        ?>
+        <div class="">
+          <?php echo '<b><font color="#F01F0E">'.$cod_unique.'</font></b>';?>
+        </div>
       </div>
 
       <div style="clear:both;"></div>

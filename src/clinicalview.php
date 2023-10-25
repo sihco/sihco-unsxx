@@ -115,6 +115,7 @@ require_once('version.php');
 		  -moz-animation: imagescale 15s ease-in-out infinite alternate;
 		  -o-webkit-animation: imagescale 15s ease-in-out infinite alternate;
 		}
+
     </style>
 		<link rel="shortcut icon" href="images/favicon.png">
     <!--<link rel=stylesheet href="Css.php" type="text/css">-->
@@ -153,9 +154,14 @@ if(function_exists("globalconf") && function_exists("sanitizeVariables")) {
 <body class="bg-secondary">
 	<div class="py-2" style="background: linear-gradient(#000046, #1cb5e0);">
 		<h2><div class="col-12 text-white" align="center" id="miDiv"></div></h2>
+
+		<button type="button" name="button" class="btn btn-outline-primary text-white" style="float: right; margin-top: -40px; margin-right: 30px;" onclick="linklogin()">Iniciar Sesión</button>
+		<script>
+			function linklogin(){
+				location.href="index.php";
+			}
+		</script>
 	</div>
-
-
 
 	<div class="bg-danger">
 		<!--inicio carousel -->
@@ -239,18 +245,19 @@ if(function_exists("globalconf") && function_exists("sanitizeVariables")) {
 						<p>Sistema de historial clínico odontológico - UNSXX</p>
 					</div>
 				</div>
-				<div class="carousel-item" data-bs-interval="2000">
-					<img src="images/admision.jpeg" class="d-block w-100" alt="...">
-					<div class="carousel-caption d-none d-md-block d-sm-block">
-						<h5>Second slide label</h5>
-						<p>Some representative placeholder content for the second slide.</p>
+
+				<div class="carousel-item slider4" data-bs-interval="10000">
+					<img src="images/car_odonto.jpeg" class="slide-image" alt="...">
+					<div class="carousel-caption">
+						<h5>Carrera Odontologia Acreditada</h5>
+						<p>Sistema de historial clínico odontológico - UNSXX</p>
 					</div>
 				</div>
-				<div class="carousel-item">
-					<img src="images/admision.jpeg" class="d-block w-100" alt="...">
-					<div class="carousel-caption d-none d-md-block d-sm-block">
-						<h5>Third slide label</h5>
-						<p>Some representative placeholder content for the third slide.</p>
+				<div class="carousel-item slider4" data-bs-interval="10000">
+					<img src="images/cli_odonto.jpeg" class="slide-image" alt="...">
+					<div class="carousel-caption">
+						<h5>Carrera Odontologia Acreditada</h5>
+						<p>Sistema de historial clínico odontológico - UNSXX</p>
 					</div>
 				</div>
 			</div>
@@ -273,35 +280,36 @@ if(function_exists("globalconf") && function_exists("sanitizeVariables")) {
 		<script src="assets/graphic/jquery-3.5.1.min.js"></script>
 		<script src="assets/graphic/chart.js"></script>
 
-    <script>
-    var textoCompleto = "CLINICA ODONTOLOGICA - UNSXX";
-    var velocidadEscritura = 50; // Velocidad de escritura en milisegundos
+		<script>
+		  const textoCompleto = "CLINICA ODONTOLOGICA - UNSXX";
+		  const velocidadEscritura = 50; // Velocidad de escritura en milisegundos
 
-    var div = document.getElementById('miDiv');
-    var indice = 0;
+		  const div = document.getElementById('miDiv');
+		  let indice = 0;
 
-    function escribirTexto() {
-      div.innerHTML += textoCompleto.charAt(indice);
-      indice++;
+		  async function escribirTexto() {
+		    while (indice < textoCompleto.length) {
+		      div.innerHTML += textoCompleto.charAt(indice);
+		      indice++;
+		      await esperar(velocidadEscritura);
+		    }
 
-      if (indice <= textoCompleto.length) {
-        setTimeout(escribirTexto, velocidadEscritura);
-      }else{
-				indice = 0;
-				div.innerHTML='';
-				sleep(3000);
-				escribirTexto();
-			}
-		}
-		escribirTexto();
-		function sleep(ms) {
-		  const inicio = Date.now();
-		  let actual = null;
+		    // Espera 2 segundos sin bloquear la interfaz
+		    await esperar(2000);
 
-		  do {
-		    actual = Date.now();
-		  } while (actual - inicio < ms);
-		}
-    </script>
+		    // Reinicia la animación
+		    div.innerHTML = '';
+		    indice = 0;
+		    await escribirTexto();
+		  }
+
+		  async function esperar(ms) {
+		    return new Promise(resolve => {
+		      setTimeout(resolve, ms);
+		    });
+		  }
+
+		  escribirTexto();
+		</script>
  </body>
 </html>

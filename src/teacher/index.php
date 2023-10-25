@@ -7,7 +7,20 @@ require('header.php');
                         <h2 class="mt-4">Pacientes derivados en linea</h2>
                         <ol class="breadcrumb mb-3">
                             <li class="breadcrumb-item active">Odontologia(UNSXX)</li>
-                            &nbsp; Fila &nbsp;<span class="border border-danger table-danger rounded ">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span> &nbsp; Significa que requiere urgente autorización
+                            <div class="row">
+                              <div class="col-12">
+                                <table class="table table-sm table-hover">
+                                  <tr>
+                                    <td class="table-default">Nuevo</td>
+                                    <td class="table-primary text-primary">En proceso</td>
+                                    <td class="table-danger">Abandonado</td>
+                                    <td class="table-success text-success">Finalizado</td>
+                                    <td class="table-dark">Anulado</td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                            &nbsp; --> Estado de ficha por fila
                         </ol>
 
 <!--<label class="input-group-text" for="selectPage">Page</label>
@@ -32,7 +45,7 @@ require('header.php');
   <?php include("patientderivepage.php");?>
 </div>
 <div class="table-responsive">
-  <table class="table table-striped table-sm table-hover ">
+  <table class="table table-sm table-hover ">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -162,25 +175,29 @@ function insert(id, val){
 function autorization(ch, page) {
   //var ch=$(this).attr('hc');
   Stop();
-  if (confirm("¿Estas seguro de autorizar?")) {
-    $.ajax({
+  $.ajax({
 
-         url:"../include/i_clinichistory.php",
-         method:"POST",
-         data: {ch:ch},
-         success:function(data)
-         {
-            if(data=='yes'){
-              PatientDerivative(page);
-              alert('Se autorizó la ficha');
-              //location.reload();
-
-            }else{
-              alert(data);
-            }
-         }
-    });
-  }
+       url:"../include/i_clinichistory.php",
+       method:"POST",
+       data: {ch:ch},
+       success:function(data)
+       {
+          if(data=='yes'){
+            PatientDerivative(page);
+            //alert('Se autorizó la ficha');
+            //location.reload();
+            Swal.fire({
+              icon: 'success',
+              title: '¡Autorizado!',
+              html: 'Se autorizó la ficha.',
+              showConfirmButton: false,
+              timer: 1600
+            });
+          }else{
+            alert(data);
+          }
+       }
+  });
 }
 $(document).ready(function(){
       /*$('.btn_autorization').click(function(){

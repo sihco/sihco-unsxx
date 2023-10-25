@@ -1,5 +1,7 @@
 <?php
-
+function myhash9($k) {
+	return strtoupper(substr(myhash($k), 0, 9));
+}
 function myshorthash($k) {
 	return hash('sha1',$k);
 }

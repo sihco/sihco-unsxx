@@ -25,7 +25,6 @@
 <script src="../assets/graphic/jquery-3.5.1.min.js"></script>
 <script src="../assets/graphic/chart.js"></script>
 
-<script src="../assets/graphic/sweetalert2.min.js"></script>
 </body>
 </html>
 <script language="JavaScript" src="../sha256.js"></script>
@@ -88,10 +87,24 @@ if($('#passwordn1').val() == $('#passwordo').val()){
 }
 }
 
-
-
 });
 
+//regenerar qr
+$('#qr_button').click(function(){
+  $.ajax({
+
+       url:"../include/i_qr.php",
+       success:function(data){
+         $('#idqr').html(data);
+
+         if(data='<img src="../include/qr.php" alt="QR Code" class="w-100">'){
+           alert('yes');
+         }else{
+           alert(data);
+         }
+       }
+  });
+});
 
 });
 </script>

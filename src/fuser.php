@@ -573,7 +573,7 @@ function DBNewUser($param, $c=null, $import=false){
 	if($updatetime <= 0)
 		$updatetime=$t;
 
-	if ($type != "admin" && $type != "teacher" && $type != "admission" && $type != "chiefclinics")
+	if ($type != "admin" && $type != "teacher" && $type != "admission" && $type != "chiefclinics" && $type != "nursing")
 		$type = "student";
 	if ($type == "admin") $changepass = "t";
 	if ($enabled != "f") $enabled = "t";

@@ -76,7 +76,7 @@ function DBNewClinichistory($param, $c=null, $authorized=false){
 
 	$teacherid=0;
 
-	$typei['updatetime']=1;
+	$typei['updatetime']=-1;
 	$typei['idre']=-1;
 	$typei['idp']=-1;
 	$typei['idpa']=-1;
@@ -113,6 +113,7 @@ function DBNewClinichistory($param, $c=null, $authorized=false){
 			}
 		}
 	}
+
 	$t = time();
 	if($updatetime <= 0)
 		$updatetime=$t;
@@ -142,7 +143,7 @@ function DBNewClinichistory($param, $c=null, $authorized=false){
 		DBExec($c, $sql, "DBNewClinichistory(insert)");
 		LOGLevel ("new clinic history $idre",2);
 	}else{
-		if($updatetime>$a['updatetime']){
+		if($updatetime>=$a['updatetime']){
 			$ret=2;
 			$idre=$a['remissionid'];
 

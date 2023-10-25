@@ -411,6 +411,7 @@ function computeHASH()
           		<option <?php if(isset($u)) if($u["usertype"] == "teacher") echo "selected"; ?> value="teacher">Docente</option>
           		<option <?php if(isset($u)) if($u["usertype"] == "student") echo "selected"; ?> value="student">Estudiante</option>
           		<option <?php if(isset($u)) if($u["usertype"] == "chiefclinics") echo "selected"; ?> value="chiefclinics">Jefe de Clínicas</option>
+          		<option <?php if(isset($u)) if($u["usertype"] == "nursing") echo "selected"; ?> value="nursing">Enfermeria</option>
 
 
           		  </select>

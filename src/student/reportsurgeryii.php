@@ -77,293 +77,167 @@ if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
   float: right;
 }
 
+.row{
+  width: 100%;
+  height: auto;
+}
+.col-1{
+  width: 7.825%;
+  height: auto;
+  display: inline-block;
+}
+.col-2{
+  width: 16.2%;
+  height: auto;
+  display: inline-block;
+}
+.col-3{
+  width: 24.58%;
+  height: auto;
+  display: inline-block;
+}
+.col-4{
+  width: 32.96%;
+  height: auto;
+  display: inline-block;
+}
+.col-5{
+  width: 41.34%;
+  height: auto;
+  display: inline-block;
+}
+.col-6{
+  width: 49.7%;
+  height: auto;
+  display: inline-block;
+}
+.col-7{
+  width: 58.1%;
+  height: auto;
+  display: inline-block;
+}
+.col-8{
+  width: 66.48%;
+  height: auto;
+  display: inline-block;
+}
+.col-9{
+  width: 74.8%;
+  height: auto;
+  display: inline-block;
+}
+.col-10{
+  width: 83.2%;
+  height: auto;
+  display: inline-block;
+}
+.col-11{
+  width: 91.6%;
+  height: auto;
+  display: inline-block;
+}
+.col-12{
+  width: 100%;
+  height: auto;
+  display: inline-block;
+}
+.table-info{
+  background-color: #ccf2f5;
+}
+.text-secondary{
+  color: #646B6C;
+}
 
+table {
+   border: 1px solid #000;
+   border-collapse: collapse;
+}
+th, td {
+   border: 1px solid #000;
+   padding: 0.1em;
+}
 </style>
   </head>
   <body>
-
-    <div class="container">
-      <?php
-      $dir='../images/';
-      ?>
-      <div align="center" class="cabezera titulo">
-        <font SIZE=4><b>
-          Ficha Clinica de Cirugia Bucal II
-
-        </b></font>
+    <div class="row">
+      <div class="col-6" align="left">
+        <i>UNIVERSIDAD NACIONAL "SIGLO XX"</i>
       </div>
-
-      <div style="clear:both;"></div>
-      <div class="idfolio">
-        <div class="" style="padding-right: 135px;">
-          N. DE FICHA: <?php
-          if(isset($pat) && $pat["surgeryiiid"]!="")
-            echo $pat["surgeryiiid"];
-          ?>
-        </div>
-        <div class="">
-          Fecha/Hora:
-          <?php
-          if($pat['stdatetime']!=-1){
-            echo datetimeconv($pat['stdatetime']);
-          }else{
-            if(isset($pat['updatetime']) && $pat["updatetime"]!="")
-              echo datetimeconv($pat['updatetime']);
-            else
-              echo ".....................................";
-          }
-          ?>
-        </div>
-      </div>
-      <div style="clear:both;"></div>
-      <div>
-        <div class="left">
-          <b>ANAMNESIS</b>
-        </div>
-      </div>
-      <div style="clear:both;"></div>
-      <br>
-      <div class="">
-        <div class="left">
-          <?php
-          $name="Nombres y Apellidos:";
-          $size=0;
-          if(isset($pat) && $pat["patientname"]){
-              $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientname"]." ".$pat["patientfirstname"]." ".$pat["patientlastname"];
-              echo $name;
-          }else{
-            echo $name."...................................................................................................";
-          }
-          ?>
-        </div>
-      </div>
-
-      <div style=" clear: both;"></div>
-      <div class="">
-        <style media="screen">
-          .dir{
-            display: inline-block;
-            width: 50%;
-            float: left;
-          }
-          .loc{
-            display: inline-block;
-            width: 31%;
-            float: left;
-          }
-        </style>
-
-
-        <div align="left" class="loc">
-          <?php
-          $name="Sexo:";
-          if(isset($pat) && $pat["patientgender"]){
-            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientgender"];
-            echo $name;
-          }else{
-            echo $name.".........................................";
-          }
-          ?>
-        </div>
-        <div align="left" class="loc">
-          <?php
-          $name="Edad:";
-          if(isset($pat) && $pat["patientage"]){
-            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientage"];
-            echo $name;
-          }else{
-            echo $name.".........................................";
-          }
-          ?>
-        </div>
-        <div align="left" class="loc">
-          <?php
-          $name="Domicilio:";
-          if(isset($pat) && $pat["patientlocation"]){
-            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientlocation"];
-            echo $name;
-          }else{
-            echo $name."...............................................";
-          }
-          ?>
-        </div>
-
-      </div>
-      <div style=" clear: both;"></div>
-      <div class="">
-        <style media="screen">
-          .edad{
-            display: inline-block;
-            float: left;
-            width: 15%;
-          }
-          .pro{
-            display: inline-block;
-            float: left;
-            width: 40%;
-          }
-        </style>
-        <div align="left" class="loc">
-
-          <?php
-          $name="Telf:";
-          if(isset($pat) && $pat["patientphone"]){
-            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientphone"];
-            echo $name;
-          }else{
-            echo $name."...........................................";
-          }
-          ?>
-        </div>
-        <div align="left" class="loc">
-          <?php
-          $name="Natural de:";
-          if(isset($pat) && $pat["patientprovenance"]){
-            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientprovenance"];
-            echo $name;
-          }else{
-            echo $name."....................................";
-          }
-          ?>
-        </div>
-        <div align="left" class="loc">
-          <?php
-          $name="Ocupacion:";
-          if(isset($pat) && $pat["patientoccupation"]){
-            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientoccupation"];
-            echo $name;
-          }else{
-            echo $name."..............................................";
-          }
-          ?>
-        </div>
-      </div>
-      <div style=" clear: both;"></div>
-      <div class="">
-        <style media="screen">
-        .tres2{
-          display: inline-block;
-          float: left;
-          width: 20%;
-        }
-        .grado{
-          display: inline-block;
-          float: left;
-          width: 40%;
-        }
-        .nac{
-          display: inline-block;
-          float: left;
-          width: 28%;
-        }
-        </style>
-      </div>
-    </div>
-    <div style=" clear: both;"></div>
-    <br>
-    <div class="">
-      <div class="left">
-        <b>ANTECEDENTES MEDICOS GENERALES</b>
+      <div class="col-6" align="right">
+        <i>UNIVERSIDAD NACIONAL "SIGLO XX"</i>
       </div>
     </div>
     <br>
-    <br>
-    <div class="">
-      <table width="100%" border=1>
-        <tr>
-          <td>ENFERMEDAD</td>
-          <td>SI</td>
-          <td>NO</td>
-          <td>OBSERVACIONES</td>
-        </tr>
-      <?php
-      $a = array('Cardiopatías', 'Fiebre Reumática', 'Artritis', 'Tuberculosis', 'Silicosis',
-          'Epilepsia', 'Hepatitis', 'Diabetes', 'Hipertension Arterial', 'Alergias', 'Asma', 'Embarazo',
-          'Habitos / vicios', 'Recibe tratamiento Medico');
-      $st=false;
-      if(isset($pat["patientgmh"])){
-          $p=cleanpatientgmh($pat["patientgmh"]);
-          $st=true;
-      }
-      for ($i=0; $i < count($a); $i++) {
-        echo "<tr>";
-        echo "<td>".$a[$i]."</td>";
-
-        if ($st) {
-          if ($p[$i]["status"]=="true") {
-            echo "<td></td><td><span class=\"check\">&nbsp; &nbsp;</span> </td>";
-          }else {
-            echo "<td><span class=\"check\">&nbsp; &nbsp;</span></td><td></td> ";
-          }
-          echo "<td>".$p[$i]["obs"]."</td>";
-        }else{
-          echo "<td></td><td></td><td></td>";
-        }
-        echo "</tr>";
-      }
-      ?>
-      </table>
+    <div class="row">
+      <div class="col-12" align="center">
+        <b>FICHA CLINICA DE CIRUGIA BUCAL II</b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" align="right">
+        N. DE FICHA: <?php
+        if(isset($pat) && $pat["surgeryiiid"]!="")
+          echo $pat["surgeryiiid"];
+        ?>
+      </div>
     </div>
     <br>
-
-    <div style=" clear: both;"></div>
-    <div class="">
-      <div class="">
-
+    <div class="row">
+      <div class="col-8">
         <?php
-        $name="Consultas y tratamientos odontologicos anteriores:";
-        if(isset($pat)&& $pat["lastconsult"]!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["lastconsult"];
-
-          echo $name;
+        $name="Nombres y Apellidos:";
+        $size=0;
+        if(isset($pat) && $pat["patientname"]){
+            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientname"]." ".$pat["patientfirstname"]." ".$pat["patientlastname"];
+            echo $name;
         }else{
-          echo $name.".................................................................................................";
-          echo "<br>";
-          echo "..................................................................................................................................................................................";
+          echo $name."...................................................................................................";
         }
         ?>
       </div>
-      <div class="">
-
+      <div class="col-4">
         <?php
-        $name="Motivo de la consulta:";
-        if(isset($pat)&& $pat["motconsult"]!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["motconsult"];
-
+        $name="Edad:";
+        if(isset($pat) && $pat["patientage"]){
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientage"];
           echo $name;
         }else{
-          echo $name."..............................................................................................................................................";
-          echo "<br>";
-          echo "..................................................................................................................................................................................";
-        }
-        ?>
-      </div>
-      <div class="">
-
-        <?php
-        $name="Estado general del paciente:";
-        if(isset($pat)&& $pat["generalstatus"]!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["generalstatus"];
-
-          echo $name;
-        }else{
-          echo $name.".....................................................................................................................................";
-          echo "<br>";
-          echo "..................................................................................................................................................................................";
+          echo $name.".........................................";
         }
         ?>
       </div>
     </div>
-    <div style=" clear: both;"></div>
-    <br>
-    <div class="">
-      <div class="left">
-        <b>EXAMEN CLINICO</b>
+    <div class="row">
+      <div class="col-12">
+        <ol start="1">
+          <li>
+            Estado general del paciente:
+            <?php
+            $msg="";
+            if(isset($pat["generalstatus"])&& trim($pat["generalstatus"])!='') $msg .= $pat["generalstatus"];
+            else $msg.="...................................................................................................";
+            echo ucfirst($msg);
+            ?>
+          </li>
+          <li>
+            Antecedentes psicotraumáticos del paciente:
+            <?php
+            $msg="";
+            if(isset($pat["surgeryiidisease"])&& trim($pat["surgeryiidisease"])!='') $msg .= $pat["surgeryiidisease"].'</span>';
+            else $msg.="...................................................................................................";
+            echo ucfirst($msg);
+            ?>
+          </li>
+        </ol>
       </div>
     </div>
-    <div style=" clear: both;"></div>
-    <div class="">
-      <b>EXTRAORAL</b>
+    <div class="row">
+      <div class="col-12">
+        <b>I. EXAMEN CLINICO</b>
+      </div>
+      <div class="col-12">
+        <b>EXTRAORAL</b>
+      </div>
     </div>
     <br>
     <div class="">
@@ -680,474 +554,280 @@ if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
     </div>
 
     <div style=" clear: both;"></div>
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <b>II. EXAMENES COMPLEMENTARIOS</b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <?php
+        $msg="";
+        if($pat["exam"] == 'periapical'){
+          $msg.='<span class="text-secondary">';
+          $msg.= "<u>RX PERIAPICAL</u>&nbsp;Pieza:";
+          if(isset($pat['pieza'])&& $pat['pieza']!='') $msg.= '&nbsp;'.$pat['pieza'].'&nbsp;';
+          else $msg.= '&nbsp;...........&nbsp;';
+          $msg.='</span>';
+        } else $msg.= "RX PERIAPICAL&nbsp;Pieza:&nbsp;...........&nbsp;";
+        $msg.="&nbsp;";
+        if($pat["exam"] == 'oclusal'){
+          $msg.='<span class="text-secondary">';
+          $msg.= "<u>RX OCLUSAL</u>&nbsp;Pieza:";
+          if(isset($pat['pieza'])&& $pat['pieza']!='') $msg.= '&nbsp;'.$pat['pieza'].'&nbsp;';
+          else $msg.= '&nbsp;...........&nbsp;';
+          $msg.='</span>';
+        } else $msg.= "RX OCLUSAL&nbsp;Pieza:&nbsp;...........&nbsp;";
+        $msg.="&nbsp;";
+        if($pat["exam"] == 'panoramico'){
+          $msg.='<span class="text-secondary">';
+          $msg.= "<u>RX PANORAMICO</u>&nbsp;Pieza:";
+          if(isset($pat['pieza'])&& $pat['pieza']!='') $msg.= '&nbsp;'.$pat['pieza'].'&nbsp;';
+          else $msg.= '&nbsp;...........&nbsp;';
+          $msg.='</span>';
+        } else $msg.= "RX PANORAMICO&nbsp;Pieza:&nbsp;...........&nbsp;";
+        $msg.="&nbsp;";
+        /*
+        if($pat["exam"] == 'otros'&& $pat['pieza']!=''){
+          $msg.='<span class="text-secondary">';
+          $msg.= "<u>Otros</u>&nbsp;Pieza:";
+          if(isset($pat['pieza'])) $msg.= '&nbsp;'.$pat['pieza'].'&nbsp;';
+          else $msg.= '&nbsp;...........&nbsp;';
+          $msg.='</span>';
+        } else $msg.= "Otros&nbsp;Pieza:&nbsp;...........&nbsp;";*/
+
+        echo $msg;
+        ?>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <b>III. DIAGNOSTICO DEFINITIVO</b>
+        <br>
+        <?php
+        $name="";
+        if(isset($pat) && $pat['surgeryiidiagnosis']!=""){
+          $name.=$pat['surgeryiidiagnosis'];
+
+          echo $name;
+        }else{
+          echo $name."...........................................................................................................................................................................";
+        }
+        ?>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <b>IV. TRATAMIENTO</b>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <ol type="a">
+          <li>
+            QUIRURGICO:&nbsp;&nbsp;&nbsp;
+            <?php
+            if(isset($pat['treatment']['quirurgico'])&& $pat['treatment']['quirurgico']=='true') echo "Si";
+            elseif (isset($pat['treatment']['quirurgico'])&& $pat['treatment']['quirurgico']=='false') echo "No";
+            else echo 'Si ()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No ()';
+            ?>
+          </li>
+          <li>
+            MEDICO FARMACOLOGICO:&nbsp;&nbsp;&nbsp;
+            <?php
+            if(isset($pat['treatment']['farmacologico'])&& $pat['treatment']['farmacologico']=='true') echo "Si";
+            elseif(isset($pat['treatment']['farmacologico'])&& $pat['treatment']['farmacologico']=='false') echo "No";
+            else echo 'Si ()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No ()';
+            ?>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <font size="2">
+        <table border="1">
+          <thead>
+             <th scope="col">Tecnica Anestesia</th>
+             <th scope="col">Autorizado</th>
+             <th scope="col">Despachado</th>
+          </thead>
+          <tbody>
+              <?php
+              $msg="";
+              if(isset($pat['anestesia']['spix'])&& $pat['anestesia']['spix']=='true'){
+                $msg.='<tr class="table-info text-secondary">';
+              }else{
+                $msg.='<tr>';
+              }
+              $msg.='<td>SPIX</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['spixteacher'])&&$pat['anestesia']['spixteacher']!='*'){
+                $data=explode('*', $pat['anestesia']['spixteacher']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['spixnursing'])&&$pat['anestesia']['spixnursing']!='*'){
+                $data=explode('*', $pat['anestesia']['spixnursing']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='</tr>';
+
+              if(isset($pat['anestesia']['mentoniana'])&& $pat['anestesia']['mentoniana']=='true'){
+                $msg.='<tr class="table-info text-secondary">';
+              }else{
+                $msg.='<tr>';
+              }
+              $msg.='<td>MENTONIANA</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['mentonianateacher'])&&$pat['anestesia']['mentonianateacher']!='*'){
+                $data=explode('*', $pat['anestesia']['mentonianateacher']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['mentoniananursing'])&&$pat['anestesia']['mentoniananursing']!='*'){
+                $data=explode('*', $pat['anestesia']['mentoniananursing']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='</tr>';
+
+              if(isset($pat['anestesia']['local'])&& $pat['anestesia']['local']=='true'){
+                $msg.='<tr class="table-info text-secondary">';
+              }else{
+                $msg.='<tr>';
+              }
+              $msg.='<td>LOCAL</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['localteacher'])&&$pat['anestesia']['localteacher']!='*'){
+                $data=explode('*', $pat['anestesia']['localteacher']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['localnursing'])&&$pat['anestesia']['localnursing']!='*'){
+                $data=explode('*', $pat['anestesia']['localnursing']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='</tr>';
+
+              if(isset($pat['anestesia']['infraorbitaria'])&& $pat['anestesia']['infraorbitaria']=='true'){
+                $msg.='<tr class="table-info text-secondary">';
+              }else{
+                $msg.='<tr>';
+              }
+              $msg.='<td>INFRAORBITARIA</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['infraorbitariateacher'])&&$pat['anestesia']['infraorbitariateacher']!='*'){
+                $data=explode('*', $pat['anestesia']['infraorbitariateacher']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['infraorbitarianursing'])&&$pat['anestesia']['infraorbitarianursing']!='*'){
+                $data=explode('*', $pat['anestesia']['infraorbitarianursing']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='</tr>';
+
+              if(isset($pat['anestesia']['tuberositaria'])&& $pat['anestesia']['tuberositaria']=='true'){
+                $msg.='<tr class="table-info text-secondary">';
+              }else{
+                $msg.='<tr>';
+              }
+              $msg.='<td>TUBEROSITARIA</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['tuberositariateacher'])&&$pat['anestesia']['tuberositariateacher']!='*'){
+                $data=explode('*', $pat['anestesia']['tuberositariateacher']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['tuberositarianursing'])&&$pat['anestesia']['tuberositarianursing']!='*'){
+                $data=explode('*', $pat['anestesia']['tuberositarianursing']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='</tr>';
+
+              if(isset($pat['anestesia']['carrea'])&& $pat['anestesia']['carrea']=='true'){
+                $msg.='<tr class="table-info text-secondary">';
+              }else{
+                $msg.='<tr>';
+              }
+              $msg.='<td>CARREA</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['carreateacher'])&&$pat['anestesia']['carreateacher']!='*'){
+                $data=explode('*', $pat['anestesia']['carreateacher']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='<td>';
+              if(isset($pat['anestesia']['carreanursing'])&&$pat['anestesia']['carreanursing']!='*'){
+                $data=explode('*', $pat['anestesia']['carreanursing']);
+                $infouser=DBUserInfo($data[0]);
+                $time=trim($data[1]);
+                $msg.=$infouser['userfullname'].'<br>';
+                $msg.=datetimeconv($time);
+              }
+              $msg.='</td>';
+              $msg.='</tr>';
+
+
+              echo $msg;
+              ?>
+          </tbody>
+        </table>
+        </font>
+      </div>
+    </div>
+
+
     <!--pagina 2-->
     <div style="page-break-before: always;"></div>
 
-    <div class="left">
-      <div class="">
-        ODONTOGRAMA
-      </div>
-    </div>
-
-    <br>
-
-    <br>
-    <style media="screen">
-      .separador{
-        width: 40px;
-        height: 75px;
-        display: inline-block;
-      }
-      .separador2{
-        width: 117px;
-        height: 75px;
-        display: inline-block;
-      }
-      .pieza{
-        width: 35px;
-        height: 75px;
-        display: inline-block;
-
-      }
-      .cuadro{
-        display: inline-block;
-        width: 49%;
-        height: 100px;
-
-      }
-      .t{
-        clear:float;
-        float: left;
-        margin-top: 25px;
-        margin-left: 9px;
-      }
-      .f{
-        clear:float;
-        float: left;
-        margin-top: 25px;
-        /*margin-left: 9px;*/
-      }
-      .l{
-        clear:float;
-        float: left;
-        margin-top: 34px;
-      }
-      .c{
-
-        clear:float;
-        float: left;
-        margin-top: 34px;
-        margin-left: 9px;
-      }
-      .r{
-        clear:float;
-        float: left;
-        margin-top: 34px;
-        margin-left: 24px;
-      }
-      .b{
-        clear:float;
-        float: left;
-        margin-top: 47px;
-        margin-left: 9px;
-      }
-
-      .st{
-        clear:float;
-        float: left;
-        margin-top: 25px;
-        margin-left: 9px;
-      }
-      .sl{
-        clear:float;
-        float: left;
-        margin-top: 34px;
-      }
-      .sc{
-
-        clear:float;
-        float: left;
-        margin-top: 34px;
-        margin-left: 9px;
-      }
-      .sr{
-        clear:float;
-        float: left;
-        margin-top: 34px;
-        margin-left: 24px;
-      }
-      .sb{
-        clear:float;
-        float: left;
-        margin-top: 47px;
-        margin-left: 9px;
-      }
-
-      .number{
-        margin-left: 10px;
-        clear:float;
-        float: left;
-      }
-    </style>
-    <br>
-    <div style="clear:both;">
-    <?php
-    $matriz=array(array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f')),
-                  array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f')),
-                  array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f')),
-                  array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f')),
-                  array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f')),
-                  array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f')),
-                  array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f')),
-                  array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f')),
-                  array(array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'),array('t','l','c','r','b','f'))
-                );
-    //echo $matriz[8][8][4];
-    //para recuperar
-    $draw="";
-    if(isset($pat) && $pat["draw"]!=""){
-      $conf=globalconf();
-      $draw=trim(decryptData($pat["draw"], $conf["key"]));
-      //echo $draw;
-      $ma=explode('}',$draw);
-      for($i=0;$i<count($ma)-1; $i++){
-        $fila=explode('[',$ma[$i]);
-        $r=intval(substr($fila[0],1,1));
-        $c=intval(substr($fila[0],2,1));
-        $data=explode(']',$fila[1]);
-        $data=explode(',',$data[0]);
-        if(isset($data[0])&&validodontogram($data[0],'t')) $matriz[$r][$c][0]=$data[0];
-        if(isset($data[1])&&validodontogram($data[1],'l')) $matriz[$r][$c][1]=$data[1];
-        if(isset($data[2])&&validodontogram($data[2],'c')) $matriz[$r][$c][2]=$data[2];
-        if(isset($data[3])&&validodontogram($data[3],'r')) $matriz[$r][$c][3]=$data[3];
-        if(isset($data[4])&&validodontogram($data[4],'b')) $matriz[$r][$c][4]=$data[4];
-        if(isset($data[5])&&validodontogram($data[5],'')) $matriz[$r][$c][5]=$data[5];
-      }
-    }
-
-    for ($i=1; $i <= 2 ; $i++) {
-      for ($j=8; $j >= 1 ; $j--) {
-          echo "<div class=\"pieza\">";
-          $jj=$j;
-          if($i==1)
-            echo "  <span class=\"number\">".$i.$j."</span>";
-          else{
-            echo "  <span class=\"number\">".$i.(($j-9)*(-1))."</span>";
-            $jj=(($j-9)*(-1));
-          }
-
-
-          echo "  <img class=\"t\" src=\"".getPieza($matriz[$i][$jj][0].".png")."\" alt=\"\">";
-          echo "  <img class=\"l\" src=\"".getPieza($matriz[$i][$jj][1].".png")."\" alt=\"\">";
-          echo "  <img class=\"c\" src=\"".getPieza($matriz[$i][$jj][2].".png")."\" alt=\"\">";
-          echo "  <img class=\"r\" src=\"".getPieza($matriz[$i][$jj][3].".png")."\" alt=\"\">";
-          echo "  <img class=\"b\" src=\"".getPieza($matriz[$i][$jj][4].".png")."\" alt=\"\">";
-          if($matriz[$i][$jj][5]!='f')
-            echo "  <img class=\"f\" src=\"".getPieza($matriz[$i][$jj][5].".png")."\" alt=\"\">";
-
-          echo "</div>\n";
-      }
-      if($i==1)
-        echo "<div class=\"separador\"></div>\n";
-    }
-    echo "<div style=\"clear:both;\"></div>";
-    echo "<div class=\"separador2\"></div>";
-    for ($i=5; $i <= 6 ; $i++) {
-      for ($j=5; $j >= 1 ; $j--) {
-          echo "<div class=\"pieza\">";
-          $jj=$j;
-          if($i==5)
-            echo "  <span class=\"number\">".$i.$j."</span>";
-          else{
-            echo "  <span class=\"number\">".$i.(($j-6)*(-1))."</span>";
-            $jj=(($j-6)*(-1));
-          }
-
-          echo "  <img class=\"st\" src=\"".getPieza($matriz[$i][$jj][0].".png")."\" alt=\"\">";
-          echo "  <img class=\"sl\" src=\"".getPieza($matriz[$i][$jj][1].".png")."\" alt=\"\">";
-          echo "  <img class=\"sc\" src=\"".getPieza($matriz[$i][$jj][2].".png")."\" alt=\"\">";
-          echo "  <img class=\"sr\" src=\"".getPieza($matriz[$i][$jj][3].".png")."\" alt=\"\">";
-          echo "  <img class=\"sb\" src=\"".getPieza($matriz[$i][$jj][4].".png")."\" alt=\"\">";
-          if($matriz[$i][$jj][5]!='f')
-            echo "  <img class=\"f\" src=\"".getPieza($matriz[$i][$jj][5].".png")."\" alt=\"\">";
-
-          echo "</div>\n";
-      }
-      if($i==5)
-        echo "<div class=\"separador\"></div>\n";
-    }
-    echo "<div style=\"clear:both;\"></div>";
-    echo "<div class=\"separador2\"></div>";
-    for ($i=8; $i >= 7 ; $i--) {
-      for ($j=5; $j >= 1 ; $j--) {
-          echo "<div class=\"pieza\">";
-          $jj=$j;
-          if($i==8)
-            echo "  <span class=\"number\">".$i.$j."</span>";
-          else{
-            echo "  <span class=\"number\">".$i.(($j-6)*(-1))."</span>";
-            $jj=(($j-6)*(-1));
-          }
-
-          echo "  <img class=\"st\" src=\"".getPieza($matriz[$i][$jj][0].".png")."\" alt=\"\">";
-          echo "  <img class=\"sl\" src=\"".getPieza($matriz[$i][$jj][1].".png")."\" alt=\"\">";
-          echo "  <img class=\"sc\" src=\"".getPieza($matriz[$i][$jj][2].".png")."\" alt=\"\">";
-          echo "  <img class=\"sr\" src=\"".getPieza($matriz[$i][$jj][3].".png")."\" alt=\"\">";
-          echo "  <img class=\"sb\" src=\"".getPieza($matriz[$i][$jj][4].".png")."\" alt=\"\">";
-          if($matriz[$i][$jj][5]!='f')
-            echo "  <img class=\"f\" src=\"".getPieza($matriz[$i][$jj][5].".png")."\" alt=\"\">";
-          echo "</div>\n";
-      }
-      if($i==8)
-        echo "<div class=\"separador\"></div>\n";
-    }
-    echo "<div style=\"clear:both;\"></div>";
-    for ($i=4; $i >= 3 ; $i--) {
-      for ($j=8; $j >= 1 ; $j--) {
-          echo "<div class=\"pieza\">";
-          $jj=$j;
-          if($i==4)
-            echo "  <span class=\"number\">".$i.$j."</span>";
-          else{
-            echo "  <span class=\"number\">".$i.(($j-9)*(-1))."</span>";
-            $jj=(($j-9)*(-1));
-          }
-
-          echo "  <img class=\"t\" src=\"".getPieza($matriz[$i][$jj][0].".png")."\" alt=\"\">";
-          echo "  <img class=\"l\" src=\"".getPieza($matriz[$i][$jj][1].".png")."\" alt=\"\">";
-          echo "  <img class=\"c\" src=\"".getPieza($matriz[$i][$jj][2].".png")."\" alt=\"\">";
-          echo "  <img class=\"r\" src=\"".getPieza($matriz[$i][$jj][3].".png")."\" alt=\"\">";
-          echo "  <img class=\"b\" src=\"".getPieza($matriz[$i][$jj][4].".png")."\" alt=\"\">";
-          if($matriz[$i][$jj][5]!='f')
-            echo "  <img class=\"f\" src=\"".getPieza($matriz[$i][$jj][5].".png")."\" alt=\"\">";
-          echo "</div>\n";
-      }
-      if($i==4)
-        echo "<div class=\"separador\"></div>\n";
-    }
-    ?>
-    <div style="clear:both;"></div>
-    <style media="screen">
-      .borde{
-        border-color: gray;
-        border-width: 1px;
-        border-style: dotted;
-      }
-    </style>
-
-
-    <?php
-
-    if(isset($pat)&& $pat["description"]){
-      $pat["description"] = str_replace("\n", "*", $pat["description"]);
-      $datad=explode('*',$pat["description"]);
-      //echo $pat["description"];
-
-      $len=count($datad)-1;
-      if($len!=0){
-        $len1=$len/3;
-        echo "<div style=\"display: inline-block;width:33%;\" class=\"borde\">";
-        for($i=0;$i<$len1;$i++){
-          echo "&nbsp;&nbsp;".$datad[$i]."<br>";
-        }
-        echo "</div>";
-        echo "<div style=\"display: inline-block;width:33%;\" class=\"borde\">";
-        for ($i=$i; $i < $len1*2; $i++) {
-          echo "&nbsp;&nbsp;".$datad[$i]."<br>";
-        }
-        echo "</div>";
-        echo "<div style=\"display: inline-block;width:33%;\" class=\"borde\">";
-        for ($i=$i; $i < $len; $i++) {
-          echo "&nbsp;&nbsp;".$datad[$i]."<br>";
-        }
-        echo "</div>";
-      }else{
-        echo $pat["description"];
-      }
-    }
-    ?>
-    <br>
-    <div class="">
-
-      <?php
-      $name="HISTORIA DE LA ENFERMEDAD ACTUAL:";
-      if(isset($pat)){
-        $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["surgeryiidisease"];
-
-        echo $name;
-      }else{
-        echo $name."...................................................................................................";
-      }
-      ?>
-    </div>
-    <br>
-    <div class="">
-      <b>EXAMENES COMPLEMENTARIOS</b>
-    </div>
-    <div class="">
-      <?php
-      $name="";
-      if(isset($pat) &&isset($pat['exam'])&&isset($pat['pieza'])&& $pat['exam']!=""&&$pat['pieza']!=""){
-        $name.="RX ".strtoupper($pat["exam"])." PIEZA:".$pat['pieza'];
-
-        echo $name;
-      }else{
-        echo $name."RX PERIAPICAL:......:PIEZA................RX OCLUSAL:......:PIEZA........RX PANORAMICO:.......:";
-      }
-      ?>
-
-    </div>
-    <div class="">
-      <b>DIAGNOSTICO</b>
-    </div>
-    <div class="">
-      <?php
-      $name="";
-      if(isset($pat) && $pat['surgeryiidiagnosis']!=""){
-        $name.=$pat['surgeryiidiagnosis'];
-
-        echo $name;
-      }else{
-        echo $name."...........................................................................................................................................................................";
-      }
-      ?>
-    </div>
-    <br>
-    <hr>
-    <div class="">
-      <div class="">
-        <b>TRATAMIENTO</b>
-      </div>
-      <div class="">
-        <?php
-        $name="";
-        if(isset($pat) &&isset($pat['treatment']) && $pat['treatment']!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".strtoupper($pat["treatment"]);
-          echo $name;
-        }else{
-
-          echo $name."a. SINTOMATICO..............................................................................................................................................<br>";
-          echo $name."b. ETIOLOGICA..............................................................................................................................................<br>";
-          echo $name."c. QUIRURGICO..............................................................................................................................................<br>";
-          echo $name."d. MEDICO FARMACOLOGICO..............................................................................................................................................<br>";
-
-        }
-        ?>
-      </div>
-
-    </div>
-    <br>
-    <div class="">
-      <style media="screen">
-      .anes1{
-        width: 30%;
-        height: 75px;
-        display: inline-block;
-        padding-left: 100px;
-
-      }
-      .anes2{
-        width: 50%;
-        height: 75px;
-        display: inline-block;
-      }
-      </style>
-      <div class="anes1">
-        <br><br><br>
-        ANESTESIAS
-      </div>
-      <div class="anes2">
-        <?php
-        $name="SPIX:";
-        if(isset($pat) && isset($pat['anestesia']) && $pat['anestesia']!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-          if($pat['anestesia']=='spix')
-            $name.="Si";
-          echo $name;
-        }else{
-          echo $name."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...........................................";
-        }
-        ?>
-        <br>
-        <?php
-        $name="MENTONIANA:";
-        if(isset($pat) && isset($pat['anestesia']) && $pat['anestesia']!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-          if($pat['anestesia']=='mentoniana')
-            $name.="Si";
-          echo $name;
-        }else{
-          echo $name."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...........................................";
-        }
-        ?>
-        <br>
-        <?php
-        $name="LOCAL:";
-        if(isset($pat) && isset($pat['anestesia']) && $pat['anestesia']!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-          if($pat['anestesia']=='local')
-            $name.="Si";
-          echo $name;
-        }else{
-          echo $name."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...........................................";
-        }
-        ?>
-        <br>
-        <?php
-        $name="INFRAORBITARIA:";
-        if(isset($pat) && isset($pat['anestesia']) && $pat['anestesia']!=""){
-          $name.="&nbsp;";
-          if($pat['anestesia']=='infraorbitaria')
-            $name.="Si";
-          echo $name;
-        }else{
-          echo $name."&nbsp;...........................................";
-        }
-        ?>
-        <br>
-        <?php
-        $name="TUBEROSITARIA:";
-        if(isset($pat) && isset($pat['anestesia']) && $pat['anestesia']!=""){
-          $name.="&nbsp;&nbsp;&nbsp;";
-          if($pat['anestesia']=='tuberositoria')
-            $name.="Si";
-          echo $name;
-        }else{
-          echo $name."&nbsp;&nbsp;&nbsp;...........................................";
-        }
-        ?>
-        <br>
-        <?php
-        $name="CARREA:";
-        if(isset($pat) && isset($pat['anestesia']) && $pat['anestesia']!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-          if($pat['anestesia']=='carrea')
-            $name.="Si";
-          echo $name;
-        }else{
-          echo $name."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...........................................";
-        }
-        ?>
-        <br>
-        <?php
-        $name="GENERAL:";
-        if(isset($pat) && isset($pat['anestesia']) && $pat['anestesia']!=""){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-          if($pat['anestesia']=='general')
-            $name.="Si";
-          echo $name;
-        }else{
-          echo $name."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...........................................";
-        }
-        ?>
-      </div>
-    </div>
-    <div style=" clear: both;"></div>
-    <div class="">
-
-    </div>
-
-    <br>
     <br>
 
     <br>
@@ -1222,18 +902,8 @@ if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
       <br>
     </div>
     <br><br>
-    <div class="">
-      <style media="screen">
-        .col1{
-          display: inline-block;
-          width: 48%;
-        }
-        .punto{
-          display: inline;
-          padding-top: 0px;
-        }
-      </style>
-      <div class="col1">
+    <div class="row">
+      <div class="col-6">
         <?php
         $name="Docente:&nbsp;&nbsp;&nbsp;&nbsp;";
 
@@ -1250,7 +920,7 @@ if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
         ?>
       </div>
 
-      <div class="col1">
+      <div class="col-6">
         <?php
 
         $name="Docente:&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -1265,63 +935,44 @@ if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
         ?>
       </div>
     </div>
-    <div class="">
-      <div class="">
-        <style media="screen">
-          .col1{
-            display: inline-block;
-            width: 48%;
-          }
-          .punto{
-            display: inline;
-            padding-top: 0px;
-          }
-        </style>
-        <div class="col1">
-          <?php
-          $name="";
-          if(isset($pat['studentid']) && $pat["studentid"]){
-            $sinfo=DBUserInfo($pat['studentid']);
-            $name.=$sinfo["userfullname"];
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <?php
+        $name="";
+        if(isset($pat['studentid']) && $pat["studentid"]){
+          $sinfo=DBUserInfo($pat['studentid']);
+          $name.=$sinfo["userfullname"];
 
-            echo $name;
-          }else{
-            echo $name;
-          }
+          echo $name;
+        }else{
+          echo $name;
+        }
 
-          ?>
-        </div>
-        <div class="col1">
-          <?php
-          $name="";
-          if(isset($sinfo["userci"]) && $sinfo["userci"]){
-            $name.=$sinfo["userci"];
-            echo $name;
-          }else{
-            echo $name;
-          }
-          ?>
-        </div>
+        ?>
       </div>
-      <div class="punto">
+      <div class="col-6">
+        <?php
+        $name="";
+        if(isset($sinfo["userci"]) && $sinfo["userci"]){
+          $name.=$sinfo["userci"];
+          echo $name;
+        }else{
+          echo $name;
+        }
+        ?>
+      </div>
+      <div class="col-12" style="margin-top:-15px;">
         ...............................................................................................................................
       </div>
-      <div class="">
-        <div class="col1">
-          Apellidos y Nombres del Alumno
-        </div>
-        <div class="col1">
-          C.I.
-        </div>
+      <div class="col-6">
+        Apellidos y Nombres del Alumno
+      </div>
+      <div class="col-6">
+        C.I.
       </div>
     </div>
 <!--PAGINA 1 FIN-->
-
-<!--PAGINA 2 INICIO
-<div style="page-break-before: always;"></div>
-<h1>grover sierra</h1>-->
-
-<!--PAGINA 2 FIN-->
 
 
   </body>
@@ -1356,7 +1007,7 @@ $options->setIsHtml5ParserEnabled(true);
 //$dompdf->loadHtml($html);
 
 $dompdf->loadHtml($html);
-$dompdf->setPaper('legal');
+$dompdf->setPaper('letter');
 
 $dompdf->render();
 $type=false;

@@ -256,6 +256,27 @@ function ValidSession2() {
 	if ($tmp["userip"] != $gip) return(FALSE);
 	return(TRUE);
 }
+function ValidSession3() {
+  //si no existe usertable en session false
+  if (!isset($_SESSION["usertable3"])) return(FALSE);
+  //funcion getIP captura el ip de la maquina
+	$gip = getIP();
+	// cassiopc: sites that use multiple IP addresses to go out create a serious problem to check IPs...
+//	if(substr($_SESSION["usertable"]["userip"],0,6) != '157.92') {
+//	if ($_SESSION["usertable"]["userip"] != $gip ||
+//		$_SESSION["usertable"]["usersession"] != session_id()) return(FALSE);
+  //      } else {
+	if($_SESSION["usertable3"]["usersession"] != session_id()) return(FALSE);
+    //    }
+  //informacion de usuario a veficar...
+	$tmp = DBUserInfo($_SESSION["usertable3"]["usernumber"]);
+
+	if($tmp['usersession']=='') return(FALSE);
+	if($_SESSION["usertable3"]["usermultilogin"] == 't') return(TRUE);
+
+	if ($tmp["userip"] != $gip) return(FALSE);
+	return(TRUE);
+}
 // grava erro no arquivo de log
 function LOGError($msg) {
 	LOGLevel($msg,0,false);
@@ -450,6 +471,16 @@ function Fussion($U, $V){
         $finalArray = array_merge($finalArray, $V);
     }
     return $finalArray;
+}
+
+//funcion para saber si una cadena es booleana o no
+function strIsBool($str){
+  $str = strtolower(trim($str));
+  if($str === "true"|| $str === "false"){
+    return true;
+  }else{
+    return false;
+  }
 }
 // eof
 ?>

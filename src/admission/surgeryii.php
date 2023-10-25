@@ -1,19 +1,34 @@
-
 <?php
 require('header.php');
+
+
+if (!isset($_GET["name"])&&isset($_GET["logout"])) {
+	//
+	//para la validacion de login yes
+	if (ValidSession3())
+	  	DBLogOut($_SESSION["usertable3"]["usernumber"], $_SESSION["usertable3"]["username"]=='admin');
+  unset($_SESSION["usertable3"]);
+  ForceLoad("listadmission.php");
+}
+if(!isset($_SESSION['usertable3'])){
+  ForceLoad("listadmission.php");
+}
+
+?>
+<?php
 $fill=false;
 if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
   $id=htmlspecialchars(trim($_GET["id"]));
   $r=DBPatientRemissionSurgeryiiInfo($id);
   //$r=DBSurgeryiiInfo($id);
   if($r==null){
-    ForceLoad("index.php");
+    ForceLoad("listadmission.php");
   }
   if($r["clinicalid"]!=6)
-    ForceLoad("index.php");
+    ForceLoad("listadmission.php");
 
 }else{
-  ForceLoad("index.php");
+  ForceLoad("listadmission.php");
 }
 $pat=$r;
 ?>
@@ -150,29 +165,38 @@ $pat=$r;
 
     <?php
     //echo $pat['status'];
+		if(isset($pat['status'])&&$pat['status']=='end'){
+			echo '<div class="fixed-top mt-5 pt-2 bg-success" align="right">';
+		}else{
+			echo '<div class="fixed-top mt-5 pt-2" align="right">';
+		}
+		echo '';
+		echo '<a href="listadmission.php" class="btn btn-sm btn-secondary">Atras</a>
+		<a href="surgeryii.php?logout" class="btn btn-sm btn-primary">Cerrar mi sesión</a>';
     if($pat["teacherid"]!=0&& is_numeric($pat["teacherid"])&& $pat['authorized']=='t'&& $pat['status']=='process'){
       //inicio autorizar por qr
-      echo '<div class="fixed-top mt-5 pt-2" align="right"><button type="button" class="btn btn-outline-success btn-sm" name="local_button" onclick="readqr('.$_GET['id'].', \'endqr\')" data-bs-toggle="modal" data-bs-target="#modalqr">Finalizar <i class="fa fa-solid fa-qrcode"></i></button></div>';
+      echo '<button type="button" class="btn btn-outline-success btn-sm" name="local_button" onclick="readqr('.$_GET['id'].', \'endqr\')" data-bs-toggle="modal" data-bs-target="#modalqr">Finalizar <i class="fa fa-solid fa-qrcode"></i></button>';
       //fin autorizar por qr
     }else{
       if($pat["teacherid"]==0&& $pat['authorized']=='t'){
-        echo '<div class="fixed-top mt-5 pt-2" align="right">Autorizando</div>';
+        echo 'Autorizando';
       }else{
         if($pat["teacherid"]==0&& $pat['status']='new'){
           //inicio autorizar por qr
-          echo '<div class="fixed-top mt-5 pt-2" align="right"><button type="button" class="btn btn-outline-primary btn-sm" name="local_button" onclick="readqr('.$_GET['id'].', \'authorizeqr\')" data-bs-toggle="modal" data-bs-target="#modalqr">Autorizame <i class="fa fa-solid fa-qrcode"></i></button></div>';
+          echo '<button type="button" class="btn btn-outline-primary btn-sm" name="local_button" onclick="readqr('.$_GET['id'].', \'authorizeqr\')" data-bs-toggle="modal" data-bs-target="#modalqr">Autorizame <i class="fa fa-solid fa-qrcode"></i></button>';
           //fin autorizar por qr
         }else{
           if($pat['authorized']=='t'&& $pat['status']=='end'){
-            echo '<div class="fixed-top mt-5 pt-2 bg-success" align="right"><span class="text-white">Culminado <i class="fa fa-solid fa-check"></i></span></div>';
+            echo '<span class="text-white">Culminado <i class="fa fa-solid fa-check"></i></span>';
           }
         }
 
       }
     }
+		echo '</div>';
     ?>
+
   <div class="fixed-bottom mb-3" align="center">
-    <a href="index.php" class="btn btn-outline-secondary">Volver<i class="fa fa-solid fa-reply-all"></i></a>
     <?php
     if($pat['status']!='end'&& $pat['status']!='canceled'&& $pat['status']!='fail'){
       echo '<button type="button" id="patientregister_button" name="patientregister_button" class="btn btn-success">
@@ -345,7 +369,16 @@ $pat=$r;
     </div>
   </div>
   <div class="row mb-2">
-    
+    <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+      <div class="input-group input-group-sm">
+        <label class="input-group-text" for="lips">Labios</label>
+        <select name="lips" id="lips" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat) || $pat["dentallips"] == 'medianos') echo "selected"; ?> value="medianos">Medianos</option>
+          <option <?php if(isset($pat) && $pat["dentallips"] == 'delgados') echo "selected"; ?> value="delgados">Delgados</option>
+          <option <?php if(isset($pat) && $pat["dentallips"] == 'gruesos') echo "selected"; ?> value="gruesos">Gruesos</option>
+        </select>
+      </div>
+    </div>
     <div class="col-lg-4 col-md-4 col-sm-12 col-12">
       <div class="input-group input-group-sm">
         <label class="input-group-text" for="ulcerations">Ulceraciones</label>
@@ -1060,7 +1093,7 @@ function registerpatient(p=1){
            if(data=='yes'){
              if(p!=0)
               //alert('Se guardó los datos de la ficha clinica');
-              Swal.fire({
+							Swal.fire({
                 icon: 'success',
                 title: '¡Guardado!',
                 html: 'Se guardó los datos de la ficha clinica',
@@ -1077,9 +1110,9 @@ function registerpatient(p=1){
 
 }
 $(document).ready(function(){
-      Stop();
+      //Stop();
       $(".detail_modal").click(function(event) {
-        Stop();
+        //Stop();
         var ch=$(this).attr('ch');
         $.ajax({
              url:"../include/i_clinichistorydetail.php",

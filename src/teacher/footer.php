@@ -25,6 +25,7 @@
 <script src="../assets/graphic/jquery-3.5.1.min.js"></script>
 <script src="../assets/graphic/chart.js"></script>
 
+<script src="../assets/graphic/sweetalert2.min.js"></script>
 </body>
 </html>
 <script language="JavaScript" src="../sha256.js"></script>
