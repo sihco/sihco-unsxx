@@ -594,7 +594,7 @@ function DBAllPatientRemissionInfo($student=null, $search='', $RegistrationPag=f
 	if(is_numeric($RegistrationPag)&&is_numeric($RegistrationInitial)){
 		$sql.=" ORDER BY pa.patientadmissionid DESC LIMIT $RegistrationPag OFFSET $RegistrationInitial";
 	}else{
-		$sql.=" order by pa.patientadmissionid desc";
+		$sql.=" order by pa.patientadmissionid desc limit 500";//por default estoy limitando en 500 para un mejor manejo desarrollar esta funcionalidad
 	}
 
 	$c = DBConnect();
