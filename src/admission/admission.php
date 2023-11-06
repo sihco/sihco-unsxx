@@ -222,7 +222,7 @@ if(!isset($upreferred)){
 				  <div class="row">
 				    <div class="col-6">
 				      <label for="patientage">Edad</label><span class="text-danger">*</span>
-				      <input type="text" name="patientage" class="form-control" id="patientage" value="<?php if(isset($pat["patientage"])) echo $pat["patientage"];  ?>">
+				      <input type="number" min="0" name="patientage" class="form-control" id="patientage" value="<?php if(isset($pat["patientage"])) echo $pat["patientage"];  ?>">
 				    </div>
 				    <div class="col-6">
 				      <label for="patientprovenance">Procedencia</label><span class="text-danger">*</span>
