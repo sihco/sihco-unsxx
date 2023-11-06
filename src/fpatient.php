@@ -261,7 +261,7 @@ function DBNewPatient($param, $c=null){
 	$placebirth='';
 	$direction='';
 	$location='';
-	$age='';
+	$age=0;
 	$provenance='';
 	$phone=0;
 	$civilstatus='';
@@ -309,6 +309,7 @@ function DBNewPatient($param, $c=null){
 	$clinical=-1;
 
 	$typei['phone']=0;
+	$typei['age']=0;
 	foreach($ac1 as $key) {
 		if(isset($param[$key])) {
 			$$key = myhtmlspecialchars($param[$key]);
@@ -367,7 +368,7 @@ function DBNewPatient($param, $c=null){
 					"triagetemperature, triageheadache, triagerespiratory, triagethroat, triagegeneral, triagevaccine, ".
 					"diagnosis, studentid, studentclinicalid, studentcourseid, ".
 					"responsibleid, responsibleclinicalid, responsiblecourseid) values (".
-					"$idpa, $idp, '$direction', '$location', '$age', '$provenance', $phone, '$civilstatus', '$occupation', ".
+					"$idpa, $idp, '$direction', '$location', $age, '$provenance', $phone, '$civilstatus', '$occupation', ".
 					"'$school', '$attorney', '$gmh', '$pa', '$tr', '$tl', '$tlr', '$tll', '$bl', '$br', '$bll', '$blr', '$desc', '$draw', ".
 					"'$tongue', '$piso', '$encias', '$mucosa', '$occlusion', '$prosthesis', '$hygiene', '$lastconsultation', '$consultation', ".
 					"'$temperature', '$headache', '$respiratory', '$throat', '$general', '$vaccine', '$diagnosis', ".
@@ -404,7 +405,7 @@ function DBNewPatient($param, $c=null){
 				"triagetemperature, triageheadache, triagerespiratory, triagethroat, triagegeneral, triagevaccine, ".
 				"diagnosis, studentid, studentclinicalid, studentcourseid, ".
 				"responsibleid, responsibleclinicalid, responsiblecourseid) values (".
-				"$idpa, $idp, '$direction', '$location', '$age', '$provenance', $phone, '$civilstatus', '$occupation', ".
+				"$idpa, $idp, '$direction', '$location', $age, '$provenance', $phone, '$civilstatus', '$occupation', ".
 				"'$school', '$attorney', '$gmh', '$pa', '$tr', '$tl', '$tlr', '$tll', '$bl', '$br', '$bll', '$blr', '$desc', '$draw', ".
 				"'$tongue', '$piso', '$encias', '$mucosa', '$occlusion', '$prosthesis', '$hygiene', '$lastconsultation', '$consultation', ".
 				"'$temperature', '$headache', '$respiratory', '$throat', '$general', '$vaccine', '$diagnosis', ".
@@ -436,7 +437,7 @@ function DBNewPatient($param, $c=null){
 						"patientnationality='$nationality', patientdatebirth=$datebirth, patientplacebirth='$placebirth', updatetime=$updatetime where patientid=$idp";
 					$r = DBExec ($c, $sql, "DBNewPatient(update patient)");
 					$sql="update patientadmissiontable set patientdirection='$direction', ".
-					"patientlocation='$location', patientage='$age', patientprovenance='$provenance', ".
+					"patientlocation='$location', patientage=$age, patientprovenance='$provenance', ".
 					"patientphone='$phone', patientcivilstatus='$civilstatus', patientoccupation='$occupation', ".
 					"patientschool='$school', patientattorney='$attorney', patientgmh='$gmh', patientpa='$pa', ".
 					"tr='$tr', tl='$tl', tlr='$tlr', tll='$tll', bl='$bl', br='$br', bll='$bll', blr='$blr', description='$desc', draw='$draw', ".
