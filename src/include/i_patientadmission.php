@@ -109,11 +109,16 @@ if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patien
       $param['reclinicalid']=$userspinfo['clinicalid'];
       $param['recourseid']=$userspinfo['coursenumber'];
 
-      if($userspinfo['userid']==0){
+      $param['stid']=$userspinfo['userid'];
+      $param['stclinicalid']=$userspinfo['clinicalid'];
+      $param['stcourseid']=$userspinfo['coursenumber'];
+
+      /*if($userspinfo['userid']==0){
         $param['stid']=$userspinfo['userid'];
         $param['stclinicalid']=$userspinfo['clinicalid'];
         $param['stcourseid']=$userspinfo['coursenumber'];
       }else{
+        //esta parte se elimino
         if((isset($_SESSION['usertable2']['usernumber'])&&
           ($userspinfo=DBSpecialtyInfo($_SESSION['usertable2']['usernumber'],1,3))!=null)){
           $param['stid']=$userspinfo['userid'];
@@ -123,7 +128,8 @@ if(isset($_POST["mod"]) && isset($_POST["padmissionid"]) && isset($_POST["patien
           echo "No Tiene Privilegios Para Realizar Admisiones";
           exit;
         }
-      }
+      }*/
+
       if(isset($_POST['clinical'])&&is_numeric($_POST['clinical']))
         $param['clinical'] = htmlspecialchars($_POST["clinical"]);
       if(isset($_POST['examined'])&&trim($_POST['examined'])!="")

@@ -636,10 +636,21 @@ if(!isset($_SESSION['usertable']['usertype'])||
       </div>
       <div class="col-12">
         <?php
+        $name="Remision:";
+        if(isset($pat['clinicalspecialty']) && $pat['clinicalspecialty']){
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat['clinicalspecialty'];
+          echo $name;
+        }else{
+          echo $name."..............................................................................................................................................................";
+        }
+        ?>
+      </div>
+      <div class="col-12">
+
+        <?php
         $name="Estudiante Designado:";
-        if(isset($pat['remission']['studentid']) && is_numeric($pat['remission']['studentid'])){
-          $stinfo=DBUserInfo($pat['remission']['studentid']);
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Univ. ".$stinfo['userfullname'];
+        if(isset($pat['userfullname']) && $pat['userfullname']){
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Univ. ".$pat['userfullname'];
           echo $name;
         }else{
           echo $name."....................................................................................................................";
@@ -650,9 +661,8 @@ if(!isset($_SESSION['usertable']['usertype'])||
         <?php
         $name="Responsable Clinica Admision:";
 
-        if(isset($pat["responsibleid"]) && $pat["responsibleid"]){
-          $uf=DBUserInfo($pat["responsibleid"]);
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dr.(a) ".$uf["userfullname"];
+        if(isset($pat["respfullname"]) && $pat["respfullname"]){
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dr.(a) ".$pat["respfullname"];
 
           echo $name;
         }else{

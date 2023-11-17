@@ -3,22 +3,17 @@ require('header.php');
 ?>
 
                   <div class="container-fluid px-3">
-											<div class="row mt-1">
-												<div class="col-6">
-													<a class="btn btn-primary btn-sm" href="newadmission.php">Remitir Paciente</a>
-													<a class="" href="report.php">Descargar Plantilla</a>
-												</div>
-												<div class="col-6" align="right">
-													<a class="btn btn-success btn-sm" href="reportadmission.php">Reportes Admisión</a>
-												</div>
-											</div>
-
-											<div class="text-center text-success m-2">
-												<u><b>REGISTRO DE PACIENTES REMITIDOS</b></u>
-											</div>
-
+                      <h3 class="mt-2" align = "center">Pacientes Admitidos</h3>
                       <div class="table-responsive">
+                        <div class="row">
+                          <div class="col-6">
+                            <form id="myForm" action="pdf_reportadmission.php" method="post" onsubmit="generate_pdf()">
+                              <button type="submit" class="btn btn-outline-success btn-sm" name="generar">Generar en PDF<i class="fa fa-solid fa-file-pdf"></i></button>
+                            </form>
 
+                          </div>
+                        </div>
+                        <br>
                         <div class="row">
 
                           <div class="col-12 mx-2 p-1 bg-secondary bg-opacity-10 border border-secondary">
@@ -87,21 +82,28 @@ require('header.php');
                             <thead>
                                 <tr>
                                     <th style="width: 5%" scope="col">#</th>
-                                    <th style="width: 15%" scope="col">
+                                    <th style="width: 20%" scope="col">
                                       <label for="patientname">Paciente</label>
                                       <input type="text" name="patientname" id="patientname" class="form-control form-control-sm" value="">
                                     </th>
-                                    <th style="width: 10%" scope="col">
-                                      Consulta
+                                    <th style="width: 15%" scope="col">
+                                      Edad
+                                      <div class="input-group input-group-sm">
+                                        <input type="number" id="agestart"class="form-control" aria-label="Sizing example input" min="0" value="0">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm"><></span>
+                                        <input type="number" id="ageend"class="form-control" aria-label="Sizing example input" value="100">
+                                      </div>
                                     </th>
                                     <th scope="col col-1">
-                                      Diagnostico
-                                    </th>
-																		<th style="width: 10%" scope="col">
-                                      Examinado Por
+                                      Genero
+                                      <select class="form-select form-select-sm" id="patientgender">
+                                        <option value="" selected>Todo</option>
+                                        <option value="m">Masculino</option>
+                                        <option value="f">Femenino</option>
+                                      </select>
                                     </th>
                                     <th scope="col" class="bg-secondary bg-opacity-10 border border-top-0 border-secondary">Remisión</th>
-                                    <th style="width: 15%" scope="col">
+                                    <th scope="col">
                                       Est. Designado
                                       <input type="text" name="studentname" id="studentname" class="form-control form-control-sm" value="">
 
@@ -115,7 +117,7 @@ require('header.php');
                                       </div>
                                     </th>
 
-                                    <th scope="col">Acciones</th>
+                                    <!--<th scope="col">Accion</th>-->
                                 </tr>
                             </thead>
                             <tbody id = "table-data">
@@ -143,6 +145,9 @@ function AddFormData(page){
   restartFormData();//reinicia el formulario
   formData.append('page', page);
   formData.append('checkboxStates', JSON.stringify(checkboxStates));
+  formData.append('startage', $('#agestart').val());
+  formData.append('endage', $('#ageend').val());
+  formData.append('gender', $('#patientgender').val());
   formData.append('patientfullname', $('#patientname').val());
   formData.append('studentfullname', $('#studentname').val());
   formData.append('stdate', $('#stdate').val());
@@ -152,7 +157,7 @@ function loadData(page){
   AddFormData(page);
   //alert('entra');
   $.ajax({
-    url: "tablelistadmission.php",
+    url: "tablereportadmission.php",
     type: "POST",
     data: formData,
     contentType: false, // Deshabilitar la codificación de tipo MIME
@@ -166,6 +171,19 @@ function loadData(page){
   });
 }
 
+function generate_pdf(){
+  AddFormData(1);
+  var idForm=document.getElementById('myForm');
+  idForm.querySelectorAll('input[type="hidden"]').forEach(input => input.remove());
+
+  idForm.formData = formData;
+  for (var pair of formData.entries()) {
+    idForm.appendChild(document.createElement('input')).setAttribute('type', 'hidden');
+    idForm.lastChild.setAttribute('name', pair[0]);
+    idForm.lastChild.setAttribute('value', pair[1]);
+  }
+  return true;
+}
 
 $('.btn-check').change(function (){
   var index = $('.btn-check').index(this);
@@ -174,80 +192,9 @@ $('.btn-check').change(function (){
   //alert('Estado del '+(index+1)+': '+checkboxStates[index]);
 });
 
-$('#patientname, #studentname, #stdate, #endate').on('change', function() {
+$('#agestart, #ageend, #patientgender, #patientname, #studentname, #stdate, #endate').on('change', function() {
   loadData(1);
 });
 //cargar datos en la pagina inicial
 loadData(1);
-
-
-function getdata(e, u, remid){
-
-
-	Swal.fire({
-	  title: e+'. Tu contraseña porfavor',
-	  input: 'password',
-	  inputAttributes: {
-	    autocapitalize: 'off'
-	  },
-	  showCancelButton: true,
-	  confirmButtonText: 'Entrar',
-	  showLoaderOnConfirm: true,
-	  preConfirm: (login) => {
-			//password hash
-			var userHASH, passHASH;
-			userHASH = u;
-			passHASH = js_myhash(js_myhash(login)+'<?php echo session_id(); ?>');
-
-			return $.ajax({
-				url: '../include/i_uservalid.php',
-				method: 'POST',
-				data: { name:userHASH, pass:passHASH},
-				success: function (response) {
-					return response;
-				}, error: function (xhr, status, error){
-					Swal.showValidationMessage(
-	          `Debe introducir su contraseña: ${error}`
-	        );
-				}
-			});
-	    /*return fetch(`//api.github.com/users/${login}`)
-	      .then(response => {
-	        if (!response.ok) {
-	          throw new Error(response.statusText)
-	        }
-	        return response.json()
-	      })
-	      .catch(error => {
-	        Swal.showValidationMessage(
-	          `Debe introducir su contraseña: ${error}`
-	        )
-	      })*/
-	  },
-	  allowOutsideClick: () => !Swal.isLoading()
-	}).then((result) => {
-	  if (result.isConfirmed) {
-			if(result.value=='true'){
-				Swal.fire({
-				  position: 'top-end',
-				  icon: 'success',
-				  title: 'Correcto',
-				  showConfirmButton: false,
-				  timer: 1500
-				}).then(() => {
-				  // Esta función se ejecutará después de que la notificación se cierre
-				  location.href="surgeryii.php?id="+remid;
-				});
-
-			}else{
-				Swal.fire({
-		      title: `${'Contraseña incorrecta'}`,
-		      imageUrl: result.value.avatar_url
-		    })
-			}
-
-
-		}
-	});
-}
 </script>

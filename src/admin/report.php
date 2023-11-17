@@ -7,7 +7,7 @@ require_once('../db.php');
 
 // Incluir la biblioteca QR Code
 require_once('../assets/phpqrcode/qrlib.php');
-
+$id="";
 if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
   $id=htmlspecialchars(trim($_GET["id"]));
   if(($pat=DBPatientRemissionInfo($id))==null){
@@ -105,7 +105,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
       </div>
       <div class="cabezera" style="padding-left:20px">
         <?php
-        $cod_unique=myhash9($_GET['id']);
+        $cod_unique=myhash9($id);
         $infoqr='Codigo ID: '.$cod_unique;
         $infoqr.="\n Ficha N.: ";
         if(isset($pat['patientadmissionid'])&& is_numeric($pat['patientadmissionid']))
@@ -1046,8 +1046,8 @@ if(!isset($_SESSION['usertable']['usertype'])||
       <div class="">
         <?php
         $name="Remision:";
-        if(isset($pat['remission']['clinicalspecialty']) && $pat['remission']['clinicalspecialty']){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat['remission']['clinicalspecialty'];
+        if(isset($pat['clinicalspecialty']) && $pat['clinicalspecialty']){
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat['clinicalspecialty'];
           echo $name;
         }else{
           echo $name."..............................................................................................................................................................";
@@ -1057,9 +1057,8 @@ if(!isset($_SESSION['usertable']['usertype'])||
       <div class="">
         <?php
         $name="Estudiante Designado:";
-        if(isset($pat['remission']['studentid']) && is_numeric($pat['remission']['studentid'])){
-          $stinfo=DBUserInfo($pat['remission']['studentid']);
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Univ. ".$stinfo['userfullname'];
+        if(isset($pat['userfullname']) && $pat['userfullname']){
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Univ. ".$pat['userfullname'];
           echo $name;
         }else{
           echo $name."....................................................................................................................";
@@ -1083,9 +1082,8 @@ if(!isset($_SESSION['usertable']['usertype'])||
         <?php
         $name="Responsable Clinica Admision:";
 
-        if(isset($pat["responsibleid"]) && $pat["responsibleid"]){
-          $uf=DBUserInfo($pat["responsibleid"]);
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dr.(a) ".$uf["userfullname"];
+        if(isset($pat["respfullname"]) && $pat["respfullname"]){
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dr.(a) ".$pat["respfullname"];
 
           echo $name;
         }else{

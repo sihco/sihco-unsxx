@@ -15,7 +15,7 @@ function DBCreateSurgeryiiTable() {
 	 $r = DBExec($c, "
 CREATE TABLE \"surgeryiitable\" (
 				\"remissionid\" int4 NOT NULL,                							-- (id de remision unica)
-					\"surgeryiiid\" int4 UNIQUE NOT NULL,                							-- (id de ficha clinica cirugia bucal ii)
+				\"surgeryiiid\" int4 UNIQUE NOT NULL,                							-- (id de ficha clinica cirugia bucal ii)
 				\"surgeryiipractice\" varchar(20) DEFAULT '',								-- (numero de practica cirugia bucal iii)
 				\"surgeryiimotconsult\" text DEFAULT '',										-- (historia del motivo de la consulta cirugia bucal iii)
         \"surgeryiipersonalremote\" text DEFAULT '',      					-- (anamnesis remota personal cirugia bucal iii)
@@ -40,8 +40,8 @@ CREATE TABLE \"surgeryiitable\" (
 
 			  \"updatetime\" int4 DEFAULT EXTRACT(EPOCH FROM now()) NOT NULL, -- (indica la ultima actualizacion del registro)
         CONSTRAINT \"surgeryii_pkey\" PRIMARY KEY (\"remissionid\"),
-				CONSTRAINT \"clinichistory_fk\" FOREIGN KEY (\"remissionid\")
-								REFERENCES \"clinichistorytable\" (\"remissionid\")
+				CONSTRAINT \"remissionhistory_fk\" FOREIGN KEY (\"remissionid\")
+								REFERENCES \"remissionhistorytable\" (\"remissionid\")
 								ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
 )", "DBCreateSurgeryiiTable(create table)");
 

@@ -5,8 +5,8 @@ require('header.php');
 
               <!--inicio de main-->
                 <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">SEGUIMIENTO A PACIENTES</h1>
+                    <div class="container-fluid px-3">
+                        <h2 class="mt-3">SEGUIMIENTO A PACIENTES</h2>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Odontologia(UNSXX)</li>
                         </ol>

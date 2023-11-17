@@ -38,9 +38,12 @@ CREATE TABLE \"usertable\" (
 	$r = DBExec($c, "CREATE UNIQUE INDEX \"user_index\" ON \"usertable\" USING btree ".
 	     "(\"usernumber\" int4_ops)",
 	     "DBCreateUserTable(create user_index)");
-	$r = DBExec($c, "CREATE UNIQUE INDEX \"user_index2\" ON \"usertable\" USING btree ".
-	     "(\"userci\" int4_ops, \"username\" varchar_ops)",
-	     "DBCreateUserTable(create user_index2)");
+	$r = DBExec($c, "CREATE INDEX \"user_indexci\" ON \"usertable\" USING btree ".
+	     "(\"userci\" int4_ops)",
+	     "DBCreateUserTable(create user_indexci)");
+	$r = DBExec($c, "CREATE INDEX \"user_indexname\" ON \"usertable\" USING btree ".
+	     "(\"username\" varchar_ops)",
+	     "DBCreateUserTable(create user_indexname)");
 }
 
 //////////////////////////////funciones de usuarios///////////////////////////////////////

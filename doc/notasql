@@ -1,0 +1,136 @@
+drop index remission_index
+create index remission_index on remissiontable using btree (remissionid int4_ops)
+create index remission_indexadmission on remissiontable using btree
+(patientadmissionid int4_ops)
+create index remission_indexclinical on remissiontable using btree
+(clinicalid int4_ops)
+
+create index remissionhistory_index on remissionhistorytable using btree
+(remissionid int4_ops)
+create index remissionhistory_indexpatientadmission on remissionhistorytable using btree
+(patientadmissionid int4_ops)
+create index remissionhistory_indexpatient on remissionhistorytable using btree
+(patientid int4_ops)
+create index remissionhistory_indexclinical on remissionhistorytable using btree
+(clinicalid int4_ops)
+create index remissionhistory_indexstudent on remissionhistorytable using btree
+(studentid int4_ops)
+create index remissionhistory_indexteacher on remissionhistorytable using btree
+(teacherid int4_ops)
+
+SELECT p.patientid, p.patientname, p.patientfirstname, p.patientlastname, p.patientgender,
+	pa.patientage, pa.updatetime, rh.clinicalid, cl.clinicalspecialty, rh.studentid, u.userfullname,
+	rh.teacherid
+	FROM patientadmissiontable AS pa JOIN patienttable AS p ON p.patientid=pa.patientid LEFT JOIN
+	remissionhistorytable AS rh ON rh.patientadmissionid=pa.patientadmissionid JOIN clinicaltable AS
+	cl ON cl.clinicalid = rh.clinicalid JOIN usertable AS u ON u.usernumber = rh.studentid
+
+
+select *from surgeryiitable
+
+
+CREATE TABLE remissionhistorytable (
+        remissionid int4 NOT NULL,          -- (id del registro remision)
+        patientadmissionid int4 NOT NULL,		-- (admission patient id)
+        patientid int4 NOT NULL,						-- (patient id)
+        clinicalid int4 NOT NULL, 					-- (clinica remitida)
+
+				status varchar(50) DEFAULT '',       -- (estado new, process, end, fail, error)
+				inputfilename varchar(100) DEFAULT '',     -- (nombre del archivo)
+				inputfile oid,															-- (el archivo conclido)
+				inputfilehash varchar(50),               --(apuntador para archivo)
+				authorized bool DEFAULT 'f' NOT NULL,							 	--(autorizado o no)
+        studentid int4, 														-- (id del estudiante)
+        studentclinicalid int4, 										-- (clinical del estudiante)
+        studentcourseid int4, 											-- (course del estudiante)
+
+        teacherid int4, 														-- (id del teacher)
+        teacherclinicalid int4, 										-- (clinical del teacher)
+        teachercourseid int4, 											-- (course del teacher)
+				reviewteacher	text DEFAULT '',											-- (ID cola de docentes revisores)
+				reviewany	bool DEFAULT 'f' NOT NULL,							 	--(revisar cualquiera)
+				reviewstatus	bool DEFAULT 'f' NOT NULL,						--(estado de revisado)
+			  stdatetime int4 DEFAULT EXTRACT(EPOCH FROM now()) NOT NULL, -- (indica la fecha de inicio de ficha clinica)
+			  endatetime int4 DEFAULT -1 NOT NULL, -- (indica la fecha de finalizacion)
+			  updatetime int4 DEFAULT EXTRACT(EPOCH FROM now()) NOT NULL, -- (indica la ultima actualizacion del registro)
+        CONSTRAINT remissionhistory_pkey PRIMARY KEY (remissionid),
+
+        CONSTRAINT specialty_fk FOREIGN KEY (studentid, studentclinicalid, studentcourseid)
+               REFERENCES specialtytable (userid, clinicalid, coursenumber)
+               ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE,
+        CONSTRAINT specialty2_fk FOREIGN KEY (teacherid, teacherclinicalid, teachercourseid)
+               REFERENCES specialtytable (userid, clinicalid, coursenumber)
+               ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE,
+				CONSTRAINT clinical_fk FOREIGN KEY (clinicalid)
+								REFERENCES clinicaltable (clinicalid)
+								ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE,
+
+				CONSTRAINT patientadmission_fk FOREIGN KEY (patientadmissionid, patientid)
+								REFERENCES patientadmissiontable (patientadmissionid, patientid)
+								ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE)
+
+
+insert into remissionhistorytable (remissionid,
+patientadmissionid,
+patientid,
+clinicalid,
+status,
+inputfilename,
+inputfile,
+inputfilehash,
+authorized,
+studentid,
+studentclinicalid,
+studentcourseid,
+teacherid,
+teacherclinicalid,
+teachercourseid,
+reviewteacher,
+reviewany,
+reviewstatus,
+stdatetime,
+endatetime,
+updatetime)
+select remissionid,
+patientadmissionid,
+patientid,
+clinicalid,
+status,
+inputfilename,
+inputfile,
+inputfilehash,
+authorized,
+studentid,
+studentclinicalid,
+studentcourseid,
+teacherid,
+teacherclinicalid,
+teachercourseid,
+reviewteacher,
+reviewany,
+reviewstatus,
+stdatetime,
+endatetime,
+updatetime
+from clinichistorytable
+
+
+select *from remissionhistorytable
+select *from remissiontable
+drop table remissiontable
+drop table clinichistorytable
+select *from clinichistorytable
+REVOKE ALL ON remissionhistorytable FROM PUBLIC
+GRANT ALL ON remissionhistorytable TO sihcouser
+
+alter table surgeryiitable drop constraint clinichistory_fk
+select *from surgeryiitable
+alter table surgeryiitable add constraint remissionhistory_fk foreign key (remissionid)
+REFERENCES remissionhistorytable (remissionid) ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
+
+CONSTRAINT \"clinichistory_fk\" FOREIGN KEY (\"remissionid\")
+								REFERENCES \"clinichistorytable\" (\"remissionid\")
+								ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
+
+
+	select clinicalid, clinicalspecialty from clinicaltable

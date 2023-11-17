@@ -345,7 +345,7 @@ $pat=$r;
     </div>
   </div>
   <div class="row mb-2">
-    
+
     <div class="col-lg-4 col-md-4 col-sm-12 col-12">
       <div class="input-group input-group-sm">
         <label class="input-group-text" for="ulcerations">Ulceraciones</label>

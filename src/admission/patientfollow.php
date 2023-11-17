@@ -197,46 +197,19 @@ $size=count($pr);
 				      echo "   <td>" . $pr[$i]["diagnosis"] . "</td>";
 
 							echo "   <td>";
-							if($pr[$i]['remission']!=null){
-								$size2=count($pr[$i]['remission']);
-								for ($j=0; $j < $size2 ; $j++) {
-										$namesp = $pr[$i]['remission'][$j]['clinicalspecialty'];
-										if (isset($pr[$i]['remission'][$j]["inputfile"])&& $pr[$i]['remission'][$j]["inputfile"] != null) {
-							        $tx = $pr[$i]['remission'][$j]["inputfilehash"];
-							        echo "<a href=\"#\" class=\"btn btn-sm btn-outline-primary\" style=\"font-weight:bold\" onClick=\"window.open('../filewindow.php?".filedownload($pr[$i]['remission'][$j]["inputfile"], $pr[$i]['remission'][$j]["inputfilename"])."', 'Ver - Ficha', 'width=680,height=600,scrollbars=yes,resizable=yes')\">$namesp</a>";
-							        
-							      }else{
-											echo $namesp;
-										}
-								}
-							}
+              if (isset($pr[$i]["inputfile"])&& $pr[$i]["inputfile"] != null) {
+                $tx = $pr[$i]["inputfilehash"];
+                echo "<a href=\"#\" class=\"btn btn-sm btn-outline-primary\" style=\"font-weight:bold\" onClick=\"window.open('../filewindow.php?".filedownload($pr[$i]["inputfile"], $pr[$i]["inputfilename"])."', 'Ver - Ficha', 'width=680,height=600,scrollbars=yes,resizable=yes')\">".$pr[$i]['clinicalspecialty']."</a>";
+              }else{
+                echo $pr[$i]['clinicalspecialty'];
+              }
 							echo "</td>";
-
-							echo "   <td>";
-							if($pr[$i]['remission']!=null){
-								$size2=count($pr[$i]['remission']);
-								for ($j=0; $j < $size2 ; $j++) {
-										$in=DBUserInfo($pr[$i]['remission'][$j]['studentid']);
-
-										echo $in['userfullname'].' ';
-
-
-								}
-							}
-							echo "</td>";
+							echo "   <td>".$pr[$i]['userfullname']."</td>";
 
 
 							//echo "   <td>".$in['userfullname']."</td>";
 
-							echo "   <td>";
-							if($pr[$i]['remission']!=null){
-								$size2=count($pr[$i]['remission']);
-								for ($j=0; $j < $size2 ; $j++) {
-										echo $namestatus[$pr[$i]['remission'][$j]['status']];
-
-								}
-							}
-							echo "</td>";
+							echo "   <td>".$namestatus[$pr[$i]['status']]."</td>";
 				      echo "</tr>";
 				}
 				echo "</tbody></table>\n";

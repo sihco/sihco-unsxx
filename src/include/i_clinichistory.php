@@ -2,10 +2,10 @@
 session_start();//para iniciar session_sta
 require_once("../globals.php");
 require_once("../db.php");
-if(isset($_POST['ch'])&& is_numeric($_POST['ch'])){
+if(isset($_POST['rh'])&& is_numeric($_POST['rh'])){
 
-  $param['remissionid']=htmlspecialchars($_POST['ch']);
-  $r=DBClinicHistoryInfo($param['remissionid']);
+  $param['remissionid']=htmlspecialchars($_POST['rh']);
+  $r=DBRemissionHistoryInfo2($param['remissionid']);
   if($r==null){
     echo "No Encontrado Historial Clínico";
     exit;
@@ -93,7 +93,7 @@ if(isset($_POST['ch'])&& is_numeric($_POST['ch'])){
     $param['reviewstatus']='t';
     DBUpdateExamClinichistory($param);//para finalizar ficha clinica
   }else{
-    DBNewClinichistory($param, null, true);
+    DBNewRemissionhistory($param, null, true);
   }
   echo 'yes';
   exit;

@@ -30,9 +30,9 @@ CREATE TABLE \"patienttable\" (
 	$r = DBExec($c, "CREATE UNIQUE INDEX \"patient_index\" ON \"patienttable\" USING btree ".
 	     "(\"patientid\" int4_ops)",
 	     "DBCreatePatientTable(create patient_index)");
-	$r = DBExec($c, "CREATE UNIQUE INDEX \"patient_index2\" ON \"patienttable\" USING btree ".
-     "(\"patientci\" varchar_ops, \"patientname\" varchar_ops, \"patientfirstname\" varchar_ops, \"patientlastname\" varchar_ops)",
-	     "DBCreatePatientTable(create patient_index2)");
+
+	$r = DBExec($c, "CREATE INDEX \"patient_indexgender\" ON \"patienttable\" USING btree ".
+     "(\"patientgender\" varchar_ops)", "DBCreatePatientTable(create patient_indexgender)");
 }
 //para eliminar la tabla paciente admision
 function DBDropPatientAdmissionTable() {
@@ -51,7 +51,7 @@ function DBCreatePatientAdmissionTable() {
 								\"patientid\" int4 NOT NULL,                        -- (id de paciente)
                 \"patientdirection\" varchar(200) DEFAULT '',         -- (direccion de paciente)
                 \"patientlocation\" varchar(300) DEFAULT '',          -- (localidad del paciente)
-                \"patientage\" varchar(20) DEFAULT '',                -- (edad del paciente)
+                \"patientage\" int4,                -- (edad del paciente)
                 \"patientprovenance\" varchar(200) DEFAULT '',    -- (procedencia del paciente)
         				\"patientphone\" int4 DEFAULT 0,		      -- (tel del paciente)
                 \"patientcivilstatus\" varchar(200) DEFAULT '',     -- (estado civil del paciente)
@@ -134,10 +134,15 @@ function DBCreatePatientAdmissionTable() {
         $r = DBExec($c, "REVOKE ALL ON \"patientadmissiontable\" FROM PUBLIC", "DBCreatePatientAdmissionTable(revoke public)");
 
         $r = DBExec($c, "GRANT INSERT, SELECT ON \"patientadmissiontable\" TO \"".$conf["dbuser"]."\"", "DBCreatePatientAdmissionTable(grant sihcouser)");
-	      $r = DBExec($c, "CREATE INDEX \"patientadmission_index\" ON \"patientadmissiontable\" USING btree ".
-	     "(\"patientadmissionid\" int4_ops, \"patientid\" int4_ops)",
-       "DBCreatePatientAdmissionTable(create patientadmission_index)");
-
+				$r = DBExec($c, "CREATE INDEX \"patientadmission_indexpatient\" ON \"patientadmissiontable\" USING btree ".
+				     "(\"patientid\" int4_ops)",
+				     "DBCreatePatientTable(create patient_index)");
+			  $r = DBExec($c, "CREATE INDEX \"patientadmission_index\" ON \"patientadmissiontable\" USING btree ".
+	     	"(\"patientadmissionid\" int4_ops)", "DBCreatePatientAdmissionTable(create patientadmission_index)");
+				$r = DBExec($c, "CREATE INDEX \"patientadmission_indexage\" ON \"patientadmissiontable\" USING btree ".
+	     	"(\"patientage\" int4_ops)", "DBCreatePatientAdmissionTable(create patientadmission_indexage)");
+				$r = DBExec($c, "CREATE INDEX \"patientadmission_indexupdatetime\" ON \"patientadmissiontable\" USING btree ".
+	     	"(\"updatetime\" int4_ops)", "DBCreatePatientAdmissionTable(create patientadmission_indexupdatetime)");
 }
 
 //funcion para registrar pacientes
@@ -326,7 +331,7 @@ function DBNewPatient($param, $c=null){
 		$sql = "select * from patienttable where patientname='$name' and patientfirstname='$firstname' and patientlastname='$lastname'";
 		$a = DBGetRow ($sql, 0, $c);
 		if($a==null){
-			$idp=DBPatientNumberMax();
+			$idp=DBPatientNumberMax($c);
 		}else{
 			$idp=$a['patientid'];
 		}
@@ -352,7 +357,7 @@ function DBNewPatient($param, $c=null){
     //para insercion o actulizacion
 		if ($a == null) {
 			    $ret=2;
-					$idpa=DBPatientAdmissionNumberMax();
+					$idpa=DBPatientAdmissionNumberMax($c);
 
     		  $sql = "insert into patienttable (patientid, patientname, patientfirstname, patientlastname, patientgender, " .
 						"patientnationality, patientdatebirth, patientplacebirth, updatetime) values ".
@@ -382,10 +387,12 @@ function DBNewPatient($param, $c=null){
 							$rdata['patientadmissionid']=$idpa;
 							$rdata['clinicalid']=$clinical;
 							if(isset($examined)&&is_numeric($examined)){
-								$rdata['examined']=$examined;
+								$rdata['studentid']=$examined;
+								$rdata['studentclinicalid']=$clinical;
+								$rdata['teacherid']=0;//admin
+								$rdata['teacherclinicalid']=$clinical;
 							}
-							$ret=DBNewRemission($rdata, $c);
-
+							$ret= DBNewRemissionhistory($rdata, $c);
 					}
 					if($cw) {
     				DBExec ($c, "commit work");
@@ -419,10 +426,12 @@ function DBNewPatient($param, $c=null){
 						$rdata['patientadmissionid']=$idpa;
 						$rdata['clinicalid']=$clinical;
 						if(isset($examined)&&is_numeric($examined)){
-							$rdata['examined']=$examined;
+							$rdata['studentid']=$examined;
+							$rdata['studentclinicalid']=$clinical;
+							$rdata['teacherid']=0;//admin
+							$rdata['teacherclinicalid']=$clinical;
 						}
-						$ret=DBNewRemission($rdata, $c);
-
+						$ret= DBNewRemissionhistory($rdata, $c);
 				}
 				if($cw) {
 					DBExec ($c, "commit work");
@@ -448,15 +457,33 @@ function DBNewPatient($param, $c=null){
 					$r = DBExec ($c, $sql, "DBNewPatient(update patientadmission)");
 					if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<=17){
 							$rdata=array();
-							$reinfo=DBRemissionInfo($idpa, $c);//idadmission
+							$reinfo=DBRemissionhistoryInfo($idpa, $c);//idadmission
 							$rdata['remissionid']=$reinfo['remissionid'];
 							$rdata['patientid']=$idp;
 							$rdata['patientadmissionid']=$idpa;
 							$rdata['clinicalid']=$clinical;
-							if(isset($examined)&&is_numeric($examined)){
-								$rdata['examined']=$examined;
+
+							if($clinical!=$reinfo['clinicalid']){
+								if(isset($examined)&&is_numeric($examined)){
+									$rdata['studentid']=$examined;
+									$rdata['studentclinicalid']=$clinical;
+									$rdata['teacherid']=0;//admin
+									$rdata['teacherclinicalid']=$clinical;
+								}
+								$ret= DBNewRemissionhistory($rdata, $c);
+							}else{
+								if(isset($examined)&&is_numeric($examined)){
+									if($examined != $reinfo['studentid']){
+										$rdata['studentid']=$examined;
+										$rdata['studentclinicalid']=$clinical;
+										$rdata['teacherid']=0;//admin
+										$rdata['teacherclinicalid']=$clinical;
+										$ret= DBNewRemissionhistory($rdata, $c);
+									}
+								}else{
+									$ret= DBNewRemissionhistory($rdata, $c);
+								}
 							}
-							$ret=DBNewRemission($rdata, $c);
 					}
 					if($cw) {
 						DBExec ($c, "commit work");
@@ -517,8 +544,25 @@ pa.patientadmissionid = (select max(pa.patientadmissionid) from patientadmission
 //funcion para sacar la informacion del paciente remetido.
 function DBPatientRemissionInfo($id, $c=null){
 
-	$sql = "select *from patienttable as p, patientadmissiontable as pa
-	where pa.patientadmissionid=$id and pa.patientid=p.patientid";
+	$sql = "SELECT p.patientid, p.patientname, p.patientfirstname, p.patientlastname, p.patientgender,
+	p.patientnationality, p.patientdatebirth, p.patientplacebirth,
+	pa.patientadmissionid, pa.patientdirection, pa.patientlocation, pa.patientage, pa.patientprovenance,
+	pa.patientphone, pa.patientcivilstatus, pa.patientoccupation, pa.patientschool, pa.patientattorney, pa.patientgmh,
+	pa.patientpa, pa.patientfather, pa.patientmother, pa.patientbrothers, pa.patientschools, pa.patientstreet,
+	pa.patientresident, pa.patientprovince, pa.tr, pa.tl, pa.tlr, pa.tll, pa.bl, pa.br, pa.bll, pa.blr,
+	pa.description, pa.draw, pa.dentalfaces, pa.dentalprofile, pa.dentalscars, pa.dentalatm, pa.dentalganglia,
+	pa.dentallips, pa.dentalulcerations, pa.dentalcheilitis, pa.dentalcommissures, pa.dentaltez,
+	pa.dentaltongue, pa.dentalpiso, pa.dentalencias, pa.dentalmucosa, pa.dentalbraces, pa.dentalpalatine,
+	pa.dentaltypeo, pa.dentaltypep, pa.dentalhygiene, pa.lastconsult, pa.motconsult, pa.generalstatus, pa.triagetemperature,
+	pa.triageheadache, pa.triagerespiratory, pa.triagethroat, pa.triagegeneral, pa.triagevaccine, pa.diagnosis,
+	pa.studentid, pa.responsibleid, pa.updatetime,
+	ur.userfullname AS respfullname,
+	cl.clinicalid, cl.clinicalspecialty,
+	rh.studentid AS designedstudentid, u.userfullname
+	FROM patientadmissiontable AS pa JOIN patienttable p ON p.patientid = pa.patientid JOIN usertable AS ur ON ur.usernumber = pa.responsibleid
+	LEFT JOIN remissionhistorytable AS rh ON rh.patientadmissionid=pa.patientadmissionid JOIN clinicaltable AS
+	cl ON cl.clinicalid = rh.clinicalid LEFT JOIN usertable AS u ON u.usernumber = rh.studentid
+	where pa.patientadmissionid=$id";
 	//funcion para capturar la fila del usuario
 	$a = DBGetRow ($sql, 0, $c);
 	if ($a == null) {
@@ -528,24 +572,22 @@ function DBPatientRemissionInfo($id, $c=null){
 		return null;
 	}
 
-	$a['remission']=DBRemissionInfo($a['patientadmissionid'],$c);
 	$a=clearpa($a);
 	$a=clearfathers($a,'father');
 	$a=clearfathers($a,'mother');
 	return $a;
 }
-function DBRemissionInfo($id, $c=null, $idrem=null){
+function DBRemissionhistoryInfo($id, $c=null, $idrem=null){
 
-	$sql = "SELECT re.remissionid, re.patientadmissionid,re.patientid, ".
-	"re.clinicalid, re.enabled, cli.clinicalmodule, cli.clinicalspecialty, cl.studentid ".
-	"FROM remissiontable re LEFT JOIN clinichistorytable cl ".
-	"ON re.remissionid = cl.remissionid INNER JOIN clinicaltable cli ".
-	"ON re.clinicalid = cli.clinicalid where re.enabled='t'";
+	$sql = "SELECT rh.remissionid, rh.patientadmissionid, rh.patientid, ".
+	"rh.clinicalid, rh.status, cli.clinicalmodule, cli.clinicalspecialty, rh.studentid, rh.teacherid ".
+	"FROM remissionhistorytable rh JOIN clinicaltable cli ".
+	"ON cli.clinicalid = rh.clinicalid";
 	if($idrem!=null){
-		$sql.=" and re.remissionid=$idrem";
+		$sql.=" where rh.remissionid=$idrem";
 	}else{
 		if($id!=null){
-			$sql.=" and re.patientadmissionid=$id";
+			$sql.=" where rh.patientadmissionid=$id";
 		}
 	}
 	//funcion para capturar la fila del usuario
@@ -580,8 +622,9 @@ function DBAllRemissionInfo($id=null, $c=null) {
 	}
 	return $a;
 }
+
 //mejorar los registros
-function DBAllPatientRemissionInfo($student=null, $search='', $RegistrationPag=false, $RegistrationInitial=false) {
+/*function DBAllPatientRemissionInfo($student=null, $search='', $RegistrationPag=false, $RegistrationInitial=false) {
 	$sql = "select *from patienttable as p, patientadmissiontable as pa
 	where p.patientid=pa.patientid";
 	if($student!=null&&is_numeric($student)){
@@ -616,7 +659,7 @@ function DBAllPatientRemissionInfo($student=null, $search='', $RegistrationPag=f
 		$a[$i]=clearfathers($a[$i],'mother');
 	}
 	return $a;
-}
+}*/
 //old function
 /*function DBAllPatientRemissionInfo($student=null) {
 	$sql = "select *from patienttable as p, patientadmissiontable as pa
@@ -645,17 +688,30 @@ function DBAllPatientRemissionInfo($student=null, $search='', $RegistrationPag=f
 	return $a;
 }*/
 function DBAllPatientRemissionClinicalInfo($clinical=null, $patient=null) {
-	$sql = "select *from patienttable as p, patientadmissiontable as pa, remissiontable re
-	where p.patientid=pa.patientid and re.patientadmissionid=pa.patientadmissionid";
+	$sql = "SELECT p.patientid, p.patientname, p.patientfirstname, p.patientlastname, p.patientgender,
+	pa.patientadmissionid, pa.patientage, pa.patientdirection, pa.patientlocation, pa.patientphone,
+	pa.tr, pa.tl, pa.tlr, pa.tll, pa.bl, pa.br, pa.bll, pa.blr, pa.description, pa.draw,
+	pa.motconsult, pa.diagnosis, pa.updatetime,
+	rh.clinicalid, rh.status, rh.studentid, rh.teacherid, rh.inputfile, rh.inputfilehash, rh.inputfilename,
+	cl.clinicalspecialty, u.userfullname
+	FROM patientadmissiontable AS pa JOIN patienttable AS p ON p.patientid=pa.patientid LEFT JOIN
+	remissionhistorytable AS rh ON rh.patientadmissionid=pa.patientadmissionid JOIN clinicaltable AS
+	cl ON cl.clinicalid = rh.clinicalid LEFT JOIN usertable AS u ON u.usernumber = rh.studentid";
+
 	if($clinical!=null&&is_numeric($clinical)){
-		$sql.=" and re.clinicalid=$clinical";
+		$sql.=" where re.clinicalid=$clinical";
+		if($patient!=null&&is_numeric($patient)){//buscar por id del paciente
+			$sql.=" and p.patientid=$patient";
+		}
+	}else{
+		if($patient!=null&&is_numeric($patient)){//buscar por id del paciente
+			$sql.=" where p.patientid=$patient";
+		}
 	}
-	if($patient!=null&&is_numeric($patient)){//buscar por id del paciente
-		$sql.=" and p.patientid=$patient";
-	}
+
 	$sql.=" order by pa.patientadmissionid desc";
 	$c = DBConnect();
-	$r = DBExec ($c, $sql, "DBAllPatientRemissionInfo(get patients remission)");
+	$r = DBExec ($c, $sql, "DBAllPatientRemissionClinicalInfo(get patients remission)");
 	$n = DBnlines($r);
 	if ($n == 0) {
 		LOGError("Unable to find users in the database. SQL=(" . $sql . ")");
@@ -665,8 +721,7 @@ function DBAllPatientRemissionClinicalInfo($clinical=null, $patient=null) {
 	$a = array();
 	for ($i=0;$i<$n;$i++) {
 		$a[$i] = DBRow($r,$i);
-		//$a[$i]['remission']=DBRemissionInfo($a[$i]['patientadmissionid'],$c);
-		$a[$i]['remission']=DBAllRemissionInfo($a[$i]['patientadmissionid'],$c);
+
 		$a[$i]=clearpa($a[$i]);
 		$a[$i]=clearfathers($a[$i],'father');
 		$a[$i]=clearfathers($a[$i],'mother');
@@ -699,73 +754,121 @@ function DBAllFollowPatient() {
 	}
 	return $a;
 }
+
+//extraer todos los paciente admitidos a diferentes especialidades
+function DBAllPatientAdmission($patientfullname, $startage, $endage, $gender, $clinicalids, $studentfullname, $stdate, $endate, $results_per_page=-1, $start_limit=-1){
+	$sql = "SELECT p.patientid, p.patientname, p.patientfirstname, p.patientlastname, p.patientgender,
+	pa.patientadmissionid, pa.patientage, pa.updatetime, rh.clinicalid, cl.clinicalspecialty, rh.studentid, u.userfullname,
+	rh.teacherid
+	FROM patientadmissiontable AS pa JOIN patienttable AS p ON p.patientid=pa.patientid LEFT JOIN
+	remissionhistorytable AS rh ON rh.patientadmissionid=pa.patientadmissionid JOIN clinicaltable AS
+	cl ON cl.clinicalid = rh.clinicalid LEFT JOIN usertable AS u ON u.usernumber = rh.studentid";
+	if(!empty($patientfullname)){
+		$sql.=" WHERE concat(patientname, ' ', patientfirstname, ' ', patientlastname) ILIKE '%$patientfullname%'
+		 AND pa.patientage BETWEEN $startage AND $endage AND pa.updatetime BETWEEN $stdate AND $endate";
+	}else{
+		$sql.=" WHERE pa.patientage BETWEEN $startage AND $endage AND pa.updatetime BETWEEN $stdate AND $endate";
+	}
+	if(!empty($clinicalids)){
+		$sql.=" AND rh.clinicalid IN ($clinicalids)";
+	}
+	if(!empty($gender)){
+		$sql.=" AND p.patientgender = '$gender'";
+	}
+	if(!empty($studentfullname)){
+		$sql.=" AND u.userfullname ILIKE '%$studentfullname%'";
+	}
+	$sql.=" order by pa.patientadmissionid desc";
+	if($results_per_page!=-1&& $start_limit!=-1)
+		$sql.=" LIMIT $results_per_page OFFSET $start_limit";
+	$c = DBConnect();
+	$r = DBExec ($c, $sql, "DBAllPatientAdmission(get patients)");
+	$n = DBnlines($r);
+	if ($n == 0) {
+		LOGError("Unable to find users in the database. SQL=(" . $sql . ")");
+		//MSGError("¡No se pueden encontrar pacientes remitidos en la base de datos!");
+	}
+
+	$a = array();
+	for ($i=0;$i<$n;$i++) {
+		$a[$i] = DBRow($r,$i);
+		$a[$i]=clearpa($a[$i]);
+		$a[$i]=clearfathers($a[$i],'father');
+		$a[$i]=clearfathers($a[$i],'mother');
+	}
+	return $a;
+}
+function DBAllPatientRemissionInfo($patientfullname, $clinicalids, $studentfullname, $stdate, $endate, $results_per_page=-1, $start_limit=-1) {
+	$sql = "SELECT p.patientid, p.patientname, p.patientfirstname, p.patientlastname,
+	pa.patientadmissionid, pa.motconsult, pa.diagnosis, pa.updatetime, ua.userfullname as studentnameresp,
+	rh.clinicalid, cl.clinicalspecialty, rh.studentid, u.userfullname, u.username, rh.remissionid, rh.teacherid
+	FROM patientadmissiontable AS pa JOIN patienttable AS p ON p.patientid=pa.patientid JOIN usertable as ua
+	ON ua.usernumber=pa.studentid LEFT JOIN remissionhistorytable AS rh ON rh.patientadmissionid=pa.patientadmissionid
+	JOIN clinicaltable AS cl ON cl.clinicalid = rh.clinicalid LEFT JOIN usertable AS u ON u.usernumber = rh.studentid";
+	if(!empty($patientfullname)){
+		$sql.=" WHERE concat(patientname, ' ', patientfirstname, ' ', patientlastname) ILIKE '%$patientfullname%'
+		 AND pa.updatetime BETWEEN $stdate AND $endate";
+	}else{
+		$sql.=" WHERE pa.updatetime BETWEEN $stdate AND $endate";
+	}
+	if(!empty($clinicalids)){
+		$sql.=" AND rh.clinicalid IN ($clinicalids)";
+	}
+	if(!empty($studentfullname)){
+		$sql.=" AND u.userfullname ILIKE '%$studentfullname%'";
+	}
+	$sql.=" order by pa.patientadmissionid desc";
+	if($results_per_page!=-1&& $start_limit!=-1)
+		$sql.=" LIMIT $results_per_page OFFSET $start_limit";
+	$c = DBConnect();
+	$r = DBExec ($c, $sql, "DBAllPatientAdmission(get patients)");
+	$n = DBnlines($r);
+	if ($n == 0) {
+		LOGError("Unable to find users in the database. SQL=(" . $sql . ")");
+		//MSGError("¡No se pueden encontrar pacientes remitidos en la base de datos!");
+	}
+
+	$a = array();
+	for ($i=0;$i<$n;$i++) {
+		$a[$i] = DBRow($r,$i);
+		$a[$i]=clearpa($a[$i]);
+		$a[$i]=clearfathers($a[$i],'father');
+		$a[$i]=clearfathers($a[$i],'mother');
+	}
+	return $a;
+}
+
 //funcion para saber en que especilidades esta presente
 //funcion para sacar los pacientes de una especilidad asignada o a las especilidades derivados
-function DBAllRemissionPatientInfo($student=null, $assigned=false, $all=false, $typeteacher=false, $typeteacherother=false, $search='', $RegistrationPag=false, $RegistrationInitial=false, $searchspecialty=-1, $searchstudent="") {
-	$sql = "SELECT p.patientid, p.patientci, p.patientname, p.patientfirstname, p.patientlastname, p.patientgender,
-p.patientnationality, p.patientdatebirth, pa.patientadmissionid, pa.patientdirection, pa.patientlocation,
-pa.patientage, pa.patientprovenance, pa.patientphone, pa.patientcivilstatus, pa.patientoccupation,
-pa.patientschool, pa.patientattorney, pa.patientgmh, pa.patientpa, pa.patientfather, pa.patientmother,
-pa.patientbrothers, pa.patientschools, pa.patientstreet, pa.patientresident, pa.patientprovince,
-pa.motconsult, pa.diagnosis, pa.studentid as studentidadmission, pa.responsibleid, pa.updatetime
-as updatetimeadmission, re.remissionid, re.clinicalid, re.enabled, re.updatetime as updatetimeremission,
-cli.remissionid as remissionidch, cli.studentid, cli.teacherid, cli.stdatetime, cli.endatetime,
-c.clinicalspecialty, c.clinicalid, cli.status, cli.authorized, cli.inputfilename, cli.inputfile, cli.inputfilehash,
-cli.reviewteacher, cli.reviewstatus FROM usertable as u, patienttable p JOIN patientadmissiontable pa ON p.patientid=pa.patientid
-JOIN remissiontable re ON re.patientadmissionid=pa.patientadmissionid LEFT JOIN
-clinichistorytable cli ON cli.remissionid=re.remissionid JOIN clinicaltable c ON c.clinicalid=re.clinicalid
-where re.enabled='t' and u.usernumber=cli.studentid";
+function DBAllRemissionPatientInfo($patientfullname, $studentfullname,
+	$clinicalids, $stdate, $endate, $results_per_page=-1, $start_limit=-1) {
 
-	if($student!=null&&is_numeric($student)){
-		$us=DBAllSpecialtyInfo($student);
-		$sql2="";
-		$sql2.=" and (";
-		$sw=true;$c=false;
-		if(is_numeric($searchspecialty)&& $searchspecialty>1){
-			$sw=false;
-			$sql2.=" re.clinicalid=".$searchspecialty;
-		}else{
-			for ($i=0; $i <count($us) ; $i++) {
-				if($us[$i]['clinicalid']!=1){
-					$sw=false;
-					if($c){
-						$sql2.=" or re.clinicalid=".$us[$i]['clinicalid'];
-					}else{
-						$sql2.=" re.clinicalid=".$us[$i]['clinicalid'];
-						$c=true;
-					}
-				}
-			}
-		}
+	$sql = "SELECT p.patientid, p.patientname, p.patientfirstname, p.patientlastname,
+	pa.patientadmissionid, pa.patientage, pa.motconsult, pa.diagnosis,
+	pa.responsibleid, pa.updatetime as updatetimeadmission,
+	rh.remissionid, rh.updatetime as updatetimeremission,
+	rh.studentid, rh.teacherid, rh.stdatetime, rh.endatetime,
+	rh.status, rh.authorized, rh.inputfilename, rh.inputfile, rh.inputfilehash, rh.reviewteacher, rh.reviewstatus,
+	cl.clinicalspecialty, cl.clinicalid,
+	u.userfullname, ut.userfullname as teacherfullname
+	FROM remissionhistorytable AS rh JOIN patientadmissiontable AS pa ON pa.patientadmissionid = rh.patientadmissionid
+	JOIN patienttable AS p ON p.patientid = rh.patientid JOIN clinicaltable AS cl ON cl.clinicalid=rh.clinicalid
+	LEFT JOIN usertable AS u ON u.usernumber = rh.studentid LEFT JOIN usertable AS ut ON ut.usernumber = rh.teacherid
+	WHERE pa.updatetime BETWEEN $stdate AND $endate";
 
-		if($sw)
-			return array();
-		if($assigned==true){//buscar quienes son mis pacientes
-			if($typeteacher){
-				if($typeteacherother){
-					$sql.=$sql2." ) and cli.teacherid!=0 and cli.studentid!=0 and reviewany='t'";
-				}else{
-					$sql.=$sql2." ) and cli.teacherid=$student";
-				}
-			}else{
-				$sql.=$sql2." ) and cli.studentid=$student";
-			}
-		}else{
-			$sql.=$sql2.' )';
-		}
+	if(!empty($patientfullname))
+		$sql.=" AND concat(patientname, ' ', patientfirstname, ' ', patientlastname) ILIKE '%$patientfullname%'";
+
+	if(!empty($clinicalids)){
+		$sql.=" AND rh.clinicalid IN ($clinicalids)";
 	}
-	if($search!=''){
-		$sql.=" and (p.patientname ILIKE '%$search%' or p.patientfirstname ILIKE '%$search%' ".
-		"or p. patientlastname ILIKE '%$search%')";
+	if(!empty($studentfullname)){
+		$sql.=" AND u.userfullname ILIKE '%$studentfullname%'";
 	}
-	if($searchstudent!=''){
-		$sql.=" and u.userfullname ILIKE '%$searchstudent%'";
-	}
-	if(is_numeric($RegistrationPag)&&is_numeric($RegistrationInitial)){
-		$sql.=" ORDER BY re.updatetime DESC LIMIT $RegistrationPag OFFSET $RegistrationInitial";
-	}else{
-		$sql.=" order by re.updatetime desc";
-	}
+
+	$sql.=" order by 	rh.updatetime desc";
+	if($results_per_page!=-1&& $start_limit!=-1)
+		$sql.=" LIMIT $results_per_page OFFSET $start_limit";
 
 	$c = DBConnect();
 	$r = DBExec ($c, $sql, "DBAllRemissionPatientInfo(get remission patients )");
@@ -780,27 +883,32 @@ where re.enabled='t' and u.usernumber=cli.studentid";
 
 	$a = array();
 	for ($i=0;$i<$n;$i++) {
-		$res = DBRow($r,$i);
-		if($all|| $res['studentid']==NULL || $assigned){
-				$a[$i]=$res;
-				//$a[$i]['remission']=DBAllRemissionInfo($a[$i]['patientadmissionid'],$c);
-				$a[$i]=clearpa($a[$i]);
-				$a[$i]=clearfathers($a[$i],'father');
-				$a[$i]=clearfathers($a[$i],'mother');
-		}
+		$a[$i] = DBRow($r,$i);
+		$a[$i]=clearpa($a[$i]);
+		$a[$i]=clearfathers($a[$i],'father');
+		$a[$i]=clearfathers($a[$i],'mother');
 	}
 	return $a;
 }
 
 //funcion para saber en que especilidades esta presente
 function DBAllSpecialtyInfo($student=null, $all=false, $type='') {
-	$sql = "SELECT *from usertable u, specialtytable s where u.usernumber=s.userid";
-
-	if($all==false) $sql.=" and s.specialtyenabled='t'";
-	if($student!=null&& is_numeric($student)){
+	$sql = "SELECT *FROM specialtytable AS s JOIN usertable AS u ON u.usernumber=s.userid";
+	$sw=false;
+	if(is_numeric($student)){
 		$sql.=" and s.userid=$student";
+		$sw=true;
 	}
-	if(trim($type)!='') $sql.=" and u.usertype='$type'";
+	if($all==false){
+		if($sw) $sql.=" and s.specialtyenabled='t'";
+		else $sql.=" where s.specialtyenabled='t'";
+	}
+
+	if(trim($type)!=''){
+		if($sw) $sql.=" and u.usertype='$type'";
+		else $sql.=" where u.usertype='$type'";
+	}
+
 	$sql.=" order by s.updatetime desc";
 	$c = DBConnect();
 	$r = DBExec ($c, $sql, "DBAllSpecialtyInfo(get specialty)");
@@ -1249,7 +1357,7 @@ function DBNewRemissionPatient($param, $c=null){
 		DBExec($c, "begin work", "DBNewRemissionPatient(begin)");
 	}
 	if($param["idpa"]!=""){
-		if(($pat=DBPatientRemissionInfo($param["idpa"]))==null){
+		if(($pat=DBPatientRemissionInfo($param["idpa"], $c))==null){
 				MSGError("id remision no encontrado");
 				return false;
 		}
@@ -1257,10 +1365,12 @@ function DBNewRemissionPatient($param, $c=null){
 		$param["idpa"]=$pat["patientadmissionid"];
 	}
 	//funcion para registrar paciente
-	$exit=false;
 	$ret=DBNewPatient($param, $c);
+	if($cw) {
+		if($ret) DBExec($c, "commit work");
+		else DBExec ($c, "rollback work");
+	}
 
-	if($cw) DBExec($c, "commit work");
 	return $ret;
 }
 
@@ -1506,9 +1616,15 @@ function DBCreateRemissionTable() {
         $r = DBExec($c, "REVOKE ALL ON \"remissiontable\" FROM PUBLIC", "DBCreateRemissionTable(revoke public)");
 
         $r = DBExec($c, "GRANT INSERT, SELECT ON \"remissiontable\" TO \"".$conf["dbuser"]."\"", "DBCreateRemissionTable(grant sihcouser)");
-	      $r = DBExec($c, "CREATE INDEX \"remission_index\" ON \"remissiontable\" USING btree ".
-	     "(\"remissionid\" int4_ops, \"patientadmissionid\" int4_ops, \"patientid\" int4_ops, \"clinicalid\" int4_ops)",
-       "DBCreateRemissionTable(create log_index)");
+				$r = DBExec($c, "CREATE INDEX \"remission_index\" ON \"remissiontable\" USING btree ".
+	     	"(\"remissionid\" int4_ops)", "DBCreateRemissionTable(create remission_index)");
+				$r = DBExec($c, "CREATE INDEX \"remission_indexadmission\" ON \"remissiontable\" USING btree ".
+	     	"(\"patientadmissionid\" int4_ops)", "DBCreateRemissionTable(create remission_indexadmission)");
+				$r = DBExec($c, "CREATE INDEX \"remission_indexclinical\" ON \"remissiontable\" USING btree ".
+	     	"(\"clinicalid\" int4_ops)", "DBCreateRemissionTable(create remission_indexclinica)");
+				//$r = DBExec($c, "CREATE INDEX \"remission_index\" ON \"remissiontable\" USING btree ".
+	     //"(\"remissionid\" int4_ops, \"patientadmissionid\" int4_ops, \"patientid\" int4_ops, \"clinicalid\" int4_ops)",
+       //"DBCreateRemissionTable(create log_index)");
 }
 //funcion insertar una nueva remision
 function DBNewRemission($param, $c=null){
@@ -1633,174 +1749,6 @@ function DBNewRemission($param, $c=null){
 
 	return $ret;
 }
-/*function DBNewRemission($param, $swrid=false, $c=null){
-
-
-	if(isset($param['patientid']) && !isset($param['id'])) $param['id']=$param['patientid'];
-	if(isset($param['admissionid']) && !isset($param['admission'])) $param['admission']=$param['admissionid'];
-	if(isset($param['patientfullname']) && !isset($param['fullname'])) $param['fullname']=$param['patientfullname'];
-	if(isset($param['patientdiagnostico']) && !isset($param['diagnostico'])) $param['diagnostico']=$param['patientdiagnostico'];
-	if(isset($param['patientclinical']) && !isset($param['clinical'])) $param['clinical']=$param['patientclinical'];
-	if(isset($param['patientexamined']) && !isset($param['examined'])) $param['examined']=$param['patientexamined'];
-
-	$ac=array('clinical', 'examined', 'admission');
-	//$ac=array('contest','site','user');
-
-	$ac1=array('fullname', 'diagnostico', 'updatetime');
-	$fullname=$param['fullname'];
-	$id=$param["id"];
-
-
-
-
-	$typei['updatetime']=1;
-
-	$typei['clinical']=1;
-	$typei['admission']=-1;
-	$typei['examined']=0;
-	$updatetime=-1;
-	foreach($ac as $key) {
-		if(!isset($param[$key]) || $param[$key]=="") {
-			MSGError("DBNewSpecialty param error: $key not found");
-			return false;
-		}
-		if(isset($typei[$key]) && !is_numeric($param[$key])) {
-			MSGError("DBNewSpecialty param error: $key is not numeric");
-			return false;
-		}
-		$$key = myhtmlspecialchars($param[$key]);
-	}
-
-	$fullname='';
-	$diagnostico='';
-
-
-	foreach($ac1 as $key) {
-		if(isset($param[$key])) {
-			$$key = myhtmlspecialchars($param[$key]);
-			if(isset($typei[$key]) && !is_numeric($param[$key])) {
-				MSGError("DBNewSpecialty param error: $key is not numeric");
-				return false;
-			}
-		}
-	}
-	$t = time();
-	if($updatetime <= 0)
-		$updatetime=$t;
-
-
-	$cw = false;
-	if($c == null) {
-		$cw = true;
-		$c = DBConnect();
-		DBExec($c, "begin work", "DBNewRemission(begin)");
-	}
-	//DBExec($c, "lock table remissiontable", "DBNewRemission(lock)");
-
-
-
-	if($param["remissionid"]=="")
-		$rid=DBRemissionNumberMax();
-	else
-		$rid=$param["remissionid"];
-
-	$sql="select *from remissiontable where remissionid=$rid";
-	$a = DBGetRow ($sql, 0, $c);
-	$ret=0;
-	//$admission=$_SESSION["usertable"]["usernumber"];
-	$data=array();//array para ficha clinica
-	if($a==null){
-		$ret=2;
-		$paid=DBPatientAdmissionNumberMax()-1;
-		$tid=DBTriageNumberMax()-1;
-		$ed=DBDentalExamNumberMax()-1;
-		$oi=DBOdontogramNumberMax()-1;
-		$rid=DBRemissionNumberMax();
-
-		$sql = "insert into remissiontable (remissionid, diagnostico, examined, clinicalid, ".
-					 "patientadmissionid, patientdentalid, odontogramid, patientid, triageid, admissionid, updatetime) values " .
-				"($rid, '$diagnostico', $examined, $clinical, $paid, $ed, $oi, $id, $tid, $admission, $updatetime)";
-		DBExec ($c, $sql, "DBNewRemission(insert)");
-		$data["clinicalold"]=$clinical;
-		LOGLevel ("remitido paciente $id registrado.",2);
-	}else{
-		if(isset($param["mod"])){
-			if($param["mod"]=='new'){
-				$ret=2;
-				$paid=DBPatientAdmissionNumberMax()-1;
-				$tid=DBTriageNumberMax()-1;
-				$ed=DBDentalExamNumberMax()-1;
-				$oi=DBOdontogramNumberMax()-1;
-
-				$rid=DBRemissionNumberMax();
-
-				$sql = "insert into remissiontable (remissionid, diagnostico, examined, clinicalid, ".
-							 "patientadmissionid, patientdentalid, odontogramid, patientid, triageid, admissionid, updatetime) values " .
-						"($rid, '$diagnostico', $examined, $clinical, $paid, $ed, $oi, $id, $tid, $admission, $updatetime)";
-				DBExec ($c, $sql, "DBNewRemission(insert)");
-
-				$data['clinicalold']=$clinical;
-				LOGLevel ("remitido paciente $id",2);
-			}elseif ($param["mod"]=='update' && $param["patientadmissionid"]!="" && $param["triageid"]!="" &&
-						$param["dentalid"]!="" && $param["odontogramid"]!="" && $param["remissionid"]!="") {
-				$ret=2;
-				$paid=$param["patientadmissionid"];
-				$tid=$param["triageid"];
-				$ed=$param["dentalid"];
-				$oi=$param["odontogramid"];
-
-				//$rid=$param["remissionid"];//id para actualizar un remision
-				$ar= array(1 => 'removable', 2 => 'fixed', 3 => 'operative', 4 => 'endodontics', 5 => 'surgeryii', 6 => 'periodonticsii', 7 => 'pediatricsi', 8 => 'orthodontics', 9 => 'removable', 10 => 'fixed', 11 => 'operative', 12 => 'endodontics', 13 => 'surgeryii',
-				14 => 'periodonticsii', 15 => 'pediatricsi', 16 => 'orthodontics');//añador para nuevas fichas clinicasl....
-				if($a['clinicalid']!=$clinical && array_key_exists($clinical, $ar)){
-					$sql="update ".$ar[$a['clinicalid']]."table set teacher=0 where remissionid=$rid";
-
-					DBExec ($c, $sql, "DBNewRemission(update)");
-				}
-
-				$sql="update remissiontable set diagnostico='$diagnostico', examined=$examined, clinicalid=$clinical ".
-						"where remissionid=$rid";
-
-				DBExec ($c, $sql, "DBNewRemission(update)");
-
-				$data['clinicalold']=$a['clinicalid'];
-				LOGLevel ("Remision $rid actualizado.",2);
-			}else{
-				LOGLevel ("Modo de registrio invalido",2);
-				return false;
-			}
-		}else{
-			LOGLevel ("No encontrado el modo de registrio",2);
-			return false;
-		}
-
-	}
-
-
-
-
-
-
-	if($cw) DBExec($c, "commit work");
-	LOGLevel ("Paciente $id remitido a la especialidad $clinical",2);
-
-	if($ret==2 && $cw==false){
-		DBExec($c, "commit work");//para el commit de exito
-		$data['patientid']=$id;
-		$data['studentid']=$examined;
-		$data['teacherid']=-1;//para el docente default 0 que es el admin
-		$data['clinicalid']=$clinical;
-		$data['remissionid']=$rid;
-		$data['type']=$param["mod"];
-		$data['updatetime']=$updatetime;
-
-		DBNewClinicalRecord($data);
-	}
-	if($swrid){
-		$ret=$rid;
-	}
-	return $ret;
-}*/
 //funcion para crear un nuevo ficha clinica designada
 function DBNewClinicalRecord($data){
 	if($data['clinicalold']==1){
@@ -2462,20 +2410,20 @@ function DBTriageNumberMax($c=null){
     return $n;
 }
 //funcion para sacar el max number de remission
-function DBRemissionNumberMax($c=null){
+function DBRemissionhistoryNumberMax($c=null){
     $cw=false;
     if($c==null){
         $cw=true;
         $c=DBConnect();
-        DBExec($c,"begin work","DBRemissionNumberMax(begin)");
+        DBExec($c,"begin work","DBRemissionhistoryNumberMax(begin)");
     }
     //no retorna un array asociativo el primer resultado
-    $a=DBGetRow("select max(remissionid) as n from remissiontable",0,$c,
-        "DBRemissionNumberMax(max(n))");
+    $a=DBGetRow("select max(remissionid) as n from remissionhistorytable",0,$c,
+        "DBRemissionhistoryNumberMax(max(n))");
 		if($a==null)
 			$a["n"]=-1;
 		if($cw){
-        DBExec($c,"commit work", "DBRemissionNumberMax(commit)");
+        DBExec($c,"commit work", "DBRemissionhistoryNumberMax(commit)");
     }
     $n=$a["n"]+1;
     return $n;
@@ -2717,5 +2665,24 @@ function DBUpdatePatientfullname($patientid, $patientname, $patientfirstname, $p
 		}
 		return $ret;
 }
+//funcion para contar paciente por modulo
+function DBCountpatientclinicalInfo() {
+	$sql = "select clinicalid, count(*) as amount from remissionhistorytable group by clinicalid";
 
+	$c = DBConnect();
+	$r = DBExec ($c, $sql, "DBCountpatientclinicalInfo(get count x clinical)");
+	$n = DBnlines($r);
+	if ($n == 0) {
+
+		LOGError("Unable to find users in the database. SQL=(" . $sql . ")");
+		//return null;
+		//MSGError("¡No se pueden encontrar pacientes remitidos en la base de datos!");
+	}
+
+	$a = array();
+	for ($i=0;$i<$n;$i++) {
+		$a[$i] = DBRow($r,$i);
+	}
+	return $a;
+}
 ?>
