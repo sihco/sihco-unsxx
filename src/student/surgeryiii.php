@@ -218,16 +218,14 @@ $pat=$r;
   </div>
 
 
-
-
-
-
   <div class="row">
     <div class="col-12">
-      <b>I. Examen Clínico</b><br>
-      <u><b>Extraoral</u></b>
+      <b>B. ANAMNESIS</b><br>
+      <u><b>B1. Anamnesis próxima personal</u></b>
     </div>
   </div>
+
+  
   <div class="row mb-2">
     <div class="col-lg-4 col-md-4 col-sm-12 col-12">
       <div class="input-group input-group-sm">
