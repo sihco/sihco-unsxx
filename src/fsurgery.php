@@ -48,8 +48,11 @@ CREATE TABLE \"surgeryiitable\" (
 	$r = DBExec($c, "REVOKE ALL ON \"surgeryiitable\" FROM PUBLIC", "DBCreateSurgeryiiTable(revoke public)");
 	$r = DBExec($c, "GRANT ALL ON \"surgeryiitable\" TO \"".$conf["dbuser"]."\"", "DBCreateSurgeryiiTable(grant sihcouser)");
 	$r = DBExec($c, "CREATE INDEX \"surgeryii_index\" ON \"surgeryiitable\" USING btree ".
-				"(\"remissionid\" int4_ops, \"surgeryiiid\" int4_ops)",
+				"(\"surgeryiiid\" int4_ops)",
 				"DBCreateSurgeryiiTable(create surgeryii_index)");
+	$r = DBExec($c, "CREATE INDEX \"surgeryii_indexremission\" ON \"surgeryiitable\" USING btree ".
+				"(\"remissionid\" int4_ops)",
+				"DBCreateSurgeryiiTable(create surgeryii_indexremission)");
 }
 
 //funcion para registrar o actualizar cirugia bucal II
@@ -1047,11 +1050,9 @@ function DBAuthorizationAnesthesia($user, $time=null, $type, $id, $c=null){
 }
 function DBPatientRemissionSurgeryiiInfo($id, $c=null) {
 
-	$sql = "select pa.*, p.*,
-	su.*, su.remissionid as remissionidsu, cli.* from patientadmissiontable as pa,
-patienttable as p, clinichistorytable as cli LEFT JOIN surgeryiitable as su ON su.remissionid=cli.remissionid
-where cli.remissionid=$id and pa.patientadmissionid=cli.patientadmissionid and
-p.patientid=cli.patientid";
+	$sql = "SELECT pa.*, p.*, rh.*, su.* FROM remissionhistorytable AS rh JOIN patientadmissiontable AS pa
+		ON pa.patientadmissionid = rh.patientadmissionid JOIN patienttable AS p ON p.patientid = pa.patientid
+		LEFT JOIN surgeryiitable AS su ON su.remissionid = rh.remissionid where rh.remissionid=$id";
 
 	$a = DBGetRow ($sql, 0, $c);
 	if ($a == null) {

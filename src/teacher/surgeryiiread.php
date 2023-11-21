@@ -6,6 +6,7 @@ if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
   $r=DBPatientRemissionSurgeryiiInfo($id);
   //$r=DBSurgeryiiInfo($id);
   if($r==null){
+    MSGError('Aun no llenó los datos la de especilidad');
     ForceLoad("index.php");
   }
   if($r["clinicalid"]!=6)
@@ -441,7 +442,7 @@ $pat=$r;
       <div class="input-group input-group-sm">
         <?php
         $msg="";
-        if($pat["exam"] == 'periapical'){
+        if(isset($pat["exam"])&& $pat["exam"] == 'periapical'){
           $msg.='<span class="text-secondary">';
           $msg.= "<u>RX PERIAPICAL</u>&nbsp;Pieza:";
           if(isset($pat['pieza'])&& $pat['pieza']!='') $msg.= '&nbsp;'.$pat['pieza'].'&nbsp;';
@@ -449,7 +450,7 @@ $pat=$r;
           $msg.='</span>';
         } else $msg.= "RX PERIAPICAL&nbsp;Pieza:&nbsp;...........&nbsp;";
         $msg.="&nbsp;";
-        if($pat["exam"] == 'oclusal'){
+        if(isset($pat["exam"])&& $pat["exam"] == 'oclusal'){
           $msg.='<span class="text-secondary">';
           $msg.= "<u>RX OCLUSAL</u>&nbsp;Pieza:";
           if(isset($pat['pieza'])&& $pat['pieza']!='') $msg.= '&nbsp;'.$pat['pieza'].'&nbsp;';
@@ -457,7 +458,7 @@ $pat=$r;
           $msg.='</span>';
         } else $msg.= "RX OCLUSAL&nbsp;Pieza:&nbsp;...........&nbsp;";
         $msg.="&nbsp;";
-        if($pat["exam"] == 'panoramico'){
+        if(isset($pat["exam"])&& $pat["exam"] == 'panoramico'){
           $msg.='<span class="text-secondary">';
           $msg.= "<u>RX PANORAMICO</u>&nbsp;Pieza:";
           if(isset($pat['pieza'])&& $pat['pieza']!='') $msg.= '&nbsp;'.$pat['pieza'].'&nbsp;';
@@ -465,7 +466,7 @@ $pat=$r;
           $msg.='</span>';
         } else $msg.= "RX PANORAMICO&nbsp;Pieza:&nbsp;...........&nbsp;";
         $msg.="&nbsp;";
-        if($pat["exam"] == 'otros'&& $pat['pieza']!=''){
+        if(isset($pat["exam"])&& $pat["exam"] == 'otros'&& $pat['pieza']!=''){
           $msg.='<span class="text-secondary">';
           $msg.= "<u>Otros</u>&nbsp;Pieza:";
           if(isset($pat['pieza'])) $msg.= '&nbsp;'.$pat['pieza'].'&nbsp;';
@@ -775,7 +776,9 @@ $pat=$r;
       <?php
 
       $name="Docente:&nbsp;&nbsp;&nbsp;&nbsp;";
-      $size=count($pat['areviewteacher']);
+      $size=0;
+      if(isset($pat['areviewteacher']))
+        $size=count($pat['areviewteacher']);
       if($size>0){
         $it=DBUserInfo($pat['areviewteacher'][$size-1]['teacher']);
       }

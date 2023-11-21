@@ -5,7 +5,7 @@ require_once("../db.php");
 if(isset($_POST['ch'])&& is_numeric($_POST['ch'])){
   $param['remissionid']=htmlspecialchars($_POST['ch']);
 
-  $r=DBClinicHistoryInfo($param['remissionid']);
+  $r=DBRemissionHistoryInfo2($param['remissionid']);
   if($r==null){
     echo "No Encontrado Historial Clínico";
     exit;

@@ -93,6 +93,7 @@ if(isset($_POST['rh'])&& is_numeric($_POST['rh'])){
     $param['reviewstatus']='t';
     DBUpdateExamClinichistory($param);//para finalizar ficha clinica
   }else{
+    $param['authorized']='t';
     DBNewRemissionhistory($param, null, true);
   }
   echo 'yes';
@@ -185,7 +186,7 @@ if(isset($_POST['formch'])&& is_numeric($_POST['formch'])&&
   isset($_POST['status'])&& isset($_POST['obsdesc'])){
     $param = array();
     $param['remissionid']=htmlspecialchars($_POST['formch']);
-    $r=DBClinicHistoryInfo($param['remissionid']);
+    $r=DBRemissionHistoryInfo2($param['remissionid']);
     if($r==null){
       echo "No Encontrado Historial Clínico";
       exit;

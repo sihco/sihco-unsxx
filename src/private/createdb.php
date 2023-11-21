@@ -56,9 +56,9 @@ DBCreateClinicalTable();
 DBCreateSpecialtyTable();
 DBCreatePatientTable();
 DBCreatePatientAdmissionTable();
-DBCreateRemissionTable();
-DBCreateClinichistoryTable();
-
+//DBCreateRemissionTable();
+//DBCreateClinichistoryTable();
+DBCreateRemissionhistoryTable();
 DBCreateSurgeryiiTable();
 /*DBCreateObservationTable();
 DBCreatePeriodonticsiiTable();

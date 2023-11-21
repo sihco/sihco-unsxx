@@ -828,7 +828,9 @@ $pat=$r;
       <?php
 
       $name="Docente:&nbsp;&nbsp;&nbsp;&nbsp;";
-      $size=count($pat['areviewteacher']);
+      $size=0;
+      if(isset($pat['areviewteacher']))
+        $size=count($pat['areviewteacher']);
       if($size>0){
         $it=DBUserInfo($pat['areviewteacher'][$size-1]['teacher']);
       }

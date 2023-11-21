@@ -77,7 +77,7 @@ if($sizedata>0){
           $tabledata .= "   <td>" . $pr[$i]["clinicalspecialty"] . "</td>";
         }
 
-        $tabledata .= "   <td>" . $pr[$i]["userfullname"] ."</td>";
+        $tabledata .= "   <td>" . ucwords($pr[$i]["userfullname"]) ."</td>";
         $tabledata .= "   <td>" . datetimeconv($pr[$i]["updatetime"]) ."</td>";
         $tabledata .= "   <td><div class=\"btn-group\"><a href=\"admission.php?id=" . $pr[$i]["patientadmissionid"] .
           "\" class=\"btn btn-outline-primary btn-sm\" name=\"\" title=\"Actualizar\"><i class=\"fa fa-2x fa-edit\"></i></a><a href=\"report.php?id=" .

@@ -79,7 +79,7 @@ if($sizedata>0){
         $tabledata .= "   <td>" . $pr[$i]["patientgender"] . "</td>";
         $tabledata .= "   <td>" . $pr[$i]["clinicalspecialty"] . "</td>";
 
-        $tabledata .= "   <td>" . $pr[$i]["userfullname"] ."</td>";
+        $tabledata .= "   <td>" . ucwords($pr[$i]["userfullname"]) ."</td>";
         $tabledata .= "   <td>" . datetimeconv($pr[$i]["updatetime"]) ."</td>";
         //$tabledata .= "   <td><div class=\"btn-group\"><a href=\"patientfollow.php?id=".$pr[$i]['patientid']."\" class=\"btn btn-primary btn-sm\" name=\"\" >Ver</a></div></td>";
 

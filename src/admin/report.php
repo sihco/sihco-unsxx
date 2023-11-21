@@ -1058,7 +1058,7 @@ if(!isset($_SESSION['usertable']['usertype'])||
         <?php
         $name="Estudiante Designado:";
         if(isset($pat['userfullname']) && $pat['userfullname']){
-          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Univ. ".$pat['userfullname'];
+          $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Univ. ".ucwords($pat['userfullname']);
           echo $name;
         }else{
           echo $name."....................................................................................................................";

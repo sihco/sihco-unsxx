@@ -1,23 +1,53 @@
 <?php
 require('header.php');
 ?>
-                    <div class="container-fluid px-4">
+                    <div class="container-fluid px-3">
 
-                        <h2 class="mt-4">Mis Fichas Clínicas</h2>
+                        <h2 class="mt-3">Mis Fichas Clínicas</h2>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Odontologia(UNSXX)</li>
                         </ol>
+                        <style media="screen">
+                          .catimg {
+                            width: 30px;
+                          }
+                          img {
+                            max-width: 100%;
+                            max-height: 100%;
+                          }
+                          td,th{
+                            text-align: center;
+                          }
+                          table{
+                            font-size: 15px
+                          }
+                        </style>
 <div class="table-responsive">
-
-
+<div class='d-flex flex-wrap flex-sm-row justify-content-between' id="pagination-data"></div>
 <table class="table table-sm table-hover">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Paciente</th>
+            <th scope="col">
+              Paciente
+              <input type="text" class="form-control" name='patientname' id='patientname' aria-label="Buscar" aria-describedby="boton-buscar">
+            </th>
             <th scope="col">Edad</th>
             <th scope="col">Consulta</th>
-            <th scope="col">Especilidad</th>
+            <th scope="col">Esp. Derivada
+              <select class="form-control" onchange="PatientDerivative(1)" id='specialty' name = 'specialty'>
+                <?php
+                $a = DBAllSpecialtyInfo($_SESSION["usertable"]["usernumber"], true);
+                $size=count($a);
+                if($size>0)
+                  echo "<option value=''>Todos</option>";
+                for ($i=0; $i < $size; $i++) {
+                      $clinical=DBClinicalInfo($a[$i]['clinicalid']);
+                      echo "<option value=".$clinical['clinicalid'].">" . $clinical["clinicalspecialty"] . "</option>";
+                }
+                ?>
+      				</select>
+            </th>
             <th scope="col">Autorizado por</th>
             <th scope="col">Estado</th>
             <th scope="col">Fecha inicio</th>
@@ -25,99 +55,9 @@ require('header.php');
             <th scope="col">Acciones para historial</th>
         </tr>
     </thead>
-    <tbody>
-      <style media="screen">
-      .catimg {
-        width: 30px;
-      }
-      img {
-      max-width: 100%;
-      max-height: 100%;
-      }
-      </style>
-<?php
-//$usr = DBAllUserInfo();
-$color=array(''=>'', 'new'=>'table-default', 'process'=>'table-primary text-primary', 'fail'=>'table-danger', 'end'=>'table-success text-success', 'canceled'=>'table-dark');
-$namestatus=array(''=>'', 'new'=>'Nuevo', 'process'=>'En proceso', 'fail'=>'Abandonado', 'end'=>'Finalizado', 'canceled'=>'Anulado');
-$historytable=array(2=>'removable', 3=>'fixed', 4=>'operative', 5=>'endodontics',
-  6=>'surgeryii', 7=>'periodonticsii', 8=>'pediatricsi', 9=>'orthodontics', 10=>'removable',
-  11=>'fixed', 12=>'operative', 13=>'endodontics', 14=>'surgeryiii', 15=>'periodonticsiii',
-  16=>'pediatricsi', 17=>'orthodontics');
-$pr=DBAllRemissionPatientInfo($_SESSION['usertable']['usernumber'], true);
-//$pr = DBAllRemissionInfo(null, false, $limit);
-$size=count($pr);
-for ($i=0; $i < $size; $i++) {
-      if(isset($pr[$i]['status'])&&isset($color[$pr[$i]['status']]))
-        echo " <tr class=\"".$color[$pr[$i]['status']]."\">\n";
-      else
-        echo " <tr class==\"\">\n";
-      echo "   <td>" . ($size-$i) . "</td>";
-      echo "   <td>" . $pr[$i]["patientname"] ." ". $pr[$i]["patientfirstname"] ." ". $pr[$i]["patientlastname"] ."</td>";
-      echo "   <td>" . $pr[$i]["patientage"] . "</td>";
-      echo "   <td>" . $pr[$i]["motconsult"] . "</td>";
-      echo "   <td>" . $pr[$i]['clinicalspecialty'] . "</td>";
-      if($pr[$i]["teacherid"]!=0&& is_numeric($pr[$i]["teacherid"])&& $pr[$i]['authorized']=='t'){
-        $t=DBUserInfo($pr[$i]["teacherid"]);
-        echo "   <td>".$t['userfullname']."</td>";
-      }else{
-        if($pr[$i]["teacherid"]==0&& $pr[$i]['authorized']=='t'){
-          echo " <td><div class=\"catimg\"><img src=\"../images/loading.gif\" alt=\"...\"></div></td>";
-        }else{
-          echo "<td>";
-          //echo " <input type=\"button\" class=\"btn btn-sm btn-success btn_autorization\" name=\"btn_autorization\" hc=".$pr[$i]['remissionidch']." value=\"Solicitar\">";
-
-          //inicio autorizar por qr
-          echo '<button type="button" class="btn btn-outline-success btn-sm" name="local_button" onclick="readqr('.$pr[$i]['remissionidch'].',\'authorizeqr\')" data-bs-toggle="modal" data-bs-target="#modalqr">Solicitar <i class="fa fa-solid fa-qrcode"></i></button>';
-          //fin autorizar por qr
-
-
-          //echo "<button type=\"button\"".
-          //"ch=\"".$pr[$i]['remissionidch']."\" class=\"btn btn-sm btn-outline-secondary\" data-bs-toggle=\"modal\" ".
-          //"data-bs-target=\"#modalautorization\"><i class=\"fa fa-2x fa-solid fa-info\"></i></button>";
-          echo "</td>";
-
-        }
-      }
-      echo "   <td>".$namestatus[$pr[$i]["status"]]."</td>";
-
-      echo "   <td>" . datetimeconv($pr[$i]["stdatetime"]) ."</td>";
-      if(isset($pr[$i]['endatetime'])&& $pr[$i]['endatetime']!=-1) echo '<td>'.dateconv($pr[$i]['endatetime']).'</td>';
-      else echo "   <td></td>";
-      echo "   <td>";
-
-      echo "<div class=\"btn-group\">" ;
-      if(isset($pr[$i]["status"])&& $pr[$i]["status"]!='end'){
-        echo "<button type=\"button\"".
-        "ch=\"".$pr[$i]['remissionidch']."\" class=\"send_modal btn btn-sm btn-outline-secondary\" data-bs-toggle=\"modal\" ".
-        "data-bs-target=\"#subfile\"><i class=\"fas fa-2x fa-regular fa-upload\"></i></button>";
-      }
-
-      if (isset($pr[$i]["inputfile"])&& $pr[$i]["inputfile"] != null) {
-        $tx = $pr[$i]["inputfilehash"];
-        echo "<a href=\"#\" class=\"btn btn-sm btn-outline-primary\" style=\"font-weight:bold\" onClick=\"window.open('../filewindow.php?".filedownload($pr[$i]["inputfile"], $pr[$i]["inputfilename"])."', 'Ver - Ficha', 'width=680,height=600,scrollbars=yes,resizable=yes')\"><i class=\"fas fa-2x fa-solid fa-eye\"></i></a>";
-        echo "  <a class=\"btn btn-sm btn-outline-success\" href=\"../filedownload.php?" . filedownload($pr[$i]["inputfile"] ,$pr[$i]["inputfilename"]) ."\">" .
-              "<i class=\"fas fa-2x fa-solid fa-download\"></i></a>";
-      }
-      echo "<button type=\"button\"".
-      "ch=\"".$pr[$i]['remissionidch']."\" class=\"detail_modal btn btn-sm btn-outline-secondary\" data-bs-toggle=\"modal\" ".
-      "data-bs-target=\"#detail\"><i class=\"fa fa-2x fa-solid fa-info\"></i></button>";
-      if($pr[$i]['clinicalid']==6){
-        echo "  <a class=\"btn btn-sm btn-outline-primary\" href=\"".$historytable[$pr[$i]['clinicalid']].".php?id=".$pr[$i]['remissionidch']."\">" .
-              "<i class='fa fa-2x fa-edit'></i></a>";
-      }
-
-
-      echo "</div>";
-
-
-
-      echo "</td>";
-
-      echo "</tr>";
-}
-echo "</tbody></table>\n";
-
-?>
+    <tbody id = "table-data">
+    </tbody>
+</table>
 </div>
 <!--tabla para pacientes remitidos fin-->
 <?php require('../leftscannerqr.php'); ?>
@@ -233,6 +173,45 @@ require('footer.php');
 ?>
 <script src="../leftscannerqr.js"></script>
 <script>
+var formData = new FormData(); // Crear un objeto FormData vacío
+function restartFormData(){
+  for (var key of formData.keys()) {
+    formData.delete(key);
+  }
+}
+//var checkboxStates = new Array(16).fill(1);
+function AddFormData(page){
+  restartFormData();//reinicia el formulario
+  formData.append('page', page);
+  formData.append('specialty', $('#specialty').val());
+  formData.append('patientfullname', $('#patientname').val());
+  //formData.append('studentfullname', $('#studentname').val());
+  //formData.append('stdate', $('#stdate').val());
+  //formData.append('endate', $('#endate').val());
+}
+function loadData(page){
+  AddFormData(page);
+  //alert('entra');
+  $.ajax({
+    url: "tableindex.php",
+    type: "POST",
+    data: formData,
+    contentType: false, // Deshabilitar la codificación de tipo MIME
+    processData: false, // Deshabilitar la codificación de datos
+    success: function(r) {
+      $('#table-data').html(r);
+      //var jsonData = JSON.parse(r);
+      //$('#table-data').html(jsonData.tableData);
+      //$('#pagination-data').html(jsonData.paginationData);
+    }
+  });
+}
+$('#patientname, #specialty').on('change', function() {
+  loadData(1);
+});
+//cargar datos en la pagina inicial
+loadData(1);
+
 function registerqr(content){
   var ch = $('#functionname').val();
   if(ch=='authorizeqr'){
@@ -240,14 +219,14 @@ function registerqr(content){
   }
 }
 function authorizeqr(content){
-  var ch = $('#inputqr').val();
+  var rh = $('#inputqr').val();
   //var ficha = $('#ficha').val();
   //window.location.href=content;
   //alert(content);
   $.ajax({
        url:"../include/i_clinichistory.php",
        method:"POST",
-       data: {content:content, ch:ch},
+       data: {content:content, rh:rh},
        success:function(data)
        {
           if(data=='yes'){

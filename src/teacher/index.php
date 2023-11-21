@@ -39,7 +39,7 @@ require('header.php');
         <tr>
           <th scope="col">#</th>
           <th scope="col">Paciente
-            <input type="text" class="form-control" name='patientname' id='patientname' aria-label="Buscar" aria-describedby="boton-buscar" onkeyup="PatientDerivative(1)">
+            <input type="text" class="form-control" name='patientname' id='patientname' aria-label="Buscar" aria-describedby="boton-buscar">
           </th>
           <th scope="col">Edad</th>
           <th scope="col">Diagnostico Presuntivo</th>

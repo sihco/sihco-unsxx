@@ -841,7 +841,7 @@ function DBAllPatientRemissionInfo($patientfullname, $clinicalids, $studentfulln
 //funcion para saber en que especilidades esta presente
 //funcion para sacar los pacientes de una especilidad asignada o a las especilidades derivados
 function DBAllRemissionPatientInfo($patientfullname, $studentfullname,
-	$clinicalids, $stdate, $endate, $results_per_page=-1, $start_limit=-1) {
+	$clinicalids, $stdate, $endate, $results_per_page=-1, $start_limit=-1, $studentid=null) {
 
 	$sql = "SELECT p.patientid, p.patientname, p.patientfirstname, p.patientlastname,
 	pa.patientadmissionid, pa.patientage, pa.motconsult, pa.diagnosis,
@@ -865,7 +865,7 @@ function DBAllRemissionPatientInfo($patientfullname, $studentfullname,
 	if(!empty($studentfullname)){
 		$sql.=" AND u.userfullname ILIKE '%$studentfullname%'";
 	}
-
+	if($studentid != null) $sql.=" AND rh.studentid=$studentid";
 	$sql.=" order by 	rh.updatetime desc";
 	if($results_per_page!=-1&& $start_limit!=-1)
 		$sql.=" LIMIT $results_per_page OFFSET $start_limit";

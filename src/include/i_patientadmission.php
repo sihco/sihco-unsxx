@@ -195,7 +195,7 @@ if(isset($_POST["mod"]) && $_POST["mod"]='surgeryii' &&
       $param["mod"]='update';
       $param["patientid"]=htmlspecialchars(trim($_POST["patientid"]));
       $param['remissionid'] = htmlspecialchars($_POST["remission"]);
-      $infoch=DBClinicHistoryInfo($param['remissionid']);
+      $infoch=DBRemissionhistoryInfo2($param['remissionid']);
       $param['idpa'] = $infoch['patientadmissionid'];
       $infopa=DBPatientRemissionInfo($param['idpa']);//informacion de patient admission
       //examen buco dental

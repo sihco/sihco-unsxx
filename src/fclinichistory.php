@@ -387,17 +387,17 @@ function DBUpdateExamClinichistory($param, $c=null){
 			$c = DBConnect();
 			DBExec($c, "begin work", "DBUpdateExamClinichistory(begin)");
 		}
-		DBExec($c, "lock table clinichistorytable", "DBUpdateExamClinichistory(lock)");
+		DBExec($c, "lock table remissionhistorytable", "DBUpdateExamClinichistory(lock)");
 
 		$ret=0;
 		$t = time();
 		if($updatetime <= 0)
 			$updatetime=$t;
 
-		$sql="select *from clinichistorytable where remissionid=$idre";
+		$sql="select *from remissionhistorytable where remissionid=$idre";
 		$a = DBGetRow ($sql, 0, $c);
 		if($a!=null){
-			$sql="update clinichistorytable set status='$status'";
+			$sql="update remissionhistorytable set status='$status'";
 			if($reviewany!='f')
 					$sql.=" , reviewany='$reviewany'";
 			if($reviewteacher!='f')
@@ -427,24 +427,24 @@ function DBUpdateReviewStatus($remission, $reviewstatus, $c=null){
 			$c = DBConnect();
 			DBExec($c, "begin work", "DBUpdateReviewStatus(begin)");
 		}
-		DBExec($c, "lock table clinichistorytable", "DBUpdateReviewStatus(lock)");
+		DBExec($c, "lock table remissionhistorytable", "DBUpdateReviewStatus(lock)");
 		$ret=0;
 		$t = time();
 		$updatetime=-1;
 		if($updatetime <= 0)
 			$updatetime=$t;
-		$sql="select *from clinichistorytable where remissionid=$remission";
+		$sql="select *from remissionhistorytable where remissionid=$remission";
 		$a = DBGetRow ($sql, 0, $c);
 		if($a!=null){
-			$sql="update clinichistorytable set ";
+			$sql="update remissionhistorytable set ";
 			if($reviewstatus==false) $sql.="reviewstatus='f', ";
 			if($reviewstatus==true) $sql.="reviewstatus='t', ";
 			$sql.="updatetime=$updatetime where remissionid=$remission";
 			DBExec($c, $sql, "DBUpdateReviewStatus(update)");
-			LOGLevel ("update clinic history $remission",2);
+			LOGLevel ("update remission history $remission",2);
 		}else{
-			MSGError("update clinic history not found $remission");
-			LOGLevel ("update clinic history not found $remission",2);
+			MSGError("update remission history not found $remission");
+			LOGLevel ("update remission history not found $remission",2);
 		}
 		if($cw) {
 				DBExec ($c, "commit work");
