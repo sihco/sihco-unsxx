@@ -560,7 +560,7 @@ function DBPatientRemissionInfo($id, $c=null){
 	cl.clinicalid, cl.clinicalspecialty,
 	rh.studentid AS designedstudentid, u.userfullname
 	FROM patientadmissiontable AS pa JOIN patienttable p ON p.patientid = pa.patientid JOIN usertable AS ur ON ur.usernumber = pa.responsibleid
-	LEFT JOIN remissionhistorytable AS rh ON rh.patientadmissionid=pa.patientadmissionid JOIN clinicaltable AS
+	LEFT JOIN remissionhistorytable AS rh ON rh.patientadmissionid=pa.patientadmissionid LEFT JOIN clinicaltable AS
 	cl ON cl.clinicalid = rh.clinicalid LEFT JOIN usertable AS u ON u.usernumber = rh.studentid
 	where pa.patientadmissionid=$id";
 	//funcion para capturar la fila del usuario

@@ -259,21 +259,20 @@ CREATE TABLE \"surgerytokentable\" (
         \"tokenbuccalmucosa\" varchar(50) DEFAULT '',     	     -- (mucosa bucal)
 				\"tokenobspost\" varchar(300) DEFAULT '',     	     -- (observaciones postoperatorio)
 
-				\"fileid\" int4 NOT NULL,                        -- (id de ficha)
-				\"student\" int4 NOT NULL,                       -- (id del estudiate)
-				\"teacher\" int4 NOT NULL,                       -- (id del docente)
+				\"remissionid\" int4 NOT NULL,                        -- (id de ficha)
 			  \"updatetime\" int4 DEFAULT EXTRACT(EPOCH FROM now()) NOT NULL, -- (indica la ultima actualizacion del registro)
         CONSTRAINT \"token_pkey\" PRIMARY KEY (\"tokenid\"),
-				CONSTRAINT \"surgeryii_fk\" FOREIGN KEY ( \"fileid\", \"student\", \"teacher\")
-								REFERENCES \"surgeryiitable\" (\"surgeryiiid\", \"student\", \"teacher\")
+				CONSTRAINT \"surgeryii_fk\" FOREIGN KEY ( \"remissionid\")
+								REFERENCES \"surgeryiitable\" (\"remissionid\")
 								ON DELETE CASCADE ON UPDATE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
 )", "DBCreateSurgeryTokenTable(create table)");
 
 	$r = DBExec($c, "REVOKE ALL ON \"surgerytokentable\" FROM PUBLIC", "DBCreateSurgeryTokenTable(revoke public)");
 	$r = DBExec($c, "GRANT ALL ON \"surgerytokentable\" TO \"".$conf["dbuser"]."\"", "DBCreateSurgeryTokenTable(grant sihcouser)");
 	$r = DBExec($c, "CREATE INDEX \"surgerytoken_index\" ON \"surgerytokentable\" USING btree ".
-				"(\"tokenid\" int4_ops, \"fileid\" int4_ops, \"student\" int4_ops, \"teacher\" int4_ops)",
-				"DBCreateSurgeryTokenTable(create surgerytoken_index)");
+				"(\"tokenid\" int4_ops)", "DBCreateSurgeryTokenTable(create surgerytoken_index)");
+	$r = DBExec($c, "CREATE INDEX \"surgerytoken_indexremission\" ON \"surgerytokentable\" USING btree ".
+				"(\"remissionid\" int4_ops)", "DBCreateSurgeryTokenTable(create surgerytoken_index)");
 }
 //control de datos
 function DBNewSurgeryToken($param , $c=null){

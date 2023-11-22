@@ -5,12 +5,6 @@ require_once('../version.php');
 require_once('../globals.php');
 require_once('../db.php');
 
-
-//if(!isset($_SESSION['usertable']['usertype'])||
-//($_SESSION['usertable']['usertype']!='admin'&&$_SESSION['usertable']['usertype']!='admission'&&$_SESSION['usertable']['usertype']!='teacher'&&$_SESSION['usertable']['usertype']!='student'&&$_SESSION['usertable']['usertype']!='chiefclinics')){
-//  ForceLoad("admission.php");
-//}
-
 $results_per_page = 15;
 $clinicalids="";
 
@@ -205,7 +199,7 @@ th, td {
             ?>
           </tbody>
         </table>
-
+        <?php echo "<i>Datos del SIHCO (Sistema de Historial Clinico Odontologico) - UNSXX</i>"; ?>
       </div>
     </div>
 
@@ -229,8 +223,6 @@ $dompdf->setPaper('letter');
 
 $dompdf->render();
 $type=false;
-//if(!isset($_GET["id"]))
-//  $type=true;
-$dompdf->stream("archivo_.pdf",array("Attachment"=>$type));
+$dompdf->stream("Reporte_Admision.pdf",array("Attachment"=>$type));
 
 ?>
