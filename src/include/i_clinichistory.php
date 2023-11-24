@@ -65,8 +65,8 @@ if(isset($_POST['rh'])&& is_numeric($_POST['rh'])){
   if(isset($_POST['endch'])&&$_POST['endch']=='true'){
     $teacher=$param['teacherid'];
     $param = array();
-    $param['remissionid']=htmlspecialchars($_POST['ch']);
-    $r=DBClinicHistoryInfo($param['remissionid']);
+    $param['remissionid']=htmlspecialchars($_POST['rh']);
+    $r=DBRemissionHistoryInfo2($param['remissionid']);
     if($r==null){
       echo "No Encontrado Historial Clínico";
       exit;
@@ -76,12 +76,12 @@ if(isset($_POST['rh'])&& is_numeric($_POST['rh'])){
     $param['status']='end';
     $param['reviewteacher']=$r['reviewteacher'].'['.$teacher.'::=::::=::'.time().']';
     $param['reviewstatus']='t';
-    DBUpdateExamClinichistory($param);//para finalizar ficha clinica
+    DBUpdateExamClinichistory($param);//para finalizar ficha clinica esta actualizado con este nombre
   }elseif (isset($_POST['canceledch'])&&$_POST['canceledch']=='true') {
     $teacher=$param['teacherid'];
     $param = array();
-    $param['remissionid']=htmlspecialchars($_POST['ch']);
-    $r=DBClinicHistoryInfo($param['remissionid']);
+    $param['remissionid']=htmlspecialchars($_POST['rh']);
+    $r=DBRemissionHistoryInfo2($param['remissionid']);
     if($r==null){
       echo "No Encontrado Historial Clínico";
       exit;

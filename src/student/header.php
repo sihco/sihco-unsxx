@@ -37,8 +37,13 @@ require_once('../db.php');
 
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>-->
         <script src="../assets/graphic/all.min.js"></script>
+
         <link href="../css/base.css" rel="stylesheet">
         <link href="../css/text.css" rel="stylesheet">
+        <link href="../css/estilo2.css" rel="stylesheet">
+
+
+
         <script language="javascript" src="../reload.js"></script>
         <script src="../assets/instascan.min.js"></script>
         <link rel="stylesheet" href="../assets/graphic/sweetalert2.min.css">

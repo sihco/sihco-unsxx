@@ -439,7 +439,8 @@ function DBNewPatient($param, $c=null){
 				LOGLevel ("Paciente $idp admitido $idpa : registrado.",2);
 
 			}else{
-				if($updatetime >= $a['updatetime'] && $idpa!="") {
+				//echo $updatetime.">=".$a['updatetime'].'::'.$param['idpa'];
+				if(isset($updatetime)&& $updatetime<=time()&& isset($idpa)) {
 					$ret=2;
 					$idpa=$param["idpa"];
 					$sql="update patienttable set patientname='$name', patientfirstname='$firstname', patientlastname='$lastname', patientgender='$gender', " .

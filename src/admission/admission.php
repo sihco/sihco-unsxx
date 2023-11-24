@@ -207,7 +207,7 @@ if(!isset($upreferred)){
 						      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'soltero') echo "selected"; ?> value="soltero">Soltero(a)</option>
 						      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'casado') echo "selected"; ?> value="casado">Casado(a)</option>
 						      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'conviviente') echo "selected"; ?> value="conviviente">Conviviente</option>
-						      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'anulado') echo "selected"; ?> value="anulado">Divorciado(a)</option>
+						      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'divorciado') echo "selected"; ?> value="divorciado">Divorciado(a)</option>
 						      <option <?php if(isset($pat) && $pat["patientcivilstatus"] == 'viudo') echo "selected"; ?> value="viudo">Viudo(a)</option>
 						    </select>
 							</div>
@@ -921,7 +921,6 @@ $(document).ready(function () {
 					 Swal.showLoading();
 				 }
 			 });
-
 			 $.ajax({
 				 url:"../include/i_patientadmission.php",
 				 method:"POST",

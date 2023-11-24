@@ -292,8 +292,18 @@ if(!isset($_SESSION['usertable']['usertype'])||
         <div class="tres" align="left">
           <?php
           $name="Estado Civil:";
-          if(isset($pat) && $pat["patientcivilstatus"]){
-            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".ucfirst($pat["patientcivilstatus"]);
+          if(isset($pat["patientcivilstatus"]) && $pat["patientcivilstatus"]!=''){
+            if($pat["patientcivilstatus"]!='conviviente'){
+              $civilstatus=substr($pat["patientcivilstatus"], 0, -1);
+              if($pat['patientgender']=='femenino'){
+                $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".ucfirst($civilstatus).'a';
+              }else{
+                $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".ucfirst($civilstatus).'o';
+              }
+            }else{
+              $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".ucfirst($pat["patientcivilstatus"]);
+            }
+
             echo $name;
           }else{
             echo $name."................................";

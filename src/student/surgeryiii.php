@@ -118,7 +118,7 @@ $pat=$r;
     <button type="button" id="file_button" name="patientregister_button" class="btn btn-sm btn-outline-primary" onclick="file(<?php echo $id; ?>)">
       <i class="fas fa-2x fa-solid fa-eye"></i>
     </button>
-    <a href="reportsurgeryii.php?id=<?php echo $id; ?>" class="btn btn btn-sm btn-warning"><i class="fa fa-2x fa-solid fa-print"></i></a>
+    <a href="reportsurgeryiii.php?id=<?php echo $id; ?>" class="btn btn btn-sm btn-warning"><i class="fa fa-2x fa-solid fa-print"></i></a>
 
   </div>
 
@@ -130,6 +130,9 @@ $pat=$r;
 
   <div class="row">
     <div class="col-lg-5 col-md-5 col-sm-12 col-12">
+      <input type="hidden" name="remissionid" id="remissionid"value="<?php if(isset($_GET['id'])) echo $_GET['id'];?>">
+      <input type="hidden" name="ficha" id="ficha"value="<?php if(isset($pat["surgeryiiid"])) echo $pat["surgeryiiid"]?>">
+
       <input type="hidden" name="patientid" id="patientid" value="<?php if(isset($pat["patientid"])) echo $pat["patientid"];  ?>">
       <label for="patientfullname"><b>Nombre del paciente:</b></label>&nbsp;&nbsp;&nbsp;
       <span class="text-secondary">
@@ -235,7 +238,7 @@ $pat=$r;
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
         <div class="input-group input-group-sm mb-3">
           <label class="input-group-text" for="historiaconsulta">Historia del Motivo de la Consulta</label>
-          <textarea class="form-control" name="historiaconsulta" id="historiaconsulta" rows="4"><?php if(isset($pat["historiaconsulta"])) echo $pat["historiaconsulta"];  ?></textarea>
+          <textarea class="form-control" name="historiaconsulta" id="historiaconsulta" rows="2"><?php if(isset($pat["historiaconsulta"])) echo $pat["historiaconsulta"];  ?></textarea>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
@@ -530,185 +533,224 @@ $pat=$r;
   <br>
   <div class="row">
     <div class="col-12">
-      <label for="">5.-¿Ha tenido sangrado anormal en relación con extracciones dentarias, operaciones o traumas?</label>
-      <div class="row">
-        <div class="col-4">
-          <select name="remota51" id="remota51" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota51']) || $pat["remota51"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota51']) && $pat["remota51"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota51']) && $pat["remota51"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="remota51">5.-¿Ha tenido sangrado anormal en relación con extracciones dentarias, operaciones o traumas?</label>
+        <select name="remota51" id="remota51" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['remota51']) || $pat["remota51"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['remota51']) && $pat["remota51"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['remota51']) && $pat["remota51"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row mx-2">
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota52">¿Se le forman moretones con facilidad?</label>
+            <select name="remota52" id="remota52" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota52']) || $pat["remota52"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota52']) && $pat["remota52"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota52']) && $pat["remota52"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota53">¿Ha recibido trasfuciones de sangre?</label>
+            <select name="remota53" id="remota53" class="form-select" onchange="remota('remota53')" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota53']) || $pat["remota53"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota53']) && $pat["remota53"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota53']) && $pat["remota53"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+            <input type="hidden" class="form-control" name="obsremota53" id="obsremota53" placeholder="¿explique las circunstancias?" value="<?php if(isset($pat["obsremota53"])&&$pat['obsremota53']) echo $pat["obsremota53"]; ?>">
+            <script type="text/javascript">
+              remota('remota53');
+            </script>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-4">
-      <label for="">¿Se le forman moretones con facilidad?</label>
-      <select name="remota52" id="remota52" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['remota52']) || $pat["remota52"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['remota52']) && $pat["remota52"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['remota52']) && $pat["remota52"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
-    </div>
-    <div class="col-4">
-      <label for="">¿Ha recibido trasfuciones de sangre?</label>
-      <select name="remota53" id="remota53" class="form-select" onchange="remota('remota53')" aria-label="Default select example">
-        <option <?php if(!isset($pat['remota53']) || $pat["remota53"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['remota53']) && $pat["remota53"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['remota53']) && $pat["remota53"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
-      <br>
-      <input type="hidden" class="form-control" name="obsremota53" id="obsremota53" placeholder="¿explique las circunstancias?" value="<?php if(isset($pat["obsremota53"])&&$pat['obsremota53']) echo $pat["obsremota53"]; ?>">
-      <script type="text/javascript">
-        remota('remota53');
-      </script>
-    </div>
+
   </div>
   <br>
   <div class="row">
-    <div class="col-4">
-      <label for="">6.- ¿Tiene alguna enfermedad sanguínea como anemia, trasfornos de la coagulación u otras?</label>
-      <select name="remota6" id="remota6" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['remota6']) || $pat["remota6"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['remota6']) && $pat["remota6"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['remota6']) && $pat["remota6"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="remota6">6.- ¿Tiene alguna enfermedad sanguínea como anemia, trasfornos de la coagulación u otras?</label>
+        <select name="remota6" id="remota6" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['remota6']) || $pat["remota6"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['remota6']) && $pat["remota6"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['remota6']) && $pat["remota6"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">7.- ¿Ha precisado cirugía o tratamiento con radioterapia por un tumor, cáncer u otra patología de cabeza y cuello?</label>
-      <select name="remota7" id="remota7" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['remota7']) || $pat["remota7"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['remota7']) && $pat["remota7"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['remota7']) && $pat["remota7"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="remota7">7.- ¿Ha precisado cirugía o tratamiento con radioterapia por un tumor, cáncer u otra patología de cabeza y cuello?</label>
+        <select name="remota7" id="remota7" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['remota7']) || $pat["remota7"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['remota7']) && $pat["remota7"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['remota7']) && $pat["remota7"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+      </div>
+
     </div>
 
   </div>
   <div class="row">
     <div class="col-12">
       <label for="">8.- ¿Está tomando alguno de los siguientes medicamentos?</label>
-      <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Antibióticos</label>
-          <select name="remota81" id="remota81" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota81']) || $pat["remota81"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota81']) && $pat["remota81"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota81']) && $pat["remota81"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+      <div class="row mx-2">
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota81">Antibióticos</label>
+            <select name="remota81" id="remota81" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota81']) || $pat["remota81"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota81']) && $pat["remota81"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota81']) && $pat["remota81"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Anticoagulantes</label>
-          <select name="remota82" id="remota82" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota82']) || $pat["remota82"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota82']) && $pat["remota82"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota82']) && $pat["remota82"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota82">Anticoagulantes</label>
+            <select name="remota82" id="remota82" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota82']) || $pat["remota82"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota82']) && $pat["remota82"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota82']) && $pat["remota82"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Fármacos parar controlar la presión arterial</label>
-          <select name="remota83" id="remota83" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota83']) || $pat["remota83"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota83']) && $pat["remota83"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota83']) && $pat["remota83"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota83">Fármacos parar controlar la presión arterial</label>
+            <select name="remota83" id="remota83" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota83']) || $pat["remota83"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota83']) && $pat["remota83"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota83']) && $pat["remota83"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Antidiabéticos</label>
-          <select name="remota84" id="remota84" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota84']) || $pat["remota84"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota84']) && $pat["remota84"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota84']) && $pat["remota84"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota84">Antidiabéticos</label>
+            <select name="remota84" id="remota84" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota84']) || $pat["remota84"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota84']) && $pat["remota84"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota84']) && $pat["remota84"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Tranquilizantes</label>
-          <select name="remota85" id="remota85" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota85']) || $pat["remota85"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota85']) && $pat["remota85"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota85']) && $pat["remota85"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota85">Tranquilizantes</label>
+            <select name="remota85" id="remota85" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota85']) || $pat["remota85"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota85']) && $pat["remota85"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota85']) && $pat["remota85"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Cortisona</label>
-          <select name="remota86" id="remota86" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota86']) || $pat["remota86"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota86']) && $pat["remota86"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota86']) && $pat["remota86"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota86">Cortisona</label>
+            <select name="remota86" id="remota86" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota86']) || $pat["remota86"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota86']) && $pat["remota86"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota86']) && $pat["remota86"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Hormonas</label>
-          <select name="remota87" id="remota87" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota87']) || $pat["remota87"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota87']) && $pat["remota87"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota87']) && $pat["remota87"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota87">Hormonas</label>
+            <select name="remota87" id="remota87" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota87']) || $pat["remota87"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota87']) && $pat["remota87"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota87']) && $pat["remota87"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Aspirina</label>
-          <select name="remota88" id="remota88" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota88']) || $pat["remota88"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota88']) && $pat["remota88"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota88']) && $pat["remota88"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota88">Aspirina</label>
+            <select name="remota88" id="remota88" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota88']) || $pat["remota88"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota88']) && $pat["remota88"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota88']) && $pat["remota88"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Fármacos para controlar el corazón</label>
-          <select name="remota89" id="remota89" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota89']) || $pat["remota89"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota89']) && $pat["remota89"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota89']) && $pat["remota89"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota89">Fármacos para controlar el corazón</label>
+            <select name="remota89" id="remota89" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota89']) || $pat["remota89"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota89']) && $pat["remota89"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota89']) && $pat["remota89"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Fármacos para la osteoporosis</label>
-          <select name="remota810" id="remota810" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota810']) || $pat["remota810"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota810']) && $pat["remota810"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota810']) && $pat["remota810"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota810">Fármacos para la osteoporosis</label>
+            <select name="remota810" id="remota810" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota810']) || $pat["remota810"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota810']) && $pat["remota810"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota810']) && $pat["remota810"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Anticonceptivos orales</label>
-          <select name="remota811" id="remota811" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota811']) || $pat["remota811"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota811']) && $pat["remota811"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota811']) && $pat["remota811"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota811">Anticonceptivos orales</label>
+            <select name="remota811" id="remota811" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota811']) || $pat["remota811"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota811']) && $pat["remota811"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota811']) && $pat["remota811"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-4 col-4">
-          <label for="">Otros (incluye medicación tradicional)</label>
-          <select name="remota812" id="remota812" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota812']) || $pat["remota812"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota812']) && $pat["remota812"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota812']) && $pat["remota812"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+        <div class="col-12">
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota812">Otros (incluye medicación tradicional)</label>
+            <select name="remota812" id="remota812" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota812']) || $pat["remota812"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota812']) && $pat["remota812"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota812']) && $pat["remota812"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <br>
   <div class="row">
-    <div class="col-4">
-      <label for="">9.- ¿Tiene alergia a algún medicamento?</label>
-      <select name="remota9" id="remota9" class="form-select" onchange="remota('remota9')" aria-label="Default select example">
-        <option <?php if(!isset($pat['remota9']) || $pat["remota9"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['remota9']) && $pat["remota9"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['remota9']) && $pat["remota9"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
-      <br>
-      <input type="hidden" class="form-control" name="obsremota9" id="obsremota9" placeholder="Indique el nombre del medicamento" value="<?php if(isset($pat["obsremota9"])&&$pat['obsremota9']) echo $pat["obsremota9"]; ?>">
-      <script type="text/javascript">
-        remota('remota9');
-      </script>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="remota9">9.- ¿Tiene alergia a algún medicamento?</label>
+        <select name="remota9" id="remota9" class="form-select" onchange="remota('remota9')" aria-label="Default select example">
+          <option <?php if(!isset($pat['remota9']) || $pat["remota9"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['remota9']) && $pat["remota9"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['remota9']) && $pat["remota9"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+        <input type="hidden" class="form-control" name="obsremota9" id="obsremota9" placeholder="Indique el nombre del medicamento" value="<?php if(isset($pat["obsremota9"])&&$pat['obsremota9']) echo $pat["obsremota9"]; ?>">
+        <script type="text/javascript">
+          remota('remota9');
+        </script>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">10.- ¿Tuvo alguna reacción por la administración de anestésicos locales?</label>
-      <select name="remota10" id="remota10" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['remota10']) || $pat["remota10"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['remota10']) && $pat["remota10"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['remota10']) && $pat["remota10"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="remota10">10.- ¿Tuvo alguna reacción por la administración de anestésicos locales?</label>
+        <select name="remota10" id="remota10" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['remota10']) || $pat["remota10"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['remota10']) && $pat["remota10"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['remota10']) && $pat["remota10"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+      </div>
     </div>
+
     <?php
     if(isset($pat['patientgender'])&&$pat['patientgender']=='femenino'){
     ?>
@@ -716,44 +758,49 @@ $pat=$r;
       <label for="">11.- ¿En caso de ser mujer?</label>
       <div class="row">
         <div class="col-12">
-          <label for="">¿Está embarazada o ha tenido un retraso reciente en su periodo menstrual?</label>
-          <select name="remota111" id="remota111" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota111']) || $pat["remota111"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota111']) && $pat["remota111"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota111']) && $pat["remota111"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota111">¿Está embarazada o ha tenido un retraso reciente en su periodo menstrual?</label>
+            <select name="remota111" id="remota111" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota111']) || $pat["remota111"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota111']) && $pat["remota111"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota111']) && $pat["remota111"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
         <div class="col-12">
-          <label for="">¿Está dando de lactar?</label>
-          <select name="remota112" id="remota112" class="form-select" aria-label="Default select example">
-            <option <?php if(!isset($pat['remota112']) || $pat["remota112"] == '') echo "selected"; ?> value="">--</option>
-            <option <?php if(isset($pat['remota112']) && $pat["remota112"] == 'si') echo "selected"; ?> value="si">Si</option>
-            <option <?php if(isset($pat['remota112']) && $pat["remota112"] == 'no') echo "selected"; ?> value="no">No</option>
-          </select>
+          <div class="input-group input-group-sm mb-2">
+            <label class="input-group-text" for="remota112">¿Está dando de lactar?</label>
+            <select name="remota112" id="remota112" class="form-select" aria-label="Default select example">
+              <option <?php if(!isset($pat['remota112']) || $pat["remota112"] == '') echo "selected"; ?> value="">--</option>
+              <option <?php if(isset($pat['remota112']) && $pat["remota112"] == 'si') echo "selected"; ?> value="si">Si</option>
+              <option <?php if(isset($pat['remota112']) && $pat["remota112"] == 'no') echo "selected"; ?> value="no">No</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-4">
-      <label for="">12.- ¿Padece alguna enfermedad que cree que deba saber?</label>
-      <select name="remota12" id="remota12" class="form-select" onchange="remota('remota12')" aria-label="Default select example">
-        <option <?php if(!isset($pat['remota12']) || $pat["remota12"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
-      <br>
-      <input type="hidden" class="form-control" name="obsremota12" id="obsremota12" placeholder="Incluye enfermedades confidenciales" value="<?php if(isset($pat["obsremota12"])&&$pat['obsremota12']) echo $pat["obsremota12"]; ?>">
-
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="remota12">12.- ¿Padece alguna enfermedad que cree que deba saber?</label>
+        <select name="remota12" id="remota12" class="form-select" onchange="remota('remota12')" aria-label="Default select example">
+          <option <?php if(!isset($pat['remota12']) || $pat["remota12"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+        <input type="hidden" class="form-control" name="obsremota12" id="obsremota12" placeholder="Incluye enfermedades confidenciales" value="<?php if(isset($pat["obsremota12"])&&$pat['obsremota12']) echo $pat["obsremota12"]; ?>">
+      </div>
     </div>
   <?php }else{ ?>
-    <div class="col-4">
-      <label for="">11.- ¿Padece alguna enfermedad que cree que deba saber?</label>
-      <select name="remota12" id="remota12" class="form-select" onchange="remota('remota12')" aria-label="Default select example">
-        <option <?php if(!isset($pat['remota12']) || $pat["remota12"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
-      <br>
-      <input type="hidden" class="form-control" name="obsremota12" id="obsremota12" placeholder="Incluya enfermedades confidenciales" value="<?php if(isset($pat["obsremota12"])&&$pat['obsremota12']) echo $pat["obsremota12"]; ?>">
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="remota12">11.- ¿Padece alguna enfermedad que cree que deba saber?</label>
+        <select name="remota12" id="remota12" class="form-select" onchange="remota('remota12')" aria-label="Default select example">
+          <option <?php if(!isset($pat['remota12']) || $pat["remota12"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+        <input type="hidden" class="form-control" name="obsremota12" id="obsremota12" placeholder="Incluya enfermedades confidenciales" value="<?php if(isset($pat["obsremota12"])&&$pat['obsremota12']) echo $pat["obsremota12"]; ?>">
+      </div>
     </div>
   <?php } ?>
   </div>
@@ -768,82 +815,96 @@ $pat=$r;
     </div>
   </div>
   <div class="row">
-    <div class="col-4">
-      <label for="">1.- ¿Visita regularmente a su dentista?</label>
-      <select name="historia1" id="historia1" class="form-select" onchange="remota('historia1')" aria-label="Default select example">
-        <option <?php if(!isset($pat['historia1']) || $pat["historia1"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['historia1']) && $pat["historia1"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['historia1']) && $pat["historia1"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
-      <br>
-      <input type="hidden" class="form-control" name="obshistoria1" id="obshistoria1" placeholder="¿Cuándo fue la última vez?" value="<?php if(isset($pat["obshistoria1"])&&$pat['obshistoria1']) echo $pat["obshistoria1"]; ?>">
-      <script type="text/javascript">
-        remota('historia1');
-      </script>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="historia1">1.- ¿Visita regularmente a su dentista?</label>
+        <select name="historia1" id="historia1" class="form-select" onchange="remota('historia1')" aria-label="Default select example">
+          <option <?php if(!isset($pat['historia1']) || $pat["historia1"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['historia1']) && $pat["historia1"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['historia1']) && $pat["historia1"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+        <input type="hidden" class="form-control" name="obshistoria1" id="obshistoria1" placeholder="¿Cuándo fue la última vez?" value="<?php if(isset($pat["obshistoria1"])&&$pat['obshistoria1']) echo $pat["obshistoria1"]; ?>">
+        <script type="text/javascript">
+          remota('historia1');
+        </script>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">2.- ¿Cuántas veces al día se cepilla los dientes?</label>
-      <select name="historia2" id="historia2" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['historia2']) || $pat["historia2"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['historia2']) && $pat["historia2"] == '1') echo "selected"; ?> value="1">1 vez</option>
-        <option <?php if(isset($pat['historia2']) && $pat["historia2"] == '2') echo "selected"; ?> value="2">2 veces</option>
-        <option <?php if(isset($pat['historia2']) && $pat["historia2"] == '3') echo "selected"; ?> value="3">3 veces</option>
-        <option <?php if(isset($pat['historia2']) && $pat["historia2"] == '4') echo "selected"; ?> value="4">4 veces</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="historia2">2.- ¿Cuántas veces al día se cepilla los dientes?</label>
+        <select name="historia2" id="historia2" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['historia2']) || $pat["historia2"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['historia2']) && $pat["historia2"] == '1') echo "selected"; ?> value="1">1 vez</option>
+          <option <?php if(isset($pat['historia2']) && $pat["historia2"] == '2') echo "selected"; ?> value="2">2 veces</option>
+          <option <?php if(isset($pat['historia2']) && $pat["historia2"] == '3') echo "selected"; ?> value="3">3 veces</option>
+          <option <?php if(isset($pat['historia2']) && $pat["historia2"] == '4') echo "selected"; ?> value="4">4 veces</option>
+        </select>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">3.- ¿Siente dolor cuando mastica?</label>
-      <select name="historia3" id="historia3" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['historia3']) || $pat["historia3"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['historia3']) && $pat["historia3"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['historia3']) && $pat["historia3"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="historia3">3.- ¿Siente dolor cuando mastica?</label>
+        <select name="historia3" id="historia3" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['historia3']) || $pat["historia3"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['historia3']) && $pat["historia3"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['historia3']) && $pat["historia3"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">4.- ¿Siente la encía irritada o adolorida?</label>
-      <select name="historia4" id="historia4" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['historia4']) || $pat["historia4"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['historia4']) && $pat["historia4"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['historia4']) && $pat["historia4"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="historia4">4.- ¿Siente la encía irritada o adolorida?</label>
+        <select name="historia4" id="historia4" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['historia4']) || $pat["historia4"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['historia4']) && $pat["historia4"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['historia4']) && $pat["historia4"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">5.- ¿Ya ha sido sometido a tratamiento quirúrgico en la boca?</label>
-      <select name="historia5" id="historia5" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['historia5']) || $pat["historia5"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['historia5']) && $pat["historia5"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['historia5']) && $pat["historia5"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="historia5">5.- ¿Ya ha sido sometido a tratamiento quirúrgico en la boca?</label>
+        <select name="historia5" id="historia5" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['historia5']) || $pat["historia5"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['historia5']) && $pat["historia5"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['historia5']) && $pat["historia5"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">6.- ¿Tiene dificultad de abrir la boca excesivamente?</label>
-      <select name="historia6" id="historia6" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['historia6']) || $pat["historia6"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['historia6']) && $pat["historia6"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['historia6']) && $pat["historia6"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="historia6">6.- ¿Tiene dificultad de abrir la boca excesivamente?</label>
+        <select name="historia6" id="historia6" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['historia6']) || $pat["historia6"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['historia6']) && $pat["historia6"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['historia6']) && $pat["historia6"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">7.- ¿Relación de oclusión de primeros molares:?</label>
-      <select name="historia7" id="historia7" class="form-select" aria-label="Default select example">
-        <option <?php if(!isset($pat['historia7']) || $pat["historia7"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['historia7']) && $pat["historia7"] == 'normooclusion') echo "selected"; ?> value="normooclusion">normooclusión</option>
-        <option <?php if(isset($pat['historia7']) && $pat["historia7"] == 'mesiooclusion') echo "selected"; ?> value="mesiooclusion">mesiooclusión</option>
-        <option <?php if(isset($pat['historia7']) && $pat["historia7"] == 'distooclusion') echo "selected"; ?> value="distooclusion">distooclusión</option>
-      </select>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="historia7">7.- ¿Relación de oclusión de primeros molares:?</label>
+        <select name="historia7" id="historia7" class="form-select" aria-label="Default select example">
+          <option <?php if(!isset($pat['historia7']) || $pat["historia7"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['historia7']) && $pat["historia7"] == 'normooclusion') echo "selected"; ?> value="normooclusion">normooclusión</option>
+          <option <?php if(isset($pat['historia7']) && $pat["historia7"] == 'mesiooclusion') echo "selected"; ?> value="mesiooclusion">mesiooclusión</option>
+          <option <?php if(isset($pat['historia7']) && $pat["historia7"] == 'distooclusion') echo "selected"; ?> value="distooclusion">distooclusión</option>
+        </select>
+      </div>
     </div>
-    <div class="col-4">
-      <label for="">8.- ¿Tuvo alguna mala experiencia durante o después de una atención odontológica?</label>
-      <select name="historia8" id="historia8" class="form-select" onchange="remota('historia8')" aria-label="Default select example">
-        <option <?php if(!isset($pat['historia8']) || $pat["historia8"] == '') echo "selected"; ?> value="">--</option>
-        <option <?php if(isset($pat['historia8']) && $pat["historia8"] == 'si') echo "selected"; ?> value="si">Si</option>
-        <option <?php if(isset($pat['historia8']) && $pat["historia8"] == 'no') echo "selected"; ?> value="no">No</option>
-      </select>
-      <br>
-      <input type="hidden" class="form-control" name="obshistoria8" id="obshistoria8" placeholder="Explíquelo" value="<?php if(isset($pat["obshistoria8"])&&$pat['obshistoria8']) echo $pat["obshistoria8"]; ?>">
-      <script type="text/javascript">
-        remota('historia8');
-      </script>
+    <div class="col-12">
+      <div class="input-group input-group-sm mb-2">
+        <label class="input-group-text" for="historia7">8.- ¿Tuvo alguna mala experiencia durante o después de una atención odontológica?</label>
+        <select name="historia8" id="historia8" class="form-select" onchange="remota('historia8')" aria-label="Default select example">
+          <option <?php if(!isset($pat['historia8']) || $pat["historia8"] == '') echo "selected"; ?> value="">--</option>
+          <option <?php if(isset($pat['historia8']) && $pat["historia8"] == 'si') echo "selected"; ?> value="si">Si</option>
+          <option <?php if(isset($pat['historia8']) && $pat["historia8"] == 'no') echo "selected"; ?> value="no">No</option>
+        </select>
+        <input type="hidden" class="form-control" name="obshistoria8" id="obshistoria8" placeholder="Explíquelo" value="<?php if(isset($pat["obshistoria8"])&&$pat['obshistoria8']) echo $pat["obshistoria8"]; ?>">
+        <script type="text/javascript">
+          remota('historia8');
+        </script>
+      </div>
     </div>
   </div>
   <br>
@@ -1016,7 +1077,7 @@ $pat=$r;
   <!--odontograma inicio-->
   <!--inicio wrapper-->
   <div id="wrapper">
-  <input type="hidden" name="draw" id="draw" value="<?php if(isset($pat['surgeryiiodontogram'])) echo $pat['surgeryiiodontogram']; ?>">
+  <input type="hidden" name="draw" id="draw" value="<?php if(isset($pat['surgeryiiodontogram'])&& !empty($pat['surgeryiiodontogram'])) echo $pat['surgeryiiodontogram']; ?>">
 
   <table id="tabla-superior" class="img-fluid">
     <tbody>
@@ -1268,7 +1329,7 @@ $pat=$r;
     </div>
     <div class="col-4">
       <br>
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
         ASA :Ayuda
       </button>
       <!-- Modal -->
@@ -1277,8 +1338,7 @@ $pat=$r;
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">Clasificación del estado físico</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
               </button>
             </div>
             <div class="modal-body">
@@ -1321,8 +1381,7 @@ $pat=$r;
               </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Entedido</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entedido</button>
             </div>
           </div>
         </div>
@@ -1337,7 +1396,7 @@ $pat=$r;
     </div>
     <div class="col-7">
       <!--inicion anexso 2-->
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ansiedad">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ansiedad">
          Determinar Ansiedad
       </button>
       <!-- Modal -->
@@ -1346,9 +1405,7 @@ $pat=$r;
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" >DETERMINACIÓN DE LA ESCALA DE ANSIEDAD DENTAL(modificado de CORAH)</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="row">
@@ -1447,8 +1504,7 @@ $pat=$r;
               nivelasiedad();
             </script>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
@@ -1474,399 +1530,182 @@ $pat=$r;
       <span>EXAMEN DE LABORATORIO:</span>
     </div>
     <div class="col-12">
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['laboratorio1']))||(isset($pat['laboratorio1'])&&($pat['laboratorio1']=='false'||$pat['laboratorio1']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"laboratorio1\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio1'])&&$pat['laboratorio1']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio1\" value=\"option1\" checked>".
-          "<label class=\"form-check-label\" for=\"laboratorio1\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio1'])&&is_numeric($pat['laboratorio1'])) {
-          echo "<span class=\"text-primary\" id=\"laboratorio1\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"laboratorio1\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>hemograma</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['laboratorio2']))||(isset($pat['laboratorio2'])&&($pat['laboratorio2']=='false'||$pat['laboratorio2']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"laboratorio2\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio2'])&&$pat['laboratorio2']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio2\" value=\"option2\" checked>".
-          "<label class=\"form-check-label\" for=\"laboratorio2\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio2'])&&is_numeric($pat['laboratorio2'])) {
-          echo "<span class=\"text-primary\" id=\"laboratorio2\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"laboratorio2\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>cuagulograma</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['laboratorio3']))||(isset($pat['laboratorio3'])&&($pat['laboratorio3']=='false'||$pat['laboratorio3']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio3\" value=\"option3\">".
-          "<label class=\"form-check-label\" for=\"laboratorio3\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio3'])&&$pat['laboratorio3']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio3\" value=\"option3\" checked>".
-          "<label class=\"form-check-label\" for=\"laboratorio3\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio3'])&&is_numeric($pat['laboratorio3'])) {
-          echo "<span class=\"text-primary\" id=\"laboratorio3\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio3\" value=\"option3\">".
-          "<label class=\"form-check-label\" for=\"laboratorio3\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>glicemia</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['laboratorio4']))||(isset($pat['laboratorio4'])&&($pat['laboratorio4']=='false'||$pat['laboratorio4']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio4\" value=\"option4\">".
-          "<label class=\"form-check-label\" for=\"laboratorio4\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio4'])&&$pat['laboratorio4']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio4\" value=\"option4\" checked>".
-          "<label class=\"form-check-label\" for=\"laboratorio4\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio4'])&&is_numeric($pat['laboratorio4'])) {
-          echo "<span class=\"text-primary\" id=\"laboratorio4\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio4\" value=\"option4\">".
-          "<label class=\"form-check-label\" for=\"laboratorio4\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>creatinina</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['laboratorio5']))||(isset($pat['laboratorio5'])&&($pat['laboratorio5']=='false'||$pat['laboratorio5']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio5\" value=\"option5\">".
-          "<label class=\"form-check-label\" for=\"laboratorio5\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio5'])&&$pat['laboratorio5']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio5\" value=\"option5\" checked>".
-          "<label class=\"form-check-label\" for=\"laboratorio5\">solicitar firma</label>";
-        }elseif (isset($pat['laboratorio5'])&&is_numeric($pat['laboratorio5'])) {
-          echo "<span class=\"text-primary\" id=\"laboratorio5\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"laboratorio5\" value=\"option5\">".
-          "<label class=\"form-check-label\" for=\"laboratorio5\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>otros</span>
+      <div class="input-group input-group-sm">
+        <div class="border">
+          <?php
+          $ac = array('laboratorio1','laboratorio2','laboratorio3','laboratorio4','laboratorio5','histopatologico1',
+    			'histopatologico2','histopatologico3','histopatologico4','diagenologia1','diagenologia2','diagenologia3',
+    			'diagenologia4','diagenologia5','diagenologia6','fotografia1','fotografia2','fotografia3','fotografia4',
+    			'fotografia5','impresiones1','impresiones2');
+          $acnames = array('hemograma','cuagulograma','glicemia','creatinina','otros','citología','biopsia escisional',
+          'biopsia incisional','biopsia aspiración','periapical','oclusal','ortopantomografía','lateral de cráneo',
+          'tomografía','otros','de frente','de perfil','maxilar intrabucal','mandibular intrabucal','en oclusión',
+          'parcial','total');
+
+          $ce_content='';
+          for ($i=0; $i < 5; $i++) {
+            $ce_content.='<div class="from-check form-check-inline border p-3" align="center">'.
+            '<input class="form-check-input" type="checkbox" id="'.$ac[$i].'" '.
+            (isset($pat['complementaryexam'][$ac[$i]])&& $pat['complementaryexam'][$ac[$i]]=='true'?'checked':'').'>'.
+            '<label for="'.$ac[$i].'">'.$acnames[$i].'</label>'.
+            '<br>'.
+            '<div class="autorizar" id="a_'.$ac[$i].'teacher">';
+            if(isset($pat['complementaryexam'][$ac[$i].'teacher'])&&$pat['complementaryexam'][$ac[$i].'teacher']!='*'){
+              $data=explode('*', $pat['complementaryexam'][$ac[$i].'teacher']);
+              $infouser=DBUserInfo($data[0]);
+              $time=trim($data[1]);
+              $ce_content.='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"
+               data-bs-target="#'.$ac[$i].'_infoteacher" aria-expanded="true" aria-controls="'.$ac[$i].'_infoteacher">Autorizado Por Docente</span>';
+              $ce_content.='<div id="'.$ac[$i].'_infoteacher" class="accordion-collapse collapse" aria-labelledby="'.$ac[$i].'_infoteacher">'.
+              '<div class="accordion-body"><div class="row"><div class="col-12">'.$infouser['userfullname'].'</div><div class="col-12">'.datetimeconv($time).'</div></div></div></div>';
+            }else{
+                $ce_content.= '<button type="button" class="btn btn-outline-primary btn-sm" name="'.$ac[$i].'_button" onclick="readqr(\''.$ac[$i].'\', \'authorizeqrtwo\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+            }
+            $ce_content.='</div>'.
+            '</div>';
+          }
+          echo $ce_content;
+          ?>
+        </div>
       </div>
     </div>
     <div class="col-12">
       <span>ESTUDIO HISTOPATOLÓGICO:</span>
     </div>
     <div class="col-12">
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['histopatologico1']))||(isset($pat['histopatologico1'])&&($pat['histopatologico1']=='false'||$pat['histopatologico1']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"histopatologico1\">solicitar firma</label>";
-        }elseif (isset($pat['histopatologico1'])&&$pat['histopatologico1']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico1\" value=\"option1\" checked>".
-          "<label class=\"form-check-label\" for=\"histopatologico1\">solicitar firma</label>";
-        }elseif (isset($pat['histopatologico1'])&&is_numeric($pat['histopatologico1'])) {
-          echo "<span class=\"text-primary\" id=\"histopatologico1\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"histopatologico1\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>citología</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['histopatologico2']))||(isset($pat['histopatologico2'])&&($pat['histopatologico2']=='false'||$pat['histopatologico2']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"histopatologico2\">solicitar firma</label>";
-        }elseif (isset($pat['histopatologico2'])&&$pat['histopatologico2']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico2\" value=\"option2\" checked>".
-          "<label class=\"form-check-label\" for=\"histopatologico2\">solicitar firma</label>";
-        }elseif (isset($pat['histopatologico2'])&&is_numeric($pat['histopatologico2'])) {
-          echo "<span class=\"text-primary\" id=\"histopatologico2\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"histopatologico2\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>biopsia escisional</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['histopatologico3']))||(isset($pat['histopatologico3'])&&($pat['histopatologico3']=='false'||$pat['histopatologico3']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico3\" value=\"option3\">".
-          "<label class=\"form-check-label\" for=\"histopatologico3\">solicitar firma</label>";
-        }elseif (isset($pat['histopatologico3'])&&$pat['histopatologico3']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico3\" value=\"option3\" checked>".
-          "<label class=\"form-check-label\" for=\"histopatologico3\">solicitar firma</label>";
-        }elseif (isset($pat['histopatologico3'])&&is_numeric($pat['histopatologico3'])) {
-          echo "<span class=\"text-primary\" id=\"histopatologico3\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico3\" value=\"option3\">".
-          "<label class=\"form-check-label\" for=\"histopatologico3\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>biopsia incisional</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['histopatologico4']))||(isset($pat['histopatologico4'])&&($pat['histopatologico4']=='false'||$pat['histopatologico4']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico4\" value=\"option4\">".
-          "<label class=\"form-check-label\" for=\"histopatologico4\">solicitar firma</label>";
-        }elseif (isset($pat['histopatologico4'])&&$pat['histopatologico4']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico4\" value=\"option4\" checked>".
-          "<label class=\"form-check-label\" for=\"histopatologico4\">solicitar firma</label>";
-        }elseif (isset($pat['histopatologico4'])&&is_numeric($pat['histopatologico4'])) {
-          echo "<span class=\"text-primary\" id=\"histopatologico4\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"histopatologico4\" value=\"option4\">".
-          "<label class=\"form-check-label\" for=\"histopatologico4\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>biopsia aspiración</span>
+      <div class="input-group input-group-sm">
+        <div class="border">
+          <?php
+          $ce_content='';
+          for ($i=5; $i < 9; $i++) {
+            $ce_content.='<div class="from-check form-check-inline border p-3" align="center">'.
+            '<input class="form-check-input" type="checkbox" id="'.$ac[$i].'" '.
+            (isset($pat['complementaryexam'][$ac[$i]])&& $pat['complementaryexam'][$ac[$i]]=='true'?'checked':'').'>'.
+            '<label for="'.$ac[$i].'">'.$acnames[$i].'</label>'.
+            '<br>'.
+            '<div class="autorizar" id="a_'.$ac[$i].'teacher">';
+            if(isset($pat['complementaryexam'][$ac[$i].'teacher'])&&$pat['complementaryexam'][$ac[$i].'teacher']!='*'){
+              $data=explode('*', $pat['complementaryexam'][$ac[$i].'teacher']);
+              $infouser=DBUserInfo($data[0]);
+              $time=trim($data[1]);
+              $ce_content.='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"
+               data-bs-target="#'.$ac[$i].'_infoteacher" aria-expanded="true" aria-controls="'.$ac[$i].'_infoteacher">Autorizado Por Docente</span>';
+              $ce_content.='<div id="'.$ac[$i].'_infoteacher" class="accordion-collapse collapse" aria-labelledby="'.$ac[$i].'_infoteacher">'.
+              '<div class="accordion-body"><div class="row"><div class="col-12">'.$infouser['userfullname'].'</div><div class="col-12">'.datetimeconv($time).'</div></div></div></div>';
+            }else{
+                $ce_content.= '<button type="button" class="btn btn-outline-primary btn-sm" name="'.$ac[$i].'_button" onclick="readqr(\''.$ac[$i].'\', \'authorizeqrtwo\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+            }
+            $ce_content.='</div>'.
+            '</div>';
+          }
+          echo $ce_content;
+          ?>
+        </div>
       </div>
     </div>
+
     <div class="col-12">
       <span>IMAGENOLOGÍA:</span>
     </div>
     <div class="col-12">
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['diagenologia1']))||(isset($pat['diagenologia1'])&&($pat['diagenologia1']=='false'||$pat['diagenologia1']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"diagenologia1\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia1'])&&$pat['diagenologia1']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia1\" value=\"option1\" checked>".
-          "<label class=\"form-check-label\" for=\"diagenologia1\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia1'])&&is_numeric($pat['diagenologia1'])) {
-          echo "<span class=\"text-primary\" id=\"diagenologia1\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"diagenologia1\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>periapical</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['diagenologia2']))||(isset($pat['diagenologia2'])&&($pat['diagenologia2']=='false'||$pat['diagenologia2']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"diagenologia2\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia2'])&&$pat['diagenologia2']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia2\" value=\"option2\" checked>".
-          "<label class=\"form-check-label\" for=\"diagenologia2\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia2'])&&is_numeric($pat['diagenologia2'])) {
-          echo "<span class=\"text-primary\" id=\"diagenologia2\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"diagenologia2\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>oclusal</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['diagenologia3']))||(isset($pat['diagenologia3'])&&($pat['diagenologia3']=='false'||$pat['diagenologia3']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia3\" value=\"option3\">".
-          "<label class=\"form-check-label\" for=\"diagenologia3\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia3'])&&$pat['diagenologia3']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia3\" value=\"option3\" checked>".
-          "<label class=\"form-check-label\" for=\"diagenologia3\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia3'])&&is_numeric($pat['diagenologia3'])) {
-          echo "<span class=\"text-primary\" id=\"diagenologia3\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia3\" value=\"option3\">".
-          "<label class=\"form-check-label\" for=\"diagenologia3\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>ortopantomografía</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['diagenologia4']))||(isset($pat['diagenologia4'])&&($pat['diagenologia4']=='false'||$pat['diagenologia4']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia4\" value=\"option4\">".
-          "<label class=\"form-check-label\" for=\"diagenologia4\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia4'])&&$pat['diagenologia4']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia4\" value=\"option4\" checked>".
-          "<label class=\"form-check-label\" for=\"diagenologia4\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia4'])&&is_numeric($pat['diagenologia4'])) {
-          echo "<span class=\"text-primary\" id=\"diagenologia4\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia4\" value=\"option4\">".
-          "<label class=\"form-check-label\" for=\"diagenologia4\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>lateral de cráneo</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['diagenologia5']))||(isset($pat['diagenologia5'])&&($pat['diagenologia5']=='false'||$pat['diagenologia5']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia5\" value=\"option5\">".
-          "<label class=\"form-check-label\" for=\"diagenologia5\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia5'])&&$pat['diagenologia5']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia5\" value=\"option5\" checked>".
-          "<label class=\"form-check-label\" for=\"diagenologia5\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia5'])&&is_numeric($pat['diagenologia5'])) {
-          echo "<span class=\"text-primary\" id=\"diagenologia5\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia5\" value=\"option5\">".
-          "<label class=\"form-check-label\" for=\"diagenologia5\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>tomografía</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['diagenologia6']))||(isset($pat['diagenologia6'])&&($pat['diagenologia6']=='false'||$pat['diagenologia6']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia6\" value=\"option6\">".
-          "<label class=\"form-check-label\" for=\"diagenologia6\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia6'])&&$pat['diagenologia6']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia6\" value=\"option6\" checked>".
-          "<label class=\"form-check-label\" for=\"diagenologia6\">solicitar firma</label>";
-        }elseif (isset($pat['diagenologia6'])&&is_numeric($pat['diagenologia6'])) {
-          echo "<span class=\"text-primary\" id=\"diagenologia6\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"diagenologia6\" value=\"option6\">".
-          "<label class=\"form-check-label\" for=\"diagenologia6\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>otros</span>
+      <div class="input-group input-group-sm">
+        <div class="border">
+          <?php
+          $ce_content='';
+          for ($i=9; $i < 15; $i++) {
+            $ce_content.='<div class="from-check form-check-inline border p-3" align="center">'.
+            '<input class="form-check-input" type="checkbox" id="'.$ac[$i].'" '.
+            (isset($pat['complementaryexam'][$ac[$i]])&& $pat['complementaryexam'][$ac[$i]]=='true'?'checked':'').'>'.
+            '<label for="'.$ac[$i].'">'.$acnames[$i].'</label>'.
+            '<br>'.
+            '<div class="autorizar" id="a_'.$ac[$i].'teacher">';
+            if(isset($pat['complementaryexam'][$ac[$i].'teacher'])&&$pat['complementaryexam'][$ac[$i].'teacher']!='*'){
+              $data=explode('*', $pat['complementaryexam'][$ac[$i].'teacher']);
+              $infouser=DBUserInfo($data[0]);
+              $time=trim($data[1]);
+              $ce_content.='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"
+               data-bs-target="#'.$ac[$i].'_infoteacher" aria-expanded="true" aria-controls="'.$ac[$i].'_infoteacher">Autorizado Por Docente</span>';
+              $ce_content.='<div id="'.$ac[$i].'_infoteacher" class="accordion-collapse collapse" aria-labelledby="'.$ac[$i].'_infoteacher">'.
+              '<div class="accordion-body"><div class="row"><div class="col-12">'.$infouser['userfullname'].'</div><div class="col-12">'.datetimeconv($time).'</div></div></div></div>';
+            }else{
+                $ce_content.= '<button type="button" class="btn btn-outline-primary btn-sm" name="'.$ac[$i].'_button" onclick="readqr(\''.$ac[$i].'\', \'authorizeqrtwo\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+            }
+            $ce_content.='</div>'.
+            '</div>';
+          }
+          echo $ce_content;
+          ?>
+        </div>
       </div>
     </div>
+
     <div class="col-12">
       <span>FOTOGRAFÍA ODONTOLÓGICA:</span>
     </div>
     <div class="col-12">
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['fotografia1']))||(isset($pat['fotografia1'])&&($pat['fotografia1']=='false'||$pat['fotografia1']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"fotografia1\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia1'])&&$pat['fotografia1']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia1\" value=\"option1\" checked>".
-          "<label class=\"form-check-label\" for=\"fotografia1\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia1'])&&is_numeric($pat['fotografia1'])) {
-          echo "<span class=\"text-primary\" id=\"fotografia1\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"fotografia1\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>de frente</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['fotografia2']))||(isset($pat['fotografia2'])&&($pat['fotografia2']=='false'||$pat['fotografia2']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"fotografia2\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia2'])&&$pat['fotografia2']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia2\" value=\"option2\" checked>".
-          "<label class=\"form-check-label\" for=\"fotografia2\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia2'])&&is_numeric($pat['fotografia2'])) {
-          echo "<span class=\"text-primary\" id=\"fotografia2\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"fotografia2\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>de perfil</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['fotografia3']))||(isset($pat['fotografia3'])&&($pat['fotografia3']=='false'||$pat['fotografia3']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia3\" value=\"option3\">".
-          "<label class=\"form-check-label\" for=\"fotografia3\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia3'])&&$pat['fotografia3']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia3\" value=\"option3\" checked>".
-          "<label class=\"form-check-label\" for=\"fotografia3\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia3'])&&is_numeric($pat['fotografia3'])) {
-          echo "<span class=\"text-primary\" id=\"fotografia3\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia3\" value=\"option3\">".
-          "<label class=\"form-check-label\" for=\"fotografia3\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>maxilar intrabucal</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['fotografia4']))||(isset($pat['fotografia4'])&&($pat['fotografia4']=='false'||$pat['fotografia4']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia4\" value=\"option4\">".
-          "<label class=\"form-check-label\" for=\"fotografia4\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia4'])&&$pat['fotografia4']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia4\" value=\"option4\" checked>".
-          "<label class=\"form-check-label\" for=\"fotografia4\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia4'])&&is_numeric($pat['fotografia4'])) {
-          echo "<span class=\"text-primary\" id=\"fotografia4\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia4\" value=\"option4\">".
-          "<label class=\"form-check-label\" for=\"fotografia4\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>mandibular intrabucal</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['fotografia5']))||(isset($pat['fotografia5'])&&($pat['fotografia5']=='false'||$pat['fotografia5']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia5\" value=\"option5\">".
-          "<label class=\"form-check-label\" for=\"fotografia5\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia5'])&&$pat['fotografia5']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia5\" value=\"option5\" checked>".
-          "<label class=\"form-check-label\" for=\"fotografia5\">solicitar firma</label>";
-        }elseif (isset($pat['fotografia5'])&&is_numeric($pat['fotografia5'])) {
-          echo "<span class=\"text-primary\" id=\"fotografia5\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"fotografia5\" value=\"option5\">".
-          "<label class=\"form-check-label\" for=\"fotografia5\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>en oclusión</span>
+      <div class="input-group input-group-sm">
+        <div class="border">
+          <?php
+          $ce_content='';
+          for ($i=15; $i < 20; $i++) {
+            $ce_content.='<div class="from-check form-check-inline border p-3" align="center">'.
+            '<input class="form-check-input" type="checkbox" id="'.$ac[$i].'" '.
+            (isset($pat['complementaryexam'][$ac[$i]])&& $pat['complementaryexam'][$ac[$i]]=='true'?'checked':'').'>'.
+            '<label for="'.$ac[$i].'">'.$acnames[$i].'</label>'.
+            '<br>'.
+            '<div class="autorizar" id="a_'.$ac[$i].'teacher">';
+            if(isset($pat['complementaryexam'][$ac[$i].'teacher'])&&$pat['complementaryexam'][$ac[$i].'teacher']!='*'){
+              $data=explode('*', $pat['complementaryexam'][$ac[$i].'teacher']);
+              $infouser=DBUserInfo($data[0]);
+              $time=trim($data[1]);
+              $ce_content.='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"
+               data-bs-target="#'.$ac[$i].'_infoteacher" aria-expanded="true" aria-controls="'.$ac[$i].'_infoteacher">Autorizado Por Docente</span>';
+              $ce_content.='<div id="'.$ac[$i].'_infoteacher" class="accordion-collapse collapse" aria-labelledby="'.$ac[$i].'_infoteacher">'.
+              '<div class="accordion-body"><div class="row"><div class="col-12">'.$infouser['userfullname'].'</div><div class="col-12">'.datetimeconv($time).'</div></div></div></div>';
+            }else{
+                $ce_content.= '<button type="button" class="btn btn-outline-primary btn-sm" name="'.$ac[$i].'_button" onclick="readqr(\''.$ac[$i].'\', \'authorizeqrtwo\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+            }
+            $ce_content.='</div>'.
+            '</div>';
+          }
+          echo $ce_content;
+          ?>
+        </div>
       </div>
     </div>
+
     <div class="col-12">
       <span>IMPRESIONES:</span>
     </div>
     <div class="col-12">
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['impresiones1']))||(isset($pat['impresiones1'])&&($pat['impresiones1']=='false'||$pat['impresiones1']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"impresiones1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"impresiones1\">solicitar firma</label>";
-        }elseif (isset($pat['impresiones1'])&&$pat['impresiones1']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"impresiones1\" value=\"option1\" checked>".
-          "<label class=\"form-check-label\" for=\"impresiones1\">solicitar firma</label>";
-        }elseif (isset($pat['impresiones1'])&&is_numeric($pat['impresiones1'])) {
-          echo "<span class=\"text-primary\" id=\"impresiones1\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"impresiones1\" value=\"option1\">".
-          "<label class=\"form-check-label\" for=\"impresiones1\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>parcial</span>
-      </div>
-      <div class="form-check form-check-inline border py-2 pr-2">
-        <?php
-        if ((!isset($pat['impresiones2']))||(isset($pat['impresiones2'])&&($pat['impresiones2']=='false'||$pat['impresiones2']==''))) {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"impresiones2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"impresiones2\">solicitar firma</label>";
-        }elseif (isset($pat['impresiones2'])&&$pat['impresiones2']=='true') {
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"impresiones2\" value=\"option2\" checked>".
-          "<label class=\"form-check-label\" for=\"impresiones2\">solicitar firma</label>";
-        }elseif (isset($pat['impresiones2'])&&is_numeric($pat['impresiones2'])) {
-          echo "<span class=\"text-primary\" id=\"impresiones2\"> Firmado</span>";
-        }else{
-          echo "<input class=\"form-check-input ml-1\" type=\"checkbox\" id=\"impresiones2\" value=\"option2\">".
-          "<label class=\"form-check-label\" for=\"impresiones2\">solicitar firma</label>";
-        }
-        ?>
-        <br><span>total</span>
+      <div class="input-group input-group-sm">
+        <div class="border">
+          <?php
+          $ce_content='';
+          for ($i=20; $i < 22; $i++) {
+            $ce_content.='<div class="from-check form-check-inline border p-3" align="center">'.
+            '<input class="form-check-input" type="checkbox" id="'.$ac[$i].'" '.
+            (isset($pat['complementaryexam'][$ac[$i]])&& $pat['complementaryexam'][$ac[$i]]=='true'?'checked':'').'>'.
+            '<label for="'.$ac[$i].'">'.$acnames[$i].'</label>'.
+            '<br>'.
+            '<div class="autorizar" id="a_'.$ac[$i].'teacher">';
+            if(isset($pat['complementaryexam'][$ac[$i].'teacher'])&&$pat['complementaryexam'][$ac[$i].'teacher']!='*'){
+              $data=explode('*', $pat['complementaryexam'][$ac[$i].'teacher']);
+              $infouser=DBUserInfo($data[0]);
+              $time=trim($data[1]);
+              $ce_content.='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"
+               data-bs-target="#'.$ac[$i].'_infoteacher" aria-expanded="true" aria-controls="'.$ac[$i].'_infoteacher">Autorizado Por Docente</span>';
+              $ce_content.='<div id="'.$ac[$i].'_infoteacher" class="accordion-collapse collapse" aria-labelledby="'.$ac[$i].'_infoteacher">'.
+              '<div class="accordion-body"><div class="row"><div class="col-12">'.$infouser['userfullname'].'</div><div class="col-12">'.datetimeconv($time).'</div></div></div></div>';
+            }else{
+                $ce_content.= '<button type="button" class="btn btn-outline-primary btn-sm" name="'.$ac[$i].'_button" onclick="readqr(\''.$ac[$i].'\', \'authorizeqrtwo\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+            }
+            $ce_content.='</div>'.
+            '</div>';
+          }
+          echo $ce_content;
+          ?>
+        </div>
       </div>
     </div>
   </div>
@@ -1885,7 +1724,7 @@ $pat=$r;
     </div>
     <div class="col-5">
       <!--inicion anexso 2-->
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#dificultadquirurgica">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#dificultadquirurgica">
          Obtener grado dificultad
       </button>
       <!-- Modal -->
@@ -1894,9 +1733,7 @@ $pat=$r;
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" >DETERMINACIÓN DEL GRADO DE DIFICULTAD QUIRÚRGICA DE LA EXODONCIA DE CORDALES INFERIORES</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="row">
@@ -2028,8 +1865,7 @@ $pat=$r;
               gradodificultad();
             </script>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
@@ -2044,7 +1880,7 @@ $pat=$r;
         <u>H.- CONSENTIMIENTO DEL PACIENTE</u>
     </div>
     <div class="col-7">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#consentimiento">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#consentimiento">
         Ver Consentimiento
       </button>
       <!-- Modal -->
@@ -2053,12 +1889,13 @@ $pat=$r;
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">CONSENTIMIENTO DEL PACIENTE</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="row">
+                <?php
+                $userinfo=DBUserInfo($pat['studentid']);
+                ?>
                 <div class="col-12">
                   El presente anexo, debe ser firmado por el paciente que será sometido a la intervención.<br>
                   Nuestra explicación de los procedimientos, su propósito, beneficios, complicaciones y alternativas de tratamiento, fueron discutidos con usted
@@ -2078,7 +1915,7 @@ $pat=$r;
                   5.- Se me ha indicado por escrito, tomar antes y después de la intervención, medicamentos (antibióticos, analgésicos, antiinflamatorios) con sus respectivas dosis, frecuencias e ingesta. Es de suma importancia que las indicaciones se cumplan al
                   de la letra, de lo contrario aumenta la posibilidad de generar resistencia de los microorganismo a los antibióticos, lo que es altamente peligroso para mi salud.<br>
                   6.- Se me ha explicado y entiendo, que no hay ninguna garantía en cuanto al resultado o la curación, dibido a que, aun habiendo tomado todas las precauciones del caso, cada persona tiene su propia forma de reaccionar frente a una misma acción quirúrgica.<br>
-                  Por lo tanto, otorgo mi consentimiento para que el Univ.: <?php echo $userinfo['userfullname']; ?> realice el procedimiento quirúrgico que me ha propuesto de la menera que me explico previamente y cualquier otro procedimiento que se considere necesario o aconsejable como corolario de la operación proyectada.<br>
+                  Por lo tanto, otorgo mi consentimiento para que el Univ.: <?php echo $userinfo['userfullname'];?> realice el procedimiento quirúrgico que me ha propuesto de la menera que me explico previamente y cualquier otro procedimiento que se considere necesario o aconsejable como corolario de la operación proyectada.<br>
                   <br>
                   FIRMA DEL PACIENTE:
 
@@ -2198,7 +2035,7 @@ $pat=$r;
               <?php if(isset($pat['surgeryiiconsent'])&&$pat['surgeryiiconsent']==null){ ?>
               <button type="button" class="btn btn-success" id="btn_firma">Guardar Firma</button>
             <?php } ?>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
@@ -2206,10 +2043,24 @@ $pat=$r;
       <!--modal de datos fin-->
     </div>
   </div>
+
   <div class="row">
     <div class="col-12">
+      I.- PLAN DE TRATAMIENTO
+    </div>
+    <div class="col-12">
+      <label for="">INMEDIATO</label>
+      <input type="text" class="form-control" name="inmediato" id="inmediato" value="<?php if(isset($pat['inmediato'])&&$pat['inmediato']) echo $pat['inmediato'];?>">
+    </div>
+    <div class="col-12">
+      <label for="">MEDIATO</label>
+      <input type="text" class="form-control" name="mediato" id="mediato" value="<?php if(isset($pat['mediato'])&&$pat['mediato']) echo $pat['mediato'];?>">
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
       <!--ficha operatoria inicial-->
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#operatoria">
+      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#operatoria">
         Llenar Datos de PRE INTRA POST (OPERATORIO)
       </button>
       <!-- Modal -->
@@ -2218,9 +2069,7 @@ $pat=$r;
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">PRE INTRA POST (OPERATORIO)</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div id="enlaceprueba"></div>
@@ -2339,6 +2188,7 @@ $pat=$r;
                   </div>
                 </div>
 
+
                 <div class="col-12">
                   <br>
                   <div class="row">
@@ -2455,7 +2305,7 @@ $pat=$r;
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
@@ -2463,31 +2313,23 @@ $pat=$r;
       <!--ficha operatoria final-->
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      I.- PLAN DE TRATAMIENTO
-    </div>
-    <div class="col-12">
-      <label for="">INMEDIATO</label>
-      <input type="text" class="form-control" name="inmediato" id="inmediato" value="<?php if(isset($pat['inmediato'])&&$pat['inmediato']) echo $pat['inmediato'];?>">
-    </div>
-    <div class="col-12">
-      <label for="">MEDIATO</label>
-      <input type="text" class="form-control" name="mediato" id="mediato" value="<?php if(isset($pat['mediato'])&&$pat['mediato']) echo $pat['mediato'];?>">
-    </div>
-  </div>
-  <div class="" align="center">
+
+
+
+
+
+  <!--<div class="" align="center">
     <b> <u>OBSERVACIONES</u> </b>
   </div>
   <div class="row">
       <div class="col-12">
-        <textarea readonly onmousedown="return false;" name="observation" id="observation" rows="4" class="form-control"><?php if(isset($pat['observationdesc'])) echo $pat['observationdesc'];?></textarea>
+        <textarea readonly onmousedown="return false;" name="observation" id="observation" rows="4" class="form-control"><?php //if(isset($pat['observationdesc'])) echo $pat['observationdesc'];?></textarea>
       </div>
-  </div>
+  </div>-->
   <br>
   <div class="row">
     <?php
-
+    /*
     if((isset($pat['observationaccepted'])&&$pat['observationaccepted']=='f') && (isset($pat['observationevaluated'])&&$pat['observationevaluated']=='t')&&isset($pat['surgeryiistatus'])&&$pat['surgeryiistatus']!='fail'&&$pat['surgeryiistatus']!='canceled'){
       echo "
       <div class=\"col-4\">
@@ -2507,17 +2349,16 @@ $pat=$r;
         <button id=\"cancel_button\" class=\"btn btn-danger\" type=\"button\" name=\"cancel_button\">Cancelar</button>
       </div>
       ";
-    }
+    }*/
     ?>
 
   </div>
-
+  <!--MODAL PARA SCANNEAR INICIO-->
+  <?php require('../leftscannerqr.php'); ?>
+  <!--MODAL PARA SCANNEAR FIN-->
 
 </div>
 <br>
-
-
-
                     </div>
 
 <?php
@@ -2534,24 +2375,24 @@ function registerqr(content){
       authorizeqrtwo(content);
       break;
     case 'authorizeqr':
-      registerpatient(0);
+      registerpatient(false);
       authorizeqr(content);
       break;
     case 'endqr':
-      registerpatient(0);
+      registerpatient(false);
       endqr(content);
       break;
   }
 }
 function endqr(content){
-  var ch = $('#inputqr').val();
+  var rh = $('#inputqr').val();
   //var ficha = $('#ficha').val();
   //window.location.href=content;
   //alert(content);
   $.ajax({
        url:"../include/i_clinichistory.php",
        method:"POST",
-       data: {content:content, ch:ch, endch:'true'},
+       data: {content:content, rh:rh, endch:'true'},
        success:function(data)
        {
           if(data=='yes'){
@@ -2563,31 +2404,31 @@ function endqr(content){
        }
   });
 }
-function authorizeqrtwo(content, remission){
+function authorizeqrtwo(content){
   var remission = $('#remissionid').val();
   var ficha = $('#ficha').val();
 
   if(ficha==''){
-    registerpatient(0);
+    registerpatient(false);
   }
 
-  var anesthesia = $('#inputqr').val();
+  var complementaryexam = $('#inputqr').val();//valor del tipo de firma
   //var ficha = $('#ficha').val();
   //window.location.href=content;
   $.ajax({
        url:"../include/i_readqr.php",
        method:"POST",
-       data: {content:content, anesthesia:anesthesia, remission:remission},
+       data: {content:content, complementaryexam:complementaryexam, remission:remission},
        success:function(data)
        {
           if(isNaN(data)){
             let arr = data.split('***');
             var type=arr[0];
-            $('#a_'+anesthesia+''+type).html(arr[1]);
+            $('#a_'+complementaryexam+''+type).html(arr[1]);
           }else{
               if(data==3){
                 alert('Tipo de usuario invalido');
-              }else if (data==3) {
+              }else if (data==2) {
                 alert('No se realizo la autorización');
               }else if (data==1) {
                 alert('Tecnica de anestesia no encontrado');
@@ -2596,22 +2437,20 @@ function authorizeqrtwo(content, remission){
               }else {
                 alert('Error: '+data);
               }
-
           }
 
        }
   });
 }
 function authorizeqr(content){
-  var ch = $('#inputqr').val();
+  var rh = $('#inputqr').val();
   //var ficha = $('#ficha').val();
   //window.location.href=content;
   //alert(content);
-  //alert(ch);
   $.ajax({
        url:"../include/i_clinichistory.php",
        method:"POST",
-       data: {content:content, ch:ch},
+       data: {content:content, rh:rh},
        success:function(data)
        {
           //alert(data);
@@ -2628,13 +2467,182 @@ function authorizeqr(content){
 function file(id){
   var st=`<?php echo $pat['status']; ?>`;
   if(st!='end'){
-    registerpatient(0);
+    registerpatient(false);
   }
 
   location.href="surgeryiiread.php?id="+id;
 }
 //scanner scan qr fin
+//para registrar datos del paciente para ficha clinica
+function registerpatient(msg=true){
+   var practice = $('#practice').val();
+   var motconsult = $('#motconsult').val();
+   var historiaconsulta = $('#historiaconsulta').val();
+   var anamnesisfamiliar = $('#anamnesisfamiliar').val();
+   var remota1 = $('select[name=remota1]').val()
+   var obsremota1 = $('#obsremota1').val();
+   var remota2 = $('select[name=remota2]').val()
+   var obsremota2 = $('#obsremota2').val();
+   var remota3 = $('select[name=remota3]').val()
+   var obsremota3 = $('#obsremota3').val();
+   var remota4a = $('select[name=remota4a]').val();
+   var remota4b1 = $('select[name=remota4b1]').val();
+   var remota4b2 = $('select[name=remota4b2]').val();
+   var remota4b3 = $('select[name=remota4b3]').val();
+   var remota4b4 = $('select[name=remota4b4]').val();
+   var remota4b5 = $('select[name=remota4b5]').val();
 
+   var remota4c = $('select[name=remota4c]').val();
+   var remota4d = $('select[name=remota4d]').val();
+   var remota4e = $('select[name=remota4e]').val();
+   var remota4f1 = $('select[name=remota4f1]').val();
+   var remota4f2 = $('select[name=remota4f2]').val();
+   var remota4f3 = $('select[name=remota4f3]').val();
+   var remota4g = $('select[name=remota4g]').val();
+   var remota4h = $('select[name=remota4h]').val();
+   var remota4i = $('select[name=remota4i]').val();
+   var remota4j = $('select[name=remota4j]').val();
+   var remota4k = $('select[name=remota4k]').val();
+   var remota4l = $('select[name=remota4l]').val();
+   var remota4m = $('select[name=remota4m]').val();
+   var remota4n = $('select[name=remota4n]').val();
+
+   var remota51 = $('select[name=remota51]').val();
+   var remota52 = $('select[name=remota52]').val();
+   var remota53 = $('select[name=remota53]').val();
+   var obsremota53 = $('#obsremota53').val();
+   var remota6 = $('select[name=remota6]').val();
+   var remota7 = $('select[name=remota7]').val();
+   var remota81 = $('select[name=remota81]').val();
+   var remota82 = $('select[name=remota82]').val();
+   var remota83 = $('select[name=remota83]').val();
+   var remota84 = $('select[name=remota84]').val();
+   var remota85 = $('select[name=remota85]').val();
+   var remota86 = $('select[name=remota86]').val();
+   var remota87 = $('select[name=remota87]').val();
+   var remota88 = $('select[name=remota88]').val();
+   var remota89 = $('select[name=remota89]').val();
+   var remota810 = $('select[name=remota810]').val();
+   var remota811 = $('select[name=remota811]').val();
+   var remota812 = $('select[name=remota812]').val();
+   var remota9 = $('select[name=remota9]').val();
+   var obsremota9 = $('#obsremota9').val();
+   var remota10 = $('#remota10').val();
+   //$pat['patientgender']
+   var remota111 = $('select[name=remota111]').val();
+   var remota112 = $('select[name=remota112]').val();
+
+   var remota12 = $('select[name=remota12]').val();
+   var obsremota12 = $('#obsremota12').val();
+
+   var historia1 = $('select[name=historia1]').val();
+   var obshistoria1 = $('#obshistoria1').val();
+   var historia2 = $('select[name=historia2]').val();
+   var historia3 = $('select[name=historia3]').val();
+   var historia4 = $('select[name=historia4]').val();
+   var historia5 = $('select[name=historia5]').val();
+   var historia6 = $('select[name=historia6]').val();
+   var historia7 = $('select[name=historia7]').val();
+   var historia8 = $('select[name=historia8]').val();
+   var obshistoria8 = $('#obshistoria8').val();
+   var arterial = $('#arterial').val();
+   var cardiaca = $('#cardiaca').val();
+   var respiratoria = $('#respiratoria').val();
+   var torax = $('#torax').val();
+   var abdomen = $('#abdomen').val();
+   var extremidades = $('#extremidades').val();
+   var faneras = $('#faneras').val();
+   var neurologico = $('#neurologico').val();
+   var cuello = $('#cuello').val();
+   var craneo = $('#craneo').val();
+   var cara = $('#cara').val();
+   var musculos = $('#musculos').val();
+   var linfaticos = $('#linfaticos').val();
+   var atm = $('#atm').val();
+   var salivales = $('#salivales').val();
+   var vestibulo = $('#vestibulo').val();
+   var anterior = $('#anterior').val();
+   var superior = $('#superior').val();
+   var posterior = $('#posterior').val();
+   var inferior = $('#inferior').val();
+   var laterales = $('#laterales').val();
+   var encias = $('#encias').val();
+   var language = $('#language').val();
+   var draw = $('#draw').val();
+   var asa = $('select[name=asa]').val();
+   var nivelansiedad1 = $('select[name=nivelansiedad1]').val();
+   var nivelansiedad2 = $('select[name=nivelansiedad2]').val();
+   var nivelansiedad3 = $('select[name=nivelansiedad3]').val();
+   var nivelansiedad4 = $('select[name=nivelansiedad4]').val();
+   var hipotesisdiagnostica = $('#hipotesisdiagnostica').val();
+   //desde aqui trabajar
+   var complementaryexam = $('#laboratorio1').prop('checked')+'-'+$('#laboratorio2').prop('checked')+'-'+
+   $('#laboratorio3').prop('checked')+'-'+$('#laboratorio4').prop('checked')+'-'+$('#laboratorio5').prop('checked')+'-'+
+   $('#histopatologico1').prop('checked')+'-'+$('#histopatologico2').prop('checked')+'-'+
+   $('#histopatologico3').prop('checked')+'-'+$('#histopatologico4').prop('checked')+'-'+
+   $('#diagenologia1').prop('checked')+'-'+$('#diagenologia2').prop('checked')+'-'+$('#diagenologia3').prop('checked')+'-'+
+   $('#diagenologia4').prop('checked')+'-'+$('#diagenologia5').prop('checked')+'-'+$('#diagenologia6').prop('checked')+'-'+
+   $('#fotografia1').prop('checked')+'-'+$('#fotografia2').prop('checked')+'-'+$('#fotografia3').prop('checked')+'-'+
+   $('#fotografia4').prop('checked')+'-'+$('#fotografia5').prop('checked')+'-'+$('#impresiones1').prop('checked')+'-'+
+   $('#impresiones2').prop('checked');
+
+   var finaldiagnostica = $('#finaldiagnostica').val();
+   var gradodificultad1 = $('select[name=gradodificultad1]').val();
+   var gradodificultad2 = $('select[name=gradodificultad2]').val();
+   var gradodificultad3 = $('select[name=gradodificultad3]').val();
+   var inmediato = $('#inmediato').val();
+   var mediato = $('#mediato').val();
+
+   var ficha=$('#ficha').val();
+   var remission = $('#remissionid').val();
+   $.ajax({
+
+        url:"../include/i_surgery.php",
+        method:"POST",
+        data: {
+          ficha:ficha, remission:remission, practice:practice, motconsult:motconsult, historiaconsulta:historiaconsulta,
+          anamnesisfamiliar:anamnesisfamiliar, remota1:remota1, obsremota1:obsremota1, remota2:remota2,
+          obsremota2:obsremota2, remota3:remota3, obsremota3:obsremota3, remota4a:remota4a, remota4b1:remota4b1,
+          remota4b2:remota4b2, remota4b3:remota4b3, remota4b4:remota4b4, remota4b5:remota4b5, remota4c:remota4c,
+          remota4d:remota4d, remota4e:remota4e, remota4f1:remota4f1, remota4f2:remota4f2, remota4f3:remota4f3,
+          remota4g:remota4g, remota4h:remota4h, remota4i:remota4i, remota4j:remota4j, remota4k:remota4k,
+          remota4l:remota4l, remota4m:remota4m, remota4n:remota4n, remota51:remota51, remota52:remota52,
+          remota53:remota53, obsremota53:obsremota53, remota6:remota6, remota7:remota7, remota81:remota81,
+          remota82:remota82, remota83:remota83, remota84:remota84, remota85:remota85, remota86:remota86,
+          remota87:remota87, remota88:remota88, remota89:remota89, remota810:remota810, remota811:remota811,
+          remota812:remota812, remota9:remota9, obsremota9:obsremota9, remota10:remota10, remota111:remota111,
+          remota112:remota112, remota12:remota12, obsremota12:obsremota12, historia1:historia1,
+          obshistoria1:obshistoria1, historia2:historia2, historia3:historia3, historia4:historia4,
+          historia5:historia5, historia6:historia6, historia7:historia7, historia8:historia8,
+          obshistoria8:obshistoria8, arterial:arterial, cardiaca:cardiaca, respiratoria:respiratoria,
+          torax:torax, abdomen:abdomen, extremidades:extremidades, faneras:faneras, neurologico:neurologico,
+          cuello:cuello, craneo:craneo, cara:cara, musculos:musculos, linfaticos:linfaticos, atm:atm,
+          salivales:salivales, vestibulo:vestibulo, anterior:anterior, superior:superior,
+          posterior:posterior, inferior:inferior, laterales:laterales, language:language, encias:encias, draw:draw,
+          asa:asa, nivelansiedad1:nivelansiedad1, nivelansiedad2:nivelansiedad2, nivelansiedad3:nivelansiedad3, nivelansiedad4:nivelansiedad4,
+          hipotesisdiagnostica:hipotesisdiagnostica, complementaryexam:complementaryexam,
+          finaldiagnostica:finaldiagnostica, gradodificultad1:gradodificultad1, gradodificultad2:gradodificultad2,
+          gradodificultad3:gradodificultad3, inmediato:inmediato, mediato:mediato
+        },
+        success:function(data){
+           if(data=='yes'){
+             if(msg){
+               Swal.fire({
+                 icon: 'success',
+                 title: '¡Guardado!',
+                 html: 'Se guardó los datos de la ficha clinica',
+                 showConfirmButton: false,
+                 timer: 1500
+               });
+             }
+           }else{
+             alert(data);
+             console.log(data);
+           }
+        }
+   });
+
+}
 
 //funcion para limpiar los datos
 function clearsurgerytoken(){
@@ -2849,7 +2857,7 @@ function tdatadelete(s){
          }else{
            $("#tbodytable tr").remove();
            $("#tbodytable").append(data);
-           alert('Se eliminó El registro de la fila');
+           alert('Se eliminó el registro de la fila');
          }
 
        }
@@ -2978,199 +2986,22 @@ $(document).ready(function(){
      $('#cancel_button').click(function(){
         location.reload();
      });
-     //para registrar datos del paciente para ficha clinica
-     function registerpatient(){
-        var ficha=$('#ficha').val();
-        var practice = $('#practice').val();
-        var motconsult = $('#motconsult').val();
-        var historiaconsulta = $('#historiaconsulta').val();
-        var anamnesisfamiliar = $('#anamnesisfamiliar').val();
-        var remota1 = $('select[name=remota1]').val()
-        var obsremota1 = $('#obsremota1').val();
-        var remota2 = $('select[name=remota2]').val()
-        var obsremota2 = $('#obsremota2').val();
-        var remota3 = $('select[name=remota3]').val()
-        var obsremota3 = $('#obsremota3').val();
-        var remota4a = $('select[name=remota4a]').val();
-        var remota4b1 = $('select[name=remota4b1]').val();
-        var remota4b2 = $('select[name=remota4b2]').val();
-        var remota4b3 = $('select[name=remota4b3]').val();
-        var remota4b4 = $('select[name=remota4b4]').val();
-        var remota4b5 = $('select[name=remota4b5]').val();
 
-        var remota4c = $('select[name=remota4c]').val();
-        var remota4d = $('select[name=remota4d]').val();
-        var remota4e = $('select[name=remota4e]').val();
-        var remota4f1 = $('select[name=remota4f1]').val();
-        var remota4f2 = $('select[name=remota4f2]').val();
-        var remota4f3 = $('select[name=remota4f3]').val();
-        var remota4g = $('select[name=remota4g]').val();
-        var remota4h = $('select[name=remota4h]').val();
-        var remota4i = $('select[name=remota4i]').val();
-        var remota4j = $('select[name=remota4j]').val();
-        var remota4k = $('select[name=remota4k]').val();
-        var remota4l = $('select[name=remota4l]').val();
-        var remota4m = $('select[name=remota4m]').val();
-        var remota4n = $('select[name=remota4n]').val();
-
-        var remota51 = $('select[name=remota51]').val();
-        var remota52 = $('select[name=remota52]').val();
-        var remota53 = $('select[name=remota53]').val();
-        var obsremota53 = $('#obsremota53').val();
-        var remota6 = $('select[name=remota6]').val();
-        var remota7 = $('select[name=remota7]').val();
-        var remota81 = $('select[name=remota81]').val();
-        var remota82 = $('select[name=remota82]').val();
-        var remota83 = $('select[name=remota83]').val();
-        var remota84 = $('select[name=remota84]').val();
-        var remota85 = $('select[name=remota85]').val();
-        var remota86 = $('select[name=remota86]').val();
-        var remota87 = $('select[name=remota87]').val();
-        var remota88 = $('select[name=remota88]').val();
-        var remota89 = $('select[name=remota89]').val();
-        var remota810 = $('select[name=remota810]').val();
-        var remota811 = $('select[name=remota811]').val();
-        var remota812 = $('select[name=remota812]').val();
-        var remota9 = $('select[name=remota9]').val();
-        var obsremota9 = $('#obsremota9').val();
-        var remota10 = $('#remota10').val();
-        //$pat['patientgender']
-        var remota111 = $('select[name=remota111]').val();
-        var remota112 = $('select[name=remota112]').val();
-
-        var remota12 = $('select[name=remota12]').val();
-        var obsremota12 = $('#obsremota12').val();
-
-        var historia1 = $('select[name=historia1]').val();
-        var obshistoria1 = $('#obshistoria1').val();
-        var historia2 = $('select[name=historia2]').val();
-        var historia3 = $('select[name=historia3]').val();
-        var historia4 = $('select[name=historia4]').val();
-        var historia5 = $('select[name=historia5]').val();
-        var historia6 = $('select[name=historia6]').val();
-        var historia7 = $('select[name=historia7]').val();
-        var historia8 = $('select[name=historia8]').val();
-        var obshistoria8 = $('#obshistoria8').val();
-        var arterial = $('#arterial').val();
-        var cardiaca = $('#cardiaca').val();
-        var respiratoria = $('#respiratoria').val();
-        var torax = $('#torax').val();
-        var abdomen = $('#abdomen').val();
-        var extremidades = $('#extremidades').val();
-        var faneras = $('#faneras').val();
-        var neurologico = $('#neurologico').val();
-        var cuello = $('#cuello').val();
-        var craneo = $('#craneo').val();
-        var cara = $('#cara').val();
-        var musculos = $('#musculos').val();
-        var linfaticos = $('#linfaticos').val();
-        var atm = $('#atm').val();
-        var salivales = $('#salivales').val();
-        var vestibulo = $('#vestibulo').val();
-        var anterior = $('#anterior').val();
-        var superior = $('#superior').val();
-        var posterior = $('#posterior').val();
-        var inferior = $('#inferior').val();
-        var laterales = $('#laterales').val();
-        var encias = $('#encias').val();
-        var language = $('#language').val();
-        var draw = $('#draw').val();
-        var asa = $('select[name=asa]').val();
-        var nivelansiedad1 = $('select[name=nivelansiedad1]').val();
-        var nivelansiedad2 = $('select[name=nivelansiedad2]').val();
-        var nivelansiedad3 = $('select[name=nivelansiedad3]').val();
-        var nivelansiedad4 = $('select[name=nivelansiedad4]').val();
-        var hipotesisdiagnostica = $('#hipotesisdiagnostica').val();
-
-        var laboratorio1 = $('#laboratorio1').prop('checked');
-        var laboratorio2 = $('#laboratorio2').prop('checked');
-        var laboratorio3 = $('#laboratorio3').prop('checked');
-        var laboratorio4 = $('#laboratorio4').prop('checked');
-        var laboratorio5 = $('#laboratorio5').prop('checked');
-        var histopatologico1 = $('#histopatologico1').prop('checked');
-        var histopatologico2 = $('#histopatologico2').prop('checked');
-        var histopatologico3 = $('#histopatologico3').prop('checked');
-        var histopatologico4 = $('#histopatologico4').prop('checked');
-        var diagenologia1 = $('#diagenologia1').prop('checked');
-        var diagenologia2 = $('#diagenologia2').prop('checked');
-        var diagenologia3 = $('#diagenologia3').prop('checked');
-        var diagenologia4 = $('#diagenologia4').prop('checked');
-        var diagenologia5 = $('#diagenologia5').prop('checked');
-        var diagenologia6 = $('#diagenologia6').prop('checked');
-        var fotografia1 = $('#fotografia1').prop('checked');
-        var fotografia2 = $('#fotografia2').prop('checked');
-        var fotografia3 = $('#fotografia3').prop('checked');
-        var fotografia4 = $('#fotografia4').prop('checked');
-        var fotografia5 = $('#fotografia5').prop('checked');
-        var impresiones1 = $('#impresiones1').prop('checked');
-        var impresiones2 = $('#impresiones2').prop('checked');
-        var finaldiagnostica = $('#finaldiagnostica').val();
-        var gradodificultad1 = $('select[name=gradodificultad1]').val();
-        var gradodificultad2 = $('select[name=gradodificultad2]').val();
-        var gradodificultad3 = $('select[name=gradodificultad3]').val();
-        var inmediato = $('#inmediato').val();
-        var mediato = $('#mediato').val();
-
-        $.ajax({
-
-             url:"../include/i_surgery.php",
-             method:"POST",
-             data: {
-               ficha:ficha, practice:practice, motconsult:motconsult, historiaconsulta:historiaconsulta,
-               anamnesisfamiliar:anamnesisfamiliar, remota1:remota1, obsremota1:obsremota1, remota2:remota2,
-               obsremota2:obsremota2, remota3:remota3, obsremota3:obsremota3, remota4a:remota4a, remota4b1:remota4b1,
-               remota4b2:remota4b2, remota4b3:remota4b3, remota4b4:remota4b4, remota4b5:remota4b5, remota4c:remota4c,
-               remota4d:remota4d, remota4e:remota4e, remota4f1:remota4f1, remota4f2:remota4f2, remota4f3:remota4f3,
-               remota4g:remota4g, remota4h:remota4h, remota4i:remota4i, remota4j:remota4j, remota4k:remota4k,
-               remota4l:remota4l, remota4m:remota4m, remota4n:remota4n, remota51:remota51, remota52:remota52,
-               remota53:remota53, obsremota53:obsremota53, remota6:remota6, remota7:remota7, remota81:remota81,
-               remota82:remota82, remota83:remota83, remota84:remota84, remota85:remota85, remota86:remota86,
-               remota87:remota87, remota88:remota88, remota89:remota89, remota810:remota810, remota811:remota811,
-               remota812:remota812, remota9:remota9, obsremota9:obsremota9, remota10:remota10, remota111:remota111,
-               remota112:remota112, remota12:remota12, obsremota12:obsremota12, historia1:historia1,
-               obshistoria1:obshistoria1, historia2:historia2, historia3:historia3, historia4:historia4,
-               historia5:historia5, historia6:historia6, historia7:historia7, historia8:historia8,
-               obshistoria8:obshistoria8, arterial:arterial, cardiaca:cardiaca, respiratoria:respiratoria,
-               torax:torax, abdomen:abdomen, extremidades:extremidades, faneras:faneras, neurologico:neurologico,
-               cuello:cuello, craneo:craneo, cara:cara, musculos:musculos, linfaticos:linfaticos, atm:atm,
-               salivales:salivales, vestibulo:vestibulo, anterior:anterior, superior:superior,
-               posterior:posterior, inferior:inferior, laterales:laterales, language:language, encias:encias, draw:draw,
-               asa:asa, nivelansiedad1:nivelansiedad1, nivelansiedad2:nivelansiedad2, nivelansiedad3:nivelansiedad3, nivelansiedad4:nivelansiedad4,
-               hipotesisdiagnostica:hipotesisdiagnostica, laboratorio1:laboratorio1, laboratorio2:laboratorio2,
-               laboratorio3:laboratorio3, laboratorio4:laboratorio4, laboratorio5:laboratorio5,
-               histopatologico1:histopatologico1, histopatologico2:histopatologico2, histopatologico3:histopatologico3,
-               histopatologico4:histopatologico4, diagenologia1:diagenologia1, diagenologia2:diagenologia2,
-               diagenologia3:diagenologia3, diagenologia4:diagenologia4, diagenologia5:diagenologia5,
-               diagenologia6:diagenologia6, fotografia1:fotografia1, fotografia2:fotografia2, fotografia3:fotografia3,
-               fotografia4:fotografia4, fotografia5:fotografia5, impresiones1:impresiones1, impresiones2:impresiones2,
-               finaldiagnostica:finaldiagnostica, gradodificultad1:gradodificultad1, gradodificultad2:gradodificultad2,
-               gradodificultad3:gradodificultad3, inmediato:inmediato, mediato:mediato
-             },
-             success:function(data){
-                if(data=='yes'){
-                  alert('Se envio los datos de la ficha clinica');
-                  location.href="index.php";
-                }else{
-                  alert(data);
-                  console.log(data);
-                }
-             }
-        });
-
-     }
      $('#patientregister_button').click(function(){
-
          registerpatient();
 
      });
      $('#btn_firma').click(function(){
-       var fichafirma=$('#ficha').val();
+       var ficha=$('#ficha').val();
+       var remission=$('#remissionid').val();
+       if(ficha=='')
+        registerpatient(false);
        var firma=document.getElementById(idCanvas).toDataURL('image/png');
        if(confirm('Quieres guardar la firma no se podrá modificar')){
          $.ajax({
               url:"../include/i_surgery.php",
               method:"POST",
-              data: {fichafirma:fichafirma, firma:firma},
+              data: {fichafirma:remission, firma:firma},
               success:function(data){
                 if(data=='yes'){
                   alert('Se guardo la firma');
@@ -3195,6 +3026,9 @@ $(document).ready(function(){
 
      $('#btn_surgery').click(function(){
         var ficha=$('#ficha').val();
+        if(ficha=='')
+          registerpatient(false);
+        var remission=$('#remissionid').val();
         var token=$('#token').val();
         var preoperatorio1 = $('#preoperatorio1').prop('checked');
         var preoperatorio2 = $('#preoperatorio2').prop('checked');
@@ -3235,7 +3069,7 @@ $(document).ready(function(){
 
              url:"../include/i_surgery.php",
              method:"POST",
-             data: {ficha:ficha, token:token, preoperatorio1:preoperatorio1, preoperatorio2:preoperatorio2, preoperatorio3:preoperatorio3,
+             data: {remission:remission, token:token, preoperatorio1:preoperatorio1, preoperatorio2:preoperatorio2, preoperatorio3:preoperatorio3,
                 preoperatorio4:preoperatorio4, diagnosisquirurjico:diagnosisquirurjico, premedication1:premedication1,
                 premedication2:premedication2, premedication3:premedication3, premedication4:premedication4,
                 dosis:dosis, intrafecha:intrafecha, intrahora1:intrahora1, intrahora2:intrahora2, asistente:asistente,
@@ -3251,6 +3085,8 @@ $(document).ready(function(){
                   clearsurgerytoken();
                   alert('Se guardó los datos');
                   $('#title_surgery').text('NUEVO REGISTRO');
+                  if(ficha=='')
+                    location.reload();
                 }else{
                   alert('Error al guardar datos');
                 }

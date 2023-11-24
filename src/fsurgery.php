@@ -84,13 +84,14 @@ function DBNewSurgeryii($param , $c=null){
 		if(isset($param['surgeryiiforecast']) && !isset($param['forecast'])) $param['forecast']=$param['surgeryiiforecast'];
 
 		$ac=array('remission');
-		$ac1=array('practice',	'motconsult',	'personalremote',	'dentalhistory',
+		$ac1=array('clinicalid', 'practice',	'motconsult',	'personalremote',	'dentalhistory',
 		'physicalexam',	'odontogram',	'asa',	'anxiety',	'diagnosishypothesis',
 		'complementaryexam',	'surgicaldifficulty',	'consent',	'treatmentplan',
 		'disease', 'exam', 'diagnosis', 'treatment', 'prescriptions', 'indications',
 		'evolution', 'forecast', 'updatetime');
 
 		$typei['remission']=-1;
+		$typei['clinicalid']=-1;
 		$typei['updatetime']=-1;
 
 		foreach($ac as $key) {
@@ -128,6 +129,7 @@ function DBNewSurgeryii($param , $c=null){
 		$evolution= '';
 		$forecast= '';
 
+		$clinicalid=-1;
 		$updatetime=-1;
 		foreach($ac1 as $key) {
 			if(isset($param[$key])) {
@@ -183,14 +185,31 @@ function DBNewSurgeryii($param , $c=null){
 					$ret=2;
 					$sql="update surgeryiitable set ";
 
-					if($disease!='') $sql.="surgeryiidisease='$disease', ";
-					if($exam!='') $sql.="surgeryiiexam='$exam', ";
-					if($diagnosis!='') $sql.="surgeryiidiagnosis='$diagnosis', ";
-					if($treatment!='') $sql.="surgeryiitreatment='$treatment', ";
-					if($prescriptions!='') $sql.="surgeryiiprescriptions='$prescriptions', ";
-					if($indications!='') $sql.="surgeryiiindications='$indications', ";
-					if($evolution!='') $sql.="surgeryiievolution='$evolution', ";
-					if($forecast!='') $sql.="surgeryiiforecast='$forecast', ";
+					if($clinicalid == 14){
+						if($practice!='') $sql.="surgeryiipractice='$practice', ";
+						if($motconsult!='') $sql.="surgeryiimotconsult='$motconsult', ";
+						if($personalremote!='') $sql.="surgeryiipersonalremote='$personalremote', ";
+						if($dentalhistory!='') $sql.="surgeryiidentalhistory='$dentalhistory', ";
+						if($physicalexam!='') $sql.="surgeryiiphysicalexam='$physicalexam', ";
+						if($odontogram!='') $sql.="surgeryiiodontogram='$odontogram', ";
+						if($asa!='') $sql.="surgeryiiasa='$asa', ";
+						if($anxiety!='') $sql.="surgeryiianxiety='$anxiety', ";
+						if($diagnosishypothesis!='') $sql.="surgeryiidiagnosishypothesis='$diagnosishypothesis', ";
+						if($complementaryexam!='') $sql.="surgeryiicomplementaryexam='$complementaryexam', ";
+						if($surgicaldifficulty!='') $sql.="surgeryiisurgicaldifficulty='$surgicaldifficulty', ";
+						if($treatmentplan!='') $sql.="surgeryiitreatmentplan='$treatmentplan', ";
+						if($diagnosis!='') $sql.="surgeryiidiagnosis='$diagnosis', ";
+
+					}else{
+						if($disease!='') $sql.="surgeryiidisease='$disease', ";
+						if($exam!='') $sql.="surgeryiiexam='$exam', ";
+						if($diagnosis!='') $sql.="surgeryiidiagnosis='$diagnosis', ";
+						if($treatment!='') $sql.="surgeryiitreatment='$treatment', ";
+						if($prescriptions!='') $sql.="surgeryiiprescriptions='$prescriptions', ";
+						if($indications!='') $sql.="surgeryiiindications='$indications', ";
+						if($evolution!='') $sql.="surgeryiievolution='$evolution', ";
+						if($forecast!='') $sql.="surgeryiiforecast='$forecast', ";
+					}
 
 
 					$sql.="updatetime=$updatetime where remissionid=$remission";
@@ -277,7 +296,7 @@ CREATE TABLE \"surgerytokentable\" (
 //control de datos
 function DBNewSurgeryToken($param , $c=null){
 
-		if(isset($param['fileid']) && !isset($param['file'])) $param['file']=$param['fileid'];
+		if(isset($param['remissionid']) && !isset($param['remission'])) $param['remission']=$param['remissionid'];
 		if(isset($param['studentid']) && !isset($param['student'])) $param['student']=$param['studentid'];
 		if(isset($param['teacherid']) && !isset($param['teacher'])) $param['teacher']=$param['teacherid'];
 
@@ -301,13 +320,11 @@ function DBNewSurgeryToken($param , $c=null){
 		if(isset($param['tokenbuccalmucosa']) && !isset($param['buccalmucosa'])) $param['buccalmucosa']=$param['tokenbuccalmucosa'];
 		if(isset($param['tokenobspost']) && !isset($param['obspost'])) $param['obspost']=$param['tokenobspost'];
 
-		$ac=array('file', 'student', 'teacher', 'id');
+		$ac=array('remission', 'id');
 		$ac1=array('area', 'diagnosis', 'premedication', 'dose', 'date', 'hourstart',
 		'hourend', 'attendee', 'anesthetic', 'technique', 'authorization', 'tracing',
 		'ending', 'obsintra', 'sensitivity', 'edema', 'buccalmucosa', 'obspost');
-		$typei['file']=-1;
-		$typei['student']=-1;
-		$typei['teacher']=-1;//admin
+		$typei['remission']=-1;
 		$typei['id']=-1;
 
 
@@ -362,12 +379,12 @@ function DBNewSurgeryToken($param , $c=null){
 			$c = DBConnect();
 			DBExec($c, "begin work", "DBNewSurgeryToken(begin)");
 		}
-		DBExec($c, "lock table pediatricsicontroltable", "DBNewSurgeryToken(lock)");
+		DBExec($c, "lock table surgerytokentable", "DBNewSurgeryToken(lock)");
 
 		$ret=1;
 
 		//antes de registrar chekear las claves foraneas
-		$sql = "select * from surgerytokentable where tokenid=$id and fileid= $file";
+		$sql = "select * from surgerytokentable where tokenid=$id and remissionid= $remission";
 		$a = DBGetRow ($sql, 0, $c);
 
 	    //para insercion o actulizacion
@@ -378,17 +395,17 @@ function DBNewSurgeryToken($param , $c=null){
 					"tokendose, tokendate, tokenhourstart, tokenhourend, tokenattendee, tokenanesthetic, ".
 					"tokentechnique, tokenauthorization, tokentracing, tokenending, tokenobsintra, tokensensitivity, ".
 					"tokenedema, tokenbuccalmucosa, tokenobspost, ".
-					"fileid,	student,	teacher) values ".
+					"remissionid) values ".
 					"('$area', '$diagnosis', '$premedication', '$dose', '$date', '$hourstart', ".
 					"'$hourend', '$attendee', '$anesthetic', '$technique', '$authorization', '$tracing', ".
 					"'$ending', '$obsintra', '$sensitivity', '$edema', '$buccalmucosa', '$obspost', ".
-					"$file, $student, $teacher)";
+					"$remission)";
 
 					DBExec ($c, $sql, "DBNewSurgeryToken(insert)");
 	    		if($cw) {
 	    				DBExec ($c, "commit work");
 	    		}
-	    		LOGLevel ("Ficha Surgery Token $file registrado.",2);
+	    		LOGLevel ("Ficha Surgery Token $remission registrado.",2);
 			} else {
 				if($updatetime > $a['updatetime']) {
 					$ret=2;
@@ -397,9 +414,8 @@ function DBNewSurgeryToken($param , $c=null){
 					"tokenhourstart='$hourstart',tokenhourend='$hourend',tokenattendee='$attendee',".
 					"tokenanesthetic='$anesthetic',tokentechnique='$technique',tokenauthorization='$authorization',".
 					"tokentracing='$tracing',tokenending='$ending',tokenobsintra='$obsintra',tokensensitivity='$sensitivity',".
-					"tokenedema='$edema',tokenbuccalmucosa='$buccalmucosa',tokenobspost='$obspost',updatetime=$updatetime, ".
-					"student=$student, teacher=$teacher " .
-					"where tokenid=$id and fileid=$file";
+					"tokenedema='$edema',tokenbuccalmucosa='$buccalmucosa',tokenobspost='$obspost',updatetime=$updatetime ".
+					"where tokenid=$id and remissionid=$remission";
 
 					$r = DBExec ($c, $sql, "DBNewSurgeryToken(update)");
 					if($cw) {
@@ -420,7 +436,7 @@ function DBSurgeryTokenInfo($id, $c=null) {
 	"tokentechnique as technique, tokenauthorization as authorization, ".
 	"tokentracing as tracing, tokenending as ending, tokenobsintra as obsintra, ".
 	"tokensensitivity as sensitivity, tokenedema as edema, tokenbuccalmucosa as buccalmucosa, ".
-	"tokenobspost as obspost, fileid as fileid from surgerytokentable where tokenid=$id";
+	"tokenobspost as obspost, remissionid from surgerytokentable where tokenid=$id";
 
 	//funcion para capturar la fila del usuario
 	$a = DBGetRow ($sql, 0, $c);
@@ -531,7 +547,7 @@ function DBAllSurgeryTokenInfo($file=-1, $tbody=false){
 	$sql = "select *from surgerytokentable";
 
 	if($file!=-1){
-		$sql.=" where fileid=$file";
+		$sql.=" where remissionid=$file";
 	}
 	$sql.=" order by updatetime desc";
 	$c = DBConnect();
@@ -1038,18 +1054,124 @@ function DBAuthorizationAnesthesia($user, $time=null, $type, $id, $c=null){
 			DBExec ($c, "commit work");
 	}
 
-
-
-
-
 	$msg=$teacher.','.$nursing;//$treat;
+
+	//DBSurgeryiiInfo($id);
+	return $msg;
+}
+//funcion para autorizar una firma a complementaryexam
+function DBAuthorizationComplementaryexam($user, $time=null, $type, $id, $c=null){
+	$userinfo=DBUserInfo($user);
+
+	if($userinfo==null)
+		return false;
+	//funcion para saber si es por qr o no
+	if($time!=null){
+		if($userinfo['usertype']!='teacher'&& $userinfo['usertype']!='nursing'|| $userinfo['userinfo']!=$time)
+			return false;
+	}
+
+	if($userinfo['usertype']=='teacher'){
+		//registrado en cirugia cuarto año
+		if(DBSpecialtyInfo($user, 14, 5)==null){
+			return false;
+		}
+	}
+
+	$file=DBSurgeryiiInfo($id);
+	$file['surgeryiicomplementaryexam'];
+	if(trim($file['surgeryiicomplementaryexam'])==''){
+		$file['surgeryiicomplementaryexam']='[false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false][(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)]';
+	}else{
+		$treat=explode(']',$file['surgeryiicomplementaryexam']);
+		$size=count($treat);
+		if($size!=3){
+			$file['surgeryiicomplementaryexam']='[false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false-false][(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)]';
+		}
+	}
+	$treat_tmp=explode(']',$file['surgeryiicomplementaryexam']);
+	$treat=explode('[',$treat_tmp[1]);
+	$treat=trim($treat[1]);
+
+	$auto=explode(')',$treat);
+	$size=count($auto);
+	if($size!=23)
+		return false;
+	$data=$auto[$type-1];
+	$data=explode('(',$data);
+	$data=trim($data[1]);
+
+	//$data=explode(',',$data);
+	$teacher=trim($data);
+	//$nursing=trim($data[1]);
+	if($userinfo['usertype']=='teacher')
+		$teacher=$user.'*'.time();
+	//if($userinfo['usertype']=='nursing')
+	//	$nursing=$user.'*'.time();
+
+	$data='('.$teacher;
+	//$data='('.$teacher.','.$nursing;
+
+	$auto[$type-1]=$data;
+
+	$auto1='';
+	for ($i=0; $i < count($auto)-1; $i++) {
+		$auto1=$auto1.$auto[$i].')';
+	}
+	$treat_tmp[1]='['.$auto1;
+	$treat='';
+	for ($i=0; $i < count($treat_tmp)-1; $i++) {
+		$treat=$treat.$treat_tmp[$i].']';
+	}
+
+	$cw = false;
+	if($c == null) {
+		$cw = true;
+		$c = DBConnect();
+		DBExec($c, "begin work", "DBAuthorizationComplementaryexam(begin)");
+	}
+	DBExec($c, "lock table surgeryiitable", "DBAuthorizationComplementaryexam(lock)");
+
+	$ret=1;
+	$time=time();
+	$sql="update surgeryiitable set surgeryiicomplementaryexam='$treat' where surgeryiiid=$id";
+	DBExec($c, $sql, "DBAuthorizationComplementaryexam(update surgeryiitable)");
+
+	if($cw) {
+			DBExec ($c, "commit work");
+	}
+
+	$msg=$teacher;//.','.$nursing;//$treat;
 
 	//DBSurgeryiiInfo($id);
 	return $msg;
 }
 function DBPatientRemissionSurgeryiiInfo($id, $c=null) {
 
-	$sql = "SELECT pa.*, p.*, rh.*, su.* FROM remissionhistorytable AS rh JOIN patientadmissiontable AS pa
+	$sql = "SELECT pa.*, p.*, rh.*,
+	su.surgeryiiid,
+	su.surgeryiipractice,
+	su.surgeryiimotconsult,
+	su.surgeryiipersonalremote,
+	su.surgeryiidentalhistory,
+	su.surgeryiiphysicalexam,
+	su.surgeryiiodontogram,
+	su.surgeryiiasa,
+	su.surgeryiianxiety,
+	su.surgeryiidiagnosishypothesis,
+	su.surgeryiicomplementaryexam,
+	su.surgeryiisurgicaldifficulty,
+	su.surgeryiiconsent,
+	su.surgeryiitreatmentplan,
+	su.surgeryiidisease,
+	su.surgeryiiexam,
+	su.surgeryiidiagnosis,
+	su.surgeryiitreatment,
+	su.surgeryiiprescriptions,
+	su.surgeryiiindications,
+	su.surgeryiievolution,
+	su.surgeryiiforecast
+	FROM remissionhistorytable AS rh JOIN patientadmissiontable AS pa
 		ON pa.patientadmissionid = rh.patientadmissionid JOIN patienttable AS p ON p.patientid = pa.patientid
 		LEFT JOIN surgeryiitable AS su ON su.remissionid = rh.remissionid where rh.remissionid=$id";
 
@@ -1064,6 +1186,7 @@ function DBPatientRemissionSurgeryiiInfo($id, $c=null) {
 	$a=clearexam($a);
 	$a=cleartreatment($a);
 	$a=clearsurgeryii($a);
+	$a=clearcomplementaryexam($a);
 	$a=clearreview($a);
 	$conf=globalconf();
 	if($a['surgeryiiodontogram']!=null)
@@ -1144,26 +1267,7 @@ function clearsurgeryii($a){
 			$a[$akey[$i]]=trim($r2[1]);
 		}
 	}
-	if($a['surgeryiicomplementaryexam']!=null){
-		$r=explode('}',$a['surgeryiicomplementaryexam']);
-		$size=count($r);
 
-		$akey = array(array('laboratorio1','laboratorio2','laboratorio3','laboratorio4','laboratorio5'),
-							array('histopatologico1','histopatologico2','histopatologico3','histopatologico4'),
-							array('diagenologia1','diagenologia2','diagenologia3','diagenologia4','diagenologia5','diagenologia6'),
-							array('fotografia1','fotografia2','fotografia3','fotografia4','fotografia5'),
-							array('impresiones1','impresiones2'));
-
-		for ($i=0; $i <$size-1; $i++) {
-			$r2=explode('{',$r[$i]);
-			$r3=explode(']',$r2[1]);
-			$size2=count($r3);
-			for ($j=0; $j < $size2-1; $j++) {
-				$r4=explode('[',$r3[$j]);
-				$a[$akey[$i][$j]]=trim($r4[1]);
-			}
-		}
-	}
 	if($a['surgeryiisurgicaldifficulty']!=null){
 		$r=explode(']',$a['surgeryiisurgicaldifficulty']);
 		$size=count($r);
@@ -1387,6 +1491,38 @@ function cleartreatment($a){
 				}
 			}
 		}
+	}
+	return $a;
+}
+function clearcomplementaryexam($a){
+	$r=explode(']',$a['surgeryiicomplementaryexam']);
+	$len=count($r);
+
+	if($len>1){
+		$r2=explode('[',$r[0]);
+		$a['complementaryexam']=array();//$r2[1];
+		$r3=explode('-',$r2[1]);
+		if(count($r3)==22){
+			$ac = array('laboratorio1','laboratorio2','laboratorio3','laboratorio4','laboratorio5','histopatologico1',
+			'histopatologico2','histopatologico3','histopatologico4','diagenologia1','diagenologia2','diagenologia3',
+			'diagenologia4','diagenologia5','diagenologia6','fotografia1','fotografia2','fotografia3','fotografia4',
+			'fotografia5','impresiones1','impresiones2');
+			for ($i=0; $i < count($ac); $i++) {
+				$a['complementaryexam'][$ac[$i]]=$r3[$i];
+			}
+
+			if($len>2){
+				$r2=explode('[',$r[1]);
+				$r3=explode(')',$r2[1]);
+				if(count($r3)==23){
+					for ($i=0; $i < count($ac); $i++) {
+						$r4=explode('(',$r3[$i]);
+						$a['complementaryexam'][$ac[$i].'teacher']=$r4[1];
+					}
+				}
+			}
+		}
+
 	}
 	return $a;
 }

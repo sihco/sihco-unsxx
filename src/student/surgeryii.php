@@ -865,8 +865,9 @@ include("../leftodontogramjs.php");
 ?>
 <script src="../leftscannerqr.js"></script>
 <script>
+//funcion que recibe contenido de qr
 function registerqr(content){
-  var ch = $('#functionname').val();
+  var ch = $('#functionname').val();//al dar click en onclick de boton docente qr guarda en function name y ahora capturamos
   switch (ch) {
     case 'authorizeqrtwo':
       authorizeqrtwo(content);
@@ -882,14 +883,14 @@ function registerqr(content){
   }
 }
 function endqr(content){
-  var ch = $('#inputqr').val();
+  var rh = $('#inputqr').val();
   //var ficha = $('#ficha').val();
   //window.location.href=content;
   //alert(content);
   $.ajax({
        url:"../include/i_clinichistory.php",
        method:"POST",
-       data: {content:content, ch:ch, endch:'true'},
+       data: {content:content, rh:rh, endch:'true'},
        success:function(data)
        {
           if(data=='yes'){
@@ -901,15 +902,15 @@ function endqr(content){
        }
   });
 }
-function authorizeqrtwo(content, remission){
-  var remission = $('#remissionid').val();
-  var ficha = $('#ficha').val();
+function authorizeqrtwo(content){
+  var remission = $('#remissionid').val();//captura el valor de la remision
+  var ficha = $('#ficha').val();//valor de la ficha de cirugia bucal
 
   if(ficha==''){
     registerpatient(0);
   }
 
-  var anesthesia = $('#inputqr').val();
+  var anesthesia = $('#inputqr').val();//extrae dato del tipo de anestesia que se guardo
   //var ficha = $('#ficha').val();
   //window.location.href=content;
   $.ajax({
@@ -941,15 +942,14 @@ function authorizeqrtwo(content, remission){
   });
 }
 function authorizeqr(content){
-  var ch = $('#inputqr').val();
+  var rh = $('#inputqr').val();
   //var ficha = $('#ficha').val();
   //window.location.href=content;
   //alert(content);
-  //alert(ch);
   $.ajax({
        url:"../include/i_clinichistory.php",
        method:"POST",
-       data: {content:content, ch:ch},
+       data: {content:content, rh:rh},
        success:function(data)
        {
           //alert(data);

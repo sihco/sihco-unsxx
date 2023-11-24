@@ -7,20 +7,18 @@ require_once('../db.php');
 
 if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
   $id=htmlspecialchars(trim($_GET["id"]));
-  $r=DBSurgeryiiInfo($id);
+  $r=DBPatientRemissionSurgeryiiInfo($id);
+  //$r=DBSurgeryiiInfo($id);
   if($r==null){
     ForceLoad("index.php");
   }
-  if(($pat=DBPatientRemissionInfo($r['remissionid']))==null){
+  if($r["clinicalid"]!=14)
     ForceLoad("index.php");
-  }
-  if($pat["clinicalid"]!=13)
-    ForceLoad("index.php");
+
 }else{
   ForceLoad("index.php");
 }
-$pat2=$r;
-$pat=array_merge($pat, $pat2);
+$pat=$r;
 ?>
 
 <!DOCTYPE html>
@@ -429,8 +427,8 @@ $pat=array_merge($pat, $pat2);
         <div class="w50" align="left">
           <?php
           $name="RECEPCIONADO POR UNIV.:";
-          if(isset($pat) && $pat["student"]){
-              $student=DBUserInfo($pat['student']);
+          if(isset($pat["studentid"]) && $pat["studentid"]){
+              $student=DBUserInfo($pat['studentid']);
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$student['userfullname'];
               echo $name;
           }else{
@@ -2519,7 +2517,7 @@ $pat=array_merge($pat, $pat2);
     <div class="">
       <?php
       $name="Trabajo Conluido el:&nbsp;&nbsp;&nbsp;&nbsp;";
-      if($pat['enddatetime']!=-1){
+      if(isset($pat['enddatetime'])&& $pat['enddatetime']!=-1){
         $name.=datetimeconv($pat['enddatetime']);
       }else {
         $name.=".................................................................";

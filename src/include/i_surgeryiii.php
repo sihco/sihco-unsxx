@@ -61,8 +61,8 @@ if(isset($_POST['fileid'])&&is_numeric($_POST['fileid'])&&
 if(isset($_POST['id'])&&is_numeric($_POST['id'])){
   $data=DBSurgeryTokenInfo($_POST['id']);
   if(DBDeleteSurgeryToken($_POST['id'])===true){
-    if($data!=null&&$data['fileid']!=''){//e
-      $a=DBAllSurgeryTokenInfo($data['fileid'], true);
+    if($data!=null&&$data['remissionid']!=''){//e
+      $a=DBAllSurgeryTokenInfo($data['remissionid'], true);
       echo $a;
     }else{
       echo "No";

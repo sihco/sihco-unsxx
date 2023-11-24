@@ -854,15 +854,15 @@ $(document).ready(function(){
 
 
 //function para autorizar
-function autorization(ch) {
+function autorization(rh) {
   //var ch=$(this).attr('hc');
   Stop();
-  //alert(ch);
+  //alert(rh);
   $.ajax({
 
        url:"../include/i_clinichistory.php",
        method:"POST",
-       data: {ch:ch},
+       data: {rh:rh},
        success:function(data)
        {
           if(data=='yes'){
@@ -884,7 +884,7 @@ function autorization(ch) {
        }
   });
 }
-function canceled(ch) {
+function canceled(rh) {
   //var ch=$(this).attr('hc');
   Stop();
   //alert(ch);
@@ -903,7 +903,7 @@ function canceled(ch) {
 
            url:"../include/i_clinichistory.php",
            method:"POST",
-           data: {ch:ch, canceledch:'true'},
+           data: {rh:rh, canceledch:'true'},
            success:function(data)
            {
               if(data=='yes'){
