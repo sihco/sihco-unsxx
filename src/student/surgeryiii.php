@@ -17,8 +17,38 @@ if(isset($_GET["id"]) && $_GET["id"]!=null && is_numeric($_GET["id"])){
 }
 $pat=$r;
 ?>
+<style media="screen">
+/*Por debajo de 700px*/
+@media screen and (max-width: 700px){
+  .readtext{
+    font-size: 10px;
+  }
 
-                    <div class="container-fluid px-4">
+  .input-group-sm > .form-control,
+  .input-group-sm > .form-select,
+  .input-group-sm > .input-group-text,
+  .input-group-sm > .btn {
+    padding: 0.10rem 0.2rem !important;
+    font-size: 0.350rem !important;
+    border-radius: 0.10rem !important;
+    /*padding: 0.25rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.25rem !important;*/
+  }
+
+  .input-group-sm > .form-select {
+    padding-right: 1.5rem !important;
+    /*padding-right: 3rem !important;*/
+  }
+}
+/*Por debajo de 400px*/
+@media screen and (max-width: 400px){
+  .readtext{
+    font-size: 8px;
+  }
+}
+</style>
+                    <div class="container-fluid px-2">
 
                         <h2 align="center" class="mt-4">
                           Ficha Clinica de Cirugia Bucal III
@@ -80,7 +110,7 @@ $pat=$r;
                           </div>
                         </div>
                         <!--MODAL FIN-->
-<div class="card p-3 shadow rounded text-half">
+<div class="card p-2 shadow rounded text-half">
 
     <?php
     //echo $pat['status'];
@@ -122,13 +152,12 @@ $pat=$r;
 
   </div>
 
-  <div class="row">
+  <div class="row readtext">
     <div class="col-12">
       <b>A. DATOS CIVILES</b>
     </div>
   </div>
-
-  <div class="row">
+  <div class="row readtext">
     <div class="col-lg-5 col-md-5 col-sm-12 col-12">
       <input type="hidden" name="remissionid" id="remissionid"value="<?php if(isset($_GET['id'])) echo $_GET['id'];?>">
       <input type="hidden" name="ficha" id="ficha"value="<?php if(isset($pat["surgeryiiid"])) echo $pat["surgeryiiid"]?>">
@@ -165,7 +194,7 @@ $pat=$r;
     </div>
   </div>
 
-  <div class="row">
+  <div class="row readtext">
     <div class="col-lg-3 col-md-3 col-sm-6 col-6">
       <label for="patientgender"><b>Domicilio:</b></label>&nbsp;&nbsp;&nbsp;&nbsp;
       <span class="text-secondary">
@@ -192,7 +221,7 @@ $pat=$r;
     </div>
   </div>
   <br>
-  <div class="row">
+  <div class="row readtext">
     <div class="col-lg-2 col-md-2 col-sm-6 col-6">
       <div class="input-group input-group-sm mb-3">
         <label class="input-group-text" for="practice">Práctica N.:</label>
@@ -221,14 +250,14 @@ $pat=$r;
   </div>
 
 
-  <div class="row">
+  <div class="row readtext">
     <div class="col-12">
       <b>B. ANAMNESIS</b><br>
       <u><b>B1. Anamnesis próxima personal</u></b>
     </div>
   </div>
   <br>
-  <div class="row">
+  <div class="row readtext">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
         <div class="input-group input-group-sm mb-3">
           <label class="input-group-text" for="motconsult">Motivo de la Consulta:</label>
@@ -248,12 +277,12 @@ $pat=$r;
         </div>
       </div>
   </div>
-  <div class="row">
+  <div class="row readtext">
     <div class="col-12">
       <b>B2. Anamnesis remota personal</b>
     </div>
   </div>
-  <div class="row">
+  <div class="row readtext">
     <script type="text/javascript">
       function remota(s){
         var b = document.querySelector("#obs"+s);
@@ -309,12 +338,12 @@ $pat=$r;
 
   </div>
 
-  <div class="row">
+  <div class="row readtext">
     <div class="col-12">
       4.- ¿Ud. padece o ha padecido alguna de las siguientes enfermedades?
     </div>
   </div>
-  <div class="row">
+  <div class="row readtext">
     <div class="col-12">
       <div class="input-group input-group-sm mb-2">
         <label class="input-group-text" for="remota4a">a.- Fiebre reumática o enfermedad cardiaca reumática.</label>
@@ -1270,7 +1299,7 @@ $pat=$r;
   <div id="visualization32b" name="diente32b-a" class="click" style="width: 22px; height: 160px;position:absolute;margin:0 0 0 7px;"></div>
   <div id="diente32b-a"></div>
   <div class="">32</div>
-</td>
+  </td>
   <td class="noborde">
   <div name="diente33b-a" class="click" id="visualization33b" style="width: 25px; height: 160px;position:absolute;margin:0 0 0 8px;"></div>
   <div id="diente33b-a"></div>
@@ -2192,6 +2221,44 @@ $pat=$r;
                 <div class="col-12">
                   <br>
                   <div class="row">
+                    <!--Inicio de firmas-->
+                    <div class="col-12">
+                      <div class="input-group input-group-sm">
+                        <div class="border">
+                          <?php
+                          /*$ac = array('autorizacion','seguimiento','finalizacion');
+                          $acnames = array('Firma de autorización','Firma de seguimiento','Firma de finalización');
+
+                          $ce_content='';
+                          for ($i=0; $i < 3; $i++) {
+                            $ce_content.='<div class="from-check form-check-inline border p-3" align="center">'.
+                            '<input class="form-check-input" type="checkbox" id="'.$ac[$i].'" '.
+                            (isset($pat['complementaryexam'][$ac[$i]])&& $pat['complementaryexam'][$ac[$i]]=='true'?'checked':'').'>'.
+                            '<label for="'.$ac[$i].'">'.$acnames[$i].'</label>'.
+                            '<br>'.
+                            '<div class="autorizar" id="a_'.$ac[$i].'teacher">';
+                            if(isset($pat['complementaryexam'][$ac[$i].'teacher'])&&$pat['complementaryexam'][$ac[$i].'teacher']!='*'){
+                              $data=explode('*', $pat['complementaryexam'][$ac[$i].'teacher']);
+                              $infouser=DBUserInfo($data[0]);
+                              $time=trim($data[1]);
+                              $ce_content.='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"
+                               data-bs-target="#'.$ac[$i].'_infoteacher" aria-expanded="true" aria-controls="'.$ac[$i].'_infoteacher">Autorizado Por Docente</span>';
+                              $ce_content.='<div id="'.$ac[$i].'_infoteacher" class="accordion-collapse collapse" aria-labelledby="'.$ac[$i].'_infoteacher">'.
+                              '<div class="accordion-body"><div class="row"><div class="col-12">'.$infouser['userfullname'].'</div><div class="col-12">'.datetimeconv($time).'</div></div></div></div>';
+                            }else{
+                                $ce_content.= '<button type="button" class="btn btn-outline-primary btn-sm" name="'.$ac[$i].'_button" onclick="readqr(\''.$ac[$i].'\', \'authorizeqrthree\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+                            }
+                            $ce_content.='</div>'.
+                            '</div>';
+                          }
+                          echo $ce_content;*/
+                          ?>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Fin de firmas-->
+
+
                     <div class="col-4">
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="autorizacion" value="option4">
@@ -2374,6 +2441,9 @@ function registerqr(content){
     case 'authorizeqrtwo':
       authorizeqrtwo(content);
       break;
+    case 'authorizeqrthree':
+      authorizeqrthree(content);
+      break;
     case 'authorizeqr':
       registerpatient(false);
       authorizeqr(content);
@@ -2442,6 +2512,47 @@ function authorizeqrtwo(content){
        }
   });
 }
+function authorizeqrthree(content){
+  var remission = $('#remissionid').val();
+  var ficha = $('#ficha').val();
+
+  if(ficha==''){
+    registerpatient(false);
+  }
+  var token = $('#token');
+  var typefirm = $('#inputqr').val();//valor del tipo de firma
+  alert('dfjjkdls');
+  if(token==''){
+
+  }
+  $("#operatoria").modal("show");
+  /*$.ajax({
+       url:"../include/i_readqr.php",
+       method:"POST",
+       data: {content:content, complementaryexam:complementaryexam, remission:remission},
+       success:function(data)
+       {
+          if(isNaN(data)){
+            let arr = data.split('***');
+            var type=arr[0];
+            $('#a_'+complementaryexam+''+type).html(arr[1]);
+          }else{
+              if(data==3){
+                alert('Tipo de usuario invalido');
+              }else if (data==2) {
+                alert('No se realizo la autorización');
+              }else if (data==1) {
+                alert('Tecnica de anestesia no encontrado');
+              }else if (data==0) {
+                alert('QR Invalido');
+              }else {
+                alert('Error: '+data);
+              }
+          }
+
+       }
+  });*/
+}
 function authorizeqr(content){
   var rh = $('#inputqr').val();
   //var ficha = $('#ficha').val();
@@ -2470,7 +2581,7 @@ function file(id){
     registerpatient(false);
   }
 
-  location.href="surgeryiiread.php?id="+id;
+  location.href="surgeryiiiread.php?id="+id;
 }
 //scanner scan qr fin
 //para registrar datos del paciente para ficha clinica
@@ -2864,6 +2975,81 @@ function tdatadelete(s){
     });
   });
 }
+
+//funcion para registar en la tabla surgery por hoja
+function registersurgerytoken(){
+  var ficha=$('#ficha').val();
+  if(ficha=='')
+    registerpatient(false);
+  var remission=$('#remissionid').val();
+  var token=$('#token').val();
+  var preoperatorio1 = $('#preoperatorio1').prop('checked');
+  var preoperatorio2 = $('#preoperatorio2').prop('checked');
+  var preoperatorio3 = $('#preoperatorio3').prop('checked');
+  var preoperatorio4 = $('#preoperatorio4').prop('checked');
+
+  var diagnosisquirurjico = $('#diagnosisquirurjico').val();
+  var premedication1 = $('#premedication1').prop('checked');
+  var premedication2 = $('#premedication2').prop('checked');
+  var premedication3 = $('#premedication3').prop('checked');
+  var premedication4 = $('#premedication4').prop('checked');
+  var dosis = $('#dosis').val();
+
+  var intrafecha = $('#intrafecha').val();
+  var intrahora1 = $('#intrahora1').val();
+  var intrahora2 = $('#intrahora2').val();
+
+  var asistente = $('#asistente').val();
+  var anestesico = $('#anestesico').val();
+  var tecnica = $('#tecnica').val();
+  var autorizacion = $('#autorizacion').prop('checked');
+  var seguimiento = $('#seguimiento').prop('checked');
+  var finalizacion = $('#finalizacion').prop('checked');
+  var obsintra = $('#obsintra').val();
+
+  var sensibilidad1 = $('#sensibilidad1').prop('checked');
+  var sensibilidad2 = $('#sensibilidad2').prop('checked');
+  var sensibilidad3 = $('#sensibilidad3').prop('checked');
+  var sensibilidad4 = $('#sensibilidad4').prop('checked');
+  var edema1 = $('#edema1').prop('checked');
+  var edema2 = $('#edema2').prop('checked');
+  var edema3 = $('#edema3').prop('checked');
+  var edema4 = $('#edema4').prop('checked');
+  var buccalmucosa1 = $('#buccalmucosa1').prop('checked');
+  var buccalmucosa2 = $('#buccalmucosa2').prop('checked');
+  var obspost = $('#obspost').val();
+  $.ajax({
+
+       url:"../include/i_surgery.php",
+       method:"POST",
+       data: {remission:remission, token:token, preoperatorio1:preoperatorio1, preoperatorio2:preoperatorio2, preoperatorio3:preoperatorio3,
+          preoperatorio4:preoperatorio4, diagnosisquirurjico:diagnosisquirurjico, premedication1:premedication1,
+          premedication2:premedication2, premedication3:premedication3, premedication4:premedication4,
+          dosis:dosis, intrafecha:intrafecha, intrahora1:intrahora1, intrahora2:intrahora2, asistente:asistente,
+          anestesico:anestesico, tecnica:tecnica, autorizacion:autorizacion, seguimiento:seguimiento,
+          finalizacion:finalizacion, obsintra:obsintra, sensibilidad1:sensibilidad1, sensibilidad2:sensibilidad2,
+          sensibilidad3:sensibilidad3, sensibilidad4:sensibilidad4, edema1:edema1, edema2:edema2, edema3:edema3,
+          edema4:edema4, buccalmucosa1:buccalmucosa1, buccalmucosa2:buccalmucosa2,
+          obspost:obspost},
+       success:function(data){
+          if(data!='No'){
+
+            $("#tbodytable tr").remove();
+            $("#tbodytable").append(data);
+            clearsurgerytoken();
+            alert('Se guardó los datos');
+            $('#title_surgery').text('NUEVO REGISTRO');
+
+            if(ficha=='')
+              location.reload();
+
+          }else{
+            alert('Error al guardar datos');
+          }
+          //console.log(data);
+       }
+  });
+}
 $(document).ready(function(){
   //para modal table tr
   var tbodytable=`<?php echo $tbodytable; ?>`;
@@ -3025,74 +3211,7 @@ $(document).ready(function(){
      //ficha de cirugia
 
      $('#btn_surgery').click(function(){
-        var ficha=$('#ficha').val();
-        if(ficha=='')
-          registerpatient(false);
-        var remission=$('#remissionid').val();
-        var token=$('#token').val();
-        var preoperatorio1 = $('#preoperatorio1').prop('checked');
-        var preoperatorio2 = $('#preoperatorio2').prop('checked');
-        var preoperatorio3 = $('#preoperatorio3').prop('checked');
-        var preoperatorio4 = $('#preoperatorio4').prop('checked');
-
-        var diagnosisquirurjico = $('#diagnosisquirurjico').val();
-        var premedication1 = $('#premedication1').prop('checked');
-        var premedication2 = $('#premedication2').prop('checked');
-        var premedication3 = $('#premedication3').prop('checked');
-        var premedication4 = $('#premedication4').prop('checked');
-        var dosis = $('#dosis').val();
-
-        var intrafecha = $('#intrafecha').val();
-        var intrahora1 = $('#intrahora1').val();
-        var intrahora2 = $('#intrahora2').val();
-
-        var asistente = $('#asistente').val();
-        var anestesico = $('#anestesico').val();
-        var tecnica = $('#tecnica').val();
-        var autorizacion = $('#autorizacion').prop('checked');
-        var seguimiento = $('#seguimiento').prop('checked');
-        var finalizacion = $('#finalizacion').prop('checked');
-        var obsintra = $('#obsintra').val();
-
-        var sensibilidad1 = $('#sensibilidad1').prop('checked');
-        var sensibilidad2 = $('#sensibilidad2').prop('checked');
-        var sensibilidad3 = $('#sensibilidad3').prop('checked');
-        var sensibilidad4 = $('#sensibilidad4').prop('checked');
-        var edema1 = $('#edema1').prop('checked');
-        var edema2 = $('#edema2').prop('checked');
-        var edema3 = $('#edema3').prop('checked');
-        var edema4 = $('#edema4').prop('checked');
-        var buccalmucosa1 = $('#buccalmucosa1').prop('checked');
-        var buccalmucosa2 = $('#buccalmucosa2').prop('checked');
-        var obspost = $('#obspost').val();
-        $.ajax({
-
-             url:"../include/i_surgery.php",
-             method:"POST",
-             data: {remission:remission, token:token, preoperatorio1:preoperatorio1, preoperatorio2:preoperatorio2, preoperatorio3:preoperatorio3,
-                preoperatorio4:preoperatorio4, diagnosisquirurjico:diagnosisquirurjico, premedication1:premedication1,
-                premedication2:premedication2, premedication3:premedication3, premedication4:premedication4,
-                dosis:dosis, intrafecha:intrafecha, intrahora1:intrahora1, intrahora2:intrahora2, asistente:asistente,
-                anestesico:anestesico, tecnica:tecnica, autorizacion:autorizacion, seguimiento:seguimiento,
-                finalizacion:finalizacion, obsintra:obsintra, sensibilidad1:sensibilidad1, sensibilidad2:sensibilidad2,
-                sensibilidad3:sensibilidad3, sensibilidad4:sensibilidad4, edema1:edema1, edema2:edema2, edema3:edema3,
-                edema4:edema4, buccalmucosa1:buccalmucosa1, buccalmucosa2:buccalmucosa2,
-                obspost:obspost},
-             success:function(data){
-                if(data!='No'){
-                  $("#tbodytable tr").remove();
-                  $("#tbodytable").append(data);
-                  clearsurgerytoken();
-                  alert('Se guardó los datos');
-                  $('#title_surgery').text('NUEVO REGISTRO');
-                  if(ficha=='')
-                    location.reload();
-                }else{
-                  alert('Error al guardar datos');
-                }
-                //console.log(data);
-             }
-        });
+        registersurgerytoken();
      });
 
 });

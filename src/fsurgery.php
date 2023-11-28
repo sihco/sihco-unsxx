@@ -266,6 +266,7 @@ CREATE TABLE \"surgerytokentable\" (
         \"tokendate\" varchar(100) DEFAULT '',     -- (fecha)
         \"tokenhourstart\" varchar(100) DEFAULT '',     -- (hora inicio)
         \"tokenhourend\" varchar(100) DEFAULT '',     -- (hora final)
+        \"tokensurgeon\" varchar(100) DEFAULT '',		-- (cirujano)
         \"tokenattendee\" varchar(100) DEFAULT '',		-- (asistente/instrumentista)
         \"tokenanesthetic\" varchar(100) DEFAULT '',		-- (medicamento anestesico)
         \"tokentechnique\" varchar(100) DEFAULT '',		-- (tecnica)
@@ -399,16 +400,16 @@ function DBNewSurgeryToken($param , $c=null){
 					"('$area', '$diagnosis', '$premedication', '$dose', '$date', '$hourstart', ".
 					"'$hourend', '$attendee', '$anesthetic', '$technique', '$authorization', '$tracing', ".
 					"'$ending', '$obsintra', '$sensitivity', '$edema', '$buccalmucosa', '$obspost', ".
-					"$remission)";
+					"$remission) returning tokenid";
 
-					DBExec ($c, $sql, "DBNewSurgeryToken(insert)");
+					$ret=DBExec ($c, $sql, "DBNewSurgeryToken(insert)");
 	    		if($cw) {
 	    				DBExec ($c, "commit work");
 	    		}
 	    		LOGLevel ("Ficha Surgery Token $remission registrado.",2);
 			} else {
 				if($updatetime > $a['updatetime']) {
-					$ret=2;
+					$ret=$id;//returna el id de tokenid
 					$sql = "update surgerytokentable set tokenarea='$area',tokendiagnosis='$diagnosis',".
 					"tokenpremedication='$premedication',tokendose='$dose',tokendate='$date',".
 					"tokenhourstart='$hourstart',tokenhourend='$hourend',tokenattendee='$attendee',".

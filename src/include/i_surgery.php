@@ -455,7 +455,8 @@ isset($_POST['buccalmucosa1'])&&isset($_POST['buccalmucosa2'])&&isset($_POST['ob
 
   $param['remission'] = $info['remissionid'];//id of clinical
 
-  DBNewSurgeryToken($param);
+  $tokenid = DBNewSurgeryToken($param); //returna el token id
+
   $a=DBAllSurgeryTokenInfo($info['remissionid'], true );
   if($a==null){
     echo 'No';

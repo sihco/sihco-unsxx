@@ -310,11 +310,11 @@ $pat=$r;
         <div align="left" class="w50">
           <?php
           $name="NOMBRES Y APELLIDOS:";
-          if(isset($pat["patientfullname"]) && $pat["patientfullname"]){
-              $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$pat["patientfullname"];
+          if(isset($pat["patientname"]) && $pat["patientname"]){
+              $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".ucfirst($pat["patientname"])." ".ucfirst($pat["patientfirstname"])." ".ucfirst($pat["patientlastname"]);
               echo $name;
           }else{
-            echo $name."..............................................................................";
+            echo $name."...........................................................";
           }
           ?>
         </div>
@@ -415,8 +415,8 @@ $pat=$r;
         <div class="w45" align="left">
           <?php
           $name="SUPERVISADO POR Dr.(a):";
-          if(isset($pat["teacher"]) && $pat["teacher"]){
-            $tea=DBUserInfo($pat['teacher']);
+          if(isset($pat["teacherid"]) && $pat["teacherid"]){
+            $tea=DBUserInfo($pat['teacherid']);
             $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$tea["userfullname"];
             echo $name;
           }else{
@@ -1858,6 +1858,7 @@ $pat=$r;
 
       <div class="">
         <?php
+
         $st=DBAllSurgeryTokenInfo($_GET['id']);//funcion para sacar la informacion
         $sw=true;
         $content="";
