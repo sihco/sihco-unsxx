@@ -222,7 +222,7 @@ function DBNewRemissionhistory($param, $c=null){
 		if($updatetime>=$a['updatetime']){
 			$ret=2;
 			$idre=$a['remissionid'];
-			$sql="update remissionhistorytable set status='$status'";
+			$sql="update remissionhistorytable set status='$status', clinicalid=$clinical";
 			if($studentid != NULL){
 					$sql.=" , studentid=$studentid, studentcourseid=$studentcourseid, studentclinicalid=$studentclinicalid,
 							teacherid=$teacherid, teachercourseid=$teachercourseid, teacherclinicalid=$teacherclinicalid";

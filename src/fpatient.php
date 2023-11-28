@@ -456,7 +456,7 @@ function DBNewPatient($param, $c=null){
 					"triagetemperature='$temperature', triageheadache='$headache', triagerespiratory='$respiratory', ".
 					"triagethroat='$throat', triagegeneral='$general', triagevaccine='$vaccine', diagnosis='$diagnosis', updatetime=$updatetime where patientadmissionid=$idpa";
 					$r = DBExec ($c, $sql, "DBNewPatient(update patientadmission)");
-					if($clinical!=-1&&is_numeric($clinical)&&$clinical>1&&$clinical<=17){
+					if($clinical!=-1&& is_numeric($clinical)&& $clinical>1 &&$clinical<=17){
 							$rdata=array();
 							$reinfo=DBRemissionhistoryInfo($idpa, $c);//idadmission
 							$rdata['remissionid']=$reinfo['remissionid'];
