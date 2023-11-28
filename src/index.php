@@ -1,23 +1,12 @@
 <?php
 
-/*ob_start();
+ob_start();
 header ("Expires: " . gmdate("D, d M Y H:i:s") . " GMT");
 header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header ("Cache-Control: no-cache, must-revalidate");
 header ("Pragma: no-cache");
 header ("Content-Type: text/html; charset=utf-8");
-session_start();*/
-ob_start();
-// Establecer la expiración a 1 semana (7 días)
-$expiration_time = gmdate("D, d M Y H:i:s", strtotime("+7 days"))." GMT";
-header("Expires: $expiration_time");
-header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
-header("Cache-Control: max-age=604800, no-cache, must-revalidate");  // max-age en segundos (7 días)
-header("Pragma: no-cache");
-
-header("Content-Type: text/html; charset=utf-8");
 session_start();
-ob_end_flush();
 
 
 
