@@ -1863,6 +1863,7 @@ $pat=$r;
         $sw=true;
         $content="";
         for ($i=0; $i < count($st); $i++) {
+          echo $st[$i]['authorizationteacher'];
           $sw=false;
           $userinfo=DBUserInfo($pat['studentid']);
           $content.="<div align=\"center\">".
@@ -1930,13 +1931,13 @@ $pat=$r;
           "<div style=\"clear:both;\"></div>".
           "<br>".
           "<div align=\"left\" class=\"w33\">".
-          "Firma de autorización:".(is_numeric($st[$i]['tokenauthorization'])?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI':'................................')."".
+          "Firma de autorización:".(isset($st[$i]['authorizationteacher'])&& $st[$i]['authorizationteacher']!=''?'&nbsp;Si<sup>'.$st[$i]['authorizationteacher'].'</sup>':'................................')."".
           "</div>".
           "<div align=\"left\" class=\"w33\">".
-          "Firma de seguimiento:".(is_numeric($st[$i]['tokentracing'])?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI':'................................')."".
+          "Firma de seguimiento:".(isset($st[$i]['tracingteacher'])&& $st[$i]['tracingteacher']!=''?'&nbsp;Si<sup>'.$st[$i]['tracingteacher'].'</sup>':'................................')."".
           "</div>".
           "<div align=\"left\" class=\"w33\">".
-          "Firma de finalización:".(is_numeric($st[$i]['tokenending'])?'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI':'................................')."".
+          "Firma de finalización:".(isset($st[$i]['endingteacher'])&& $st[$i]['endingteacher']!=''?'&nbsp;Si<sup>'.$st[$i]['endingteacher'].'</sup>':'................................')."".
           "</div>".
           "<div style=\"clear:both;\"></div>".
           "<br>".

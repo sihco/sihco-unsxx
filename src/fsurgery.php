@@ -545,6 +545,11 @@ function clearsurgerytoken($a){
 		}
 	}
 
+	if (isset($a['tokenauthorization'])) $a['authorization']=$a['tokenauthorization'];
+	if (isset($a['tokentracing'])) $a['tracing']=$a['tokentracing'];
+	if (isset($a['tokenending'])) $a['ending']=$a['tokenending'];
+
+
 	if(isset($a['authorization'])&&$a['authorization']!=null){
 		$r=explode(']',$a['authorization']);
 		$size=count($r);
