@@ -443,8 +443,8 @@ $pat=$r;
         <div class="w50" align="left">
           <?php
           $name="FECHA:";
-          if(isset($pat["startdatetime"]) && $pat["startdatetime"]!=-1){
-            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".datetimeconv($pat["startdatetime"]);
+          if(isset($pat["stdatetime"]) && $pat["stdatetime"]!=-1){
+            $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".datetimeconv($pat["stdatetime"]);
             echo $name;
           }else{
             echo $name.".....................................................................";
@@ -1585,34 +1585,34 @@ $pat=$r;
         <div align="left">
           <?php
           $name="EXAMEN DE LABORATORIO:";
-          if(isset($pat["laboratorio1"]) && is_numeric($pat["laboratorio1"])){
-              $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hemograma&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI";
+          if(isset($pat['complementaryexam']['laboratorio1teacher'])&&$pat['complementaryexam']['laboratorio1teacher']!='*'){
+              $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>hemograma</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI";
           }else{
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hemograma&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
           }
-          if(isset($pat["laboratorio2"]) && is_numeric($pat["laboratorio2"])){
+          if(isset($pat['complementaryexam']['laboratorio2teacher'])&&$pat['complementaryexam']['laboratorio2teacher']!='*'){
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cuagulograma&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI";
           }else{
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cuagulograma&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
           }
-          if(isset($pat["laboratorio3"]) && is_numeric($pat["laboratorio3"])){
+          if(isset($pat['complementaryexam']['laboratorio3teacher'])&&$pat['complementaryexam']['laboratorio3teacher']!='*'){
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glicemia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI";
           }else{
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glicemia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
           }
-          if(isset($pat["laboratorio4"]) && is_numeric($pat["laboratorio4"])){
+          if(isset($pat['complementaryexam']['laboratorio4teacher'])&&$pat['complementaryexam']['laboratorio4teacher']!='*'){
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creatinina&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI";
           }else{
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;creatinina&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
           }
-          if(isset($pat["laboratorio5"]) && is_numeric($pat["laboratorio5"])){
+          if(isset($pat['complementaryexam']['laboratorio5teacher'])&&$pat['complementaryexam']['laboratorio5teacher']!='*'){
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI";
           }else{
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
           }
           $name.="<br>";
           $name.="ESTUDIO HISTOPATOLÓGICO:";
-          if(isset($pat["histopatologico1"]) && is_numeric($pat["histopatologico1"])){
+          if(isset($pat['complementaryexam']['histopatologico1teacher'])&&$pat['complementaryexam']['histopatologico1teacher']!='*'){
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;citología&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI";
           }else{
               $name.="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;citología&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -1864,7 +1864,7 @@ $pat=$r;
         $content="";
         for ($i=0; $i < count($st); $i++) {
           $sw=false;
-          $userinfo=DBUserInfo($st[$i]['student']);
+          $userinfo=DBUserInfo($pat['studentid']);
           $content.="<div align=\"center\">".
           "PREOPERATORIO".
           "</div>".

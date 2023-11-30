@@ -158,6 +158,8 @@ $pat=$r;
     </div>
   </div>
   <div class="row readtext">
+    <div class="col-12">
+    </div>
     <div class="col-lg-5 col-md-5 col-sm-12 col-12">
       <input type="hidden" name="remissionid" id="remissionid"value="<?php if(isset($_GET['id'])) echo $_GET['id'];?>">
       <input type="hidden" name="ficha" id="ficha"value="<?php if(isset($pat["surgeryiiid"])) echo $pat["surgeryiiid"]?>">
@@ -2094,7 +2096,7 @@ $pat=$r;
       </button>
       <!-- Modal -->
       <div class="modal fade" id="operatoria" tabindex="-1" role="dialog" aria-labelledby="operatoria" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">PRE INTRA POST (OPERATORIO)</h5>
@@ -2226,7 +2228,7 @@ $pat=$r;
                       <div class="input-group input-group-sm">
                         <div class="border">
                           <?php
-                          /*$ac = array('autorizacion','seguimiento','finalizacion');
+                          $ac = array('autorizacion','seguimiento','finalizacion');
                           $acnames = array('Firma de autorización','Firma de seguimiento','Firma de finalización');
 
                           $ce_content='';
@@ -2251,7 +2253,7 @@ $pat=$r;
                             $ce_content.='</div>'.
                             '</div>';
                           }
-                          echo $ce_content;*/
+                          echo $ce_content;
                           ?>
                         </div>
                       </div>
@@ -2259,7 +2261,7 @@ $pat=$r;
                     <!--Fin de firmas-->
 
 
-                    <div class="col-4">
+                    <!--<div class="col-4">
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="autorizacion" value="option4">
                         <label class="form-check-label" for="autorizacion">Firma de autorización</label>
@@ -2277,7 +2279,7 @@ $pat=$r;
                         <label class="form-check-label" for="finalizacion">Firma de finalización</label>
                       </div>
 
-                    </div>
+                    </div>-->
                   </div>
                 </div>
                 <div class="row">
@@ -2476,88 +2478,95 @@ function endqr(content){
 }
 function authorizeqrtwo(content){
   var remission = $('#remissionid').val();
-  var ficha = $('#ficha').val();
+  is_empty(remission).then(function(r){
+    if(r=='true'){
+      registerpatient(false);
+    }
+    var complementaryexam = $('#inputqr').val();//valor del tipo de firma
+    $.ajax({
+         url:"../include/i_readqr.php",
+         method:"POST",
+         data: {content:content, complementaryexam:complementaryexam, remission:remission},
+         success:function(data)
+         {
+            if(isNaN(data)){
+              let arr = data.split('***');
+              var type=arr[0];
+              $('#a_'+complementaryexam+''+type).html(arr[1]);
+            }else{
+                if(data==3){
+                  alert('Tipo de usuario invalido');
+                }else if (data==2) {
+                  alert('No se realizo la autorización');
+                }else if (data==1) {
+                  alert('Tecnica de anestesia no encontrado');
+                }else if (data==4) {
+                  alert('Valor de Qr invalido');
+                }else if (data==5) {
+                  alert('Qr no tiene permisos de autorización');
+                }else if (data==0) {
+                  alert('QR Invalido');
+                }else {
+                  alert('Error: '+data);
+                }
+            }
 
-  if(ficha==''){
-    registerpatient(false);
-  }
+         }
+    });
 
-  var complementaryexam = $('#inputqr').val();//valor del tipo de firma
-  //var ficha = $('#ficha').val();
-  //window.location.href=content;
-  $.ajax({
-       url:"../include/i_readqr.php",
-       method:"POST",
-       data: {content:content, complementaryexam:complementaryexam, remission:remission},
-       success:function(data)
-       {
-          if(isNaN(data)){
-            let arr = data.split('***');
-            var type=arr[0];
-            $('#a_'+complementaryexam+''+type).html(arr[1]);
-          }else{
-              if(data==3){
-                alert('Tipo de usuario invalido');
-              }else if (data==2) {
-                alert('No se realizo la autorización');
-              }else if (data==1) {
-                alert('Tecnica de anestesia no encontrado');
-              }else if (data==0) {
-                alert('QR Invalido');
-              }else {
-                alert('Error: '+data);
-              }
-          }
-
-       }
+  }).catch(function(e){
+    console.error('Error en la peticion:', error);
   });
+
+}
+//funcion para saber si es numerico o no
+function is_numeric(value){
+  var value=parseFloat(value);
+  return !isNaN(value) && isFinite(value);
 }
 function authorizeqrthree(content){
   var remission = $('#remissionid').val();
-  var ficha = $('#ficha').val();
-
-  if(ficha==''){
-    registerpatient(false);
-  }
-  var token = $('#token');
+  var token = $('#token').val();
   var typefirm = $('#inputqr').val();//valor del tipo de firma
-  alert('dfjjkdls');
-  if(token==''){
 
-  }
-  $("#operatoria").modal("show");
-  /*$.ajax({
-       url:"../include/i_readqr.php",
-       method:"POST",
-       data: {content:content, complementaryexam:complementaryexam, remission:remission},
-       success:function(data)
-       {
-          if(isNaN(data)){
-            let arr = data.split('***');
-            var type=arr[0];
-            $('#a_'+complementaryexam+''+type).html(arr[1]);
-          }else{
-              if(data==3){
-                alert('Tipo de usuario invalido');
-              }else if (data==2) {
-                alert('No se realizo la autorización');
-              }else if (data==1) {
-                alert('Tecnica de anestesia no encontrado');
-              }else if (data==0) {
-                alert('QR Invalido');
-              }else {
-                alert('Error: '+data);
+  registersurgerytoken(true).then(function(result) {
+      token=result;
+      $.ajax({
+           url:"../include/i_readqr.php",
+           method:"POST",
+           data: {content:content, typefirm:typefirm, remission:remission, token:token},
+           success:function(data)
+           {
+              if(isNaN(data)){
+                alert('Autorizado:)');
+              }else{
+                if(data==3){
+                  alert('Tipo de usuario invalido');
+                }else if (data==2) {
+                  alert('No se realizo la autorización');
+                }else if (data==1) {
+                  alert('Tecnica de anestesia no encontrado');
+                }else if (data==4) {
+                  alert('Valor de Qr invalido');
+                }else if (data==5) {
+                  alert('Qr no tiene permisos de autorización');
+                }else if (data==0) {
+                  alert('QR Invalido');
+                }else {
+                  alert('Error: '+data);
+                }
               }
-          }
+              tdataupdate(token);
+              $("#operatoria").modal("show");
+           }
+      });
+  }).catch(function(error) {
+        console.error(error);
+  });
 
-       }
-  });*/
 }
 function authorizeqr(content){
   var rh = $('#inputqr').val();
-  //var ficha = $('#ficha').val();
-  //window.location.href=content;
-  //alert(content);
   $.ajax({
        url:"../include/i_clinichistory.php",
        method:"POST",
@@ -2582,6 +2591,21 @@ function file(id){
   }
 
   location.href="surgeryiiiread.php?id="+id;
+}
+function is_empty(id){
+  return new Promise(function(resolve, reject){
+    $.ajax({
+         url:"../include/i_surgery.php",
+         method:"POST",
+         data: {remid:id},
+         success:function(data){
+           resolve(data);
+         },
+         error: function(error){
+           reject(error);
+         }
+    });
+  });
 }
 //scanner scan qr fin
 //para registrar datos del paciente para ficha clinica
@@ -2704,14 +2728,13 @@ function registerpatient(msg=true){
    var inmediato = $('#inmediato').val();
    var mediato = $('#mediato').val();
 
-   var ficha=$('#ficha').val();
    var remission = $('#remissionid').val();
    $.ajax({
 
         url:"../include/i_surgery.php",
         method:"POST",
         data: {
-          ficha:ficha, remission:remission, practice:practice, motconsult:motconsult, historiaconsulta:historiaconsulta,
+          remission:remission, practice:practice, motconsult:motconsult, historiaconsulta:historiaconsulta,
           anamnesisfamiliar:anamnesisfamiliar, remota1:remota1, obsremota1:obsremota1, remota2:remota2,
           obsremota2:obsremota2, remota3:remota3, obsremota3:obsremota3, remota4a:remota4a, remota4b1:remota4b1,
           remota4b2:remota4b2, remota4b3:remota4b3, remota4b4:remota4b4, remota4b5:remota4b5, remota4c:remota4c,
@@ -2758,6 +2781,7 @@ function registerpatient(msg=true){
 //funcion para limpiar los datos
 function clearsurgerytoken(){
   $(document).ready(function(){
+    var msg='';
     $('#token').val('');
     $('#preoperatorio1').prop('checked',false);
     $('#preoperatorio2').prop('checked',false);
@@ -2776,33 +2800,18 @@ function clearsurgerytoken(){
     $('#asistente').val('');
     $('#anestesico').val('');
     $('#tecnica').val('');
-    autonot='<div class="form-check form-check-inline">'+
-      '<input class="form-check-input" type="checkbox" id="autorizacion" value="option4">'+
-      '<label class="form-check-label" for="autorizacion">Firma de autorización</label>'+
-    '</div>';
-    if($('#autorizacion').prop('checked')===undefined){
-      $('#autorizacion').replaceWith(autonot);
-    }else{
-      $('#autorizacion').prop('checked',false);
-    }
-    autonot='<div class="form-check form-check-inline">'+
-      '<input class="form-check-input" type="checkbox" id="seguimiento" value="option4">'+
-      '<label class="form-check-label" for="seguimiento">Firma de seguimiento</label>'+
-    '</div>';
-    if($('#seguimiento').prop('checked')===undefined){
-      $('#seguimiento').replaceWith(autonot);
-    }else{
-      $('#seguimiento').prop('checked',false);
-    }
-    autonot='<div class="form-check form-check-inline">'+
-      '<input class="form-check-input" type="checkbox" id="finalizacion" value="option4">'+
-      '<label class="form-check-label" for="finalizacion">Firma de finalización</label>'+
-    '</div>';
-    if($('#finalizacion').prop('checked')===undefined){
-      $('#finalizacion').replaceWith(autonot);
-    }else{
-      $('#finalizacion').prop('checked',false);
-    }
+
+    $('#autorizacion').prop('checked',false);
+    $('#seguimiento').prop('checked',false);
+    $('#finalizacion').prop('checked',false);
+
+    msg='<button type="button" class="btn btn-outline-primary btn-sm" name="autorizacion_button" onclick="readqr(\'autorizacion\', \'authorizeqrthree\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+    $('#a_autorizacionteacher').html(msg);
+    msg='<button type="button" class="btn btn-outline-primary btn-sm" name="seguimiento_button" onclick="readqr(\'seguimiento\', \'authorizeqrthree\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+    $('#a_seguimientoteacher').html(msg);
+    msg='<button type="button" class="btn btn-outline-primary btn-sm" name="finalizacion_button" onclick="readqr(\'finalizacion\', \'authorizeqrthree\')" data-bs-toggle="modal" data-bs-target="#modalqr">Docente <i class="fa fa-solid fa-qrcode"></i></button>';
+    $('#a_finalizacionteacher').html(msg);
+
 
     $('#obsintra').val('');
 
@@ -2826,131 +2835,82 @@ function clearsurgerytoken(){
 
 //funcion para actualizar un registrio tbody js
 function tdataupdate(s){
-  $(document).ready(function(){
-    $.ajax({
+  var msg='';
+  $.ajax({
 
-       url:"../include/i_surgeryiii.php",
-       method:"POST",
-       data: {idupdate:s},
-       dataType: "json",
-       success:function(data)
-       {
-         $('#token').val(data.token);
-         $('#preoperatorio1').prop('checked',data.preoperatorio1);
-         $('#preoperatorio2').prop('checked',data.preoperatorio2);
-         $('#preoperatorio3').prop('checked',data.preoperatorio3);
-         $('#preoperatorio4').prop('checked',data.preoperatorio4);
-         $('#diagnosisquirurjico').val(data.diagnosis);
-         $('#premedication1').prop('checked',data.preoperatorio1);
-         $('#premedication2').prop('checked',data.preoperatorio2);
-         $('#premedication3').prop('checked',data.preoperatorio3);
-         $('#premedication4').prop('checked',data.preoperatorio4);
-         $('#dosis').val(data.dose);
-         $('#intrafecha').val(data.date);
-         $('#intrahora1').val(data.hourstart);
-         $('#intrahora2').val(data.hourend);
+     url:"../include/i_surgeryiii.php",
+     method:"POST",
+     data: {idupdate:s},
+     dataType: "json",
+     success:function(data)
+     {
+       $('#token').val(data.token);
+       $('#preoperatorio1').prop('checked',data.preoperatorio1);
+       $('#preoperatorio2').prop('checked',data.preoperatorio2);
+       $('#preoperatorio3').prop('checked',data.preoperatorio3);
+       $('#preoperatorio4').prop('checked',data.preoperatorio4);
+       $('#diagnosisquirurjico').val(data.diagnosis);
+       $('#premedication1').prop('checked',data.premedication1);
+       $('#premedication2').prop('checked',data.premedication2);
+       $('#premedication3').prop('checked',data.premedication3);
+       $('#premedication4').prop('checked',data.premedication4);
+       $('#dosis').val(data.dose);
+       $('#intrafecha').val(data.date);
+       $('#intrahora1').val(data.hourstart);
+       $('#intrahora2').val(data.hourend);
 
-         $('#asistente').val(data.attendee);
-         $('#anestesico').val(data.anesthetic);
-         $('#tecnica').val(data.technique);
-         var autoyes='<div class="form-check form-check-inline">'+
-           '<input class="form-check-input" type="checkbox" id="autorizacion" value="option4" checked>'+
-           '<label class="form-check-label" for="autorizacion">Firma de autorización</label>'+
-         '</div>';
-         var autonot='<div class="form-check form-check-inline">'+
-           '<input class="form-check-input" type="checkbox" id="autorizacion" value="option4">'+
-           '<label class="form-check-label" for="autorizacion">Firma de autorización</label>'+
-         '</div>';
+       $('#asistente').val(data.attendee);
+       $('#anestesico').val(data.anesthetic);
+       $('#tecnica').val(data.technique);
 
-         if($('#autorizacion').prop('checked')===undefined){
-           if(data.authorization=='true'){
-             $('#autorizacion').replaceWith(autoyes);
-           }else if(data.authorization=='false'||data.authorization==''){
-             $('#autorizacion').replaceWith(autonot);
-           }else if(!isNaN(data.authorization)){
-             $('#autorizacion').replaceWith('<span id="autorizacion" class="text-primary">Firmado<br><span>Autorización</span></span>');
-           }
-         }else{
-           if(data.authorization=='true'){
-             $('#autorizacion').prop('checked',true);
-           }else if(data.authorization=='false'||data.authorization==''){
-             $('#autorizacion').prop('checked',false);
-           }else if(!isNaN(data.authorization)){
-             $('#autorizacion').parent().after('<span id="autorizacion" class="text-primary">Firmado<br><span>Autorización</span></span>');
-             $('#autorizacion').parent().remove();
-           }
-         }
-         autoyes='<div class="form-check form-check-inline">'+
-           '<input class="form-check-input" type="checkbox" id="seguimiento" value="option4" checked>'+
-           '<label class="form-check-label" for="seguimiento">Firma de seguimiento</label>'+
-         '</div>';
-         autonot='<div class="form-check form-check-inline">'+
-           '<input class="form-check-input" type="checkbox" id="seguimiento" value="option4">'+
-           '<label class="form-check-label" for="seguimiento">Firma de seguimiento</label>'+
-         '</div>';
-         if($('#seguimiento').prop('checked')===undefined){
-           if(data.tracing=='true'){
-             $('#seguimiento').replaceWith(autoyes);
-           }else if(data.tracing=='false'||data.tracing==''){
-             $('#seguimiento').replaceWith(autonot);
-           }else if(!isNaN(data.tracing)){
-             $('#seguimiento').replaceWith('<span id="seguimiento" class="text-primary">Firmado<br><span>Seguimiento</span></span>');
-           }
-         }else{
-           if(data.tracing=='true'){
-             $('#seguimiento').prop('checked',true);
-           }else if(data.tracing=='false'||data.tracing==''){
-             $('#seguimiento').prop('checked',false);
-           }else if(!isNaN(data.tracing)){
-             $('#seguimiento').parent().after('<span id="seguimiento" class="text-primary">Firmado<br><span>Seguimiento</span></span>');
-             $('#seguimiento').parent().remove();
-           }
-         }
-
-         autoyes='<div class="form-check form-check-inline">'+
-           '<input class="form-check-input" type="checkbox" id="finalizacion" value="option4" checked>'+
-           '<label class="form-check-label" for="finalizacion">Firma de seguimiento</label>'+
-         '</div>';
-         autonot='<div class="form-check form-check-inline">'+
-           '<input class="form-check-input" type="checkbox" id="finalizacion" value="option4">'+
-           '<label class="form-check-label" for="finalizacion">Firma de seguimiento</label>'+
-         '</div>';
-         if($('#finalizacion').prop('checked')===undefined){
-           if(data.ending=='true'){
-             $('#finalizacion').replaceWith(autoyes);
-           }else if(data.ending=='false'||data.ending==''){
-             $('#finalizacion').replaceWith(autonot);
-           }else if(!isNaN(data.ending)){
-             $('#finalizacion').replaceWith('<span id="finalizacion" class="text-primary">Firmado<br><span>Finalización</span></span>');
-           }
-         }else{
-           if(data.ending=='true'){
-             $('#finalizacion').prop('checked',true);
-           }else if(data.ending=='false'||data.ending==''){
-             $('#finalizacion').prop('checked',false);
-           }else if(!isNaN(data.ending)){
-             $('#finalizacion').parent().after('<span id="finalizacion" class="text-primary">Firmado<br><span>Finalización</span></span>');
-             $('#finalizacion').parent().remove();
-           }
-         }
-         $('#obsintra').val(data.obsintra);
-         $('#sensibilidad1').prop('checked',data.sensibilidad1);
-         $('#sensibilidad2').prop('checked',data.sensibilidad2);
-         $('#sensibilidad3').prop('checked',data.sensibilidad3);
-         $('#sensibilidad4').prop('checked',data.sensibilidad4);
-
-         $('#edema1').prop('checked',data.edema1);
-         $('#edema2').prop('checked',data.edema2);
-         $('#edema3').prop('checked',data.edema3);
-         $('#edema4').prop('checked',data.edema4);
-         $('#buccalmucosa1').prop('checked',data.buccalmucosa1);
-         $('#buccalmucosa2').prop('checked',data.buccalmucosa2);
-         $('#obspost').val(data.obspost);
-
-         $('#title_surgery').text('ACTUALIZAR REGISTRO');
-         $(location).attr('href','#enlaceprueba');
+       if(data.authorizationcontrol!==undefined&& data.authorizationcontrol!=''){
+         $('#autorizacion').prop('checked',data.authorizationcontrol);
        }
-    });
+       if(data.tracingcontrol!==undefined&& data.tracingcontrol!=''){
+         $('#seguimiento').prop('checked',data.tracingcontrol);
+       }
+       if(data.endingcontrol!==undefined&& data.endingcontrol!=''){
+         $('#finalizacion').prop('checked',data.endingcontrol);
+       }
+       if(data.authorizationtime!==undefined&& data.authorizationteacher!==undefined&& data.authorizationtime!=''&& data.authorizationteacher!=''){
+         msg='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"'+
+          'data-bs-target="#autorizacion_infoteacher" aria-expanded="true" aria-controls="autorizacion_infoteacher">Autorizado Por Docente</span>'+
+         '<div id="autorizacion_infoteacher" class="accordion-collapse collapse" aria-labelledby="autorizacion_infoteacher">'+
+         '<div class="accordion-body"><div class="row"><div class="col-12">'+data.authorizationteacher+'</div><div class="col-12">'+data.authorizationtime+'</div></div></div></div>';
+         $('#a_autorizacionteacher').html(msg);
+       }
+       if(data.tracingtime!==undefined&& data.tracingteacher!==undefined&& data.tracingtime!=''&& data.tracingteacher!=''){
+         msg='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"'+
+          'data-bs-target="#seguimiento_infoteacher" aria-expanded="true" aria-controls="seguimiento_infoteacher">Autorizado Por Docente</span>'+
+         '<div id="seguimiento_infoteacher" class="accordion-collapse collapse" aria-labelledby="seguimiento_infoteacher">'+
+         '<div class="accordion-body"><div class="row"><div class="col-12">'+data.tracingteacher+'</div><div class="col-12">'+data.tracingtime+'</div></div></div></div>';
+         $('#a_seguimientoteacher').html(msg);
+       }
+       if(data.endingtime!==undefined&& data.endingteacher!==undefined&& data.endingtime!=''&& data.endingteacher!=''){
+         msg='<span style="cursor: pointer;"class="text-primary fst-italic" data-bs-toggle="collapse"'+
+          'data-bs-target="#finalizacion_infoteacher" aria-expanded="true" aria-controls="finalizacion_infoteacher">Autorizado Por Docente</span>'+
+         '<div id="finalizacion_infoteacher" class="accordion-collapse collapse" aria-labelledby="finalizacion_infoteacher">'+
+         '<div class="accordion-body"><div class="row"><div class="col-12">'+data.endingteacher+'</div><div class="col-12">'+data.endingtime+'</div></div></div></div>';
+         $('#a_finalizacionteacher').html(msg);
+       }
+
+       $('#obsintra').val(data.obsintra);
+       $('#sensibilidad1').prop('checked',data.sensibilidad1);
+       $('#sensibilidad2').prop('checked',data.sensibilidad2);
+       $('#sensibilidad3').prop('checked',data.sensibilidad3);
+       $('#sensibilidad4').prop('checked',data.sensibilidad4);
+
+       $('#edema1').prop('checked',data.edema1);
+       $('#edema2').prop('checked',data.edema2);
+       $('#edema3').prop('checked',data.edema3);
+       $('#edema4').prop('checked',data.edema4);
+       $('#buccalmucosa1').prop('checked',data.buccalmucosa1);
+       $('#buccalmucosa2').prop('checked',data.buccalmucosa2);
+       $('#obspost').val(data.obspost);
+
+       $('#title_surgery').text('ACTUALIZAR REGISTRO');
+       $(location).attr('href','#enlaceprueba');
+     }
   });
 }
 //funcion para eliminar un registro de tbody js
@@ -2977,78 +2937,93 @@ function tdatadelete(s){
 }
 
 //funcion para registar en la tabla surgery por hoja
-function registersurgerytoken(){
-  var ficha=$('#ficha').val();
-  if(ficha=='')
-    registerpatient(false);
+function registersurgerytoken(ptoken=false){
+  return new Promise(function(resolve, reject) {
+
   var remission=$('#remissionid').val();
-  var token=$('#token').val();
-  var preoperatorio1 = $('#preoperatorio1').prop('checked');
-  var preoperatorio2 = $('#preoperatorio2').prop('checked');
-  var preoperatorio3 = $('#preoperatorio3').prop('checked');
-  var preoperatorio4 = $('#preoperatorio4').prop('checked');
 
-  var diagnosisquirurjico = $('#diagnosisquirurjico').val();
-  var premedication1 = $('#premedication1').prop('checked');
-  var premedication2 = $('#premedication2').prop('checked');
-  var premedication3 = $('#premedication3').prop('checked');
-  var premedication4 = $('#premedication4').prop('checked');
-  var dosis = $('#dosis').val();
+  is_empty(remission).then(function(r){
+    if(r=='true'){
+      registerpatient(false);
+    }
+    var token=$('#token').val();
+    var preoperatorio1 = $('#preoperatorio1').prop('checked');
+    var preoperatorio2 = $('#preoperatorio2').prop('checked');
+    var preoperatorio3 = $('#preoperatorio3').prop('checked');
+    var preoperatorio4 = $('#preoperatorio4').prop('checked');
 
-  var intrafecha = $('#intrafecha').val();
-  var intrahora1 = $('#intrahora1').val();
-  var intrahora2 = $('#intrahora2').val();
+    var diagnosisquirurjico = $('#diagnosisquirurjico').val();
+    var premedication1 = $('#premedication1').prop('checked');
+    var premedication2 = $('#premedication2').prop('checked');
+    var premedication3 = $('#premedication3').prop('checked');
+    var premedication4 = $('#premedication4').prop('checked');
+    var dosis = $('#dosis').val();
 
-  var asistente = $('#asistente').val();
-  var anestesico = $('#anestesico').val();
-  var tecnica = $('#tecnica').val();
-  var autorizacion = $('#autorizacion').prop('checked');
-  var seguimiento = $('#seguimiento').prop('checked');
-  var finalizacion = $('#finalizacion').prop('checked');
-  var obsintra = $('#obsintra').val();
+    var intrafecha = $('#intrafecha').val();
+    var intrahora1 = $('#intrahora1').val();
+    var intrahora2 = $('#intrahora2').val();
 
-  var sensibilidad1 = $('#sensibilidad1').prop('checked');
-  var sensibilidad2 = $('#sensibilidad2').prop('checked');
-  var sensibilidad3 = $('#sensibilidad3').prop('checked');
-  var sensibilidad4 = $('#sensibilidad4').prop('checked');
-  var edema1 = $('#edema1').prop('checked');
-  var edema2 = $('#edema2').prop('checked');
-  var edema3 = $('#edema3').prop('checked');
-  var edema4 = $('#edema4').prop('checked');
-  var buccalmucosa1 = $('#buccalmucosa1').prop('checked');
-  var buccalmucosa2 = $('#buccalmucosa2').prop('checked');
-  var obspost = $('#obspost').val();
-  $.ajax({
+    var asistente = $('#asistente').val();
+    var anestesico = $('#anestesico').val();
+    var tecnica = $('#tecnica').val();
+    var autorizacion = $('#autorizacion').prop('checked');
+    var seguimiento = $('#seguimiento').prop('checked');
+    var finalizacion = $('#finalizacion').prop('checked');
+    var obsintra = $('#obsintra').val();
 
-       url:"../include/i_surgery.php",
-       method:"POST",
-       data: {remission:remission, token:token, preoperatorio1:preoperatorio1, preoperatorio2:preoperatorio2, preoperatorio3:preoperatorio3,
-          preoperatorio4:preoperatorio4, diagnosisquirurjico:diagnosisquirurjico, premedication1:premedication1,
-          premedication2:premedication2, premedication3:premedication3, premedication4:premedication4,
-          dosis:dosis, intrafecha:intrafecha, intrahora1:intrahora1, intrahora2:intrahora2, asistente:asistente,
-          anestesico:anestesico, tecnica:tecnica, autorizacion:autorizacion, seguimiento:seguimiento,
-          finalizacion:finalizacion, obsintra:obsintra, sensibilidad1:sensibilidad1, sensibilidad2:sensibilidad2,
-          sensibilidad3:sensibilidad3, sensibilidad4:sensibilidad4, edema1:edema1, edema2:edema2, edema3:edema3,
-          edema4:edema4, buccalmucosa1:buccalmucosa1, buccalmucosa2:buccalmucosa2,
-          obspost:obspost},
-       success:function(data){
-          if(data!='No'){
+    var sensibilidad1 = $('#sensibilidad1').prop('checked');
+    var sensibilidad2 = $('#sensibilidad2').prop('checked');
+    var sensibilidad3 = $('#sensibilidad3').prop('checked');
+    var sensibilidad4 = $('#sensibilidad4').prop('checked');
+    var edema1 = $('#edema1').prop('checked');
+    var edema2 = $('#edema2').prop('checked');
+    var edema3 = $('#edema3').prop('checked');
+    var edema4 = $('#edema4').prop('checked');
+    var buccalmucosa1 = $('#buccalmucosa1').prop('checked');
+    var buccalmucosa2 = $('#buccalmucosa2').prop('checked');
+    var obspost = $('#obspost').val();
+    $.ajax({
 
-            $("#tbodytable tr").remove();
-            $("#tbodytable").append(data);
-            clearsurgerytoken();
-            alert('Se guardó los datos');
-            $('#title_surgery').text('NUEVO REGISTRO');
+         url:"../include/i_surgery.php",
+         method:"POST",
+         data: {remission:remission, token:token, preoperatorio1:preoperatorio1, preoperatorio2:preoperatorio2, preoperatorio3:preoperatorio3,
+            preoperatorio4:preoperatorio4, diagnosisquirurjico:diagnosisquirurjico, premedication1:premedication1,
+            premedication2:premedication2, premedication3:premedication3, premedication4:premedication4,
+            dosis:dosis, intrafecha:intrafecha, intrahora1:intrahora1, intrahora2:intrahora2, asistente:asistente,
+            anestesico:anestesico, tecnica:tecnica, autorizacion:autorizacion, seguimiento:seguimiento,
+            finalizacion:finalizacion, obsintra:obsintra, sensibilidad1:sensibilidad1, sensibilidad2:sensibilidad2,
+            sensibilidad3:sensibilidad3, sensibilidad4:sensibilidad4, edema1:edema1, edema2:edema2, edema3:edema3,
+            edema4:edema4, buccalmucosa1:buccalmucosa1, buccalmucosa2:buccalmucosa2,
+            obspost:obspost},
+         success:function(data){
+            if(data!='No'){
+              var arr = data.split('***');
+              $("#tbodytable tr").remove();
+              $("#tbodytable").append(arr[1]);
+              clearsurgerytoken();
 
-            if(ficha=='')
-              location.reload();
+              $('#title_surgery').text('NUEVO REGISTRO');
+              if(ptoken){
+                resolve(arr[0]);
+              }else{
+                  alert('Se guardó los datos');
+                  resolve();
+              }
+            }else{
+              alert('Error al guardar datos');
+              reject('Error al guardar datos');
+            }
+            //console.log(data);
+         }
+    });
 
-          }else{
-            alert('Error al guardar datos');
-          }
-          //console.log(data);
-       }
+  }).catch(function(e){
+    console.error('Error en la peticion:' + error);
+    reject('Error en is_empty: ' + error);
   });
+
+  });//cierre para retorna una promesa
+
 }
 $(document).ready(function(){
   //para modal table tr
@@ -3178,30 +3153,39 @@ $(document).ready(function(){
 
      });
      $('#btn_firma').click(function(){
-       var ficha=$('#ficha').val();
        var remission=$('#remissionid').val();
-       if(ficha=='')
-        registerpatient(false);
-       var firma=document.getElementById(idCanvas).toDataURL('image/png');
-       if(confirm('Quieres guardar la firma no se podrá modificar')){
-         $.ajax({
-              url:"../include/i_surgery.php",
-              method:"POST",
-              data: {fichafirma:remission, firma:firma},
-              success:function(data){
-                if(data=='yes'){
-                  alert('Se guardo la firma');
-                  $('#consentimiento').hide();
-                  if ($('.modal-backdrop').is(':visible')) {
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-                  };
-                }else{
-                    alert(data);
+
+       is_empty(remission).then(function(r){
+         if(r=='true'){
+           registerpatient(false);
+         }
+         var firma=document.getElementById(idCanvas).toDataURL('image/png');
+         if(confirm('Quieres guardar la firma no se podrá modificar')){
+           $.ajax({
+                url:"../include/i_surgery.php",
+                method:"POST",
+                data: {fichafirma:remission, firma:firma},
+                success:function(data){
+                  if(data=='yes'){
+                    alert('Se guardó la firma');
+                    $('#consentimiento').hide();
+                    if ($('.modal-backdrop').is(':visible')) {
+                      $('body').removeClass('modal-open');
+                      $('.modal-backdrop').remove();
+                    };
+                  }else{
+                      alert(data);
+                  }
                 }
-              }
-         });
-       }
+           });
+         }
+
+       }).catch(function(e){
+         console.error('Error en la peticion:', error);
+       });
+
+
+
      });
      $('#btn_surgery_cancel').click(function(){
        clearsurgerytoken();

@@ -2,6 +2,14 @@
 session_start();//para iniciar session_sta
 require_once("../globals.php");
 require_once("../db.php");
+if(isset($_POST['remid'])&& is_numeric($_POST['remid'])){
+  $remid=htmlspecialchars($_POST['remid']);
+  if(DBSurgeryiiInfo($remid, true)==NULL)
+    echo 'true';
+  else
+    echo 'false';
+  exit;
+}
 if(isset($_POST['idfilepageteacher'])&&is_numeric($_POST['idfilepageteacher'])){
   $param['ficha']=htmlspecialchars(trim($_POST['idfilepageteacher']));
   $info=DBSurgeryiiInfo(htmlspecialchars(trim($_POST["idfilepageteacher"])));//informacion de ficha clinica de cirugia bucal iii
@@ -38,7 +46,7 @@ if(isset($_POST['idfilepageteacher'])&&is_numeric($_POST['idfilepageteacher'])){
   exit;
 }
 //sentencia para registrar datos de la ficha clinica surgery iii
-if(isset($_POST['ficha'])&& isset($_POST['remission'])&& isset($_POST['practice'])&&  isset($_POST['motconsult'])&&
+if(isset($_POST['remission'])&& isset($_POST['practice'])&&  isset($_POST['motconsult'])&&
 isset($_POST['historiaconsulta'])&&  isset($_POST['anamnesisfamiliar'])&&
 isset($_POST['remota1'])&&  isset($_POST['obsremota1'])&&  isset($_POST['remota2'])&&
 isset($_POST['obsremota2'])&&  isset($_POST['remota3'])&&  isset($_POST['obsremota3'])&&
@@ -72,10 +80,10 @@ isset($_POST['hipotesisdiagnostica'])&& isset($_POST['complementaryexam'])&& iss
 isset($_POST['gradodificultad1'])&&  isset($_POST['gradodificultad2'])&&  isset($_POST['gradodificultad3'])&&
 isset($_POST['inmediato'])&&  isset($_POST['mediato'])){
 
-$param['ficha']=htmlspecialchars(trim($_POST['ficha']));
+//$param['ficha']=htmlspecialchars(trim($_POST['ficha']));
 $info_r=DBRemissionhistoryInfo2(htmlspecialchars(trim($_POST["remission"])));//informacion de ficha clinica de cirugia bucal iii
-if(!empty($_POST["ficha"]))
-  $info=DBSurgeryiiInfo(htmlspecialchars(trim($_POST["ficha"])));//informacion de ficha clinica de cirugia bucal iii
+//if(!empty($_POST["ficha"]))
+//  $info=DBSurgeryiiInfo(htmlspecialchars(trim($_POST["ficha"])));//informacion de ficha clinica de cirugia bucal iii
 
 $param['practice']=htmlspecialchars(trim($_POST['practice']));
 $param['motconsult']='['.htmlspecialchars(trim($_POST['motconsult'])).']'.
@@ -210,32 +218,6 @@ $param['personalremote']='['.htmlspecialchars(trim($_POST['remota1'])).'='.htmls
     $param['complementaryexam']=$param['complementaryexam'].'[(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)(*)]';
   }
 
-  //examenes compl. fin
-  /*$param['complementaryexam']='{'.
-  '['.(isset($_POST['laboratorio1'])?$_POST['laboratorio1']:(isset($info['laboratorio1'])?$info['laboratorio1']:'')).']'.
-  '['.(isset($_POST['laboratorio2'])?$_POST['laboratorio2']:(isset($info['laboratorio2'])?$info['laboratorio2']:'')).']'.
-  '['.(isset($_POST['laboratorio3'])?$_POST['laboratorio3']:(isset($info['laboratorio3'])?$info['laboratorio3']:'')).']'.
-  '['.(isset($_POST['laboratorio4'])?$_POST['laboratorio4']:(isset($info['laboratorio4'])?$info['laboratorio4']:'')).']'.
-  '['.(isset($_POST['laboratorio5'])?$_POST['laboratorio5']:(isset($info['laboratorio5'])?$info['laboratorio5']:'')).']}'.
-
-  '{['.(isset($_POST['histopatologico1'])?$_POST['histopatologico1']:(isset($info['histopatologico1'])?$info['histopatologico1']:'')).']'.
-  '['.(isset($_POST['histopatologico2'])?$_POST['histopatologico2']:(isset($info['histopatologico2'])?$info['histopatologico2']:'')).']'.
-  '['.(isset($_POST['histopatologico3'])?$_POST['histopatologico3']:(isset($info['histopatologico3'])?$info['histopatologico3']:'')).']'.
-  '['.(isset($_POST['histopatologico4'])?$_POST['histopatologico4']:(isset($info['histopatologico4'])?$info['histopatologico4']:'')).']}'.
-  '{['.(isset($_POST['diagenologia1'])?$_POST['diagenologia1']:(isset($info['diagenologia1'])?$info['diagenologia1']:'')).']'.
-  '['.(isset($_POST['diagenologia2'])?$_POST['diagenologia2']:(isset($info['diagenologia2'])?$info['diagenologia2']:'')).']'.
-  '['.(isset($_POST['diagenologia3'])?$_POST['diagenologia3']:(isset($info['diagenologia3'])?$info['diagenologia3']:'')).']'.
-  '['.(isset($_POST['diagenologia4'])?$_POST['diagenologia4']:(isset($info['diagenologia4'])?$info['diagenologia4']:'')).']'.
-  '['.(isset($_POST['diagenologia5'])?$_POST['diagenologia5']:(isset($info['diagenologia5'])?$info['diagenologia5']:'')).']'.
-  '['.(isset($_POST['diagenologia6'])?$_POST['diagenologia6']:(isset($info['diagenologia6'])?$info['diagenologia6']:'')).']}'.
-  '{['.(isset($_POST['fotografia1'])?$_POST['fotografia1']:(isset($info['fotografia1'])?$info['fotografia1']:'')).']'.
-  '['.(isset($_POST['fotografia2'])?$_POST['fotografia2']:(isset($info['fotografia2'])?$info['fotografia2']:'')).']'.
-  '['.(isset($_POST['fotografia3'])?$_POST['fotografia3']:(isset($info['fotografia3'])?$info['fotografia3']:'')).']'.
-  '['.(isset($_POST['fotografia4'])?$_POST['fotografia4']:(isset($info['fotografia4'])?$info['fotografia4']:'')).']'.
-  '['.(isset($_POST['fotografia5'])?$_POST['fotografia5']:(isset($info['fotografia5'])?$info['fotografia5']:'')).']}'.
-  '{['.(isset($_POST['impresiones1'])?$_POST['impresiones1']:(isset($info['impresiones1'])?$info['impresiones1']:'')).']'.
-  '['.(isset($_POST['impresiones2'])?$_POST['impresiones2']:(isset($info['impresiones2'])?$info['impresiones2']:'')).']}';*/
-
   $param['diagnosis']=htmlspecialchars(trim($_POST['finaldiagnostica']));
   $param['surgicaldifficulty']='['.htmlspecialchars(trim($_POST['gradodificultad1'])).']'.
   '['.htmlspecialchars(trim($_POST['gradodificultad2'])).']'.
@@ -244,13 +226,8 @@ $param['personalremote']='['.htmlspecialchars(trim($_POST['remota1'])).'='.htmls
   $param['treatmentplan']='['.htmlspecialchars(trim($_POST['inmediato'])).']'.
   '['.htmlspecialchars(trim($_POST['mediato'])).']';
 
-
-  //$param['patientid'] = $info_r['patientid'];
-  //$param['studentid'] = $info_r['student'];
   $param['remissionid'] = $info_r['remissionid'];
   $param['clinicalid'] = $info_r['clinicalid'];
-  //$param['teacherid'] = $info_r['teacher'];//id of teacher
-  //$param['clinicalid'] = $info_r['clinicalid'];//id of clinical
   $param['status'] = 'process';
 
   DBUpdateReviewStatus($param['remissionid'], false);
@@ -413,33 +390,48 @@ isset($_POST['buccalmucosa1'])&&isset($_POST['buccalmucosa2'])&&isset($_POST['ob
   $param['anesthetic'] = htmlspecialchars(trim($_POST['anestesico']));
   $param['technique'] = htmlspecialchars(trim($_POST['tecnica']));
 
+  if(strIsBool($_POST['autorizacion'])&& strIsBool($_POST['seguimiento'])&& strIsBool($_POST['finalizacion'])){
+      $param['authorization'] = htmlspecialchars(trim($_POST['autorizacion']));
+      $param['tracing'] = htmlspecialchars(trim($_POST['seguimiento']));
+      $param['ending'] = htmlspecialchars(trim($_POST['finalizacion']));
+  }else{
+    echo "No se envió todos los valores necesarias para guardar datos";
+    exit;
+  }
+  $param['authorization']='['.htmlspecialchars($param['authorization'],true).']';
+  if($data!=null&& isset($data['authorization'])&& $data['authorization']!=''){
+    $arr=explode(']', $data['authorization']);
+    if(count($arr)==3&& $arr[1]!=''){
+      $param['authorization']=$param['authorization'].$arr[1].']';
+    }else{
+      $param['authorization']=$param['authorization'].'[*]';
+    }
+  }else{
+    $param['authorization']=$param['authorization'].'[*]';
+  }
 
-  if(isset($_POST['autorizacion'])){
-    $param['authorization'] = htmlspecialchars(trim($_POST['autorizacion']));
-  }else{
-    if(isset($data['authorization'])){
-      $param['authorization'] = $data['authorization'];
+  $param['tracing']='['.htmlspecialchars($param['tracing'],true).']';
+  if($data!=null&& isset($data['tracing'])&& $data['tracing']!=''){
+    $arr=explode(']', $data['tracing']);
+    if(count($arr)==3&& $arr[1]!=''){
+      $param['tracing']=$param['tracing'].$arr[1].']';
     }else{
-      $param['authorization'] = '';
+      $param['tracing']=$param['tracing'].'[*]';
     }
-  }
-  if(isset($_POST['seguimiento'])){
-    $param['tracing'] = htmlspecialchars(trim($_POST['seguimiento']));
   }else{
-      if(isset($data['tracing'])){
-        $param['tracing'] = $data['tracing'];
-      }else{
-        $param['tracing'] ='';
-      }
+    $param['tracing']=$param['tracing'].'[*]';
   }
-  if(isset($_POST['finalizacion'])){
-    $param['ending'] = htmlspecialchars(trim($_POST['finalizacion']));
-  }else{
-    if(isset($param['ending'])){
-      $param['ending'] = $data['ending'];
+
+  $param['ending']='['.htmlspecialchars($param['ending'],true).']';
+  if($data!=null&& isset($data['ending'])&& $data['ending']!=''){
+    $arr=explode(']', $data['ending']);
+    if(count($arr)==3&& $arr[1]!=''){
+      $param['ending']=$param['ending'].$arr[1].']';
     }else{
-      $param['ending'] = '';
+      $param['ending']=$param['ending'].'[*]';
     }
+  }else{
+    $param['ending']=$param['ending'].'[*]';
   }
 
 
@@ -461,7 +453,7 @@ isset($_POST['buccalmucosa1'])&&isset($_POST['buccalmucosa2'])&&isset($_POST['ob
   if($a==null){
     echo 'No';
   }else{
-    echo $a;
+    echo $tokenid.'***'.$a;
   }
 
   exit;

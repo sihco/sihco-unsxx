@@ -402,7 +402,9 @@ function DBNewSurgeryToken($param , $c=null){
 					"'$ending', '$obsintra', '$sensitivity', '$edema', '$buccalmucosa', '$obspost', ".
 					"$remission) returning tokenid";
 
-					$ret=DBExec ($c, $sql, "DBNewSurgeryToken(insert)");
+					//$ret=DBExec ($c, $sql, "DBNewSurgeryToken(insert)");
+					$ret=DBGetRow ($sql, 0, $c);
+					$ret=$ret['tokenid'];
 	    		if($cw) {
 	    				DBExec ($c, "commit work");
 	    		}
@@ -542,6 +544,62 @@ function clearsurgerytoken($a){
 			$a[$akey[$i]]=filter_var(trim($r2[1]), FILTER_VALIDATE_BOOLEAN);
 		}
 	}
+
+	if(isset($a['authorization'])&&$a['authorization']!=null){
+		$r=explode(']',$a['authorization']);
+		$size=count($r);
+		if($size==3){
+			$r2=explode('[',$r[0]);
+			$a['authorizationcontrol']=filter_var(trim($r2[1]), FILTER_VALIDATE_BOOLEAN);
+			$r2=explode('[',$r[1]);
+			$r2=explode('*',$r2[1]);
+			if(is_numeric($r2[0])&& is_numeric($r2[1])){
+				$u=DBUserInfo($r2[0]);
+				$r2[0]=$u['userfullname'];
+				$r2[1]=datetimeconv($r2[1]);
+			}
+			$a['authorizationtime']=$r2[1];
+			$a['authorizationteacher']=$r2[0];
+		}
+	}
+	if(isset($a['tracing'])&&$a['tracing']!=null){
+		$r=explode(']',$a['tracing']);
+		$size=count($r);
+		if($size==3){
+			$r2=explode('[',$r[0]);
+			$a['tracingcontrol']=filter_var(trim($r2[1]), FILTER_VALIDATE_BOOLEAN);
+			$r2=explode('[',$r[1]);
+			$r2=explode('*',$r2[1]);
+			if(is_numeric($r2[0])&& is_numeric($r2[1])){
+				$u=DBUserInfo($r2[0]);
+				$r2[0]=$u['userfullname'];
+				$r2[1]=datetimeconv($r2[1]);
+			}
+			$a['tracingtime']=$r2[1];
+			$a['tracingteacher']=$r2[0];
+		}
+	}
+	if(isset($a['ending'])&&$a['ending']!=null){
+		$r=explode(']',$a['ending']);
+		$size=count($r);
+		if($size==3){
+			$r2=explode('[',$r[0]);
+			$a['endingcontrol']=filter_var(trim($r2[1]), FILTER_VALIDATE_BOOLEAN);
+			$r2=explode('[',$r[1]);
+			$r2=explode('*',$r2[1]);
+			if(is_numeric($r2[0])&& is_numeric($r2[1])){
+				$u=DBUserInfo($r2[0]);
+				$r2[0]=$u['userfullname'];
+				$r2[1]=datetimeconv($r2[1]);
+			}
+			$a['endingtime']=$r2[1];
+			$a['endingteacher']=$r2[0];
+		}
+	}
+
+
+
+
 	return $a;
 }
 function DBAllSurgeryTokenInfo($file=-1, $tbody=false){
@@ -1137,6 +1195,65 @@ function DBAuthorizationComplementaryexam($user, $time=null, $type, $id, $c=null
 	$time=time();
 	$sql="update surgeryiitable set surgeryiicomplementaryexam='$treat' where surgeryiiid=$id";
 	DBExec($c, $sql, "DBAuthorizationComplementaryexam(update surgeryiitable)");
+
+	if($cw) {
+			DBExec ($c, "commit work");
+	}
+
+	$msg=$teacher;//.','.$nursing;//$treat;
+
+	//DBSurgeryiiInfo($id);
+	return $msg;
+}
+//funcion para autorizar una firma a typefirm
+function DBAuthorizationTypefirm($user, $time=null, $type, $id, $token, $c=null){
+	$userinfo=DBUserInfo($user);
+
+	if($userinfo==null)
+		return false;
+	//funcion para saber si es por qr o no
+	if($time!=null){
+		if($userinfo['usertype']!='teacher'&& $userinfo['usertype']!='nursing'|| $userinfo['userinfo']!=$time)
+			return false;
+	}
+
+	if($userinfo['usertype']=='teacher'){
+		//registrado en cirugia cuarto año
+		if(DBSpecialtyInfo($user, 14, 5)==null){
+			return false;
+		}
+	}
+	$file=DBSurgeryTokenInfo($token);
+	if(trim($file[$type])==''){
+		$file[$type]='[false][*]';
+	}else{
+		$treat=explode(']',$file[$type]);
+		$size=count($treat);
+		if($size!=3){
+			$file[$type]='[false][*]';
+		}
+	}
+	$treat_tmp=explode(']', $file[$type]);
+	$treat=explode('[',$treat_tmp[1]);
+	$treat=trim($treat[1]);
+	$data=trim($treat);
+	if($userinfo['usertype']=='teacher')
+		$teacher=$user.'*'.time();
+
+	$data=$treat_tmp[0].']['.$teacher.']';
+	$treat =$data;
+	$cw = false;
+	if($c == null) {
+		$cw = true;
+		$c = DBConnect();
+		DBExec($c, "begin work", "DBAuthorizationTypefirm(begin)");
+	}
+	DBExec($c, "lock table surgerytokentable", "DBAuthorizationTypefirm(lock)");
+
+	$ret=1;
+	$time=time();
+	$sql="update surgerytokentable set token$type='$treat' where remissionid=$id and tokenid=$token";
+	DBExec($c, $sql, "DBAuthorizationTypefirm(update surgeryiitable)");
 
 	if($cw) {
 			DBExec ($c, "commit work");
