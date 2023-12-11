@@ -304,7 +304,7 @@ $pat=$r;
         <select name="remota1" id="remota1" class="form-select" onchange="remota('remota1')" aria-label="Default select example">
           <option <?php if(!isset($pat['remota1']) || $pat["remota1"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota1']) && $pat["remota1"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota1']) && $pat["remota1"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota1']) || $pat["remota1"] == 'no'|| $pat["remota1"] == '') echo "selected"; ?> value="no">No</option>
         </select>
         <input type="hidden" class="form-control" name="obsremota1" id="obsremota1" placeholder="¿de qué está siendo tratado?" value="<?php if(isset($pat["obsremota1"])&&$pat['obsremota1']) echo $pat["obsremota1"]; ?>">
       </div>
@@ -316,7 +316,7 @@ $pat=$r;
         <select name="remota2" id="remota2" class="form-select" onchange="remota('remota2')" aria-label="Default select example">
           <option <?php if(!isset($pat['remota2']) || $pat["remota2"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota2']) && $pat["remota2"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota2']) && $pat["remota2"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota2']) || $pat["remota2"] == '' || $pat["remota2"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
         <input type="hidden" class="form-control" name="obsremota2" id="obsremota2" placeholder="¿Cuál es la enfermedad o el tipo de intervención?" value="<?php if(isset($pat["obsremota2"])&&$pat['obsremota2']) echo $pat["obsremota2"]; ?>">
       </div>
@@ -327,7 +327,7 @@ $pat=$r;
         <select name="remota3" id="remota3" class="form-select" onchange="remota('remota3')" aria-label="Default select example">
           <option <?php if(!isset($pat['remota3']) || $pat["remota3"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota3']) && $pat["remota3"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota3']) && $pat["remota3"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota3']) || $pat["remota3"] == '' || $pat["remota3"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
         <input type="hidden" class="form-control" name="obsremota3" id="obsremota3" placeholder="¿Cuál fue el motivo?" value="<?php if(isset($pat["obsremota3"])&&$pat['obsremota3']) echo $pat["obsremota3"]; ?>">
         <script type="text/javascript">
@@ -352,7 +352,7 @@ $pat=$r;
         <select name="remota4a" id="remota4a" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4a']) || $pat["remota4a"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4a']) && $pat["remota4a"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4a']) && $pat["remota4a"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4a']) || $pat["remota4a"] == ''|| $pat["remota4a"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -367,7 +367,7 @@ $pat=$r;
             <select name="remota4b1" id="remota4b1" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota4b1']) || $pat["remota4b1"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota4b1']) && $pat["remota4b1"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota4b1']) && $pat["remota4b1"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota4b1']) || $pat["remota4b1"] == ''|| $pat["remota4b1"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -378,7 +378,7 @@ $pat=$r;
             <select name="remota4b2" id="remota4b2" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota4b2']) || $pat["remota4b2"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota4b2']) && $pat["remota4b2"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota4b2']) && $pat["remota4b2"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota4b2']) || $pat["remota4b2"] == ''|| $pat["remota4b2"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -388,7 +388,7 @@ $pat=$r;
             <select name="remota4b3" id="remota4b3" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota4b3']) || $pat["remota4b3"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota4b3']) && $pat["remota4b3"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota4b3']) && $pat["remota4b3"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota4b2']) || $pat["remota4b2"] == ''|| $pat["remota4b3"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -398,7 +398,7 @@ $pat=$r;
             <select name="remota4b4" id="remota4b4" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota4b4']) || $pat["remota4b4"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota4b4']) && $pat["remota4b4"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota4b4']) && $pat["remota4b4"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota4b2']) || $pat["remota4b2"] == ''|| $pat["remota4b4"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -408,7 +408,7 @@ $pat=$r;
             <select name="remota4b5" id="remota4b5" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota4b5']) || $pat["remota4b5"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota4b5']) && $pat["remota4b5"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota4b5']) && $pat["remota4b5"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota4b5']) || $pat["remota4b5"] == ''|| $pat["remota4b5"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -420,7 +420,7 @@ $pat=$r;
         <select name="remota4c" id="remota4c" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4c']) || $pat["remota4c"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4c']) && $pat["remota4c"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4c']) && $pat["remota4c"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4b5']) || $pat["remota4b5"] == ''|| $pat["remota4c"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -430,7 +430,7 @@ $pat=$r;
         <select name="remota4d" id="remota4d" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4d']) || $pat["remota4d"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4d']) && $pat["remota4d"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4d']) && $pat["remota4d"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4d']) || $pat["remota4d"] == ''|| $pat["remota4d"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -440,7 +440,7 @@ $pat=$r;
         <select name="remota4e" id="remota4e" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4e']) || $pat["remota4e"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4e']) && $pat["remota4e"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4e']) && $pat["remota4e"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4e']) || $pat["remota4e"] == ''|| $pat["remota4e"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -453,7 +453,7 @@ $pat=$r;
             <select name="remota4f1" id="remota4f1" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota4f1']) && $pat["remota4f1"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota4f1']) && $pat["remota4f1"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == ''|| $pat["remota4f1"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -463,7 +463,7 @@ $pat=$r;
             <select name="remota4f2" id="remota4f2" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota4f2']) || $pat["remota4f2"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota4f2']) && $pat["remota4f2"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota4f2']) && $pat["remota4f2"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == ''|| $pat["remota4f2"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -473,7 +473,7 @@ $pat=$r;
             <select name="remota4f3" id="remota4f3" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota4f3']) || $pat["remota4f3"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota4f3']) && $pat["remota4f3"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota4f3']) && $pat["remota4f3"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == ''|| $pat["remota4f3"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -486,7 +486,7 @@ $pat=$r;
         <select name="remota4g" id="remota4g" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4g']) || $pat["remota4g"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4g']) && $pat["remota4g"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4g']) && $pat["remota4g"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == ''|| $pat["remota4g"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -496,7 +496,7 @@ $pat=$r;
         <select name="remota4h" id="remota4h" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4h']) || $pat["remota4h"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4h']) && $pat["remota4h"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4h']) && $pat["remota4h"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == ''|| $pat["remota4h"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -506,7 +506,7 @@ $pat=$r;
         <select name="remota4i" id="remota4i" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4i']) || $pat["remota4i"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4i']) && $pat["remota4i"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4i']) && $pat["remota4i"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == ''|| $pat["remota4i"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -516,7 +516,7 @@ $pat=$r;
         <select name="remota4j" id="remota4j" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4j']) || $pat["remota4j"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4j']) && $pat["remota4j"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4j']) && $pat["remota4j"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == ''|| $pat["remota4j"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -526,7 +526,7 @@ $pat=$r;
         <select name="remota4k" id="remota4k" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4k']) || $pat["remota4k"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4k']) && $pat["remota4k"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4k']) && $pat["remota4k"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4f1']) || $pat["remota4f1"] == ''|| $pat["remota4k"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -536,7 +536,7 @@ $pat=$r;
         <select name="remota4l" id="remota4l" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4l']) || $pat["remota4l"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4l']) && $pat["remota4l"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4l']) && $pat["remota4l"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4l']) || $pat["remota4l"] == ''|| $pat["remota4l"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -546,7 +546,7 @@ $pat=$r;
         <select name="remota4m" id="remota4m" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4m']) || $pat["remota4m"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4m']) && $pat["remota4m"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4m']) && $pat["remota4m"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4m']) || $pat["remota4m"] == ''|| $pat["remota4m"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -556,7 +556,7 @@ $pat=$r;
         <select name="remota4n" id="remota4n" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota4n']) || $pat["remota4n"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota4n']) && $pat["remota4n"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota4n']) && $pat["remota4n"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota4n']) || $pat["remota4n"] == ''|| $pat["remota4n"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -569,7 +569,7 @@ $pat=$r;
         <select name="remota51" id="remota51" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota51']) || $pat["remota51"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota51']) && $pat["remota51"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota51']) && $pat["remota51"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota51']) || $pat["remota51"] == ''|| $pat["remota51"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -581,7 +581,7 @@ $pat=$r;
             <select name="remota52" id="remota52" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota52']) || $pat["remota52"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota52']) && $pat["remota52"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota52']) && $pat["remota52"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota52']) || $pat["remota52"] == ''|| $pat["remota52"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -591,7 +591,7 @@ $pat=$r;
             <select name="remota53" id="remota53" class="form-select" onchange="remota('remota53')" aria-label="Default select example">
               <option <?php if(!isset($pat['remota53']) || $pat["remota53"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota53']) && $pat["remota53"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota53']) && $pat["remota53"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota53']) || $pat["remota53"] == ''|| $pat["remota53"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
             <input type="hidden" class="form-control" name="obsremota53" id="obsremota53" placeholder="¿explique las circunstancias?" value="<?php if(isset($pat["obsremota53"])&&$pat['obsremota53']) echo $pat["obsremota53"]; ?>">
             <script type="text/javascript">
@@ -611,7 +611,7 @@ $pat=$r;
         <select name="remota6" id="remota6" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota6']) || $pat["remota6"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota6']) && $pat["remota6"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota6']) && $pat["remota6"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota6']) || $pat["remota6"] == ''|| $pat["remota6"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -621,7 +621,7 @@ $pat=$r;
         <select name="remota7" id="remota7" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota7']) || $pat["remota7"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota7']) && $pat["remota7"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota7']) && $pat["remota7"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota7']) || $pat["remota7"] == ''|| $pat["remota7"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
 
@@ -638,7 +638,7 @@ $pat=$r;
             <select name="remota81" id="remota81" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota81']) || $pat["remota81"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota81']) && $pat["remota81"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota81']) && $pat["remota81"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota81']) || $pat["remota81"] == ''|| $pat["remota81"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -648,7 +648,7 @@ $pat=$r;
             <select name="remota82" id="remota82" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota82']) || $pat["remota82"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota82']) && $pat["remota82"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota82']) && $pat["remota82"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota82']) || $pat["remota82"] == ''|| $pat["remota82"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -658,7 +658,7 @@ $pat=$r;
             <select name="remota83" id="remota83" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota83']) || $pat["remota83"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota83']) && $pat["remota83"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota83']) && $pat["remota83"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota83']) || $pat["remota83"] == ''|| $pat["remota83"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -668,7 +668,7 @@ $pat=$r;
             <select name="remota84" id="remota84" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota84']) || $pat["remota84"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota84']) && $pat["remota84"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota84']) && $pat["remota84"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota84']) || $pat["remota84"] == ''|| $pat["remota84"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -678,7 +678,7 @@ $pat=$r;
             <select name="remota85" id="remota85" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota85']) || $pat["remota85"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota85']) && $pat["remota85"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota85']) && $pat["remota85"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota85']) || $pat["remota85"] == ''|| $pat["remota85"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -688,7 +688,7 @@ $pat=$r;
             <select name="remota86" id="remota86" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota86']) || $pat["remota86"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota86']) && $pat["remota86"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota86']) && $pat["remota86"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota86']) || $pat["remota86"] == ''|| $pat["remota86"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -698,7 +698,7 @@ $pat=$r;
             <select name="remota87" id="remota87" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota87']) || $pat["remota87"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota87']) && $pat["remota87"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota87']) && $pat["remota87"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota87']) || $pat["remota87"] == ''|| $pat["remota87"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -708,7 +708,7 @@ $pat=$r;
             <select name="remota88" id="remota88" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota88']) || $pat["remota88"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota88']) && $pat["remota88"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota88']) && $pat["remota88"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota88']) || $pat["remota88"] == ''|| $pat["remota88"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -718,7 +718,7 @@ $pat=$r;
             <select name="remota89" id="remota89" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota89']) || $pat["remota89"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota89']) && $pat["remota89"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota89']) && $pat["remota89"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota89']) || $pat["remota89"] == ''|| $pat["remota89"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -728,7 +728,7 @@ $pat=$r;
             <select name="remota810" id="remota810" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota810']) || $pat["remota810"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota810']) && $pat["remota810"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota810']) && $pat["remota810"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota810']) || $pat["remota810"] == ''|| $pat["remota810"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -738,7 +738,7 @@ $pat=$r;
             <select name="remota811" id="remota811" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota811']) || $pat["remota811"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota811']) && $pat["remota811"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota811']) && $pat["remota811"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota811']) || $pat["remota811"] == ''|| $pat["remota811"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -748,7 +748,7 @@ $pat=$r;
             <select name="remota812" id="remota812" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota812']) || $pat["remota812"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota812']) && $pat["remota812"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota812']) && $pat["remota812"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota812']) || $pat["remota812"] == ''|| $pat["remota812"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -763,7 +763,7 @@ $pat=$r;
         <select name="remota9" id="remota9" class="form-select" onchange="remota('remota9')" aria-label="Default select example">
           <option <?php if(!isset($pat['remota9']) || $pat["remota9"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota9']) && $pat["remota9"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota9']) && $pat["remota9"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota9']) || $pat["remota9"] == ''|| $pat["remota9"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
         <input type="hidden" class="form-control" name="obsremota9" id="obsremota9" placeholder="Indique el nombre del medicamento" value="<?php if(isset($pat["obsremota9"])&&$pat['obsremota9']) echo $pat["obsremota9"]; ?>">
         <script type="text/javascript">
@@ -777,7 +777,7 @@ $pat=$r;
         <select name="remota10" id="remota10" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['remota10']) || $pat["remota10"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota10']) && $pat["remota10"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota10']) && $pat["remota10"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota10']) || $pat["remota10"] == ''|| $pat["remota10"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -794,7 +794,7 @@ $pat=$r;
             <select name="remota111" id="remota111" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota111']) || $pat["remota111"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota111']) && $pat["remota111"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota111']) && $pat["remota111"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota111']) || $pat["remota111"] == ''|| $pat["remota111"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -804,7 +804,7 @@ $pat=$r;
             <select name="remota112" id="remota112" class="form-select" aria-label="Default select example">
               <option <?php if(!isset($pat['remota112']) || $pat["remota112"] == '') echo "selected"; ?> value="">--</option>
               <option <?php if(isset($pat['remota112']) && $pat["remota112"] == 'si') echo "selected"; ?> value="si">Si</option>
-              <option <?php if(isset($pat['remota112']) && $pat["remota112"] == 'no') echo "selected"; ?> value="no">No</option>
+              <option <?php if(!isset($pat['remota112']) || $pat["remota112"] == ''|| $pat["remota112"] == 'no') echo "selected"; ?> value="no">No</option>
             </select>
           </div>
         </div>
@@ -816,7 +816,7 @@ $pat=$r;
         <select name="remota12" id="remota12" class="form-select" onchange="remota('remota12')" aria-label="Default select example">
           <option <?php if(!isset($pat['remota12']) || $pat["remota12"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota12']) || $pat["remota12"] == ''|| $pat["remota12"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
         <input type="hidden" class="form-control" name="obsremota12" id="obsremota12" placeholder="Incluye enfermedades confidenciales" value="<?php if(isset($pat["obsremota12"])&&$pat['obsremota12']) echo $pat["obsremota12"]; ?>">
       </div>
@@ -828,7 +828,7 @@ $pat=$r;
         <select name="remota12" id="remota12" class="form-select" onchange="remota('remota12')" aria-label="Default select example">
           <option <?php if(!isset($pat['remota12']) || $pat["remota12"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['remota12']) && $pat["remota12"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['remota12']) || $pat["remota12"] == ''|| $pat["remota12"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
         <input type="hidden" class="form-control" name="obsremota12" id="obsremota12" placeholder="Incluya enfermedades confidenciales" value="<?php if(isset($pat["obsremota12"])&&$pat['obsremota12']) echo $pat["obsremota12"]; ?>">
       </div>
@@ -852,7 +852,7 @@ $pat=$r;
         <select name="historia1" id="historia1" class="form-select" onchange="remota('historia1')" aria-label="Default select example">
           <option <?php if(!isset($pat['historia1']) || $pat["historia1"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['historia1']) && $pat["historia1"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['historia1']) && $pat["historia1"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['historia1']) || $pat["historia1"] == ''|| $pat["historia1"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
         <input type="hidden" class="form-control" name="obshistoria1" id="obshistoria1" placeholder="¿Cuándo fue la última vez?" value="<?php if(isset($pat["obshistoria1"])&&$pat['obshistoria1']) echo $pat["obshistoria1"]; ?>">
         <script type="text/javascript">
@@ -878,7 +878,7 @@ $pat=$r;
         <select name="historia3" id="historia3" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['historia3']) || $pat["historia3"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['historia3']) && $pat["historia3"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['historia3']) && $pat["historia3"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['historia3']) || $pat["historia3"] == ''|| isset($pat['historia3']) && $pat["historia3"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -888,7 +888,7 @@ $pat=$r;
         <select name="historia4" id="historia4" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['historia4']) || $pat["historia4"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['historia4']) && $pat["historia4"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['historia4']) && $pat["historia4"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['historia4']) || $pat["historia4"] == ''|| $pat["historia4"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -898,7 +898,7 @@ $pat=$r;
         <select name="historia5" id="historia5" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['historia5']) || $pat["historia5"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['historia5']) && $pat["historia5"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['historia5']) && $pat["historia5"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['historia5']) || $pat["historia5"] == ''|| $pat["historia5"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -908,7 +908,7 @@ $pat=$r;
         <select name="historia6" id="historia6" class="form-select" aria-label="Default select example">
           <option <?php if(!isset($pat['historia6']) || $pat["historia6"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['historia6']) && $pat["historia6"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['historia6']) && $pat["historia6"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['historia6']) || $pat["historia6"] == ''|| $pat["historia6"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
       </div>
     </div>
@@ -929,7 +929,7 @@ $pat=$r;
         <select name="historia8" id="historia8" class="form-select" onchange="remota('historia8')" aria-label="Default select example">
           <option <?php if(!isset($pat['historia8']) || $pat["historia8"] == '') echo "selected"; ?> value="">--</option>
           <option <?php if(isset($pat['historia8']) && $pat["historia8"] == 'si') echo "selected"; ?> value="si">Si</option>
-          <option <?php if(isset($pat['historia8']) && $pat["historia8"] == 'no') echo "selected"; ?> value="no">No</option>
+          <option <?php if(!isset($pat['historia8']) || $pat["historia8"] == ''|| $pat["historia8"] == 'no') echo "selected"; ?> value="no">No</option>
         </select>
         <input type="hidden" class="form-control" name="obshistoria8" id="obshistoria8" placeholder="Explíquelo" value="<?php if(isset($pat["obshistoria8"])&&$pat['obshistoria8']) echo $pat["obshistoria8"]; ?>">
         <script type="text/javascript">
@@ -2437,6 +2437,7 @@ require('footer.php');
 
 <script src="../leftscannerqr.js"></script>
 <script>
+Stop();
 function registerqr(content){
   var ch = $('#functionname').val();
   switch (ch) {

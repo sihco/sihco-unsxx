@@ -931,3 +931,962 @@
 	height: 18px;
 	margin: 70px 20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+/*Por debajo de 700px*/
+@media screen and (max-width: 700px){
+	#wrapper{
+		margin: 0 auto;
+		background: #ff0000;/*#ffffff;*/
+		padding: 0 5px;/*20*/
+		width: 500px;/*980*/
+	}
+	#separador{
+		width: 100%;
+		background: #090b52;
+		color: #ffffff;
+		font-weight: bold;
+	}
+	#separador td{
+		padding: 2px 90px;
+	}
+	#tabla-superior{
+		margin: 0 auto;
+		background: #ffffff;
+	}
+	#tabla-superior table{
+		width: 100%;
+	}
+	#tabla-1 td, #tabla-2 td,#tabla-3 td,#tabla-4 td,
+	#tabla-5 td, #tabla-6 td,#tabla-7 td,#tabla-8 td{
+		height: 0px;
+		min-width: 10px;/*39*/
+		vertical-align: middle;
+	}
+	.titulo{
+		text-align: right;
+		padding-right: 5px;
+		font-weight:bold;
+
+	}
+	.noborde{
+			/*padding:2px 0 7px;*/
+			margin:0;
+			text-align: center;
+	}
+	#lineas-gr,#lineas-gr-inf{
+		width: 200px;/*400*/
+		height: 80px;/*160*/
+		position:absolute;
+		background: url('../images/img/fondo-grafico.png') repeat-x;
+	}
+	#lineas-gr{
+		background: url('../images/img/fondo-grafico.png') repeat-x;
+	}
+	#lineas-gr-inf{
+		background: url('../images/img/fondo-grafico-inf.png') repeat-x;
+		margin: 0px 0 0;
+	}
+
+	/* visualization svg of google  visualization */
+	#visualization18a, #visualization17a {
+		width: 20px;/*40*/
+		height: 80px;/*160*/
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+	#visualization16a{
+		width: 27px;/*55*/
+		height: 80px;/*160*/
+		position:absolute;
+		margin:0 0 0 3px;
+	}
+
+	#visualization15a, #visualization14a{
+		width: 14px;/*28*/
+		height: 80px;/*168*/
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization13a{
+		width: 14px;/*28*/
+		height: 80px;/*160*/
+		position:absolute;
+		margin:0 0 0 5px;
+	}
+
+	#visualization12a{
+		width: 13px;/*27*/
+		height: 80px;/*160*/
+		position:absolute;
+		margin:0 0 0 7px;
+	}
+	#visualization11a{
+		width: 33px;/*33*/
+		height: 160px;/*160*/
+		position:absolute;
+		margin:0 0 0 13px;
+	}
+	/*dientes de r*/
+	#diente21-a,#diente22-a,#diente23-a,#diente24-a,#diente25-a,#diente26-a,#diente27-a,#diente28-a{
+		height: 77px;/*155*/
+		background-repeat: no-repeat;
+	}
+	#diente21-a{
+		background: url('../images/img/tabla2/periodontograma-dientes-arriba-21.png');
+		width:26px;/*53*/
+		background-position: bottom;
+		background-repeat: no-repeat;
+	}
+	#diente22-a{
+		background: url('../images/img/tabla2/periodontograma-dientes-arriba-22.png');
+		width:19px;/*38*/
+		background-position: 0px 6px;
+		background-repeat: no-repeat;
+	}
+	#diente23-a{
+		background: url('../images/img/tabla2/periodontograma-dientes-arriba-23.png');
+		width:43px;
+		background-position: top;
+		background-repeat: no-repeat;
+	}
+	#diente24-a{
+		background: url('../images/img/tabla2/periodontograma-dientes-arriba-24.png');
+		width:43px;
+		/*background-position: */
+		background-repeat: no-repeat;
+	}
+	#diente25-a{
+		background: url('../images/img/tabla2/periodontograma-dientes-arriba-25.png');
+		width:42px;
+		background-position: 0 5px;
+		background-repeat: no-repeat;
+	}
+	#diente26-a{
+		background: url('../images/img/tabla2/periodontograma-dientes-arriba-26.png');
+		width:64px;
+		background-position: 0 4px;
+		background-repeat: no-repeat;
+	}
+	#diente27-a{
+		background: url('../images/img/tabla2/periodontograma-dientes-arriba-27.png');
+		width:56px;
+		background-position: 0px 0px;
+		background-repeat: no-repeat;
+	}
+	#diente28-a{
+		background: url('../images/img/tabla2/periodontograma-dientes-arriba-28.png');
+		width:54px;
+		background-position: 0 -2px;
+		background-repeat: no-repeat;
+	}
+	#visualization21a {
+		width: 33px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 7px;
+
+	}
+	#visualization22a {
+		width: 27px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 5px;
+
+	}
+	#visualization23a {
+		width: 28px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 11px;
+	}
+	#visualization24a {
+		width: 28px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+	#visualization25a {
+		width: 28px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+	#visualization26a {
+		width: 55px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 3px;
+	}
+
+	#visualization27a {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization28a {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+	/*dientes de r fin*/
+	/* visualization svg of google  visualization */
+	#diente18b-a,#diente17b-a,#diente16b-a,
+	#diente15b-a,#diente14b-a,#diente13b-a,
+	#diente12b-a,#diente11b-a{
+		height: 155px;
+		background-repeat: no-repeat;
+	}
+	#diente18b-a{
+		background: url('../images/img/tabla3/periodontograma-dientes-arriba-18b.png');
+		width:54px;
+		background-position: 0 23px;
+		background-repeat: no-repeat;
+	}
+	#diente17b-a{
+		background: url('../images/img/tabla3/periodontograma-dientes-arriba-17b.png');
+		width:57px;
+		background-position: 0 24px;
+		background-repeat: no-repeat;
+	}
+	#diente16b-a{
+		background: url('../images/img/tabla3/periodontograma-dientes-arriba-16b.png');
+		width:62px;
+		background-position: 0 22px;
+		background-repeat: no-repeat;
+	}
+	#diente15b-a{
+		background: url('../images/img/tabla3/periodontograma-dientes-arriba-15b.png');
+		width:42px;
+		background-position: 0 17px;
+		background-repeat: no-repeat;
+	}
+	#diente14b-a{
+		background: url('../images/img/tabla3/periodontograma-dientes-arriba-14b.png');
+		width:46px;
+		background-position: 0 17px;
+		background-repeat: no-repeat;
+	}
+	#diente13b-a{
+		background: url('../images/img/tabla3/periodontograma-dientes-arriba-13b.png');
+		width:42px;
+		background-position: 0 16px;
+		background-repeat: no-repeat;
+	}
+	#diente12b-a{
+		background: url('../images/img/tabla3/periodontograma-dientes-arriba-12b.png');
+		width:45px;
+		background-position: 0 18px;
+		background-repeat: no-repeat;
+	}
+	#diente11b-a{
+		background: url('../images/img/tabla3/periodontograma-dientes-arriba-11b.png');
+		width:54px;
+		background-position: 0 12px;
+		background-repeat: no-repeat;
+	}
+
+	#visualization18b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 4px;
+	}
+
+	#visualization17b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 7px;
+	}
+
+	#visualization16b {
+		width: 48px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 5px;
+	}
+	#visualization15b {
+		width: 28px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 6px;
+	}
+
+	#visualization14b {
+		width: 28px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 9px;
+	}
+
+	#visualization13b {
+		width: 28px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 9px;
+	}
+
+	#visualization12b {
+		width: 26px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 9px;
+	}
+
+	#visualization11b {
+		width: 33px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 4px;
+	}
+	/* ----------------------------------------------------------------------- */
+	/* visualization svg of google  visualization */
+	#diente21b-a,#diente22b-a,#diente23b-a,#diente24b-a,#diente25b-a,#diente26b-a,#diente27b-a,#diente28b-a{
+		height: 155px;
+		background-repeat: no-repeat;
+	}
+	#diente21b-a{
+		background: url('../images/img/tabla4/periodontograma-dientes-arriba-21b.png');
+		width:53px;
+		background-position: 0 11px;
+		background-repeat: no-repeat;
+	}
+	#diente22b-a{
+		background: url('../images/img/tabla4/periodontograma-dientes-arriba-22b.png');
+		width:44px;
+		background-position: 0px 17px;
+		background-repeat: no-repeat;
+	}
+	#diente23b-a{
+		background: url('../images/img/tabla4/periodontograma-dientes-arriba-23b.png');
+		width:43px;
+		background-position: 0 15px;
+		background-repeat: no-repeat;
+	}
+	#diente24b-a{
+		background: url('../images/img/tabla4/periodontograma-dientes-arriba-24b.png');
+		width:43px;
+		background-position: 0 16px;
+		background-repeat: no-repeat;
+	}
+	#diente25b-a{
+		background: url('../images/img/tabla4/periodontograma-dientes-arriba-25b.png');
+		width:42px;
+		background-position: 0 16px;
+		background-repeat: no-repeat;
+	}
+	#diente26b-a{
+		background: url('../images/img/tabla4/periodontograma-dientes-arriba-26b.png');
+		width:64px;
+		background-position: 0 21px;
+		background-repeat: no-repeat;
+	}
+	#diente27b-a{
+		background: url('../images/img/tabla4/periodontograma-dientes-arriba-27b.png');
+		width:56px;
+		background-position: 0px 24px;
+		background-repeat: no-repeat;
+	}
+	#diente28b-a{
+		background: url('../images/img/tabla4/periodontograma-dientes-arriba-28b.png');
+		width:54px;
+		background-position: 0 23px;
+		background-repeat: no-repeat;
+	}
+	#visualization21b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization22b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 4px;
+	}
+
+	#visualization23b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 1px;
+	}
+
+	#visualization24b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 3px;
+	}
+
+	#visualization25b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 4px;
+	}
+
+	#visualization26b {
+		width: 48px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 11px;
+	}
+
+	#visualization27b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 11px;
+	}
+
+	#visualization28b {
+		width: 40px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	/* ----------------------------------------------------------------------- */
+	#diente18-a,#diente17-a,#diente16-a,#diente15-a,#diente14-a,#diente13-a,#diente12-a,#diente11-a{
+		height: 77px;/*155*/
+		background-repeat: no-repeat;
+
+	}
+	#diente18-a{
+		background: url('../images/img/tabla1/periodontograma-dientes-arriba-18.png');
+		width:27px;/*54*/
+		background-position: 0 -2px;
+		background-repeat: no-repeat;
+		background-size: 100% auto;
+	}
+	#diente17-a{
+		background: url('../images/img/tabla1/periodontograma-dientes-arriba-17.png');
+		width:57px;
+		/*background-position: */
+		background-repeat: no-repeat;
+	}
+	#diente16-a{
+		background: url('../images/img/tabla1/periodontograma-dientes-arriba-16.png');
+		width:62px;
+		background-position: 0 4px;
+		background-repeat: no-repeat;
+	}
+	#diente15-a{
+		background: url('../images/img/tabla1/periodontograma-dientes-arriba-15.png');
+		width:42px;
+		background-position: 0 5px;
+		background-repeat: no-repeat;
+	}
+	#diente14-a{
+		background: url('../images/img/tabla1/periodontograma-dientes-arriba-14.png');
+		width:46px;
+		/*background-position: */
+		background-repeat: no-repeat;
+	}
+	#diente13-a{
+		background: url('../images/img/tabla1/periodontograma-dientes-arriba-13.png');
+		width:42px;
+		background-position: top;
+		background-repeat: no-repeat;
+	}
+	#diente12-a{
+		background: url('../images/img/tabla1/periodontograma-dientes-arriba-12.png');
+		width:38px;
+		background-position: 0px 6px;
+		background-repeat: no-repeat;
+	}
+	#diente11-a{
+		background: url('../images/img/tabla1/periodontograma-dientes-arriba-11.png');
+		width:54px;
+		background-position: bottom;
+		background-repeat: no-repeat;
+	}
+
+	/* visualization svg of google  visualization */
+	#diente48-a,#diente47-a,#diente46-a,#diente45-a,#diente44-a,#diente43-a,#diente42-a,#diente41-a{
+		height: 155px;
+		background-repeat: no-repeat;
+	}
+	#diente48-a{
+		background: url('../images/img/tabla5/periodontograma-dientes-abajo-48.png');
+		width:66px;
+		background-position: 0 -4px;
+		background-repeat: no-repeat;
+	}
+	#diente47-a{
+		background: url('../images/img/tabla5/periodontograma-dientes-abajo-47.png');
+		width:61px;
+		background-position: 0 4px;
+		background-repeat: no-repeat;
+	}
+	#diente46-a{
+		background: url('../images/img/tabla5/periodontograma-dientes-abajo-46.png');
+		width:66px;
+		background-position: 0 -1px;
+		background-repeat: no-repeat;
+	}
+	#diente45-a{
+		background: url('../images/img/tabla5/periodontograma-dientes-abajo-45.png');
+		width:44px;
+		background-position: 0 1px;
+		background-repeat: no-repeat;
+	}
+	#diente44-a{
+		background: url('../images/img/tabla5/periodontograma-dientes-abajo-44.png');
+		width:42px;
+		background-position: 0px 3px;
+		background-repeat: no-repeat;
+	}
+	#diente43-a{
+		background: url('../images/img/tabla5/periodontograma-dientes-abajo-43.png');
+		width:42px;
+		background-position: 0 7px;
+		background-repeat: no-repeat;
+	}
+	#diente42-a{
+		background: url('../images/img/tabla5/periodontograma-dientes-abajo-42.png');
+		width:35px;
+		background-position: 0px 3px;
+		background-repeat: no-repeat;
+	}
+	#diente41-a{
+		background: url('../images/img/tabla5/periodontograma-dientes-abajo-41.png');
+		width:36px;
+		background-position: 0 1px;
+		background-repeat: no-repeat;
+	}
+	#visualization48a {
+		width: 48px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 7px;
+	}
+
+	#visualization47a {
+		width: 43px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization46a {
+		width: 44px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 12px;
+	}
+	#visualization45a {
+		width: 23px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization44a {
+		width: 25px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization43a {
+		width: 23px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization42a {
+		width: 17px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+	#visualization41a {
+		width: 18px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	/* ----------------------------------------------------------------------- */
+	/* visualization svg of google  visualization */
+	#diente31-a,#diente32-a,#diente33-a,#diente34-a,#diente35-a,#diente36-a,#diente37-a,#diente38-a{
+		height: 155px;
+		background-repeat: no-repeat;
+	}
+	#diente31-a{
+		background: url('../images/img/tabla6/periodontograma-dientes-abajo-31.png');
+		width:37px;
+		background-position: 0 1px;
+		background-repeat: no-repeat;
+	}
+	#diente32-a{
+		background: url('../images/img/tabla6/periodontograma-dientes-abajo-32.png');
+		width:37px;
+		background-position: 0 3px;
+		background-repeat: no-repeat;
+	}
+	#diente33-a{
+		background: url('../images/img/tabla6/periodontograma-dientes-abajo-33.png');
+		width:41px;
+		background-position: 0 7px;
+		background-repeat: no-repeat;
+	}
+	#diente34-a{
+		background: url('../images/img/tabla6/periodontograma-dientes-abajo-34.png');
+		width:42px;
+		background-position: 0 5px;
+		background-repeat: no-repeat;
+	}
+	#diente35-a{
+		background: url('../images/img/tabla6/periodontograma-dientes-abajo-35.png');
+		width:44px;
+		background-position: 0 1px;
+		background-repeat: no-repeat;
+	}
+	#diente36-a{
+		background: url('../images/img/tabla6/periodontograma-dientes-abajo-36.png');
+		width:66px;
+		background-position: top;
+		background-repeat: no-repeat;
+	}
+	#diente37-a{
+		background: url('../images/img/tabla6/periodontograma-dientes-abajo-37.png');
+		width:62px;
+		background-position: 0px -4px;
+		background-repeat: no-repeat;
+	}
+	#diente38-a{
+		background: url('../images/img/tabla6/periodontograma-dientes-abajo-38.png');
+		width:66px;
+		background-position: 0 -3px;
+		background-repeat: no-repeat;
+	}
+	#visualization31a {
+		width: 23px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization32a {
+		width: 22px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 9px;
+	}
+
+	#visualization33a {
+		width: 25px;
+		height: 160px;
+		position:
+		absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization34a {
+		width: 22px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 11px;
+	}
+
+	#visualization34a {
+		width: 25px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 10px;
+	}
+
+	#visualization35a{
+		width: 50px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+	#visualization36a {
+		width: 47px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	#visualization37a {
+		width: 47px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 10px;
+	}
+	#visualization38a {
+		width: 47px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 10px;
+	}
+	/* ----------------------------------------------------------------------- */
+	/*TABLA 7*/
+	#diente48b-a,#diente47b-a,#diente46b-a,#diente45b-a,#diente44b-a,#diente43b-a,#diente42b-a,#diente41b-a{
+		height: 155px;
+		background-repeat: no-repeat;
+	}
+	#diente48b-a{
+		background: url('../images/img/tabla7/periodontograma-dientes-abajo-48b.png');
+		width:61px;
+		background-position: 0 24px;
+		background-repeat: no-repeat;
+	}
+	#diente47b-a{
+		background: url('../images/img/tabla7/periodontograma-dientes-abajo-47b.png');
+		width:62px;
+		background-position: 0 22px;
+		background-repeat: no-repeat;
+	}
+	#diente46b-a{
+		background: url('../images/img/tabla7/periodontograma-dientes-abajo-46b.png');
+		width:68px;
+		background-position: 0 23px;
+		background-repeat: no-repeat;
+	}
+	#diente45b-a{
+		background: url('../images/img/tabla7/periodontograma-dientes-abajo-45b.png');
+		width:45px;
+		background-position: 0 20px;
+		background-repeat: no-repeat;
+	}
+	#diente44b-a{
+		background: url('../images/img/tabla7/periodontograma-dientes-abajo-44b.png');
+		width:42px;
+		background-position: 0 13px;
+		background-repeat: no-repeat;
+	}
+	#diente43b-a{
+		background: url('../images/img/tabla7/periodontograma-dientes-abajo-43b.png');
+		width:40px;
+		background-position: 0 12px;
+		background-repeat: no-repeat;
+	}
+	#diente42b-a{
+		background: url('../images/img/tabla7/periodontograma-dientes-abajo-42b.png');
+		width:39px;
+		background-position: 0 15px;
+		background-repeat: no-repeat;
+	}
+	#diente41b-a{
+		background: url('../images/img/tabla7/periodontograma-dientes-abajo-41b.png');
+		width:37px;
+		background-position: 0 19px;
+		background-repeat: no-repeat;
+	}
+
+	/* ----------------------------------------------------------------------- */
+	/* visualization svg of google  visualization */
+
+	#visualization48b {
+		width: 48px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 5px;
+	}
+
+	#visualization47b {
+		width: 43px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 10px;
+	}
+
+	#visualization46b {
+		width: 44px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 13px;
+	}
+
+	#visualization45b {
+		width: 23px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 13px;
+	}
+
+	#visualization44b {
+		width: 25px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 10px;
+	}
+
+	#visualization43b {
+		width: 23px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 10px;
+	}
+
+	#visualization42b {
+		width: 17px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 11px;
+	}
+
+	#visualization41b {
+		width: 18px;
+		height: 160px;
+		position:absolute;
+		margin:0 0 0 8px;
+	}
+
+	/* ----------------------------------------------------------------------- */
+	/*TABLA 8 INICIO*/
+	#diente31b-a,#diente32b-a,#diente33b-a,#diente34b-a,#diente35b-a,#diente36b-a,#diente37b-a,#diente38b-a{
+		height: 155px;
+		background-repeat: no-repeat;
+	}
+	#diente31b-a{
+		background: url('../images/img/tabla8/periodontograma-dientes-abajo-31b.png');
+		width:38px;
+		background-position: 0 19px;
+		background-repeat: no-repeat;
+	}
+	#diente32b-a{
+		background: url('../images/img/tabla8/periodontograma-dientes-abajo-32b.png');
+		width:38px;
+		background-position: 0 15px;
+		background-repeat: no-repeat;
+	}
+	#diente33b-a{
+		background: url('../images/img/tabla8/periodontograma-dientes-abajo-33b.png');
+		width:40px;
+		background-position: 0 12px;
+		background-repeat: no-repeat;
+	}
+	#diente34b-a{
+		background: url('../images/img/tabla8/periodontograma-dientes-abajo-34b.png');
+		width:43px;
+		background-position: 0 13px;
+		background-repeat: no-repeat;
+	}
+	#diente35b-a{
+		background: url('../images/img/tabla8/periodontograma-dientes-abajo-35b.png');
+		width:45px;
+		background-position: 0 20px;
+		background-repeat: no-repeat;
+	}
+	#diente36b-a{
+		background: url('../images/img/tabla8/periodontograma-dientes-abajo-36b.png');
+		width:68px;
+		background-position: 0 23px;
+		background-repeat: no-repeat;
+	}
+	#diente37b-a{
+		background: url('../images/img/tabla8/periodontograma-dientes-abajo-37b.png');
+		width:63px;
+		background-position: 0 21px;
+		background-repeat: no-repeat;
+	}
+	#diente38b-a{
+		background: url('../images/img/tabla8/periodontograma-dientes-abajo-38b.png');
+		width:63px;
+		background-position: 0 24px;
+		background-repeat: no-repeat;
+	}
+	/*TABLA 8 FIN*/
+
+	#furca18,#furca17,#furca16,
+	#furca26,#furca27,#furca28{
+		position: absolute;
+		width: 5px;
+		height: 5px;
+		margin: 15px 5px;
+	  /*background-color: #ffffff;*/
+	}
+	.lineu{
+	  position: absolute;
+		width: 20px;
+		height: 5px;
+		margin: 62px 10px;
+	}
+	.linet{
+	  position: absolute;
+		width: 46px;
+		height: 5px;
+		margin: 62px 10px;
+	}
+
+	.linelingualt{
+	  position: absolute;
+	  width: 46px;
+	  height: 5px;
+	  margin: 94px 11px;
+	}
+	.linelingualu{
+	  position: absolute;
+	  width: 20px;
+	  height: 5px;
+	  margin: 94px 11px;
+	}
+	.red{
+	  background-color: #FF0000;
+	}
+
+	.click:hover {
+	    /*background: rgba(117, 198, 243, 0.4);*/
+
+	    cursor: pointer;
+	}
+
+	#furca18-a,#furca18-b,#furca17-a,#furca17-b,#furca16-a,#furca16-b,#furca14-a,#furca14-b,
+	#furca24-a,#furca24-b,#furca26-a,#furca26-b,#furca27-a,#furca27-b,#furca28-a,#furca28-b{
+		width: 18px;
+		height: 18px;
+		position: absolute;
+	}
+	#furca18-a,#furca17-a,#furca16-a,#furca14-a,
+	#furca24-a,#furca26-a,#furca27-a,#furca28-a{
+		margin-top: 70px;
+	}
+	#furca18-b,#furca17-b,#furca16-b,#furca14-b,
+	#furca24-b,#furca26-b,#furca27-b,#furca28-b{
+		margin-top: 80px;
+		margin-left: 28px;
+	}
+	#furca48,#furca47,#furca46,
+	#furca38,#furca37,#furca36,
+	#furca26,#furca27,#furca28,
+	#furca48b,#furca47b,#furca46b,
+	#furca38b,#furca37b,#furca36b{
+		position: absolute;
+		width: 18px;
+		height: 18px;
+		margin: 70px 20px;
+	}
+
+
+
+
+
+
+
+
+
+
+}

@@ -83,8 +83,8 @@ DBCreateOrthodonticsTable();
 DBCreateRemovableTable();
 DBCreateFixedTable();
 DBCreateOperativeTable();
-DBCreateEndodonticsTable();
-DBCreateSurgeryTokenTable();*/
+DBCreateEndodonticsTable();*/
+DBCreateSurgeryTokenTable();
 
 echo "creating initial fake admin\n";
 DBFakeUser();
