@@ -86,7 +86,7 @@ function graphic(title, labels){
 
 function admissionChart(){
   var titleChart='Pacientes X Especilidad (PROSTODONCIA)';
-  var labels = ['Prost. Removible II', 'Prost. Removible III', 'Prost. Fija II', 'Prost. Fija III'];
+  var labels = ['Prost. Removible II', 'Prost. Fija II', 'Prost. Removible III', 'Prost. Fija III'];
   prostChart = new Chart(document.getElementById('prostChart'), graphic(titleChart, labels));
 
   titleChart='Pacientes X Especilidad (OPERATORIA)';
