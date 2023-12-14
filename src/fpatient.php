@@ -2667,9 +2667,10 @@ function DBUpdatePatientfullname($patientid, $patientname, $patientfirstname, $p
 		return $ret;
 }
 //funcion para contar paciente por modulo
-function DBCountpatientclinicalInfo() {
-	$sql = "select clinicalid, count(*) as amount from remissionhistorytable group by clinicalid";
-
+function DBCountpatientclinicalInfo($stdate=-1, $endate=-1) {
+	$sql = "select clinicalid, count(*) as amount from remissionhistorytable";
+	if($stdate!=-1&& $endate!=-1) $sql.=" where updatetime between $stdate and $endate";
+	$sql.=" group by clinicalid";
 	$c = DBConnect();
 	$r = DBExec ($c, $sql, "DBCountpatientclinicalInfo(get count x clinical)");
 	$n = DBnlines($r);

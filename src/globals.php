@@ -348,7 +348,54 @@ function datetimeconv($d, $r=false){
     return date('d-m-Y h:i:s a', $d);
   }
 }
+//solo para dias
+function dateconvday($d) {
+	return date('d', $d);
+}
+//solo para mes
+function dateconvmonthAbre($d) {
+   // fecha en formato AAAA-MM-DD
+  $numMonth = date("n", ($d)); // obtener el número de mes (sin ceros iniciales)
+  $MonthEsp = array(
+      1 => "ene",
+      2 => "feb",
+      3 => "mar",
+      4 => "abr",
+      5 => "may",
+      6 => "jun",
+      7 => "jul",
+      8 => "ago",
+      9 => "sep",
+      10 => "oct",
+      11 => "nov",
+      12 => "dic"
+  );
+  return $MonthEsp[$numMonth]; // obtener el nombre del mes en español
+}
+function dateconvmonth($d) {
+   // fecha en formato AAAA-MM-DD
+  $numMonth = date("n", ($d)); // obtener el número de mes (sin ceros iniciales)
+  $MonthEsp = array(
+      1 => "enero",
+      2 => "febrero",
+      3 => "marzo",
+      4 => "abril",
+      5 => "mayo",
+      6 => "junio",
+      7 => "julio",
+      8 => "agosto",
+      9 => "septiembre",
+      10 => "octubre",
+      11 => "noviembre",
+      12 => "diciembre"
+  );
+  return $MonthEsp[$numMonth]; // obtener el nombre del mes en español
 
+}
+//solo para año
+function dateconvyear($d) {
+	return date('Y', $d);
+}
 //transforma segundos para minutos
 function dateconvminutes ($d) {
 	return (int)($d/60);

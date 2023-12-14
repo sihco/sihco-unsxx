@@ -156,6 +156,7 @@ th, td {
         <div class="fs-4"><b>CARRERA ODONTOLOGIA</b></div>
         <div class="fs-3"><i>UNIDAD ACADEMICA ACREDITADA AL C.E.U.B</i></div>
         <div class="fs-3"><i>POR RESOLUCION N<sup>0</sup> 006/2016 DE LA IX CENU</i></div>
+        <div class="fs-3"><i>ACREDITADA AL SISTEMA ARCU-SUR POR RES. N<sup>0</sup> 026/2023</i></div>
       </div>
       <div class="col-2" align="right">
         <div class="img-1">
@@ -170,6 +171,7 @@ th, td {
           <thead>
             <tr align="center">
               <th>#</th>
+              <th>Cod.</th>
               <th>Paciente</th>
               <th>Edad</th>
               <th>Genero</th>
@@ -185,12 +187,13 @@ th, td {
             for ($i=0; $i < $size; $i++) {
                   $tabledata .= " <tr>\n";
                   $tabledata .= "   <td>" . ($i+1). "</td>";
+                  $tabledata .= "   <td>" . $pr[$i]['patientadmissionid']. "</td>";
                   $tabledata .= "   <td>". $pr[$i]["patientname"] ." ". $pr[$i]["patientfirstname"] ." ". $pr[$i]["patientlastname"] ."</td>";
                   $tabledata .= "   <td>" . $pr[$i]["patientage"] . "</td>";
-                  $tabledata .= "   <td>" . $pr[$i]["patientgender"] . "</td>";
+                  $tabledata .= "   <td>" . ucfirst($pr[$i]["patientgender"]) . "</td>";
                   $tabledata .= "   <td>" . $pr[$i]["clinicalspecialty"] . "</td>";
 
-                  $tabledata .= "   <td>" . $pr[$i]["userfullname"] ."</td>";
+                  $tabledata .= "   <td>" . ucwords($pr[$i]["userfullname"]) ."</td>";
                   $tabledata .= "   <td>" . datetimeconv($pr[$i]["updatetime"]) ."</td>";
 
                   $tabledata .= "</tr>";
@@ -199,7 +202,10 @@ th, td {
             ?>
           </tbody>
         </table>
-        <?php echo "<i>Datos del SIHCO (Sistema de Historial Clinico Odontologico) - UNSXX</i>"; ?>
+        <?php
+        echo "<i>#$i Pacientes Remitidos</i> <br>";
+        echo "<i>Datos del SIHCO (Sistema de Historial Clinico Odontologico) - UNSXX</i>";
+        ?>
       </div>
     </div>
 

@@ -12,6 +12,9 @@ require('header.php');
                             </form>
 
                           </div>
+                          <div class="col-6" align="right">
+                            <a href="chartadmission.php" class="btn btn-outline-success btn-sm">Especilidades <i class="fa fa-solid fa-chart-line"></i></a>
+                          </div>
                         </div>
                         <br>
                         <div class="row">
